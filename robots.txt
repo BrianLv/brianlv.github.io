@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://brianlv.github.io/sitemap.xml

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>吕海峰的博客</title>
+    <link>https://brianlv.github.io/</link>
+    <description>Recent content on 吕海峰的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 20 Aug 2017 21:38:52 +0800</lastBuildDate>
+    
+        <atom:link href="https://brianlv.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>关于</title>
+      <link>https://brianlv.github.io/about/</link>
+      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
+      
+      <guid>https://brianlv.github.io/about/</guid>
+      
+        <description>
+
+&lt;h1 id=&#34;about&#34;&gt;About&lt;/h1&gt;
+
+&lt;p&gt;My name is Brian Lv(CN:吕海峰). You can call me Brian.I am an algorithm engineer(AI),and a strong advocate and believer of Free Software. I love Machine/Deep Learning,Data Science,HPC and Cloud Computing.Now,I focus on image video algorithm.
+In spare time,I like reading,climbing mountain and photography.&lt;/p&gt;
+
+&lt;h1 id=&#34;work-experience&#34;&gt;Work Experience&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;MeiYou(&lt;a href=&#34;https://www.meiyou.com/&#34;&gt;Web Site&lt;/a&gt;) as an algorithm expert(AI).&lt;/li&gt;
+&lt;li&gt;IFENG GROUP(&lt;a href=&#34;http://www.ifeng.com&#34;&gt;Web Site&lt;/a&gt;) as a senior algorithm engineer(Machine/Deep Learning).&lt;/li&gt;
+&lt;li&gt;GOME HOLDINGS GROUP(&lt;a href=&#34;https://www.gomeholdings.com/index.html&#34;&gt;Web Site&lt;/a&gt;) as a R&amp;amp;D Manager.&lt;/li&gt;
+&lt;li&gt;Moji Weather(&lt;a href=&#34;http://www.moji.com/&#34;&gt;Web Site&lt;/a&gt;) as a Senior Data Engineer.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
+    
+  </channel>
+</rss>
