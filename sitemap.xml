@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<?xml-stylesheet type="text/xsl" href="https://brianlv.github.io/sitemap.xsl"?>
+<?xml-stylesheet type="text/xsl" href="https://www.brianlv.com/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://brianlv.github.io/about/</loc>
+    <loc>https://www.brianlv.com/about/</loc>
     <lastmod>2017-08-28T21:41:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://brianlv.github.io/post/python-with-as/</loc>
+    <loc>https://www.brianlv.com/post/python-with-as/</loc>
     <lastmod>2018-12-02T21:57:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://brianlv.github.io/categories/</loc>
+    <loc>https://www.brianlv.com/categories/</loc>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://brianlv.github.io/post/</loc>
+    <loc>https://www.brianlv.com/post/</loc>
     <lastmod>2018-12-02T21:57:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://brianlv.github.io/categories/programming/</loc>
+    <loc>https://www.brianlv.com/categories/programming/</loc>
     <lastmod>2018-12-02T21:57:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://brianlv.github.io/tags/python/</loc>
+    <loc>https://www.brianlv.com/tags/python/</loc>
     <lastmod>2018-12-02T21:57:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://brianlv.github.io/tags/</loc>
+    <loc>https://www.brianlv.com/tags/</loc>
     <lastmod>2018-12-02T21:57:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://brianlv.github.io/</loc>
+    <loc>https://www.brianlv.com/</loc>
     <lastmod>2017-08-28T21:41:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>

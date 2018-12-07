@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://brianlv.github.io/sitemap.xml
+Sitemap: https://www.brianlv.com/sitemap.xml

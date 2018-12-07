@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>吕海峰的博客</title>
-    <link>https://brianlv.github.io/</link>
+    <link>https://www.brianlv.com/</link>
     <description>Recent content on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 20 Aug 2017 21:38:52 +0800</lastBuildDate>
     
-        <atom:link href="https://brianlv.github.io/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.brianlv.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>关于</title>
-      <link>https://brianlv.github.io/about/</link>
+      <link>https://www.brianlv.com/about/</link>
       <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
       
-      <guid>https://brianlv.github.io/about/</guid>
+      <guid>https://www.brianlv.com/about/</guid>
       
         <description>
 
@@ -31,7 +31,7 @@ In spare time,I like reading,climbing mountain and photography.&lt;/p&gt;
 &lt;li&gt;MeiYou(&lt;a href=&#34;https://www.meiyou.com/&#34;&gt;Web Site&lt;/a&gt;) as an algorithm expert(AI).&lt;/li&gt;
 &lt;li&gt;IFENG GROUP(&lt;a href=&#34;http://www.ifeng.com&#34;&gt;Web Site&lt;/a&gt;) as a senior algorithm engineer(Machine/Deep Learning).&lt;/li&gt;
 &lt;li&gt;GOME HOLDINGS GROUP(&lt;a href=&#34;https://www.gomeholdings.com/index.html&#34;&gt;Web Site&lt;/a&gt;) as a R&amp;amp;D Manager.&lt;/li&gt;
-&lt;li&gt;Moji Weather(&lt;a href=&#34;http://www.moji.com/&#34;&gt;Web Site&lt;/a&gt;) as a Senior Data Engineer.&lt;/li&gt;
+&lt;li&gt;Moji Weather(&lt;a href=&#34;http://www.moji.com/&#34;&gt;Web Site&lt;/a&gt;) as a senior algorithm engineer.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
       
@@ -39,10 +39,10 @@ In spare time,I like reading,climbing mountain and photography.&lt;/p&gt;
     
     <item>
       <title>深入理解Python的With-as语句</title>
-      <link>https://brianlv.github.io/post/python-with-as/</link>
+      <link>https://www.brianlv.com/post/python-with-as/</link>
       <pubDate>Sun, 02 Dec 2018 21:57:43 +0800</pubDate>
       
-      <guid>https://brianlv.github.io/post/python-with-as/</guid>
+      <guid>https://www.brianlv.com/post/python-with-as/</guid>
       
         <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
 

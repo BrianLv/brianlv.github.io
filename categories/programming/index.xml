@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Programming on 吕海峰的博客</title>
-    <link>https://brianlv.github.io/categories/programming/</link>
+    <link>https://www.brianlv.com/categories/programming/</link>
     <description>Recent content in Programming on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 02 Dec 2018 21:57:43 +0800</lastBuildDate>
     
-	<atom:link href="https://brianlv.github.io/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.brianlv.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>深入理解Python的With-as语句</title>
-      <link>https://brianlv.github.io/post/python-with-as/</link>
+      <link>https://www.brianlv.com/post/python-with-as/</link>
       <pubDate>Sun, 02 Dec 2018 21:57:43 +0800</pubDate>
       
-      <guid>https://brianlv.github.io/post/python-with-as/</guid>
+      <guid>https://www.brianlv.com/post/python-with-as/</guid>
       <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
 
 &lt;p&gt;学习Python有一段时间了，最近做一个项目会涉及到文件的读取和关闭。比如：我想把一些对象序列化到文件里面，然后当我再次使用的时候，在从文件里面读取反序列化成对象。像这种操作一般都是用&lt;strong&gt;try…except…finally&lt;/strong&gt;。但是经过自己对Python的研究发现会有更出色的方法，比如：with-as语句也有的人称为&lt;strong&gt;context manager。&lt;/strong&gt;&lt;/p&gt;
