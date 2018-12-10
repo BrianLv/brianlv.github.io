@@ -74,14 +74,18 @@ Accuracy = \frac{TP+TN}{TP+FP+TN+FN} &lt;br /&gt;
 Precision = \frac{TP}{TP+FP}&lt;br /&gt;
 Recall = \frac{TP}{TP+FN}&lt;br /&gt;
 SP = \frac{TN}{TN + FP}&lt;br /&gt;
-$$
-* Accuracy：表示预测结果的精确度，预测正确的样本数除以总样本数。
-* Precision，准确率，表示预测结果中，预测为正样本的样本中，正确预测为正样本的概率；
-* Recall，召回率，表示在原始样本的正样本中，最后被正确预测为正样本的概率；
-* Specificity，常常称作特异性，它研究的样本集是原始样本中的负样本，表示的是在这些负样本中最后被正确预测为负样本的概率。&lt;/p&gt;
+$$&lt;/p&gt;
 
-&lt;p&gt;在实际当中，我们往往希望得到的precision和recall都比较高，比如当FN和FP等于0的时候，他们的值都等于1。但是，它们往往在某种情况下是互斥的。例如，有50个正样本，50个负样本，结果全部预测为正样本，那么TP=50,FP=50,TN=0,FN=0,按照上面的公式计算，可以得到正样本的recall却为1，precision却为0.5.所以需要一种折衷的方式，因此就有了F1-score。
-$$
+&lt;ul&gt;
+&lt;li&gt;Accuracy：表示预测结果的精确度，预测正确的样本数除以总样本数。&lt;/li&gt;
+&lt;li&gt;Precision，准确率，表示预测结果中，预测为正样本的样本中，正确预测为正样本的概率；&lt;/li&gt;
+&lt;li&gt;Recall，召回率，表示在原始样本的正样本中，最后被正确预测为正样本的概率；&lt;/li&gt;
+&lt;li&gt;Specificity，常常称作特异性，它研究的样本集是原始样本中的负样本，表示的是在这些负样本中最后被正确预测为负样本的概率。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在实际当中，我们往往希望得到的precision和recall都比较高，比如当FN和FP等于0的时候，他们的值都等于1。但是，它们往往在某种情况下是互斥的。例如，有50个正样本，50个负样本，结果全部预测为正样本，那么TP=50,FP=50,TN=0,FN=0,按照上面的公式计算，可以得到正样本的recall却为1，precision却为0.5.所以需要一种折衷的方式，因此就有了F1-score。&lt;/p&gt;
+
+&lt;p&gt;$$
 F1-score = \frac{2\times recall \times precision}{ recall + precision}
 $$&lt;/p&gt;
 

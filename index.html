@@ -292,7 +292,7 @@
           <a href="https://www.brianlv.com/categories/machine-learning/"> Machine Learning </a>
           
         </div>
-      <span class="more-meta"> 约 3741 字 </span>
+      <span class="more-meta"> 约 3737 字 </span>
       <span class="more-meta"> 预计阅读 8 分钟 </span>
       
       
@@ -333,14 +333,18 @@ Accuracy = \frac{TP+TN}{TP+FP+TN+FN} <br />
 Precision = \frac{TP}{TP+FP}<br />
 Recall = \frac{TP}{TP+FN}<br />
 SP = \frac{TN}{TN + FP}<br />
-$$
-* Accuracy：表示预测结果的精确度，预测正确的样本数除以总样本数。
-* Precision，准确率，表示预测结果中，预测为正样本的样本中，正确预测为正样本的概率；
-* Recall，召回率，表示在原始样本的正样本中，最后被正确预测为正样本的概率；
-* Specificity，常常称作特异性，它研究的样本集是原始样本中的负样本，表示的是在这些负样本中最后被正确预测为负样本的概率。</p>
+$$</p>
 
-<p>在实际当中，我们往往希望得到的precision和recall都比较高，比如当FN和FP等于0的时候，他们的值都等于1。但是，它们往往在某种情况下是互斥的。例如，有50个正样本，50个负样本，结果全部预测为正样本，那么TP=50,FP=50,TN=0,FN=0,按照上面的公式计算，可以得到正样本的recall却为1，precision却为0.5.所以需要一种折衷的方式，因此就有了F1-score。
-$$
+<ul>
+<li>Accuracy：表示预测结果的精确度，预测正确的样本数除以总样本数。</li>
+<li>Precision，准确率，表示预测结果中，预测为正样本的样本中，正确预测为正样本的概率；</li>
+<li>Recall，召回率，表示在原始样本的正样本中，最后被正确预测为正样本的概率；</li>
+<li>Specificity，常常称作特异性，它研究的样本集是原始样本中的负样本，表示的是在这些负样本中最后被正确预测为负样本的概率。</li>
+</ul>
+
+<p>在实际当中，我们往往希望得到的precision和recall都比较高，比如当FN和FP等于0的时候，他们的值都等于1。但是，它们往往在某种情况下是互斥的。例如，有50个正样本，50个负样本，结果全部预测为正样本，那么TP=50,FP=50,TN=0,FN=0,按照上面的公式计算，可以得到正样本的recall却为1，precision却为0.5.所以需要一种折衷的方式，因此就有了F1-score。</p>
+
+<p>$$
 F1-score = \frac{2\times recall \times precision}{ recall + precision}
 $$</p>
 
