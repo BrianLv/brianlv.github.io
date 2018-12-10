@@ -59,7 +59,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.brianlv.com/" />
-<meta property="og:updated_time" content="2018-12-10T21:23:21&#43;08:00"/>
+<meta property="og:updated_time" content="2018-12-10T21:24:21&#43;08:00"/>
 
 <meta itemprop="name" content="吕海峰的博客">
 <meta itemprop="description" content="">
@@ -282,6 +282,184 @@
     
       <article class="post bg-white">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1/">Linux 后台服务</a></h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-10" class="post-time">
+        2018-12-10
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/linux/"> Linux </a>
+          
+        </div>
+      <span class="more-meta"> 约 2172 字 </span>
+      <span class="more-meta"> 预计阅读 5 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="概述">概述</h2>
+
+<p>研发人员交付测试和上线产品时，需要对服务和产品以后台进程的方式启动。所以便利的后台进程工具可以很好的帮助你管理你的进程。确切的说：成为系统的守护进程(daemon)。</p>
+
+<h2 id="任务">任务</h2>
+
+<p>我们一般通过如下方式的命令运行的大多数是<strong>前台任务</strong>，：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task
+</span><span class="c1"></span>python main.py
+<span class="c1">#nodejs task
+</span><span class="c1"></span>nodejs main.js</code></pre></td></tr></table>
+</div>
+</div>
+<p>前台任务有很大的限制。我们无法获得标准输入<strong>stdin</strong>(它独占窗口session)，当前的session中断和退出，会立即中断任务。如果想结束改task只能等待完成或者手动结束。我们更倾向于<strong>后台任务</strong>，通过如下方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task
+</span><span class="c1"></span>python main.py <span class="p">&amp;</span>
+<span class="c1">#nodejs task
+</span><span class="c1"></span>nodejs main.js <span class="p">&amp;</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+    <div class="read-more">
+      <a href="/post/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1/" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
+    
+      <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/ubuntu-install-opencv/">Ubuntu 16.04 Install OpenCV</a></h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-10" class="post-time">
+        2018-12-10
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/opencv/"> OpenCV </a>
+          
+        </div>
+      <span class="more-meta"> 约 691 字 </span>
+      <span class="more-meta"> 预计阅读 2 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h1 id="概述">概述</h1>
+
+<p>安装opencv有很多种方式，我列出了三种方式。并针对第二种方式进行了详细的安装解释，强烈推荐使用第三种方式。</p>
+
+<h2 id="1-从ubuntu源安装opencv">1.从Ubuntu源安装opencv</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install libopencv-dev python-opencv</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="2-从opencv官方源代码安装">2.从opencv官方源代码安装</h2>
+
+<p>1.安装opencv所依赖的包</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># KEEP UBUNTU OR DEBIAN UP TO DATE
+</span><span class="c1"></span>sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y dist-upgrade
+sudo apt-get -y autoremove
+<span class="c1"># install package
+</span><span class="c1"></span>sudo apt-get install build-essential cmake pkg-config
+sudo apt-get install libatlas-base-dev gfortran
+<span class="c1"># GUI (if you want to use GTK instead of Qt, replace &#39;qt5-default&#39; with &#39;libgtkglext1-dev&#39; and remove &#39;-DWITH_QT=ON&#39; option in CMake):
+</span><span class="c1"></span>sudo apt-get install -y qt5-default libvtk6-dev
+
+<span class="c1"># Media I/O:
+</span><span class="c1"></span>sudo apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev
+
+<span class="c1"># Video I/O:
+</span><span class="c1"></span>sudo apt-get install -y libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev
+
+<span class="c1"># Parallelism and linear algebra libraries:
+</span><span class="c1"></span>sudo apt-get install -y libtbb-dev libeigen3-dev
+
+<span class="c1"># Python:
+</span><span class="c1"></span>sudo apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy
+
+<span class="c1"># Java:
+</span><span class="c1"></span>sudo apt-get install -y ant default-jdk
+
+<span class="c1"># Documentation:
+</span><span class="c1"></span>sudo apt-get install -y doxygen</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+    <div class="read-more">
+      <a href="/post/ubuntu-install-opencv/" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
+    
+      <article class="post bg-white">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/ubuntu-install-vnc/">Ubuntu Install Vnc</a></h1>
     
     <div class="post-meta">
@@ -358,169 +536,6 @@
 </article>
 
     
-      <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/centos-upgrade-python/">CentOS6 升级Python2.7.X和Python3.X</a></h1>
-    
-    <div class="post-meta">
-      <time datetime="2018-12-10" class="post-time">
-        2018-12-10
-      </time>
-      <div class="post-category">
-          <a href="https://www.brianlv.com/categories/python/"> Python </a>
-          
-        </div>
-      <span class="more-meta"> 约 1169 字 </span>
-      <span class="more-meta"> 预计阅读 3 分钟 </span>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      <h2 id="简述">简述</h2>
-
-<p>由于产品需要从裸机开始开发所以所有的配置和开发也是从零开始，这个导航是基于centos6.x版本升级默认的Centos的Python，升级到Python2.7或者Python3.3。我们不仅升级了Python，同样基于Python的setuptools, pip, virtualenv and pyvenv这些工具也同样安装和升级以便于项目需要。</p>
-
-<h2 id="安装基本的开发工具包">安装基本的开发工具包</h2>
-
-<p>为了确保编译Python成功，先安装下面的这几个package和类库。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">yum groupinstall <span class="s2">&#34;Development tools&#34;</span>
-yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel</code></pre></td></tr></table>
-</div>
-</div>
-    </div>
-    <div class="read-more">
-      <a href="/post/centos-upgrade-python/" class="read-more-link">阅读全文</a>
-    </div>
-    
-  </div>
-</article>
-
-    
-      <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/python-with-as/">深入理解Python的With-as语句</a></h1>
-    
-    <div class="post-meta">
-      <time datetime="2018-12-02" class="post-time">
-        2018-12-02
-      </time>
-      <div class="post-category">
-          <a href="https://www.brianlv.com/categories/python/"> Python </a>
-          
-        </div>
-      <span class="more-meta"> 约 4634 字 </span>
-      <span class="more-meta"> 预计阅读 10 分钟 </span>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      <h2 id="概述">概述</h2>
-
-<p>学习Python有一段时间了，最近做一个项目会涉及到文件的读取和关闭。比如：我想把一些对象序列化到文件里面，然后当我再次使用的时候，在从文件里面读取反序列化成对象。像这种操作一般都是用<strong>try…except…finally</strong>。但是经过自己对Python的研究发现会有更出色的方法，比如：with-as语句也有的人称为<strong>context manager。</strong></p>
-
-<h2 id="with-as-用法">With-as 用法</h2>
-
-<p>我们先看一下例子，当我们需要打开一个文件的时，比如：txt等，一般经常会这么操作：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
-    <span class="n">To</span> <span class="n">Do</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="n">To</span> <span class="n">Do</span>
-<span class="k">finally</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
-</div>
-</div>
-<p>这是错误，因为file.open是否打开文件是不确定，而在出现异常的时候你却关闭了已经打开的文件。文件没有打开怎么能直接关闭呢？你可以按照下面的解决方法来解决上述出现的问题。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>  
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
-    <span class="n">To</span> <span class="n">Do</span>
-<span class="k">except</span><span class="p">:</span>  
-    <span class="n">To</span> <span class="n">Do</span>
-    <span class="o">//</span><span class="err">出现异常直接返回或者退出，这说明</span><span class="n">file并没有打开</span><span class="err">。</span>
-    <span class="k">return</span><span class="o">/</span><span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
-
-<span class="o">//</span><span class="err">已经成功打开</span><span class="n">file文件</span><span class="err">，所以你需要在</span><span class="n">finally中关闭打开的文件</span><span class="err">。</span>
-<span class="k">try</span><span class="p">:</span>  
-    <span class="n">To</span> <span class="n">Do</span>
-<span class="k">except</span><span class="p">:</span>  
-    <span class="n">To</span> <span class="n">Do</span>
-<span class="k">finally</span><span class="p">:</span>  
-    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
-</div>
-</div>
-<p>你会发现这么做会非常麻烦，并且try……except…..finally嵌套也比较啰嗦。那有没有好的解决办法能解决上述问题，并且还能减少代码量呢？(类似于C#中的using关键字)答案是肯定的，那就是with……as语句。<strong>With语句适用于对I/O、文件流、数据流等资源进行访问的场合，确保不管使用过程中是否发生异常都会执行必要的“清理”操作，释放资源.比如文件使用后自动关闭、线程中锁的自动获取和释放等等。</strong> 我们来看一下with-as的用法：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">line</span>
-        <span class="o">...</span> <span class="n">more</span> <span class="n">processing</span> <span class="n">code</span> <span class="o">...</span></code></pre></td></tr></table>
-</div>
-</div>
-<p>这个语句执行完成之后，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄,确实比try……except……finally好多了。在这个例子中f就是上下文管理器enter()的返回值，返回的是当前文件自身的引用。Python内建对象都加入了对上下文管理器的支持，可以用在with语句中。比如:file、 threading、decimal等等，在多线程模块中，lock和条件变量也是支持with语句的。例如：</p>
-
-<p></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/python-with-as/" class="read-more-link">阅读全文</a>
-    </div>
-    
-  </div>
-</article>
-
-    
   </section>
 
   
@@ -560,6 +575,10 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
       
       <li  class="active" >
         <a href="/page/4/">4</a>
+      </li>
+      
+      <li >
+        <a href="/page/5/">5</a>
       </li>
       
     </ul>
@@ -737,7 +756,14 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
 
 
 <script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ="></script>
-<script id="tencent_analytics">
+
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script id="tencent_analytics">
   var _hmt = _hmt || [];
   (function() {
     if (window.location.hostname === 'localhost') return;

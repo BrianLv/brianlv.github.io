@@ -6,10 +6,137 @@
     <description>Recent content in Machine Learning on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 10 Dec 2018 22:17:19 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 10 Dec 2018 23:16:18 +0800</lastBuildDate>
     
 	<atom:link href="https://www.brianlv.com/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>机器学习性能度量</title>
+      <link>https://www.brianlv.com/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F/</link>
+      <pubDate>Mon, 10 Dec 2018 23:16:18 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F/</guid>
+      <description>&lt;p&gt;我们在进行机器学习时需要衡量机器学习的优劣和本身模型的准确程度，比如简单的衡量数据的准确率和错误率，但是我们更关心的是模型的泛化能力的指标，即基于模型的所选的item相关性以及模型分类指标的好坏。&lt;/p&gt;
+
+&lt;h2 id=&#34;机器学习度量&#34;&gt;机器学习度量&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;error rate(错误率)&lt;/strong&gt;:把分类错误的样本数占样本总数的比例。$$E=a/m$$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;accuracy(精确度)&lt;/strong&gt;:分类正确的样本数占样本总数的比例。$$acc=1-E$$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;training error(训练误差):&lt;/strong&gt;学习器在训练集上的误差。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;generalization error(泛华误差):&lt;/strong&gt;在新样本上的误差。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在机器学习中由很多机器学习算法，那么如何选择这些算法和模型，如何评估这些算法和模型,评估模型的算法和准确率的方式很多，我们依次来介绍一下几个常用的指标。&lt;strong&gt;TP、TN、FP、FN、Acc、Recall、F1、ROC和ROI&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;各种机器学习衡量指标&#34;&gt;各种机器学习衡量指标&lt;/h2&gt;
+
+&lt;h3 id=&#34;accuracy-precision-recall和f1-score&#34;&gt;Accuracy、Precision、Recall和F1-Score&lt;/h3&gt;
+
+&lt;p&gt;混淆矩阵是按照预测分类和实际分类的类别对比,如下图所示:
+&lt;img src=&#34;https://www.brianlv.com/image/precision-recall.png&#34; alt=&#34;混淆矩阵&#34; /&gt;
+如上表所示，行表示预测的label值，列表示真实label值。TP，FP，FN，TN分别表示如下意思：
+* TP（true positive）：表示样本的真实类别为正，最后预测得到的结果也为正
+* FP（false positive）：表示样本的真实类别为负，最后预测得到的结果却为正
+* FN（false negative）：表示样本的真实类别为正，最后预测得到的结果却为负
+* TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负&lt;/p&gt;
+
+&lt;p&gt;$$
+Accuracy = \frac{TP+TN}{TP+FP+TN+FN} &lt;br /&gt;
+Precision = \frac{TP}{TP+FP}&lt;br /&gt;
+Recall = \frac{TP}{TP+FN}&lt;br /&gt;
+SP = \frac{TN}{TN + FP}&lt;br /&gt;
+$$
+* Accuracy：表示预测结果的精确度，预测正确的样本数除以总样本数。
+* Precision，准确率，表示预测结果中，预测为正样本的样本中，正确预测为正样本的概率；
+* Recall，召回率，表示在原始样本的正样本中，最后被正确预测为正样本的概率；
+* Specificity，常常称作特异性，它研究的样本集是原始样本中的负样本，表示的是在这些负样本中最后被正确预测为负样本的概率。&lt;/p&gt;
+
+&lt;p&gt;在实际当中，我们往往希望得到的precision和recall都比较高，比如当FN和FP等于0的时候，他们的值都等于1。但是，它们往往在某种情况下是互斥的。例如，有50个正样本，50个负样本，结果全部预测为正样本，那么TP=50,FP=50,TN=0,FN=0,按照上面的公式计算，可以得到正样本的recall却为1，precision却为0.5.所以需要一种折衷的方式，因此就有了F1-score。
+$$
+F1-score = \frac{2\times recall \times precision}{ recall + precision}
+$$&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;F1-score表示的是precision和recall的调和平均评估指标.&lt;/strong&gt;
+另外还有一个指标，即MCC，该指标对于不均衡数据集的评估非常有效，公式如下：&lt;/p&gt;
+
+&lt;p&gt;$$
+MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP+FP)\times(TP+FN)\times(TN+FP)\times(TN+FN)}}
+$$&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>结构化的机器学习流程</title>
+      <link>https://www.brianlv.com/post/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Mon, 10 Dec 2018 23:05:11 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/post/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B/</guid>
+      <description>&lt;p&gt;机器学习可以通过结构化的流程来梳理:&lt;strong&gt;1.定义问题和需求分析-&amp;gt;2.数据探索-&amp;gt;3.数据准备-&amp;gt;4.评估算法-&amp;gt;5.优化模型-&amp;gt;6.部署&lt;/strong&gt;。
+* 导入类库
+* 导入数据集
+* 数据统计分析
+* 数据可视化
+* 数据清洗
+* 特征选择
+* 数据转换
+* 分离数据集
+* 定义模型评估标准
+* 算法审查
+* 算法比较
+* 算法调参
+* 集成算法
+* 预测评估数据集
+* 利用数据生成模型
+* 序列化模型&lt;/p&gt;
+
+&lt;h2 id=&#34;数据理解&#34;&gt;数据理解&lt;/h2&gt;
+
+&lt;p&gt;数据的理解主要在于分析数据维度、数据类型属性、数据分布以及相关性等。数据属性的相关性是指数据的两个属性的互相影响。&lt;/p&gt;
+
+&lt;h3 id=&#34;数据统计分析&#34;&gt;数据统计分析&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 数据导入与数据维度探索&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;numpy&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;loadtxt&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filename&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;rt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rawdata&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;loadtxt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rawdata&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;delimiter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#数据属性和描述性统计&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dtype&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;describe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#数据根据类别分类&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;group&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;class&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#数据属性相关性(皮尔逊相关系数，1完全正相关，-1完全负相关，0不相关)&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;corr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;method&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;pearson&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#数据分布分析,skew代表高斯分布的偏离程度，数据接近于0表示数据偏差非常小&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;skew&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;数据可视化&#34;&gt;数据可视化&lt;/h3&gt;
+
+&lt;p&gt;数据可视化主要集中在&lt;strong&gt;直方图、密度图和箱线图&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>熵的理解</title>
@@ -17,9 +144,7 @@
       <pubDate>Mon, 10 Dec 2018 22:17:19 +0800</pubDate>
       
       <guid>https://www.brianlv.com/post/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
-      <description>&lt;h2 id=&#34;熵&#34;&gt;熵&lt;/h2&gt;
-
-&lt;p&gt;熵在信息论中代表随机变量不确定度的度量。一个离散型随机变量X的熵H(X)定义为：
+      <description>&lt;p&gt;熵在信息论中代表随机变量不确定度的度量。一个离散型随机变量X的熵H(X)定义为：
 $$
 H(X)=- \sum_{x \in X} p(x) \cdot logp(x)
 $$
@@ -29,13 +154,82 @@ $$
 $$
 log\frac{1}{32}=5log\frac{1}{32}=5bit
 $$
+第二个例子：赌马比赛里，有4匹马A,B,C,D，获胜概率分别为
+$$ \frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{8} $$&lt;/p&gt;
 
-第二个例子：
-赌马比赛里，有4匹马A,B,C,D，获胜概率分别为 $$ \frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{8} $$
-&amp;gt; * 如果 X=A ，那么需要问1次（问题1：是不是A？），概率为 $$ \frac{1}{2} $$
-&amp;gt; * 如果 X=B ，那么需要问2次（问题1：是不是A？问题2：是不是B？），概率为  $$ \frac{1}{4}$$
-&amp;gt; * 如果 X=C ，那么需要问3次（问题1，问题2，问题3），概率为   $$ \frac{1}{8}$$
-&amp;gt; * 如果 X=D ，那么同样需要问3次（问题1，问题2，问题3），概率为 $$ \frac{1}{8}$$&lt;/p&gt;</description>
+&lt;ul&gt;
+&lt;li&gt;如果 X=A ，那么需要问1次（问题1：是不是A？），概率为
+$$ \frac{1}{2} $$&lt;/li&gt;
+&lt;li&gt;如果 X=B ，那么需要问2次（问题1：是不是A？问题2：是不是B？），概率为
+$$ \frac{1}{4}$$&lt;/li&gt;
+&lt;li&gt;如果 X=C ，那么需要问3次（问题1，问题2，问题3），概率为&lt;br /&gt;
+$$ \frac{1}{8}$$&lt;/li&gt;
+&lt;li&gt;如果 X=D ，那么同样需要问3次（问题1，问题2，问题3），概率为
+$$ \frac{1}{8}$$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;通过熵的定义得到&lt;/p&gt;
+
+&lt;p&gt;$$
+H(x)=-\sum_{x \in {A,B,C,D}}p(x)\cdot log p(x)=\frac{1}{2} \cdot log2+\frac{1}{4} \cdot log4+\frac{1}{8} \cdot log8+\frac{1}{8} \cdot log8=1.75
+$$&lt;/p&gt;
+
+&lt;p&gt;在二进制计算机中，一个比特为0或1(代表二元问题)。在计算机中，我们给哪一匹马夺冠这个事件进行编码，所需要的平均码长为1.75个比特。其定义为:&lt;/p&gt;
+
+&lt;p&gt;$$
+L&amp;copy;=\sum_{x \in X}p(x)l(x)
+$$&lt;/p&gt;
+
+&lt;p&gt;为了尽可能减少码长，我们要给发生概率p(x)较大的事件，分配较短的码长l(x)。所以那么
+$${A,B,C,D}$$
+四个实践，可以分别由
+$${0,10,110,111}$$
+表示.
+（1）信息熵只反映内容的随机性，与内容本身无关。不管是什么样内容的文件，只要服从同样的概率分布，就会计算得到同样的信息熵。
+（2）信息熵越大，表示占用的二进制位越长，因此就可以表达更多的符号。所以，人们有时也说，信息熵越大，表示信息量越大。不过，由于第一点的原因，这种说法很容易产生误导。较大的信息熵，只表示可能出现的符号较多，并不意味着你可以从中得到更多的信息。
+（3）信息熵与热力学的熵，基本无关。&lt;/p&gt;
+
+&lt;h2 id=&#34;相对熵-kl离散度&#34;&gt;相对熵(KL离散度)&lt;/h2&gt;
+
+&lt;p&gt;相对熵又叫做KL离散度，其定义为：
+$$
+KL(f(x)||g(x))=-\sum_{x \in X} f(x) \cdot log\frac{f(x)}{g(x)}
+$$
+KL 散度是两个概率分布f(x)和g(x)差别的非对称性的度量。KL散度是用来度量使用基于f(x)的编码来编码来自g(x)的样本平均所需的额外的位元数。
+很容易证明，有三个结论：
+(1) 两函数完全相同时，KL=0
+(2) KL越大，差异越大
+(3) 对概率分布或者概率密度函数(&amp;gt;0), KL可用来衡量两个随机变量分布的差异性。&lt;/p&gt;
+
+&lt;h2 id=&#34;交叉熵&#34;&gt;交叉熵&lt;/h2&gt;
+
+&lt;p&gt;对一随机事件，其真实概率分布为p(i)，从数据中得到的概率分布为q(i)，则我们定义，交叉熵为:&lt;/p&gt;
+
+&lt;p&gt;$$
+H(p,q)=\sum&lt;em&gt;{i} p(i) \cdot \frac{1}{logq(i)}=-\sum&lt;/em&gt;{i} p(i) \cdot logq(i)
+$$&lt;/p&gt;
+
+&lt;p&gt;核心理解：
+* 用p来衡量识别一个样本的信息量即最小编码长度（&lt;strong&gt;信息熵&lt;/strong&gt;）。
+$$
+H(p)=\sum p \cdot log\frac{1}{p}
+$$
+* q来估计真实分布为p的样本的信息量.
+$$
+H(q,p)=\sum p \cdot \frac{1}{q}
+$$
+* 则估算多出来的冗余信息量.
+$$
+D(p||q)=H(p,q)-H(p)=\sum p \cdot log\frac{p}{q}(KL离散度)
+$$&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;在机器学习中，p通常设定为真实标记的分布，q设定为训练后模型预测标记的分布：&lt;/strong&gt;
+$$
+H(p,q)=H(p)+D_{KL}(pq)
+$$
+&lt;strong&gt;即：交叉熵=信息熵+KL散度（相对熵）&lt;/strong&gt;
+由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&amp;rdquo;距离&amp;rdquo;。
+&lt;/p&gt;</description>
     </item>
     
   </channel>

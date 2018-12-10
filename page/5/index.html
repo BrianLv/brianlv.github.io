@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Machine Learning · 吕海峰的博客</title>
+  <title>吕海峰的博客</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -32,8 +32,8 @@
 <meta name="generator" content="Hugo 0.49.2" />
 
 
-<link rel="canonical" href="https://www.brianlv.com/tags/machine-learning/" />
-<link href="https://www.brianlv.com/tags/machine-learning/index.xml" rel="alternate" type="application/rss+xml" title="吕海峰的博客" />
+<link rel="canonical" href="https://www.brianlv.com/" />
+<link href="https://www.brianlv.com/index.xml" rel="alternate" type="application/rss+xml" title="吕海峰的博客" />
 
 
 
@@ -55,17 +55,17 @@
 
 
 
-<meta property="og:title" content="Machine Learning" />
+<meta property="og:title" content="吕海峰的博客" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.brianlv.com/tags/machine-learning/" />
-<meta property="og:updated_time" content="2018-12-10T23:16:18&#43;08:00"/>
+<meta property="og:url" content="https://www.brianlv.com/" />
+<meta property="og:updated_time" content="2018-12-10T21:16:50&#43;08:00"/>
 
-<meta itemprop="name" content="Machine Learning">
+<meta itemprop="name" content="吕海峰的博客">
 <meta itemprop="description" content="">
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Machine Learning"/>
+<meta name="twitter:title" content="吕海峰的博客"/>
 <meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
@@ -210,7 +210,7 @@
   <ul id="menu" class="menu">
     
     
-        <li class="menu-item">
+        <li class="menu-item active">
         
           
           
@@ -276,69 +276,220 @@
       <div class="content-wrapper">
         <div id="content" class="content container">
           
-
-<section id="archive" class="archive">
-  
+  <section id="posts" class="posts">
     
-      <div class="archive-title tag">
-        <h2 class="archive-name">标签： Machine Learning</h2>
-      </div>
     
-  
-
-  
-    <div class="archive-post">
-      <time datetime="2018-12-10" class="archive-post-time">
+    
+      <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/centos-upgrade-python/">CentOS6 升级Python2.7.X和Python3.X</a></h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-10" class="post-time">
         2018-12-10
       </time>
-      <span class="archive-post-title">
-        <a href="/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F/" class="archive-post-link">
-          机器学习性能度量
-        </a>
-      </span>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/python/"> Python </a>
+          
+        </div>
+      <span class="more-meta"> 约 1169 字 </span>
+      <span class="more-meta"> 预计阅读 3 分钟 </span>
+      
+      
+      
     </div>
+  </header>
   
-    <div class="archive-post">
-      <time datetime="2018-12-10" class="archive-post-time">
-        2018-12-10
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="简述">简述</h2>
+
+<p>由于产品需要从裸机开始开发所以所有的配置和开发也是从零开始，这个导航是基于centos6.x版本升级默认的Centos的Python，升级到Python2.7或者Python3.3。我们不仅升级了Python，同样基于Python的setuptools, pip, virtualenv and pyvenv这些工具也同样安装和升级以便于项目需要。</p>
+
+<h2 id="安装基本的开发工具包">安装基本的开发工具包</h2>
+
+<p>为了确保编译Python成功，先安装下面的这几个package和类库。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">yum groupinstall <span class="s2">&#34;Development tools&#34;</span>
+yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+    <div class="read-more">
+      <a href="/post/centos-upgrade-python/" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
+    
+      <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/python-with-as/">深入理解Python的With-as语句</a></h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-02" class="post-time">
+        2018-12-02
       </time>
-      <span class="archive-post-title">
-        <a href="/post/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B/" class="archive-post-link">
-          结构化的机器学习流程
-        </a>
-      </span>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/python/"> Python </a>
+          
+        </div>
+      <span class="more-meta"> 约 4634 字 </span>
+      <span class="more-meta"> 预计阅读 10 分钟 </span>
+      
+      
+      
     </div>
+  </header>
   
-    <div class="archive-post">
-      <time datetime="2018-12-10" class="archive-post-time">
-        2018-12-10
-      </time>
-      <span class="archive-post-title">
-        <a href="/post/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3/" class="archive-post-link">
-          熵的理解
-        </a>
-      </span>
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="概述">概述</h2>
+
+<p>学习Python有一段时间了，最近做一个项目会涉及到文件的读取和关闭。比如：我想把一些对象序列化到文件里面，然后当我再次使用的时候，在从文件里面读取反序列化成对象。像这种操作一般都是用<strong>try…except…finally</strong>。但是经过自己对Python的研究发现会有更出色的方法，比如：with-as语句也有的人称为<strong>context manager。</strong></p>
+
+<h2 id="with-as-用法">With-as 用法</h2>
+
+<p>我们先看一下例子，当我们需要打开一个文件的时，比如：txt等，一般经常会这么操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这是错误，因为file.open是否打开文件是不确定，而在出现异常的时候你却关闭了已经打开的文件。文件没有打开怎么能直接关闭呢？你可以按照下面的解决方法来解决上述出现的问题。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>  
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">except</span><span class="p">:</span>  
+    <span class="n">To</span> <span class="n">Do</span>
+    <span class="o">//</span><span class="err">出现异常直接返回或者退出，这说明</span><span class="n">file并没有打开</span><span class="err">。</span>
+    <span class="k">return</span><span class="o">/</span><span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="o">//</span><span class="err">已经成功打开</span><span class="n">file文件</span><span class="err">，所以你需要在</span><span class="n">finally中关闭打开的文件</span><span class="err">。</span>
+<span class="k">try</span><span class="p">:</span>  
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">except</span><span class="p">:</span>  
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">finally</span><span class="p">:</span>  
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>你会发现这么做会非常麻烦，并且try……except…..finally嵌套也比较啰嗦。那有没有好的解决办法能解决上述问题，并且还能减少代码量呢？(类似于C#中的using关键字)答案是肯定的，那就是with……as语句。<strong>With语句适用于对I/O、文件流、数据流等资源进行访问的场合，确保不管使用过程中是否发生异常都会执行必要的“清理”操作，释放资源.比如文件使用后自动关闭、线程中锁的自动获取和释放等等。</strong> 我们来看一下with-as的用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">line</span>
+        <span class="o">...</span> <span class="n">more</span> <span class="n">processing</span> <span class="n">code</span> <span class="o">...</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这个语句执行完成之后，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄,确实比try……except……finally好多了。在这个例子中f就是上下文管理器enter()的返回值，返回的是当前文件自身的引用。Python内建对象都加入了对上下文管理器的支持，可以用在with语句中。比如:file、 threading、decimal等等，在多线程模块中，lock和条件变量也是支持with语句的。例如：</p>
+
+<p></p>
     </div>
-  
-</section>
+    <div class="read-more">
+      <a href="/post/python-with-as/" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
 
-
-
-
-
-
-  
-  
-  
+    
+  </section>
 
   
   
 
+
+
+  
   
   
 
   
   
+
+  
+  
+
+  
+  
+
+  
+  
+  <nav class="pagination">
+    <ul>
+      
+      <li >
+        <a href="/">1</a>
+      </li>
+      
+      <li >
+        <a href="/page/2/">2</a>
+      </li>
+      
+      <li >
+        <a href="/page/3/">3</a>
+      </li>
+      
+      <li >
+        <a href="/page/4/">4</a>
+      </li>
+      
+      <li  class="active" >
+        <a href="/page/5/">5</a>
+      </li>
+      
+    </ul>
+  </nav>
 
   
   
@@ -512,7 +663,14 @@
 
 
 <script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ="></script>
-<script id="tencent_analytics">
+
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script id="tencent_analytics">
   var _hmt = _hmt || [];
   (function() {
     if (window.location.hostname === 'localhost') return;

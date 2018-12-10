@@ -59,7 +59,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.brianlv.com/" />
-<meta property="og:updated_time" content="2018-12-10T21:30:53&#43;08:00"/>
+<meta property="og:updated_time" content="2018-12-10T21:31:00&#43;08:00"/>
 
 <meta itemprop="name" content="吕海峰的博客">
 <meta itemprop="description" content="">
@@ -282,6 +282,173 @@
     
       <article class="post bg-white">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/python%E8%BF%9B%E9%98%B6%E4%B8%89/">Python进阶系列三</a></h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-10" class="post-time">
+        2018-12-10
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/python/"> Python </a>
+          
+        </div>
+      <span class="more-meta"> 约 3125 字 </span>
+      <span class="more-meta"> 预计阅读 7 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="python-进阶">Python 进阶</h2>
+
+<p>我们在<strong>Python进阶教程(二)</strong>，介绍了一些Python进阶用法。今天给大家介绍的是和<strong>c/c++</strong>混合编程的用法。我们都知道特别是Python2.x版本GIL的影响造成多线程计算方面是鸡肋，并且常常在高性能计算方面依赖很多包。如果我们想切合我们自己的业务处理，比如高性能部分我们用<strong>C/C++</strong>生成动态链接库，Python调用该动态链接库。我们今天主要介绍Python在和<strong>c/c++</strong>混合编程。</p>
+
+<h3 id="python和c-c-混合编程">Python和C/C++混合编程</h3>
+
+<p>在和<strong>C/C++代码</strong>进行混合编程时，我们通常需要采用以下几个技术点：
+* <strong>Ctypes</strong>:C++编译成动态链接库(DLL,即运行时动态调用)，然后通过<strong>ctypes</strong>来解析和加载动态链接库，python调用该动态链接库。从ctypes的文档中可以推断，在各个平台上均使用了对应平台动态加载动态链接库的方法，并通过一套类型映射的方式将Python与二进制动态链接库相连接。ctypes 实现了一系列的类型转换方法，Python的数据类型会包装或直接推算为C类型，作为函数的调用参数；函数的返回值也经过一系列的包装成为Python类型。
+<strong>优点：</strong>
+1.Python内建，不需要单独安装
+2.可以直接调用二进制的动态链接库
+3.在Python一侧，不需要了解Python内部的工作方式
+4.在C/C++一侧，也不需要了解Python内部的工作方式
+5.对基本类型的相互映射有良好的支持
+<strong>缺点：</strong>
+1.平台兼容性差
+2.不能够直接调用动态链接库中未经导出的函数或变量
+3.对C++的支持差
+* <strong>SWIG</strong>:通过提供的接口文件来调用。
+* <strong>Python/C</strong>在C中直接扩展Python的代码。
+</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/python%E8%BF%9B%E9%98%B6%E4%B8%89/" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
+    
+      <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/python%E8%BF%9B%E9%98%B6%E4%BA%8C/">Python进阶系列二</a></h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-10" class="post-time">
+        2018-12-10
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/python/"> Python </a>
+          
+        </div>
+      <span class="more-meta"> 约 5650 字 </span>
+      <span class="more-meta"> 预计阅读 12 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="概述">概述</h2>
+
+<p>在上一篇博客中，我们介绍了<strong><a href="https://www.brianlv.com/post/python进阶一">Python进阶系列一</a></strong>，还有一些新的技巧没有翻译完，我们下面来继续我们的翻译。</p>
+
+<h2 id="intermediate-python-中译-二">Intermediate Python 中译(二)</h2>
+
+<h3 id="decorators">Decorators</h3>
+
+<p><strong>Decorators</strong>装饰器是Pytho非常重要的特性，相当于Java注解功能。装饰器是修饰函数的一种语法特性，可以使其功能发生一些改变。在Python函数也是第一等公民，可以直接赋值对象和使用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&#34;hi,&#34;</span><span class="o">+</span><span class="n">name</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hi</span><span class="p">())</span>
+<span class="c1">#输出</span>
+<span class="n">hi</span><span class="p">,</span><span class="n">brian</span>
+<span class="n">greet</span> <span class="o">=</span> <span class="n">hi</span>
+<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
+<span class="c1">#输出</span>
+<span class="n">hi</span><span class="p">,</span><span class="n">brian</span>
+<span class="c1">#此时已经删除hi对象，无法运行hi()方法，但是可以通过greet()方法运行</span>
+<span class="k">del</span> <span class="n">hi</span>
+<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
+<span class="c1">#输出</span>
+<span class="n">hi</span><span class="err">，</span><span class="n">brian</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>我们也可以在函数内定义函数</strong>，比如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;now you are inside in the hi() method&#34;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">greet</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s2">&#34;now you are in inside the greet() method&#34;</span>
+    <span class="k">def</span> <span class="nf">welcome</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s2">&#34;now you are in inside the welcome() method&#34;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">welcome</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;now you are back in the hi() method&#34;</span><span class="p">)</span>
+<span class="n">hi</span><span class="p">()</span>
+<span class="c1">#输出为</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">inside</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">()</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">greet</span><span class="p">()</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">welcome</span><span class="p">()</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">back</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">()</span> <span class="n">method</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>我们可以看到在函数(主函数)内定义函数(子函数)，只要是不调用子函数，子函数只是声明并不执行，当执行完子函数时又返回了主函数。</strong>由于Python只是函数第一等公民的功能特性，那么在Python代码中是可以将Python的函数可以作为变量使用并将其作为返回值亦可。<strong>从主函数中返回子函数(即从函数中返回函数)</strong>。
+</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/python%E8%BF%9B%E9%98%B6%E4%BA%8C/" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
+    
+      <article class="post bg-white">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/python%E8%BF%9B%E9%98%B6%E4%B8%80/">Python进阶系列一</a></h1>
     
     <div class="post-meta">
@@ -439,100 +606,6 @@
 </article>
 
     
-      <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/python-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/">Python 性能分析</a></h1>
-    
-    <div class="post-meta">
-      <time datetime="2018-12-10" class="post-time">
-        2018-12-10
-      </time>
-      <div class="post-category">
-          <a href="https://www.brianlv.com/categories/python/"> Python </a>
-          
-        </div>
-      <span class="more-meta"> 约 1650 字 </span>
-      <span class="more-meta"> 预计阅读 4 分钟 </span>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      <h1 id="python性能分析与优化">Python性能分析与优化</h1>
-
-<p>一个优秀的程序员，在保证业务正常的条件下都会追求自己的程序更快、更省。更快：运行时间短；更省：相对节省计算机资源（比如：CPU、Memory）。一般都是以这两种衡量方式来度量自己的程序及进一步优化自己程序的空间。更专业的性能分析软件一般有两类方法论：<strong>event-based profiling和statistical profiling</strong> 。</p>
-
-<h2 id="event-based-profiling">Event-based Profiling</h2>
-
-<p>并不是所有编程语言都支持这类性能分析，支持这类分析的语言主要有：</p>
-
-<ul>
-<li>Java:JVMTI（JVM Tools Interface,JVM工具接口）为性能提供了钩子，可以跟踪函数调用和事件执行等等。</li>
-<li>.NET :也提供了事件监听器，主要得益于.net 运行时。</li>
-<li>Python：可以利用sys.setprofile函数来跟踪函数python<em>(call,return,exception)或者c</em>(call,return,exception).</li>
-</ul>
-
-<p>基于事件的性能分析(event-based profiler or tracing profiler)是通过手机程序执行过程中的具体事件进行工作的，这些性能分析会产生大量的数据，基本而言，你监听的事件越多产生的数据量句越多。这导致它们不太实用，在开始对程序进行性能往往不是首选，当其他性能分析不够用或者不精准它们可以作为最后的选择。
-
-我们看一下一个python的例子：</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/python-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/" class="read-more-link">阅读全文</a>
-    </div>
-    
-  </div>
-</article>
-
-    
-      <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/python-gil/">Python GIL</a></h1>
-    
-    <div class="post-meta">
-      <time datetime="2018-12-10" class="post-time">
-        2018-12-10
-      </time>
-      <div class="post-category">
-          <a href="https://www.brianlv.com/categories/python/"> Python </a>
-          
-        </div>
-      <span class="more-meta"> 约 1470 字 </span>
-      <span class="more-meta"> 预计阅读 3 分钟 </span>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      <h2 id="概述">概述</h2>
-
-<p><strong>GIL（Global Interpreter    Lock）</strong>是什么东东？为什么当一些Pythoners在开发一些多线程操作的时候，都会有些很多疑问？多线程真的很糟糕吗？我该如何实现多线程并发操作？今天博主带你详细的介绍一下GIL。</p>
-
-<h2 id="gil原理">GIL原理</h2>
-
-<p>由于Python是动态解释性语言，即解释运行。运行Python代码时都会通过Python解释器解释执行，Python官方默认的解释器是Cython,当然你也可以选择自己的Python解释器(PyPy,JPython),其中JPython就没有GIL的限制。在解释器解释执行任何Python代码时，首先都需要<strong>they  acquire GIL when running，release GIL when blocking for I/O</strong>。如果没有涉及I/O操作，只是CPU密集型操作或者，解释器会每隔<strong>100 ticks</strong>(低级的解释器指令)就释放GIL(通过 sys.setcheckinterval来修改)。<strong>GIL是实现Python解释器(Cython)时所引入的一个概念。GIL不是Python的特性。</strong></p>
-
-<h3 id="线程执行模型">线程执行模型</h3>
-
-<p>我们先看一下Python下多任务线程执行模型，下面的图取自<strong>David Beazley</strong>大神，并且在他的个人网站中对GIL进行深度的解剖。如果想了解更深入的东西，可以去逛逛他的网站。
-
-<img src="/image/gil-threads.png" alt="Thread Execution Model" /></p>
-    </div>
-    <div class="read-more">
-      <a href="/post/python-gil/" class="read-more-link">阅读全文</a>
-    </div>
-    
-  </div>
-</article>
-
-    
   </section>
 
   
@@ -572,6 +645,10 @@
       
       <li >
         <a href="/page/4/">4</a>
+      </li>
+      
+      <li >
+        <a href="/page/5/">5</a>
       </li>
       
     </ul>
@@ -749,7 +826,14 @@
 
 
 <script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ="></script>
-<script id="tencent_analytics">
+
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script id="tencent_analytics">
   var _hmt = _hmt || [];
   (function() {
     if (window.location.hostname === 'localhost') return;
