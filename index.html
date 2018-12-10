@@ -282,18 +282,122 @@
     
       <article class="post bg-white">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/python-with-as/">深入理解Python的With-as语句</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3/">熵的理解</a></h1>
     
     <div class="post-meta">
-      <time datetime="2018-12-02" class="post-time">
-        2018-12-02
+      <time datetime="2018-12-10" class="post-time">
+        2018-12-10
       </time>
       <div class="post-category">
-          <a href="https://www.brianlv.com/categories/programming/"> Programming </a>
+          <a href="https://www.brianlv.com/categories/machine-learning/"> Machine Learning </a>
           
         </div>
-      <span class="more-meta"> 约 4634 字 </span>
-      <span class="more-meta"> 预计阅读 10 分钟 </span>
+      <span class="more-meta"> 约 1338 字 </span>
+      <span class="more-meta"> 预计阅读 3 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="熵">熵</h2>
+
+<p>熵在信息论中代表随机变量不确定度的度量。一个离散型随机变量X的熵H(X)定义为：
+$$
+H(X)=- \sum_{x \in X} p(x) \cdot logp(x)
+$$
+明确定义的科学名词且与内容无关，而且不随信息的具体表达式的变化而变化。是独立于形式，反映了信息表达式中统计方面的性质。是统计学上的抽象概念。信息熵的一种解释是，它表示的是最短的平均编码长度。同样的，不确定性越大，熵就越大。信息熵的单位是比特(bit)。我们举两个简单的例子：
+第一个例子：
+32支球队，在无任何先验信息的前提下，用二分法猜冠军队伍，最多猜5次，即：
+$$
+log\frac{1}{32}=5log\frac{1}{32}=5bit
+$$
+
+第二个例子：
+赌马比赛里，有4匹马A,B,C,D，获胜概率分别为 $$ \frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{8} $$
+&gt; * 如果 X=A ，那么需要问1次（问题1：是不是A？），概率为 $$ \frac{1}{2} $$
+&gt; * 如果 X=B ，那么需要问2次（问题1：是不是A？问题2：是不是B？），概率为  $$ \frac{1}{4}$$
+&gt; * 如果 X=C ，那么需要问3次（问题1，问题2，问题3），概率为   $$ \frac{1}{8}$$
+&gt; * 如果 X=D ，那么同样需要问3次（问题1，问题2，问题3），概率为 $$ \frac{1}{8}$$</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3/" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
+    
+      <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/python%E8%BF%9B%E9%98%B6%E4%B8%89/">Python进阶系列三</a></h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-10" class="post-time">
+        2018-12-10
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/python/"> Python </a>
+          
+        </div>
+      <span class="more-meta"> 约 3125 字 </span>
+      <span class="more-meta"> 预计阅读 7 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="python-进阶">Python 进阶</h2>
+
+<p>我们在<strong>Python进阶教程(二)</strong>，介绍了一些Python进阶用法。今天给大家介绍的是和<strong>c/c++</strong>混合编程的用法。我们都知道特别是Python2.x版本GIL的影响造成多线程计算方面是鸡肋，并且常常在高性能计算方面依赖很多包。如果我们想切合我们自己的业务处理，比如高性能部分我们用<strong>C/C++</strong>生成动态链接库，Python调用该动态链接库。我们今天主要介绍Python在和<strong>c/c++</strong>混合编程。</p>
+
+<h3 id="python和c-c-混合编程">Python和C/C++混合编程</h3>
+
+<p>在和<strong>C/C++代码</strong>进行混合编程时，我们通常需要采用以下几个技术点：
+* <strong>Ctypes</strong>:C++编译成动态链接库(DLL,即运行时动态调用)，然后通过<strong>ctypes</strong>来解析和加载动态链接库，python调用该动态链接库。从ctypes的文档中可以推断，在各个平台上均使用了对应平台动态加载动态链接库的方法，并通过一套类型映射的方式将Python与二进制动态链接库相连接。ctypes 实现了一系列的类型转换方法，Python的数据类型会包装或直接推算为C类型，作为函数的调用参数；函数的返回值也经过一系列的包装成为Python类型。
+<strong>优点：</strong>
+1.Python内建，不需要单独安装
+2.可以直接调用二进制的动态链接库
+3.在Python一侧，不需要了解Python内部的工作方式
+4.在C/C++一侧，也不需要了解Python内部的工作方式
+5.对基本类型的相互映射有良好的支持
+<strong>缺点：</strong>
+1.平台兼容性差
+2.不能够直接调用动态链接库中未经导出的函数或变量
+3.对C++的支持差
+* <strong>SWIG</strong>:通过提供的接口文件来调用。
+* <strong>Python/C</strong>在C中直接扩展Python的代码。
+</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/python%E8%BF%9B%E9%98%B6%E4%B8%89/" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
+    
+      <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/python%E8%BF%9B%E9%98%B6%E4%BA%8C/">Python进阶系列二</a></h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-10" class="post-time">
+        2018-12-10
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/python/"> Python </a>
+          
+        </div>
+      <span class="more-meta"> 约 5650 字 </span>
+      <span class="more-meta"> 预计阅读 12 分钟 </span>
       
       
       
@@ -305,32 +409,48 @@
     <div class="post-summary">
       <h2 id="概述">概述</h2>
 
-<p>学习Python有一段时间了，最近做一个项目会涉及到文件的读取和关闭。比如：我想把一些对象序列化到文件里面，然后当我再次使用的时候，在从文件里面读取反序列化成对象。像这种操作一般都是用<strong>try…except…finally</strong>。但是经过自己对Python的研究发现会有更出色的方法，比如：with-as语句也有的人称为<strong>context manager。</strong></p>
+<p>在上一篇博客中，我们介绍了<strong><a href="https://www.brianlv.com/post/python进阶一">Python进阶系列一</a></strong>，还有一些新的技巧没有翻译完，我们下面来继续我们的翻译。</p>
 
-<h2 id="with-as-用法">With-as 用法</h2>
+<h2 id="intermediate-python-中译-二">Intermediate Python 中译(二)</h2>
 
-<p>我们先看一下例子，当我们需要打开一个文件的时，比如：txt等，一般经常会这么操作：</p>
+<h3 id="decorators">Decorators</h3>
+
+<p><strong>Decorators</strong>装饰器是Pytho非常重要的特性，相当于Java注解功能。装饰器是修饰函数的一种语法特性，可以使其功能发生一些改变。在Python函数也是第一等公民，可以直接赋值对象和使用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
-    <span class="n">To</span> <span class="n">Do</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="n">To</span> <span class="n">Do</span>
-<span class="k">finally</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&#34;hi,&#34;</span><span class="o">+</span><span class="n">name</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hi</span><span class="p">())</span>
+<span class="c1">#输出</span>
+<span class="n">hi</span><span class="p">,</span><span class="n">brian</span>
+<span class="n">greet</span> <span class="o">=</span> <span class="n">hi</span>
+<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
+<span class="c1">#输出</span>
+<span class="n">hi</span><span class="p">,</span><span class="n">brian</span>
+<span class="c1">#此时已经删除hi对象，无法运行hi()方法，但是可以通过greet()方法运行</span>
+<span class="k">del</span> <span class="n">hi</span>
+<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
+<span class="c1">#输出</span>
+<span class="n">hi</span><span class="err">，</span><span class="n">brian</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>这是错误，因为file.open是否打开文件是不确定，而在出现异常的时候你却关闭了已经打开的文件。文件没有打开怎么能直接关闭呢？你可以按照下面的解决方法来解决上述出现的问题。</p>
+<p><strong>我们也可以在函数内定义函数</strong>，比如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
@@ -350,44 +470,28 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>  
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
-    <span class="n">To</span> <span class="n">Do</span>
-<span class="k">except</span><span class="p">:</span>  
-    <span class="n">To</span> <span class="n">Do</span>
-    <span class="o">//</span><span class="err">出现异常直接返回或者退出，这说明</span><span class="n">file并没有打开</span><span class="err">。</span>
-    <span class="k">return</span><span class="o">/</span><span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
-
-<span class="o">//</span><span class="err">已经成功打开</span><span class="n">file文件</span><span class="err">，所以你需要在</span><span class="n">finally中关闭打开的文件</span><span class="err">。</span>
-<span class="k">try</span><span class="p">:</span>  
-    <span class="n">To</span> <span class="n">Do</span>
-<span class="k">except</span><span class="p">:</span>  
-    <span class="n">To</span> <span class="n">Do</span>
-<span class="k">finally</span><span class="p">:</span>  
-    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;now you are inside in the hi() method&#34;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">greet</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s2">&#34;now you are in inside the greet() method&#34;</span>
+    <span class="k">def</span> <span class="nf">welcome</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s2">&#34;now you are in inside the welcome() method&#34;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">welcome</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;now you are back in the hi() method&#34;</span><span class="p">)</span>
+<span class="n">hi</span><span class="p">()</span>
+<span class="c1">#输出为</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">inside</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">()</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">greet</span><span class="p">()</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">welcome</span><span class="p">()</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">back</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">()</span> <span class="n">method</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>你会发现这么做会非常麻烦，并且try……except…..finally嵌套也比较啰嗦。那有没有好的解决办法能解决上述问题，并且还能减少代码量呢？(类似于C#中的using关键字)答案是肯定的，那就是with……as语句。<strong>With语句适用于对I/O、文件流、数据流等资源进行访问的场合，确保不管使用过程中是否发生异常都会执行必要的“清理”操作，释放资源.比如文件使用后自动关闭、线程中锁的自动获取和释放等等。</strong> 我们来看一下with-as的用法：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">line</span>
-        <span class="o">...</span> <span class="n">more</span> <span class="n">processing</span> <span class="n">code</span> <span class="o">...</span></code></pre></td></tr></table>
-</div>
-</div>
-<p>这个语句执行完成之后，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄,确实比try……except……finally好多了。在这个例子中f就是上下文管理器enter()的返回值，返回的是当前文件自身的引用。Python内建对象都加入了对上下文管理器的支持，可以用在with语句中。比如:file、 threading、decimal等等，在多线程模块中，lock和条件变量也是支持with语句的。例如：</p>
-
-<p></p>
+<p><strong>我们可以看到在函数(主函数)内定义函数(子函数)，只要是不调用子函数，子函数只是声明并不执行，当执行完子函数时又返回了主函数。</strong>由于Python只是函数第一等公民的功能特性，那么在Python代码中是可以将Python的函数可以作为变量使用并将其作为返回值亦可。<strong>从主函数中返回子函数(即从函数中返回函数)</strong>。
+</p>
     </div>
     <div class="read-more">
-      <a href="/post/python-with-as/" class="read-more-link">阅读全文</a>
+      <a href="/post/python%E8%BF%9B%E9%98%B6%E4%BA%8C/" class="read-more-link">阅读全文</a>
     </div>
     
   </div>
@@ -413,6 +517,30 @@
 
   
   
+
+  
+  
+  <nav class="pagination">
+    <ul>
+      
+      <li  class="active" >
+        <a href="/">1</a>
+      </li>
+      
+      <li >
+        <a href="/page/2/">2</a>
+      </li>
+      
+      <li >
+        <a href="/page/3/">3</a>
+      </li>
+      
+      <li >
+        <a href="/page/4/">4</a>
+      </li>
+      
+    </ul>
+  </nav>
 
   
   

@@ -11,11 +11,38 @@
     
     
     <item>
-      <title>Programming</title>
-      <link>https://www.brianlv.com/categories/programming/</link>
-      <pubDate>Sun, 02 Dec 2018 21:57:43 +0800</pubDate>
+      <title>Linux</title>
+      <link>https://www.brianlv.com/categories/linux/</link>
+      <pubDate>Mon, 10 Dec 2018 21:24:21 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/categories/programming/</guid>
+      <guid>https://www.brianlv.com/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>https://www.brianlv.com/categories/machine-learning/</link>
+      <pubDate>Mon, 10 Dec 2018 22:17:19 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/categories/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Opencv</title>
+      <link>https://www.brianlv.com/categories/opencv/</link>
+      <pubDate>Mon, 10 Dec 2018 21:23:57 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/categories/opencv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://www.brianlv.com/categories/python/</link>
+      <pubDate>Mon, 10 Dec 2018 21:31:00 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/categories/python/</guid>
       <description></description>
     </item>
     

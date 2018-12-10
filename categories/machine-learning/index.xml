@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Machine Learning on 吕海峰的博客</title>
+    <link>https://www.brianlv.com/categories/machine-learning/</link>
+    <description>Recent content in Machine Learning on 吕海峰的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 10 Dec 2018 22:17:19 +0800</lastBuildDate>
+    
+	<atom:link href="https://www.brianlv.com/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>熵的理解</title>
+      <link>https://www.brianlv.com/post/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3/</link>
+      <pubDate>Mon, 10 Dec 2018 22:17:19 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/post/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3/</guid>
+      <description>&lt;h2 id=&#34;熵&#34;&gt;熵&lt;/h2&gt;
+
+&lt;p&gt;熵在信息论中代表随机变量不确定度的度量。一个离散型随机变量X的熵H(X)定义为：
+$$
+H(X)=- \sum_{x \in X} p(x) \cdot logp(x)
+$$
+明确定义的科学名词且与内容无关，而且不随信息的具体表达式的变化而变化。是独立于形式，反映了信息表达式中统计方面的性质。是统计学上的抽象概念。信息熵的一种解释是，它表示的是最短的平均编码长度。同样的，不确定性越大，熵就越大。信息熵的单位是比特(bit)。我们举两个简单的例子：
+第一个例子：
+32支球队，在无任何先验信息的前提下，用二分法猜冠军队伍，最多猜5次，即：
+$$
+log\frac{1}{32}=5log\frac{1}{32}=5bit
+$$
+
+第二个例子：
+赌马比赛里，有4匹马A,B,C,D，获胜概率分别为 $$ \frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{8} $$
+&amp;gt; * 如果 X=A ，那么需要问1次（问题1：是不是A？），概率为 $$ \frac{1}{2} $$
+&amp;gt; * 如果 X=B ，那么需要问2次（问题1：是不是A？问题2：是不是B？），概率为  $$ \frac{1}{4}$$
+&amp;gt; * 如果 X=C ，那么需要问3次（问题1，问题2，问题3），概率为   $$ \frac{1}{8}$$
+&amp;gt; * 如果 X=D ，那么同样需要问3次（问题1，问题2，问题3），概率为 $$ \frac{1}{8}$$&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
