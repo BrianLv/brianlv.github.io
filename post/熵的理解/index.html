@@ -49,7 +49,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.aaf3394fc81ccb6f6fe3fe458d1f5b61c39f151e44df83baaf1d7b3775a8b98d.css" integrity="sha256-qvM5T8gcy29v4/5FjR9bYcOfFR5E34O6rx17N3WouY0=" media="screen">
+<link rel="stylesheet" href="/sass/jane.min.28854364c052ec02eba4ee5867bc889d3a567cdf337ba3a355c33511d20bee1e.css" integrity="sha256-KIVDZMBS7ALrpO5YZ7yInTpWfN8ze6OjVcM1EdIL7h4=" media="screen">
 
 
 
@@ -67,7 +67,7 @@
 
 <meta itemprop="datePublished" content="2018-12-10T22:17:19&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-10T22:17:19&#43;08:00" />
-<meta itemprop="wordCount" content="1280">
+<meta itemprop="wordCount" content="1274">
 
 
 
@@ -85,6 +85,43 @@
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
 
+
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
 
 
 
@@ -296,7 +333,7 @@
             <a href="https://www.brianlv.com/categories/machine-learning/"> Machine Learning </a>
             
           </div>
-        <span class="more-meta"> 约 1280 字 </span>
+        <span class="more-meta"> 约 1274 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
 
         
@@ -389,31 +426,41 @@ KL 散度是两个概率分布f(x)和g(x)差别的非对称性的度量。KL散�
 
 <h2 id="交叉熵">交叉熵</h2>
 
-<p>对一随机事件，其真实概率分布为p(i)，从数据中得到的概率分布为q(i)，则我们定义，交叉熵为:</p>
-
-<p>$$
-H(p,q)=\sum<em>{i} p(i) \cdot \frac{1}{logq(i)}=-\sum</em>{i} p(i) \cdot logq(i)
+<p>对一随机事件，其真实概率分布为p(i)，从数据中得到的概率分布为q(i)，则我们定义，交叉熵为:
+$$
+H(p,q)=\displaystyle\sum _{x}p(x)log\frac{1}{q(x)}=-\sum _{x}p(x)logq(x)
 $$</p>
 
 <p>核心理解：
-* 用p来衡量识别一个样本的信息量即最小编码长度（<strong>信息熵</strong>）。
-$$
+* 用p来衡量识别一个样本的信息量即最小编码长度（<strong>信息熵</strong>）。</p>
+
+<p>$$
 H(p)=\sum p \cdot log\frac{1}{p}
-$$
-* q来估计真实分布为p的样本的信息量.
-$$
+$$</p>
+
+<ul>
+<li>q来估计真实分布为p的样本的信息量.</li>
+</ul>
+
+<p>$$
 H(q,p)=\sum p \cdot \frac{1}{q}
-$$
-* 则估算多出来的冗余信息量.
-$$
+$$</p>
+
+<ul>
+<li>则估算多出来的冗余信息量.</li>
+</ul>
+
+<p>$$
 D(p||q)=H(p,q)-H(p)=\sum p \cdot log\frac{p}{q}(KL离散度)
 $$</p>
 
-<p><strong>在机器学习中，p通常设定为真实标记的分布，q设定为训练后模型预测标记的分布：</strong>
-$$
+<p><strong>在机器学习中，p通常设定为真实标记的分布，q设定为训练后模型预测标记的分布：</strong></p>
+
+<p>$$
 H(p,q)=H(p)+D_{KL}(pq)
-$$
-<strong>即：交叉熵=信息熵+KL散度（相对熵）</strong>
+$$</p>
+
+<p><strong>即：交叉熵=信息熵+KL散度（相对熵）</strong>
 由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&rdquo;距离&rdquo;。
 </p>
     </div>

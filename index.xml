@@ -70,9 +70,15 @@ In spare time,I like reading,climbing mountain and photography.&lt;/p&gt;
 * TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负&lt;/p&gt;
 
 &lt;p&gt;$$
-Accuracy = \frac{TP+TN}{TP+FP+TN+FN} &lt;br /&gt;
-Precision = \frac{TP}{TP+FP}&lt;br /&gt;
-Recall = \frac{TP}{TP+FN}&lt;br /&gt;
+Accuracy = \frac{TP+TN}{TP+FP+TN+FN}
+$$
+$$
+Precision = \frac{TP}{TP+FP}
+$$
+$$
+Recall = \frac{TP}{TP+FN}
+$$
+$$
 SP = \frac{TN}{TN + FP}&lt;br /&gt;
 $$&lt;/p&gt;
 
@@ -94,9 +100,8 @@ $$&lt;/p&gt;
 
 &lt;p&gt;$$
 MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP+FP)\times(TP+FN)\times(TN+FP)\times(TN+FN)}}
-$$&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;
+$$
+&lt;/p&gt;
 
 &lt;h3 id=&#34;roc和auc&#34;&gt;ROC和AUC&lt;/h3&gt;
 
@@ -1820,31 +1825,41 @@ KL 散度是两个概率分布f(x)和g(x)差别的非对称性的度量。KL散�
 
 &lt;h2 id=&#34;交叉熵&#34;&gt;交叉熵&lt;/h2&gt;
 
-&lt;p&gt;对一随机事件，其真实概率分布为p(i)，从数据中得到的概率分布为q(i)，则我们定义，交叉熵为:&lt;/p&gt;
-
-&lt;p&gt;$$
-H(p,q)=\sum&lt;em&gt;{i} p(i) \cdot \frac{1}{logq(i)}=-\sum&lt;/em&gt;{i} p(i) \cdot logq(i)
+&lt;p&gt;对一随机事件，其真实概率分布为p(i)，从数据中得到的概率分布为q(i)，则我们定义，交叉熵为:
+$$
+H(p,q)=\displaystyle\sum _{x}p(x)log\frac{1}{q(x)}=-\sum _{x}p(x)logq(x)
 $$&lt;/p&gt;
 
 &lt;p&gt;核心理解：
-* 用p来衡量识别一个样本的信息量即最小编码长度（&lt;strong&gt;信息熵&lt;/strong&gt;）。
-$$
+* 用p来衡量识别一个样本的信息量即最小编码长度（&lt;strong&gt;信息熵&lt;/strong&gt;）。&lt;/p&gt;
+
+&lt;p&gt;$$
 H(p)=\sum p \cdot log\frac{1}{p}
-$$
-* q来估计真实分布为p的样本的信息量.
-$$
+$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;q来估计真实分布为p的样本的信息量.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$
 H(q,p)=\sum p \cdot \frac{1}{q}
-$$
-* 则估算多出来的冗余信息量.
-$$
+$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;则估算多出来的冗余信息量.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$
 D(p||q)=H(p,q)-H(p)=\sum p \cdot log\frac{p}{q}(KL离散度)
 $$&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;在机器学习中，p通常设定为真实标记的分布，q设定为训练后模型预测标记的分布：&lt;/strong&gt;
-$$
+&lt;p&gt;&lt;strong&gt;在机器学习中，p通常设定为真实标记的分布，q设定为训练后模型预测标记的分布：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;$$
 H(p,q)=H(p)+D_{KL}(pq)
-$$
-&lt;strong&gt;即：交叉熵=信息熵+KL散度（相对熵）&lt;/strong&gt;
+$$&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;即：交叉熵=信息熵+KL散度（相对熵）&lt;/strong&gt;
 由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&amp;rdquo;距离&amp;rdquo;。
 &lt;/p&gt;</description>
       

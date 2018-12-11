@@ -26,16 +26,12 @@
   <meta name="description" content="我们在进行机器学习时需要衡量机器学习的优劣和本身模型的准确程度，比如简单的衡量数据的准确率和错误率，但是我们更关心的是模型的泛化能力的指标，即基于模型的所选的item相关性以及模型分类指标的好坏。
 机器学习度量  error rate(错误率):把分类错误的样本数占样本总数的比例。$$E=a/m$$ accuracy(精确度):分类正确的样本数占样本总数的比例。$$acc=1-E$$ training error(训练误差):学习器在训练集上的误差。 generalization error(泛华误差):在新样本上的误差。  在机器学习中由很多机器学习算法，那么如何选择这些算法和模型，如何评估这些算法和模型,评估模型的算法和准确率的方式很多，我们依次来介绍一下几个常用的指标。TP、TN、FP、FN、Acc、Recall、F1、ROC和ROI
 各种机器学习衡量指标 Accuracy、Precision、Recall和F1-Score 混淆矩阵是按照预测分类和实际分类的类别对比,如下图所示: 如上表所示，行表示预测的label值，列表示真实label值。TP，FP，FN，TN分别表示如下意思： * TP（true positive）：表示样本的真实类别为正，最后预测得到的结果也为正 * FP（false positive）：表示样本的真实类别为负，最后预测得到的结果却为正 * FN（false negative）：表示样本的真实类别为正，最后预测得到的结果却为负 * TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负
-$$ Accuracy = \frac{TP&#43;TN}{TP&#43;FP&#43;TN&#43;FN} Precision = \frac{TP}{TP&#43;FP}
-Recall = \frac{TP}{TP&#43;FN}
-SP = \frac{TN}{TN &#43; FP}
+$$ Accuracy = \frac{TP&#43;TN}{TP&#43;FP&#43;TN&#43;FN} $$ $$ Precision = \frac{TP}{TP&#43;FP} $$ $$ Recall = \frac{TP}{TP&#43;FN} $$ $$ SP = \frac{TN}{TN &#43; FP}
 $$
  Accuracy：表示预测结果的精确度，预测正确的样本数除以总样本数。 Precision，准确率，表示预测结果中，预测为正样本的样本中，正确预测为正样本的概率； Recall，召回率，表示在原始样本的正样本中，最后被正确预测为正样本的概率； Specificity，常常称作特异性，它研究的样本集是原始样本中的负样本，表示的是在这些负样本中最后被正确预测为负样本的概率。  在实际当中，我们往往希望得到的precision和recall都比较高，比如当FN和FP等于0的时候，他们的值都等于1。但是，它们往往在某种情况下是互斥的。例如，有50个正样本，50个负样本，结果全部预测为正样本，那么TP=50,FP=50,TN=0,FN=0,按照上面的公式计算，可以得到正样本的recall却为1，precision却为0.5.所以需要一种折衷的方式，因此就有了F1-score。
 $$ F1-score = \frac{2\times recall \times precision}{ recall &#43; precision} $$
 F1-score表示的是precision和recall的调和平均评估指标. 另外还有一个指标，即MCC，该指标对于不均衡数据集的评估非常有效，公式如下：
-$$ MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP&#43;FP)\times(TP&#43;FN)\times(TN&#43;FP)\times(TN&#43;FN)}} $$
-
-" />
+$$ MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP&#43;FP)\times(TP&#43;FN)\times(TN&#43;FP)\times(TN&#43;FN)}} $$ " />
 
 
 
@@ -62,7 +58,7 @@ $$ MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP&#43;FP)\times(TP&#43;FN)\t
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.aaf3394fc81ccb6f6fe3fe458d1f5b61c39f151e44df83baaf1d7b3775a8b98d.css" integrity="sha256-qvM5T8gcy29v4/5FjR9bYcOfFR5E34O6rx17N3WouY0=" media="screen">
+<link rel="stylesheet" href="/sass/jane.min.28854364c052ec02eba4ee5867bc889d3a567cdf337ba3a355c33511d20bee1e.css" integrity="sha256-KIVDZMBS7ALrpO5YZ7yInTpWfN8ze6OjVcM1EdIL7h4=" media="screen">
 
 
 
@@ -95,9 +91,15 @@ Accuracy、Precision、Recall和F1-Score
 * TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负
 
 $$
-Accuracy = \frac{TP&#43;TN}{TP&#43;FP&#43;TN&#43;FN} 
+Accuracy = \frac{TP&#43;TN}{TP&#43;FP&#43;TN&#43;FN}
+$$
+$$
 Precision = \frac{TP}{TP&#43;FP}
+$$
+$$
 Recall = \frac{TP}{TP&#43;FN}
+$$
+$$
 SP = \frac{TN}{TN &#43; FP}
 $$
 
@@ -120,7 +122,6 @@ F1-score表示的是precision和recall的调和平均评估指标.
 $$
 MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP&#43;FP)\times(TP&#43;FN)\times(TN&#43;FP)\times(TN&#43;FN)}}
 $$
-
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.brianlv.com/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F/" /><meta property="article:published_time" content="2018-12-10T23:16:18&#43;08:00"/>
@@ -153,9 +154,15 @@ Accuracy、Precision、Recall和F1-Score
 * TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负
 
 $$
-Accuracy = \frac{TP&#43;TN}{TP&#43;FP&#43;TN&#43;FN} 
+Accuracy = \frac{TP&#43;TN}{TP&#43;FP&#43;TN&#43;FN}
+$$
+$$
 Precision = \frac{TP}{TP&#43;FP}
+$$
+$$
 Recall = \frac{TP}{TP&#43;FN}
+$$
+$$
 SP = \frac{TN}{TN &#43; FP}
 $$
 
@@ -178,13 +185,12 @@ F1-score表示的是precision和recall的调和平均评估指标.
 $$
 MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP&#43;FP)\times(TP&#43;FN)\times(TN&#43;FP)\times(TN&#43;FN)}}
 $$
-
 ">
 
 
 <meta itemprop="datePublished" content="2018-12-10T23:16:18&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-10T23:16:18&#43;08:00" />
-<meta itemprop="wordCount" content="3737">
+<meta itemprop="wordCount" content="3743">
 
 
 
@@ -217,9 +223,15 @@ Accuracy、Precision、Recall和F1-Score
 * TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负
 
 $$
-Accuracy = \frac{TP&#43;TN}{TP&#43;FP&#43;TN&#43;FN} 
+Accuracy = \frac{TP&#43;TN}{TP&#43;FP&#43;TN&#43;FN}
+$$
+$$
 Precision = \frac{TP}{TP&#43;FP}
+$$
+$$
 Recall = \frac{TP}{TP&#43;FN}
+$$
+$$
 SP = \frac{TN}{TN &#43; FP}
 $$
 
@@ -242,7 +254,6 @@ F1-score表示的是precision和recall的调和平均评估指标.
 $$
 MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP&#43;FP)\times(TP&#43;FN)\times(TN&#43;FP)\times(TN&#43;FN)}}
 $$
-
 "/>
 
 <!--[if lte IE 9]>
@@ -254,6 +265,43 @@ $$
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
 
+
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
 
 
 
@@ -465,7 +513,7 @@ $$
             <a href="https://www.brianlv.com/categories/machine-learning/"> Machine Learning </a>
             
           </div>
-        <span class="more-meta"> 约 3737 字 </span>
+        <span class="more-meta"> 约 3743 字 </span>
           <span class="more-meta"> 预计阅读 8 分钟 </span>
 
         
@@ -532,9 +580,15 @@ $$
 * TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负</p>
 
 <p>$$
-Accuracy = \frac{TP+TN}{TP+FP+TN+FN} <br />
-Precision = \frac{TP}{TP+FP}<br />
-Recall = \frac{TP}{TP+FN}<br />
+Accuracy = \frac{TP+TN}{TP+FP+TN+FN}
+$$
+$$
+Precision = \frac{TP}{TP+FP}
+$$
+$$
+Recall = \frac{TP}{TP+FN}
+$$
+$$
 SP = \frac{TN}{TN + FP}<br />
 $$</p>
 
@@ -556,9 +610,8 @@ $$</p>
 
 <p>$$
 MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP+FP)\times(TP+FN)\times(TN+FP)\times(TN+FN)}}
-$$</p>
-
-<p></p>
+$$
+</p>
 
 <h3 id="roc和auc">ROC和AUC</h3>
 

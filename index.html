@@ -49,7 +49,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.aaf3394fc81ccb6f6fe3fe458d1f5b61c39f151e44df83baaf1d7b3775a8b98d.css" integrity="sha256-qvM5T8gcy29v4/5FjR9bYcOfFR5E34O6rx17N3WouY0=" media="screen">
+<link rel="stylesheet" href="/sass/jane.min.28854364c052ec02eba4ee5867bc889d3a567cdf337ba3a355c33511d20bee1e.css" integrity="sha256-KIVDZMBS7ALrpO5YZ7yInTpWfN8ze6OjVcM1EdIL7h4=" media="screen">
 
 
 
@@ -77,6 +77,43 @@
   <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
 <![endif]-->
 
+
+
+<script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
 
 
 
@@ -282,7 +319,10 @@
     
       <article class="post bg-white">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F/">机器学习性能度量</a></h1>
+    <h1 class="post-title">
+      
+      <a class="post-link" href="/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F/">机器学习性能度量</a>
+    </h1>
     
     <div class="post-meta">
       <time datetime="2018-12-10" class="post-time">
@@ -292,7 +332,7 @@
           <a href="https://www.brianlv.com/categories/machine-learning/"> Machine Learning </a>
           
         </div>
-      <span class="more-meta"> 约 3737 字 </span>
+      <span class="more-meta"> 约 3743 字 </span>
       <span class="more-meta"> 预计阅读 8 分钟 </span>
       
       
@@ -329,9 +369,15 @@
 * TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负</p>
 
 <p>$$
-Accuracy = \frac{TP+TN}{TP+FP+TN+FN} <br />
-Precision = \frac{TP}{TP+FP}<br />
-Recall = \frac{TP}{TP+FN}<br />
+Accuracy = \frac{TP+TN}{TP+FP+TN+FN}
+$$
+$$
+Precision = \frac{TP}{TP+FP}
+$$
+$$
+Recall = \frac{TP}{TP+FN}
+$$
+$$
 SP = \frac{TN}{TN + FP}<br />
 $$</p>
 
@@ -353,9 +399,8 @@ $$</p>
 
 <p>$$
 MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP+FP)\times(TP+FN)\times(TN+FP)\times(TN+FN)}}
-$$</p>
-
-<p></p>
+$$
+</p>
     </div>
     <div class="read-more">
       <a href="/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F/" class="read-more-link">阅读全文</a>
@@ -367,7 +412,10 @@ $$</p>
     
       <article class="post bg-white">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B/">结构化的机器学习流程</a></h1>
+    <h1 class="post-title">
+      
+      <a class="post-link" href="/post/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B/">结构化的机器学习流程</a>
+    </h1>
     
     <div class="post-meta">
       <time datetime="2018-12-10" class="post-time">
@@ -461,7 +509,10 @@ $$</p>
     
       <article class="post bg-white">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3/">熵的理解</a></h1>
+    <h1 class="post-title">
+      
+      <a class="post-link" href="/post/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3/">熵的理解</a>
+    </h1>
     
     <div class="post-meta">
       <time datetime="2018-12-10" class="post-time">
@@ -471,7 +522,7 @@ $$</p>
           <a href="https://www.brianlv.com/categories/machine-learning/"> Machine Learning </a>
           
         </div>
-      <span class="more-meta"> 约 1280 字 </span>
+      <span class="more-meta"> 约 1274 字 </span>
       <span class="more-meta"> 预计阅读 3 分钟 </span>
       
       
@@ -541,31 +592,41 @@ KL 散度是两个概率分布f(x)和g(x)差别的非对称性的度量。KL散�
 
 <h2 id="交叉熵">交叉熵</h2>
 
-<p>对一随机事件，其真实概率分布为p(i)，从数据中得到的概率分布为q(i)，则我们定义，交叉熵为:</p>
-
-<p>$$
-H(p,q)=\sum<em>{i} p(i) \cdot \frac{1}{logq(i)}=-\sum</em>{i} p(i) \cdot logq(i)
+<p>对一随机事件，其真实概率分布为p(i)，从数据中得到的概率分布为q(i)，则我们定义，交叉熵为:
+$$
+H(p,q)=\displaystyle\sum _{x}p(x)log\frac{1}{q(x)}=-\sum _{x}p(x)logq(x)
 $$</p>
 
 <p>核心理解：
-* 用p来衡量识别一个样本的信息量即最小编码长度（<strong>信息熵</strong>）。
-$$
+* 用p来衡量识别一个样本的信息量即最小编码长度（<strong>信息熵</strong>）。</p>
+
+<p>$$
 H(p)=\sum p \cdot log\frac{1}{p}
-$$
-* q来估计真实分布为p的样本的信息量.
-$$
+$$</p>
+
+<ul>
+<li>q来估计真实分布为p的样本的信息量.</li>
+</ul>
+
+<p>$$
 H(q,p)=\sum p \cdot \frac{1}{q}
-$$
-* 则估算多出来的冗余信息量.
-$$
+$$</p>
+
+<ul>
+<li>则估算多出来的冗余信息量.</li>
+</ul>
+
+<p>$$
 D(p||q)=H(p,q)-H(p)=\sum p \cdot log\frac{p}{q}(KL离散度)
 $$</p>
 
-<p><strong>在机器学习中，p通常设定为真实标记的分布，q设定为训练后模型预测标记的分布：</strong>
-$$
+<p><strong>在机器学习中，p通常设定为真实标记的分布，q设定为训练后模型预测标记的分布：</strong></p>
+
+<p>$$
 H(p,q)=H(p)+D_{KL}(pq)
-$$
-<strong>即：交叉熵=信息熵+KL散度（相对熵）</strong>
+$$</p>
+
+<p><strong>即：交叉熵=信息熵+KL散度（相对熵）</strong>
 由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&rdquo;距离&rdquo;。
 </p>
     </div>
@@ -797,14 +858,7 @@ $$
 
 
 <script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ="></script>
-
-  <script type="text/javascript">
-    window.MathJax = {
-      showProcessingMessages: false,
-      messageStyle: 'none'
-    };
-  </script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script><script id="tencent_analytics">
+<script id="tencent_analytics">
   var _hmt = _hmt || [];
   (function() {
     if (window.location.hostname === 'localhost') return;
