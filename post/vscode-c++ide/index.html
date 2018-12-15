@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ubuntu 16.04 Install OpenCV - 吕海峰的博客</title>
+  <title>C/C&#43;&#43; Development In Visual Studio Code - 吕海峰的博客</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -22,8 +22,7 @@
 
 <meta name="mobile-web-app-capable" content="yes">
 
-<meta name="author" content="吕海峰(BrianLv)" /><meta name="description" content="Ubuntu 16.04 Install OpenCV" />
-<meta name="keywords" content="OpenCV" />
+<meta name="author" content="吕海峰(BrianLv)" /><meta name="description" content="C/C&#43;&#43; Development using Visual Studio Code, CMake and LLDB" />
 
 
 
@@ -34,7 +33,7 @@
 <meta name="generator" content="Hugo 0.49.2" />
 
 
-<link rel="canonical" href="https://www.brianlv.com/post/ubuntu-install-opencv/" />
+<link rel="canonical" href="https://www.brianlv.com/post/vscode-c&#43;&#43;ide/" />
 
 
 
@@ -56,26 +55,26 @@
 
 
 
-<meta property="og:title" content="Ubuntu 16.04 Install OpenCV" />
-<meta property="og:description" content="Ubuntu 16.04 Install OpenCV" />
+<meta property="og:title" content="C/C&#43;&#43; Development In Visual Studio Code" />
+<meta property="og:description" content="C/C&#43;&#43; Development using Visual Studio Code, CMake and LLDB" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.brianlv.com/post/ubuntu-install-opencv/" /><meta property="article:published_time" content="2018-12-10T21:23:57&#43;08:00"/>
-<meta property="article:modified_time" content="2018-12-10T21:23:57&#43;08:00"/>
+<meta property="og:url" content="https://www.brianlv.com/post/vscode-c&#43;&#43;ide/" /><meta property="article:published_time" content="2018-12-15T17:14:08&#43;08:00"/>
+<meta property="article:modified_time" content="2018-12-15T17:14:08&#43;08:00"/>
 
-<meta itemprop="name" content="Ubuntu 16.04 Install OpenCV">
-<meta itemprop="description" content="Ubuntu 16.04 Install OpenCV">
-
-
-<meta itemprop="datePublished" content="2018-12-10T21:23:57&#43;08:00" />
-<meta itemprop="dateModified" content="2018-12-10T21:23:57&#43;08:00" />
-<meta itemprop="wordCount" content="691">
+<meta itemprop="name" content="C/C&#43;&#43; Development In Visual Studio Code">
+<meta itemprop="description" content="C/C&#43;&#43; Development using Visual Studio Code, CMake and LLDB">
 
 
+<meta itemprop="datePublished" content="2018-12-15T17:14:08&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-15T17:14:08&#43;08:00" />
+<meta itemprop="wordCount" content="714">
 
-<meta itemprop="keywords" content="OpenCV," />
+
+
+<meta itemprop="keywords" content="C/C&#43;&#43;," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Ubuntu 16.04 Install OpenCV"/>
-<meta name="twitter:description" content="Ubuntu 16.04 Install OpenCV"/>
+<meta name="twitter:title" content="C/C&#43;&#43; Development In Visual Studio Code"/>
+<meta name="twitter:description" content="C/C&#43;&#43; Development using Visual Studio Code, CMake and LLDB"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -324,17 +323,17 @@ code.has-jax {
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">Ubuntu 16.04 Install OpenCV</h1>
+      <h1 class="post-title">C/C&#43;&#43; Development In Visual Studio Code</h1>
       
       <div class="post-meta">
-        <time datetime="2018-12-10" class="post-time">
-          2018-12-10
+        <time datetime="2018-12-15" class="post-time">
+          2018-12-15
         </time>
         <div class="post-category">
-            <a href="https://www.brianlv.com/categories/opencv/"> OpenCV </a>
+            <a href="https://www.brianlv.com/categories/c-c&#43;&#43;/"> C/C&#43;&#43; </a>
             
           </div>
-        <span class="more-meta"> 约 691 字 </span>
+        <span class="more-meta"> 约 714 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
 
         
@@ -356,11 +355,13 @@ code.has-jax {
   <div class="post-toc-content">
     <nav id="TableOfContents">
 <ul>
-<li><a href="#概述">概述</a>
+<li>
 <ul>
-<li><a href="#1-从ubuntu源安装opencv">1.从Ubuntu源安装opencv</a></li>
-<li><a href="#2-从opencv官方源代码安装">2.从opencv官方源代码安装</a></li>
-<li><a href="#3-从anaconda安装oepncv环境">3.从Anaconda安装oepncv环境</a></li>
+<li><a href="#开发环境搭建">开发环境搭建</a>
+<ul>
+<li><a href="#c-cpp-propertie-json">c_cpp_propertie.json</a></li>
+</ul></li>
+<li><a href="#效果">效果</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -369,25 +370,22 @@ code.has-jax {
 
     
     <div class="post-content">
-      <h1 id="概述">概述</h1>
+      <p>由于我工作环境是Linux和Mac,个人的工作目录和开发环境一直来回切换，之前一直使用emacs，emacs非常强大和可定制化。最近看到vscode的社区不断壮大，在好基友的推荐下，试用vscode，发现非常不错。于是记录和分享到博客中。今天主要给大家讲解的<strong>vscode配置c/c++ ide开发环境</strong>，当然官网支持很多种可定制化的配置。</p>
 
-<p>安装opencv有很多种方式，我列出了三种方式。并针对第二种方式进行了详细的安装解释，强烈推荐使用第三种方式。</p>
+<h2 id="开发环境搭建">开发环境搭建</h2>
 
-<h2 id="1-从ubuntu源安装opencv">1.从Ubuntu源安装opencv</h2>
+<p>我们首先安装<strong>vscode</strong>，官网是：<a href="https://code.visualstudio.com/">vscode</a>。我们下面来安装支持c/c++开发环境的安装包。
+* cpptools
+* cmake
+* C/C++ Clang</p>
+
+<p>我们在工作目录依次安装如下，<strong>c_cpp_properties.json(指定c/c++包和平台相关的配置文件),launch.json(debug 调试),tasks.json(你的编译等命令)</strong>。
+</p>
+
+<h3 id="c-cpp-propertie-json">c_cpp_propertie.json</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install libopencv-dev python-opencv</code></pre></td></tr></table>
-</div>
-</div>
-<h2 id="2-从opencv官方源代码安装">2.从opencv官方源代码安装</h2>
-
-<p>1.安装opencv所依赖的包</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -415,151 +413,246 @@ code.has-jax {
 </span><span class="lnt">26
 </span><span class="lnt">27
 </span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># KEEP UBUNTU OR DEBIAN UP TO DATE
-</span><span class="c1"></span>sudo apt-get -y update
-sudo apt-get -y upgrade
-sudo apt-get -y dist-upgrade
-sudo apt-get -y autoremove
-<span class="c1"># install package
-</span><span class="c1"></span>sudo apt-get install build-essential cmake pkg-config
-sudo apt-get install libatlas-base-dev gfortran
-<span class="c1"># GUI (if you want to use GTK instead of Qt, replace &#39;qt5-default&#39; with &#39;libgtkglext1-dev&#39; and remove &#39;-DWITH_QT=ON&#39; option in CMake):
-</span><span class="c1"></span>sudo apt-get install -y qt5-default libvtk6-dev
-
-<span class="c1"># Media I/O:
-</span><span class="c1"></span>sudo apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev
-
-<span class="c1"># Video I/O:
-</span><span class="c1"></span>sudo apt-get install -y libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev
-
-<span class="c1"># Parallelism and linear algebra libraries:
-</span><span class="c1"></span>sudo apt-get install -y libtbb-dev libeigen3-dev
-
-<span class="c1"># Python:
-</span><span class="c1"></span>sudo apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy
-
-<span class="c1"># Java:
-</span><span class="c1"></span>sudo apt-get install -y ant default-jdk
-
-<span class="c1"># Documentation:
-</span><span class="c1"></span>sudo apt-get install -y doxygen</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;configurations&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Mac&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;includePath&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&#34;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;/usr/local/include&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;/usr/include&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;${workspaceRoot}&#34;</span>
+      <span class="p">],</span>
+      <span class="nt">&#34;defines&#34;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&#34;intelliSenseMode&#34;</span><span class="p">:</span> <span class="s2">&#34;clang-x64&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;browse&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&#34;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1&#34;</span><span class="p">,</span>
+          <span class="s2">&#34;/usr/local/include&#34;</span><span class="p">,</span>
+          <span class="s2">&#34;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include&#34;</span><span class="p">,</span>
+          <span class="s2">&#34;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include&#34;</span><span class="p">,</span>
+          <span class="s2">&#34;/usr/include&#34;</span><span class="p">,</span>
+          <span class="s2">&#34;${workspaceRoot}&#34;</span>
+        <span class="p">],</span>
+        <span class="nt">&#34;limitSymbolsToIncludedHeaders&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&#34;databaseFilename&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span>
+      <span class="p">},</span>
+      <span class="nt">&#34;macFrameworkPath&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&#34;/System/Library/Frameworks&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;/Library/Frameworks&#34;</span>
+      <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Linux&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;includePath&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&#34;/usr/include&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;/usr/local/include&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;${workspaceRoot}&#34;</span>
+      <span class="p">],</span>
+      <span class="nt">&#34;defines&#34;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&#34;intelliSenseMode&#34;</span><span class="p">:</span> <span class="s2">&#34;clang-x64&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;browse&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&#34;/usr/include&#34;</span><span class="p">,</span>
+          <span class="s2">&#34;/usr/local/include&#34;</span><span class="p">,</span>
+          <span class="s2">&#34;${workspaceRoot}&#34;</span>
+        <span class="p">],</span>
+        <span class="nt">&#34;limitSymbolsToIncludedHeaders&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&#34;databaseFilename&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Win32&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;includePath&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&#34;C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;${workspaceRoot}&#34;</span>
+      <span class="p">],</span>
+      <span class="nt">&#34;defines&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&#34;_DEBUG&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;UNICODE&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;_UNICODE&#34;</span>
+      <span class="p">],</span>
+      <span class="nt">&#34;intelliSenseMode&#34;</span><span class="p">:</span> <span class="s2">&#34;msvc-x64&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;browse&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&#34;C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*&#34;</span><span class="p">,</span>
+          <span class="s2">&#34;${workspaceRoot}&#34;</span>
+        <span class="p">],</span>
+        <span class="nt">&#34;limitSymbolsToIncludedHeaders&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="nt">&#34;databaseFilename&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="mi">3</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>
-2.下载opencv和opencv_contrib源代码</p>
+<p>我们再看一下下面的debug下的json数据。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">wget -O opencv.zip https://github.com/opencv/opencv/archive/3.2.0.zip
-wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.2.0.zip
-unzip opencv.zip
-unzip opencv_contrib.zip</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="err">//</span> <span class="err">Use</span> <span class="err">IntelliSense</span> <span class="err">to</span> <span class="err">learn</span> <span class="err">about</span> <span class="err">possible</span> <span class="err">attributes.</span>
+  <span class="err">//</span> <span class="err">Hover</span> <span class="err">to</span> <span class="err">view</span> <span class="err">descriptions</span> <span class="err">of</span> <span class="err">existing</span> <span class="err">attributes.</span>
+  <span class="err">//</span> <span class="err">For</span> <span class="err">more</span> <span class="err">information,</span> <span class="err">visit:</span> <span class="err">https://go.microsoft.com/fwlink/?linkid=830387</span>
+  <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;0.2.0&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;configurations&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;(lldb) Launch&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;cppdbg&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;request&#34;</span><span class="p">:</span> <span class="s2">&#34;launch&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;program&#34;</span><span class="p">:</span> <span class="s2">&#34;${workspaceFolder}/build/DemoProject&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&#34;stopAtEntry&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&#34;cwd&#34;</span><span class="p">:</span> <span class="s2">&#34;${workspaceFolder}/build&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;environment&#34;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="nt">&#34;externalConsole&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">&#34;MIMode&#34;</span><span class="p">:</span> <span class="s2">&#34;lldb&#34;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>3.为opencv创建独立虚拟话环境</p>
+<p>最后一个是<strong>tasks.json</strong>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">mkvirtualenv -p python3.5 cvdl
-workon cvdl
-pip install numpy</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="err">//</span> <span class="err">See</span> <span class="err">https://go.microsoft.com/fwlink/?LinkId=733558</span>
+  <span class="err">//</span> <span class="err">for</span> <span class="err">the</span> <span class="err">documentation</span> <span class="err">about</span> <span class="err">the</span> <span class="err">tasks.json</span> <span class="err">format</span>
+  <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;2.0.0&#34;</span><span class="p">,</span>
+  <span class="nt">&#34;echoCommand&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&#34;options&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;cwd&#34;</span><span class="p">:</span> <span class="s2">&#34;${workspaceRoot}/build&#34;</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;tasks&#34;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&#34;label&#34;</span><span class="p">:</span> <span class="s2">&#34;cmake&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;shell&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;command&#34;</span><span class="p">:</span> <span class="s2">&#34;cmake -G &#39;Unix Makefiles&#39; -DCMAKE_BUILD_TYPE=Debug ..&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;group&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;kind&#34;</span><span class="p">:</span> <span class="s2">&#34;build&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;isDefault&#34;</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&#34;label&#34;</span><span class="p">:</span> <span class="s2">&#34;make&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;shell&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;command&#34;</span><span class="p">:</span> <span class="s2">&#34;make -j 8&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;group&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;kind&#34;</span><span class="p">:</span> <span class="s2">&#34;build&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;isDefault&#34;</span><span class="p">:</span> <span class="kc">true</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>4.配置和安装opencv</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> opencv-3.2.0
-mkdir build
-<span class="nb">cd</span> build
-cmake -DCMAKE_BUILD_TYPE<span class="o">=</span>RELEASE -DCMAKE_INSTALL_PREFIX<span class="o">=</span>/usr/local -DWITH_QT<span class="o">=</span>ON -DWITH_OPENGL<span class="o">=</span>ON -DFORCE_VTK<span class="o">=</span>ON -DWITH_TBB<span class="o">=</span>ON -DWITH_GDAL<span class="o">=</span>ON -DWITH_XINE<span class="o">=</span>ON -DPYTHON_EXECUTABLE<span class="o">=</span>~/.virtualenvs/cvdl/bin/python -DINSTALL_PYTHON_EXAMPLES<span class="o">=</span>ON -DOPENCV_EXTRA_MODULES_PATH<span class="o">=</span>~/project/cvdl/opencv_contrib/modules -DBUILD_EXAMPLES<span class="o">=</span>ON ..
-<span class="c1"># PYTHON_EXECUTABLE： python执行环境，当然也可以指定为python2.7
-</span><span class="c1"># OPENCV_EXTRA_MODULES_PATH：opencv第三方的模块。
-</span><span class="c1"></span>make -j4
-sudo make install
-sudo ldconfig</code></pre></td></tr></table>
-</div>
-</div>
-<p>5.安装成功的opencv作用到全局</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">ls -l /usr/local/lib/python3.5/site-packages/
-<span class="c1">#在安装完之后会有cv2.cpython-35m-x86_64-linux-gnu.so的动态链接库。
-</span><span class="c1"></span><span class="nb">cd</span> /usr/local/lib/python3.5/site-packages/
-sudo mv cv2.cpython-35m-x86_64-linux-gnu.so cv2.so
-<span class="nb">cd</span> ~/.virtualenvs/cvdl/lib/python3.5/site-packages
-ln -s /usr/local/lib/python3.5/site-packages/cv2.so cv2.so</code></pre></td></tr></table>
-</div>
-</div>
-<p>6.测试安装是否成功
-打开ipython，输入如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">ipython
-import cv2
-cv2.__version__
-#如果提示正常代表安装成功</code></pre></td></tr></table>
-</div>
-</div>
-<p>7.删除源包</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">rm -rf opencv opencv_contrib opencv.zip opencv_contrib.zip</code></pre></td></tr></table>
-</div>
-</div>
-<h2 id="3-从anaconda安装oepncv环境">3.从Anaconda安装oepncv环境</h2>
+<h2 id="效果">效果</h2>
 
-<p>我们需要建立一个虚拟化的独立环境</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">cv3</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.6</span>
-<span class="n">source</span> <span class="n">activate</span> <span class="n">cv3</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">conda</span><span class="o">.</span><span class="n">anaconda</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">menpo</span> <span class="n">opencv3</span></code></pre></td></tr></table>
-</div>
-</div>
+<p><img src="/image/vscodeauto.jpeg" alt="整体布局" />
+<img src="/image/vscodeide.jpeg" alt="智能提示" /></p>
     </div>
 
     
@@ -571,7 +664,7 @@ cv2.__version__
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
-    <span class="item-content">2018-12-10</span>
+    <span class="item-content">2018-12-15</span>
   </p>
   
   <p class="copyright-item">
@@ -599,29 +692,16 @@ cv2.__version__
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://www.brianlv.com/tags/opencv/">OpenCV</a>
+          <a href="https://www.brianlv.com/tags/c-c&#43;&#43;/">C/C&#43;&#43;</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/post/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1/">
-            
-            <i class="iconfont">
-              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
-  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="18" height="18">
-  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
-</svg>
-
-            </i>
-            <span class="prev-text nav-default">Linux 后台服务</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
         
-          <a class="next" href="/post/ubuntu-install-vnc/">
-            <span class="next-text nav-default">Ubuntu Install Vnc</span>
+          <a class="next" href="/post/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F/">
+            <span class="next-text nav-default">机器学习性能度量</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">
