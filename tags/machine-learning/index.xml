@@ -73,8 +73,7 @@ $$&lt;/p&gt;
 
 &lt;p&gt;$$
 MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP+FP)\times(TP+FN)\times(TN+FP)\times(TN+FN)}}
-$$
-&lt;/p&gt;</description>
+$$&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -122,7 +121,6 @@ $$
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 数据导入与数据维度探索&lt;/span&gt;
@@ -133,7 +131,6 @@ $$
 &lt;span class=&#34;c1&#34;&gt;#数据属性和描述性统计&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dtype&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;describe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
-&lt;span class=&#34;n&#34;&gt;&lt;/span&gt;
 &lt;span class=&#34;c1&#34;&gt;#数据根据类别分类&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;group&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;class&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
 &lt;span class=&#34;c1&#34;&gt;#数据属性相关性(皮尔逊相关系数，1完全正相关，-1完全负相关，0不相关)&lt;/span&gt;
@@ -141,10 +138,7 @@ $$
 &lt;span class=&#34;c1&#34;&gt;#数据分布分析,skew代表高斯分布的偏离程度，数据接近于0表示数据偏差非常小&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;skew&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;h3 id=&#34;数据可视化&#34;&gt;数据可视化&lt;/h3&gt;
-
-&lt;p&gt;数据可视化主要集中在&lt;strong&gt;直方图、密度图和箱线图&lt;/strong&gt;。&lt;/p&gt;</description>
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -247,8 +241,7 @@ H(p,q)=H(p)+D_{KL}(pq)
 $$&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;即：交叉熵=信息熵+KL散度（相对熵）&lt;/strong&gt;
-由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&amp;rdquo;距离&amp;rdquo;。
-&lt;/p&gt;</description>
+由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&amp;rdquo;距离&amp;rdquo;。&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.49.2" />
+<meta name="generator" content="Hugo 0.54.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/post/python-with-as/" />
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.28854364c052ec02eba4ee5867bc889d3a567cdf337ba3a355c33511d20bee1e.css" integrity="sha256-KIVDZMBS7ALrpO5YZ7yInTpWfN8ze6OjVcM1EdIL7h4=" media="screen">
+<link rel="stylesheet" href="/sass/jane.min.ee2da86e0e0bb049417813d23ca8f6b2ab96ba6e9e26f8b71648de38bd6dcd6a.css" integrity="sha256-7i2obg4LsElBeBPSPKj2squWum6eJvi3FkjeOL1tzWo=" media="screen">
 
 
 
@@ -59,7 +59,8 @@
 <meta property="og:title" content="深入理解Python的With-as语句" />
 <meta property="og:description" content="Python with-as" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.brianlv.com/post/python-with-as/" /><meta property="article:published_time" content="2018-12-02T21:57:43&#43;08:00"/>
+<meta property="og:url" content="https://www.brianlv.com/post/python-with-as/" />
+<meta property="article:published_time" content="2018-12-02T21:57:43&#43;08:00"/>
 <meta property="article:modified_time" content="2018-12-02T21:57:43&#43;08:00"/>
 
 <meta itemprop="name" content="深入理解Python的With-as语句">
@@ -458,7 +459,6 @@ code.has-jax {
 </div>
 <p>这个语句执行完成之后，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄,确实比try……except……finally好多了。在这个例子中f就是上下文管理器enter()的返回值，返回的是当前文件自身的引用。Python内建对象都加入了对上下文管理器的支持，可以用在with语句中。比如:file、 threading、decimal等等，在多线程模块中，lock和条件变量也是支持with语句的。例如：</p>
 
-<p></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
@@ -1296,7 +1296,7 @@ code.has-jax {
     &copy;
     
       2017 -
-    2018
+    2019
     <span class="heart">
       
       <i class="iconfont">

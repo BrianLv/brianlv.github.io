@@ -36,8 +36,7 @@
 2.不能够直接调用动态链接库中未经导出的函数或变量
 3.对C++的支持差
 * &lt;strong&gt;SWIG&lt;/strong&gt;:通过提供的接口文件来调用。
-* &lt;strong&gt;Python/C&lt;/strong&gt;在C中直接扩展Python的代码。
-&lt;/p&gt;</description>
+* &lt;strong&gt;Python/C&lt;/strong&gt;在C中直接扩展Python的代码。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -126,8 +125,7 @@
 &lt;span class=&#34;n&#34;&gt;now&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;you&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;are&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;back&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;hi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;method&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;我们可以看到在函数(主函数)内定义函数(子函数)，只要是不调用子函数，子函数只是声明并不执行，当执行完子函数时又返回了主函数。&lt;/strong&gt;由于Python只是函数第一等公民的功能特性，那么在Python代码中是可以将Python的函数可以作为变量使用并将其作为返回值亦可。&lt;strong&gt;从主函数中返回子函数(即从函数中返回函数)&lt;/strong&gt;。
-&lt;/p&gt;</description>
+&lt;p&gt;&lt;strong&gt;我们可以看到在函数(主函数)内定义函数(子函数)，只要是不调用子函数，子函数只是声明并不执行，当执行完子函数时又返回了主函数。&lt;/strong&gt;由于Python只是函数第一等公民的功能特性，那么在Python代码中是可以将Python的函数可以作为变量使用并将其作为返回值亦可。&lt;strong&gt;从主函数中返回子函数(即从函数中返回函数)&lt;/strong&gt;。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -261,8 +259,7 @@
 	&lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Test Data&amp;#34;&lt;/span&gt;
 &lt;span class=&#34;n&#34;&gt;someclass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_info&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_info&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -285,9 +282,7 @@
 &lt;li&gt;Python：可以利用sys.setprofile函数来跟踪函数python&lt;em&gt;(call,return,exception)或者c&lt;/em&gt;(call,return,exception).&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;基于事件的性能分析(event-based profiler or tracing profiler)是通过手机程序执行过程中的具体事件进行工作的，这些性能分析会产生大量的数据，基本而言，你监听的事件越多产生的数据量句越多。这导致它们不太实用，在开始对程序进行性能往往不是首选，当其他性能分析不够用或者不精准它们可以作为最后的选择。
-
-我们看一下一个python的例子：&lt;/p&gt;</description>
+&lt;p&gt;基于事件的性能分析(event-based profiler or tracing profiler)是通过手机程序执行过程中的具体事件进行工作的，这些性能分析会产生大量的数据，基本而言，你监听的事件越多产生的数据量句越多。这导致它们不太实用，在开始对程序进行性能往往不是首选，当其他性能分析不够用或者不精准它们可以作为最后的选择。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -306,9 +301,7 @@
 
 &lt;h3 id=&#34;线程执行模型&#34;&gt;线程执行模型&lt;/h3&gt;
 
-&lt;p&gt;我们先看一下Python下多任务线程执行模型，下面的图取自&lt;strong&gt;David Beazley&lt;/strong&gt;大神，并且在他的个人网站中对GIL进行深度的解剖。如果想了解更深入的东西，可以去逛逛他的网站。
-
-&lt;img src=&#34;https://www.brianlv.com/image/gil-threads.png&#34; alt=&#34;Thread Execution Model&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;我们先看一下Python下多任务线程执行模型，下面的图取自&lt;strong&gt;David Beazley&lt;/strong&gt;大神，并且在他的个人网站中对GIL进行深度的解剖。如果想了解更深入的东西，可以去逛逛他的网站。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -473,9 +466,7 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
         &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;more&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;processing&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;code&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p&gt;这个语句执行完成之后，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄,确实比try……except……finally好多了。在这个例子中f就是上下文管理器enter()的返回值，返回的是当前文件自身的引用。Python内建对象都加入了对上下文管理器的支持，可以用在with语句中。比如:file、 threading、decimal等等，在多线程模块中，lock和条件变量也是支持with语句的。例如：&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;这个语句执行完成之后，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄,确实比try……except……finally好多了。在这个例子中f就是上下文管理器enter()的返回值，返回的是当前文件自身的引用。Python内建对象都加入了对上下文管理器的支持，可以用在with语句中。比如:file、 threading、decimal等等，在多线程模块中，lock和条件变量也是支持with语句的。例如：&lt;/p&gt;</description>
     </item>
     
   </channel>

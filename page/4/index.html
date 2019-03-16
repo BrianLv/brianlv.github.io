@@ -29,7 +29,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.49.2" />
+<meta name="generator" content="Hugo 0.54.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/" />
@@ -49,7 +49,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.28854364c052ec02eba4ee5867bc889d3a567cdf337ba3a355c33511d20bee1e.css" integrity="sha256-KIVDZMBS7ALrpO5YZ7yInTpWfN8ze6OjVcM1EdIL7h4=" media="screen">
+<link rel="stylesheet" href="/sass/jane.min.ee2da86e0e0bb049417813d23ca8f6b2ab96ba6e9e26f8b71648de38bd6dcd6a.css" integrity="sha256-7i2obg4LsElBeBPSPKj2squWum6eJvi3FkjeOL1tzWo=" media="screen">
 
 
 
@@ -59,6 +59,7 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.brianlv.com/" />
+
 <meta property="og:updated_time" content="2018-12-10T21:24:38&#43;08:00"/>
 
 <meta itemprop="name" content="吕海峰的博客">
@@ -437,10 +438,10 @@ cat &gt; ~/.pip/pip.conf <span class="s">&lt;&lt; EOF
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task
-</span><span class="c1"></span>python main.py
-<span class="c1">#nodejs task
-</span><span class="c1"></span>nodejs main.js</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task</span>
+python main.py
+<span class="c1">#nodejs task</span>
+nodejs main.js</code></pre></td></tr></table>
 </div>
 </div>
 <p>前台任务有很大的限制。我们无法获得标准输入<strong>stdin</strong>(它独占窗口session)，当前的session中断和退出，会立即中断任务。如果想结束改task只能等待完成或者手动结束。我们更倾向于<strong>后台任务</strong>，通过如下方式：</p>
@@ -452,10 +453,10 @@ cat &gt; ~/.pip/pip.conf <span class="s">&lt;&lt; EOF
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task
-</span><span class="c1"></span>python main.py <span class="p">&amp;</span>
-<span class="c1">#nodejs task
-</span><span class="c1"></span>nodejs main.js <span class="p">&amp;</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task</span>
+python main.py <span class="p">&amp;</span>
+<span class="c1">#nodejs task</span>
+nodejs main.js <span class="p">&amp;</span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -541,34 +542,34 @@ cat &gt; ~/.pip/pip.conf <span class="s">&lt;&lt; EOF
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># KEEP UBUNTU OR DEBIAN UP TO DATE
-</span><span class="c1"></span>sudo apt-get -y update
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># KEEP UBUNTU OR DEBIAN UP TO DATE</span>
+sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt-get -y dist-upgrade
 sudo apt-get -y autoremove
-<span class="c1"># install package
-</span><span class="c1"></span>sudo apt-get install build-essential cmake pkg-config
+<span class="c1"># install package</span>
+sudo apt-get install build-essential cmake pkg-config
 sudo apt-get install libatlas-base-dev gfortran
-<span class="c1"># GUI (if you want to use GTK instead of Qt, replace &#39;qt5-default&#39; with &#39;libgtkglext1-dev&#39; and remove &#39;-DWITH_QT=ON&#39; option in CMake):
-</span><span class="c1"></span>sudo apt-get install -y qt5-default libvtk6-dev
+<span class="c1"># GUI (if you want to use GTK instead of Qt, replace &#39;qt5-default&#39; with &#39;libgtkglext1-dev&#39; and remove &#39;-DWITH_QT=ON&#39; option in CMake):</span>
+sudo apt-get install -y qt5-default libvtk6-dev
 
-<span class="c1"># Media I/O:
-</span><span class="c1"></span>sudo apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev
+<span class="c1"># Media I/O:</span>
+sudo apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev
 
-<span class="c1"># Video I/O:
-</span><span class="c1"></span>sudo apt-get install -y libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev
+<span class="c1"># Video I/O:</span>
+sudo apt-get install -y libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev
 
-<span class="c1"># Parallelism and linear algebra libraries:
-</span><span class="c1"></span>sudo apt-get install -y libtbb-dev libeigen3-dev
+<span class="c1"># Parallelism and linear algebra libraries:</span>
+sudo apt-get install -y libtbb-dev libeigen3-dev
 
-<span class="c1"># Python:
-</span><span class="c1"></span>sudo apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy
+<span class="c1"># Python:</span>
+sudo apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy
 
-<span class="c1"># Java:
-</span><span class="c1"></span>sudo apt-get install -y ant default-jdk
+<span class="c1"># Java:</span>
+sudo apt-get install -y ant default-jdk
 
-<span class="c1"># Documentation:
-</span><span class="c1"></span>sudo apt-get install -y doxygen</code></pre></td></tr></table>
+<span class="c1"># Documentation:</span>
+sudo apt-get install -y doxygen</code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -739,7 +740,7 @@ sudo apt-get install libatlas-base-dev gfortran
     &copy;
     
       2017 -
-    2018
+    2019
     <span class="heart">
       
       <i class="iconfont">

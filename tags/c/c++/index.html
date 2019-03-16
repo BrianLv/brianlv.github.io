@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ubuntu 16.04 Install OpenCV - 吕海峰的博客</title>
+  <title>C/C&#43;&#43; · 吕海峰的博客</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -22,9 +22,7 @@
 
 <meta name="mobile-web-app-capable" content="yes">
 
-<meta name="author" content="吕海峰(BrianLv)" /><meta name="description" content="Ubuntu 16.04 Install OpenCV" />
-<meta name="keywords" content="OpenCV" />
-
+<meta name="author" content="吕海峰(BrianLv)" />
 
 
 
@@ -34,7 +32,8 @@
 <meta name="generator" content="Hugo 0.54.0" />
 
 
-<link rel="canonical" href="https://www.brianlv.com/post/ubuntu-install-opencv/" />
+<link rel="canonical" href="https://www.brianlv.com/tags/c/c&#43;&#43;/" />
+<link href="https://www.brianlv.com/tags/c/c&#43;&#43;/index.xml" rel="alternate" type="application/rss+xml" title="吕海峰的博客" />
 
 
 
@@ -56,27 +55,19 @@
 
 
 
-<meta property="og:title" content="Ubuntu 16.04 Install OpenCV" />
-<meta property="og:description" content="Ubuntu 16.04 Install OpenCV" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.brianlv.com/post/ubuntu-install-opencv/" />
-<meta property="article:published_time" content="2018-12-10T21:23:57&#43;08:00"/>
-<meta property="article:modified_time" content="2018-12-10T21:23:57&#43;08:00"/>
+<meta property="og:title" content="C/C&#43;&#43;" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.brianlv.com/tags/c/c&#43;&#43;/" />
 
-<meta itemprop="name" content="Ubuntu 16.04 Install OpenCV">
-<meta itemprop="description" content="Ubuntu 16.04 Install OpenCV">
+<meta property="og:updated_time" content="2018-12-15T17:14:08&#43;08:00"/>
 
+<meta itemprop="name" content="C/C&#43;&#43;">
+<meta itemprop="description" content="">
 
-<meta itemprop="datePublished" content="2018-12-10T21:23:57&#43;08:00" />
-<meta itemprop="dateModified" content="2018-12-10T21:23:57&#43;08:00" />
-<meta itemprop="wordCount" content="691">
-
-
-
-<meta itemprop="keywords" content="OpenCV," />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Ubuntu 16.04 Install OpenCV"/>
-<meta name="twitter:description" content="Ubuntu 16.04 Install OpenCV"/>
+<meta name="twitter:title" content="C/C&#43;&#43;"/>
+<meta name="twitter:description" content=""/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -322,322 +313,36 @@ code.has-jax {
     <main id="main" class="main bg-llight">
       <div class="content-wrapper">
         <div id="content" class="content container">
-          <article class="post bg-white">
-    
-    <header class="post-header">
-      <h1 class="post-title">Ubuntu 16.04 Install OpenCV</h1>
-      
-      <div class="post-meta">
-        <time datetime="2018-12-10" class="post-time">
-          2018-12-10
-        </time>
-        <div class="post-category">
-            <a href="https://www.brianlv.com/categories/opencv/"> OpenCV </a>
-            
-          </div>
-        <span class="more-meta"> 约 691 字 </span>
-          <span class="more-meta"> 预计阅读 2 分钟 </span>
-
-        
-        
-          <span id="busuanzi_container_page_pv">
-            | 阅读 <span id="busuanzi_value_page_pv"></span>
-          </span>
-        
-
-        
-        
-      </div>
-    </header>
-
-    
-    
-<div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content">
-    <nav id="TableOfContents">
-<ul>
-<li><a href="#概述">概述</a>
-<ul>
-<li><a href="#1-从ubuntu源安装opencv">1.从Ubuntu源安装opencv</a></li>
-<li><a href="#2-从opencv官方源代码安装">2.从opencv官方源代码安装</a></li>
-<li><a href="#3-从anaconda安装oepncv环境">3.从Anaconda安装oepncv环境</a></li>
-</ul></li>
-</ul>
-</nav>
-  </div>
-</div>
-
-    
-    <div class="post-content">
-      <h1 id="概述">概述</h1>
-
-<p>安装opencv有很多种方式，我列出了三种方式。并针对第二种方式进行了详细的安装解释，强烈推荐使用第三种方式。</p>
-
-<h2 id="1-从ubuntu源安装opencv">1.从Ubuntu源安装opencv</h2>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install libopencv-dev python-opencv</code></pre></td></tr></table>
-</div>
-</div>
-<h2 id="2-从opencv官方源代码安装">2.从opencv官方源代码安装</h2>
-
-<p>1.安装opencv所依赖的包</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># KEEP UBUNTU OR DEBIAN UP TO DATE</span>
-sudo apt-get -y update
-sudo apt-get -y upgrade
-sudo apt-get -y dist-upgrade
-sudo apt-get -y autoremove
-<span class="c1"># install package</span>
-sudo apt-get install build-essential cmake pkg-config
-sudo apt-get install libatlas-base-dev gfortran
-<span class="c1"># GUI (if you want to use GTK instead of Qt, replace &#39;qt5-default&#39; with &#39;libgtkglext1-dev&#39; and remove &#39;-DWITH_QT=ON&#39; option in CMake):</span>
-sudo apt-get install -y qt5-default libvtk6-dev
-
-<span class="c1"># Media I/O:</span>
-sudo apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev
-
-<span class="c1"># Video I/O:</span>
-sudo apt-get install -y libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev
-
-<span class="c1"># Parallelism and linear algebra libraries:</span>
-sudo apt-get install -y libtbb-dev libeigen3-dev
-
-<span class="c1"># Python:</span>
-sudo apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy
-
-<span class="c1"># Java:</span>
-sudo apt-get install -y ant default-jdk
-
-<span class="c1"># Documentation:</span>
-sudo apt-get install -y doxygen</code></pre></td></tr></table>
-</div>
-</div>
-<p>2.下载opencv和opencv_contrib源代码</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">wget -O opencv.zip https://github.com/opencv/opencv/archive/3.2.0.zip
-wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.2.0.zip
-unzip opencv.zip
-unzip opencv_contrib.zip</code></pre></td></tr></table>
-</div>
-</div>
-<p>3.为opencv创建独立虚拟话环境</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">mkvirtualenv -p python3.5 cvdl
-workon cvdl
-pip install numpy</code></pre></td></tr></table>
-</div>
-</div>
-<p>4.配置和安装opencv</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> opencv-3.2.0
-mkdir build
-<span class="nb">cd</span> build
-cmake -DCMAKE_BUILD_TYPE<span class="o">=</span>RELEASE -DCMAKE_INSTALL_PREFIX<span class="o">=</span>/usr/local -DWITH_QT<span class="o">=</span>ON -DWITH_OPENGL<span class="o">=</span>ON -DFORCE_VTK<span class="o">=</span>ON -DWITH_TBB<span class="o">=</span>ON -DWITH_GDAL<span class="o">=</span>ON -DWITH_XINE<span class="o">=</span>ON -DPYTHON_EXECUTABLE<span class="o">=</span>~/.virtualenvs/cvdl/bin/python -DINSTALL_PYTHON_EXAMPLES<span class="o">=</span>ON -DOPENCV_EXTRA_MODULES_PATH<span class="o">=</span>~/project/cvdl/opencv_contrib/modules -DBUILD_EXAMPLES<span class="o">=</span>ON ..
-<span class="c1"># PYTHON_EXECUTABLE： python执行环境，当然也可以指定为python2.7</span>
-<span class="c1"># OPENCV_EXTRA_MODULES_PATH：opencv第三方的模块。</span>
-make -j4
-sudo make install
-sudo ldconfig</code></pre></td></tr></table>
-</div>
-</div>
-<p>5.安装成功的opencv作用到全局</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">ls -l /usr/local/lib/python3.5/site-packages/
-<span class="c1">#在安装完之后会有cv2.cpython-35m-x86_64-linux-gnu.so的动态链接库。</span>
-<span class="nb">cd</span> /usr/local/lib/python3.5/site-packages/
-sudo mv cv2.cpython-35m-x86_64-linux-gnu.so cv2.so
-<span class="nb">cd</span> ~/.virtualenvs/cvdl/lib/python3.5/site-packages
-ln -s /usr/local/lib/python3.5/site-packages/cv2.so cv2.so</code></pre></td></tr></table>
-</div>
-</div>
-<p>6.测试安装是否成功
-打开ipython，输入如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">ipython
-import cv2
-cv2.__version__
-<span class="c1">#如果提示正常代表安装成功</span></code></pre></td></tr></table>
-</div>
-</div>
-<p>7.删除源包</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">rm -rf opencv opencv_contrib opencv.zip opencv_contrib.zip</code></pre></td></tr></table>
-</div>
-</div>
-<h2 id="3-从anaconda安装oepncv环境">3.从Anaconda安装oepncv环境</h2>
-
-<p>我们需要建立一个虚拟化的独立环境</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">cv3</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.6</span>
-<span class="n">source</span> <span class="n">activate</span> <span class="n">cv3</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">conda</span><span class="o">.</span><span class="n">anaconda</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">menpo</span> <span class="n">opencv3</span></code></pre></td></tr></table>
-</div>
-</div>
-    </div>
-
-    
-    
-<div class="post-copyright">
-  <p class="copyright-item">
-    <span class="item-title">文章作者</span>
-    <span class="item-content">吕海峰(BrianLv)</span>
-  </p>
-  <p class="copyright-item">
-    <span class="item-title">上次更新</span>
-    <span class="item-content">2018-12-10</span>
-  </p>
-  
-  <p class="copyright-item">
-    <span class="item-title">许可协议</span>
-    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0-原创文章，如需转载请注明文章作者和出处。谢谢！</a></span>
-  </p>
-</div>
-
-
-    
-    
-<div class="post-reward">
-  <input type="checkbox" name="reward" id="reward" hidden />
-  <label class="reward-button" for="reward">赞赏支持</label>
-  <div class="qr-code">
-    
-    
-      <label class="qr-code-image" for="reward">
-        <img class="image" src="/image/wechatpay.png">
-        <span>微信打赏</span>
-      </label>
-    
-  </div>
-</div>
-
-    <footer class="post-footer">
-      <div class="post-tags">
-          <a href="https://www.brianlv.com/tags/opencv/">OpenCV</a>
           
-        </div>
 
-      
-      <nav class="post-nav">
-        
-          <a class="prev" href="/post/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1/">
-            
-            <i class="iconfont">
-              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
-  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="18" height="18">
-  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
-</svg>
-
-            </i>
-            <span class="prev-text nav-default">Linux 后台服务</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
-        
-          <a class="next" href="/post/ubuntu-install-vnc/">
-            <span class="next-text nav-default">Ubuntu Install Vnc</span>
-            <span class="prev-text nav-mobile">下一篇</span>
-            
-            <i class="iconfont">
-              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
-  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="18" height="18">
-  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
-</svg>
-
-            </i>
-          </a>
-      </nav>
-    </footer>
-  </article>
+<section id="archive" class="archive">
+  
+    
+      <div class="archive-title tag">
+        <h2 class="archive-name">标签： C/C&#43;&#43;</h2>
+      </div>
+    
+  
 
   
+    <div class="archive-post">
+      <time datetime="2018-12-15" class="archive-post-time">
+        2018-12-15
+      </time>
+      <span class="archive-post-title">
+        <a href="/post/vscode-c&#43;&#43;ide/" class="archive-post-link">
+          C/C&#43;&#43; Development In Visual Studio Code
+        </a>
+      </span>
+    </div>
+  
+</section>
+
+
+
+
+
+
   
   
   
@@ -649,25 +354,12 @@ cv2.__version__
   
 
   
-
   
 
   
   
-    <div id="lv-container" class="disqus-comment" data-id="city" data-uid='MTAyMC8zNDc2My8xMTMwMA=='>
-   <script type="text/javascript">
-   (function(d, s) {
-       var j, e = d.getElementsByTagName(s)[0];
-       if (typeof LivereTower === 'function') { return; }
-       j = d.createElement(s);
-       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-       j.async = true;
-       e.parentNode.insertBefore(j, e);
-   })(document, 'script');
-    </script>
-  <noscript>Please enable JavaScript to view the
-    <a href="https://www.livere.com">comments powered by LiveRe.</a>
-   </div>
+
+
 
 
 

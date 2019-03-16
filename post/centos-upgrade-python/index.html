@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.49.2" />
+<meta name="generator" content="Hugo 0.54.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/post/centos-upgrade-python/" />
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.28854364c052ec02eba4ee5867bc889d3a567cdf337ba3a355c33511d20bee1e.css" integrity="sha256-KIVDZMBS7ALrpO5YZ7yInTpWfN8ze6OjVcM1EdIL7h4=" media="screen">
+<link rel="stylesheet" href="/sass/jane.min.ee2da86e0e0bb049417813d23ca8f6b2ab96ba6e9e26f8b71648de38bd6dcd6a.css" integrity="sha256-7i2obg4LsElBeBPSPKj2squWum6eJvi3FkjeOL1tzWo=" media="screen">
 
 
 
@@ -59,7 +59,8 @@
 <meta property="og:title" content="CentOS6 升级Python2.7.X和Python3.X" />
 <meta property="og:description" content="Python upgrade" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.brianlv.com/post/centos-upgrade-python/" /><meta property="article:published_time" content="2018-12-10T21:16:50&#43;08:00"/>
+<meta property="og:url" content="https://www.brianlv.com/post/centos-upgrade-python/" />
+<meta property="article:published_time" content="2018-12-10T21:16:50&#43;08:00"/>
 <meta property="article:modified_time" content="2018-12-10T21:16:50&#43;08:00"/>
 
 <meta itemprop="name" content="CentOS6 升级Python2.7.X和Python3.X">
@@ -391,8 +392,7 @@ code.has-jax {
 yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel</code></pre></td></tr></table>
 </div>
 </div>
-<p>
-下面需要关心的两个问题：
+<p>下面需要关心的两个问题：
 &gt; * Unicode
     如果为了支持更多的编码字符集，可以采用UTF-32的编码能有更好的扩展性，好的扩展性是需要牺牲一部分内存。嘿嘿，所以占用的内存就比之前的多。在Python2.7.x版本支持标准是<strong>&ndash;enable-unicode=ucs4</strong>，在Python3.X版本中支持的标志是<strong>&ndash;with-wide-unicode</strong>。
 &gt; * Shared library
@@ -423,15 +423,15 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Python 2.7.6:
-</span><span class="c1"></span>wget http://python.org/ftp/python/2.7.12/Python-2.7.12.tar.xz
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Python 2.7.6:</span>
+wget http://python.org/ftp/python/2.7.12/Python-2.7.12.tar.xz
 tar xf Python-2.7.6.tar.xz
 <span class="nb">cd</span> Python-2.7.6
 ./configure --prefix<span class="o">=</span>/usr/local --enable-unicode<span class="o">=</span>ucs4 --enable-shared <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&#34;-Wl,-rpath /usr/local/lib&#34;</span>
 make <span class="o">&amp;&amp;</span> make altinstall
  
-<span class="c1"># Python 3.5.2:
-</span><span class="c1"></span>wget http://python.org/ftp/python/3.5.2/Python-3.5.2.tar.xz
+<span class="c1"># Python 3.5.2:</span>
+wget http://python.org/ftp/python/3.5.2/Python-3.5.2.tar.xz
 tar xf Python-3.5.2.tar.xz
 <span class="nb">cd</span> Python-3.5.2
 ./configure --prefix<span class="o">=</span>/usr/local --enable-shared <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&#34;-Wl,-rpath /usr/local/lib&#34;</span>
@@ -464,8 +464,8 @@ make <span class="o">&amp;&amp;</span> make altinstall</code></pre></td></tr></t
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">pip2.7 install virtualenv virtualenvwrapper
-<span class="c1">#.bash_profile
-</span><span class="c1"></span><span class="nb">export</span> <span class="nv">WORKON_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/.virtualenvs
+<span class="c1">#.bash_profile</span>
+<span class="nb">export</span> <span class="nv">WORKON_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/.virtualenvs
 <span class="nb">export</span> <span class="nv">PROJECT_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/workspace
 <span class="nb">source</span> /usr/local/bin/virtualenvwrapper.sh</code></pre></td></tr></table>
 </div>
@@ -488,15 +488,15 @@ make <span class="o">&amp;&amp;</span> make altinstall</code></pre></td></tr></t
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">Defaults    <span class="nv">secure_path</span> <span class="o">=</span> /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/usr/local/sbin
 如果你想让centos默认为python2.7可做如下设置
-<span class="c1">#1.将默认python重命名为Python2并替代Python2的软连接(Python2是Python的软连接)
-</span><span class="c1"></span> mv python python2
-<span class="c1">#2.新建默认Python2.7
-</span><span class="c1"></span>ln -s /usr/local/bin/python2.7 python
-<span class="c1">#3.修改/usr/bin/yum的python解释器
-</span><span class="c1"></span>nano /usr/bin/yum
+<span class="c1">#1.将默认python重命名为Python2并替代Python2的软连接(Python2是Python的软连接)</span>
+ mv python python2
+<span class="c1">#2.新建默认Python2.7</span>
+ln -s /usr/local/bin/python2.7 python
+<span class="c1">#3.修改/usr/bin/yum的python解释器</span>
+nano /usr/bin/yum
 修改 <span class="cp">#!/usr/bin/python 为 #!/usr/bin/python2
-</span><span class="cp"></span><span class="c1">#4.创建新的Python软连接
-</span><span class="c1"></span>sudo ln -s /usr/local/bin/python2.7 python</code></pre></td></tr></table>
+</span><span class="cp"></span><span class="c1">#4.创建新的Python软连接</span>
+sudo ln -s /usr/local/bin/python2.7 python</code></pre></td></tr></table>
 </div>
 </div>
 <p>到此你的所有安装已完毕并能正常使用Python。</p>
@@ -715,7 +715,7 @@ make <span class="o">&amp;&amp;</span> make altinstall</code></pre></td></tr></t
     &copy;
     
       2017 -
-    2018
+    2019
     <span class="heart">
       
       <i class="iconfont">

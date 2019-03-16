@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.49.2" />
+<meta name="generator" content="Hugo 0.54.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/post/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1/" />
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.28854364c052ec02eba4ee5867bc889d3a567cdf337ba3a355c33511d20bee1e.css" integrity="sha256-KIVDZMBS7ALrpO5YZ7yInTpWfN8ze6OjVcM1EdIL7h4=" media="screen">
+<link rel="stylesheet" href="/sass/jane.min.ee2da86e0e0bb049417813d23ca8f6b2ab96ba6e9e26f8b71648de38bd6dcd6a.css" integrity="sha256-7i2obg4LsElBeBPSPKj2squWum6eJvi3FkjeOL1tzWo=" media="screen">
 
 
 
@@ -59,7 +59,8 @@
 <meta property="og:title" content="Linux 后台服务" />
 <meta property="og:description" content="Linux 后台服务" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.brianlv.com/post/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1/" /><meta property="article:published_time" content="2018-12-10T21:24:21&#43;08:00"/>
+<meta property="og:url" content="https://www.brianlv.com/post/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1/" />
+<meta property="article:published_time" content="2018-12-10T21:24:21&#43;08:00"/>
 <meta property="article:modified_time" content="2018-12-10T21:24:21&#43;08:00"/>
 
 <meta itemprop="name" content="Linux 后台服务">
@@ -392,10 +393,10 @@ code.has-jax {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task
-</span><span class="c1"></span>python main.py
-<span class="c1">#nodejs task
-</span><span class="c1"></span>nodejs main.js</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task</span>
+python main.py
+<span class="c1">#nodejs task</span>
+nodejs main.js</code></pre></td></tr></table>
 </div>
 </div>
 <p>前台任务有很大的限制。我们无法获得标准输入<strong>stdin</strong>(它独占窗口session)，当前的session中断和退出，会立即中断任务。如果想结束改task只能等待完成或者手动结束。我们更倾向于<strong>后台任务</strong>，通过如下方式：</p>
@@ -407,14 +408,13 @@ code.has-jax {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task
-</span><span class="c1"></span>python main.py <span class="p">&amp;</span>
-<span class="c1">#nodejs task
-</span><span class="c1"></span>nodejs main.js <span class="p">&amp;</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task</span>
+python main.py <span class="p">&amp;</span>
+<span class="c1">#nodejs task</span>
+nodejs main.js <span class="p">&amp;</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>
-这样就会把当前进程置为后台进程。如果想让前台任务变为后台任务，可以先通过<strong>CTRL+Z</strong>再执行，<strong>bg</strong>命令。快捷键说明：
+<p>这样就会把当前进程置为后台进程。如果想让前台任务变为后台任务，可以先通过<strong>CTRL+Z</strong>再执行，<strong>bg</strong>命令。快捷键说明：
 &gt;  <strong>CTRL+C</strong>是强制中断程序的执行,,进程已经终止。
 &gt; <strong>CTRL+Z</strong>将任务暂停或者挂起，此任务并没有结束,它仍然在进程中。只是维持挂起的状态,用户可以使用fg/bg操作继续前台或后台的任务,fg命令重新启动前台被中断的任务,bg命令把被中断的任务放在后台执行。
 &gt; <strong>CTRL+D</strong> 发送一个特殊的二进制值，表示 EOF。
@@ -448,12 +448,12 @@ huponexit      	off</code></pre></td></tr></table>
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 创建screen并制定名字
-</span><span class="c1"></span>$ screen -S name
-<span class="c1"># 切回指定 session
-</span><span class="c1"></span>$ screen -r name or pid_number
-<span class="c1"># 列出所有 session
-</span><span class="c1"></span>$ screen -ls</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 创建screen并制定名字</span>
+$ screen -S name
+<span class="c1"># 切回指定 session</span>
+$ screen -r name or pid_number
+<span class="c1"># 列出所有 session</span>
+$ screen -ls</code></pre></td></tr></table>
 </div>
 </div>
 <p>创建完screen后，在新的session书写自己的后台服务即可，书写完成之后通过<strong>CTRL+a，d</strong> 来退出当前会话。</p>
@@ -484,14 +484,14 @@ huponexit      	off</code></pre></td></tr></table>
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#第一种，创建confs
-</span><span class="c1"></span>mkdir -m <span class="m">755</span> -p /etc/supervisor/conf.d/
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#第一种，创建confs</span>
+mkdir -m <span class="m">755</span> -p /etc/supervisor/conf.d/
 emacs /etc/supervisor/supervisord.conf
-<span class="c1">#找到如下节点进行配置
-</span><span class="c1"></span><span class="o">[</span>include<span class="o">]</span>
+<span class="c1">#找到如下节点进行配置</span>
+<span class="o">[</span>include<span class="o">]</span>
 <span class="nv">files</span> <span class="o">=</span> /etc/supervisor/conf.d/*.conf
-<span class="c1">#第二种，直接采用默认conf
-</span><span class="c1"></span>echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf</code></pre></td></tr></table>
+<span class="c1">#第二种，直接采用默认conf</span>
+echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf</code></pre></td></tr></table>
 </div>
 </div>
 <p>进行自动化配置：</p>
@@ -527,28 +527,28 @@ emacs /etc/supervisor/supervisord.conf
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>program:test<span class="o">]</span>
 <span class="nb">command</span> <span class="o">=</span> /usr/bin/test
-<span class="c1">#启动程序的命令；
-</span><span class="c1"></span><span class="nv">autostart</span> <span class="o">=</span> <span class="nb">true</span>
-<span class="c1">#在supervisord启动的时候也自动启动；
-</span><span class="c1"></span><span class="nv">autorestart</span> <span class="o">=</span> <span class="nb">true</span>
-<span class="c1">#程序异常退出后自动重启；
-</span><span class="c1"></span><span class="nv">startsecs</span> <span class="o">=</span> <span class="m">5</span>
-<span class="c1">#启动5秒后没有异常退出，就当作已经正常启动了；
-</span><span class="c1"></span><span class="nv">startretries</span> <span class="o">=</span> <span class="m">3</span>
-<span class="c1">#启动失败自动重试次数，默认是3；
-</span><span class="c1">#user = nobody
-</span><span class="c1">#开启进程使用哪个用户和组启动(这里memcached启动时指定了nobody用户所以就不用再指定了)；
-</span><span class="c1"></span><span class="nv">redirect_stderr</span> <span class="o">=</span> <span class="nb">true</span>
-<span class="c1">#把stderr重定向到stdout，默认false；
-</span><span class="c1"></span><span class="nv">stdout_logfile</span><span class="o">=</span>/var/log/out-memcache.log
-<span class="c1">#标准日志输出；
-</span><span class="c1"></span><span class="nv">stderr_logfile</span><span class="o">=</span>/var/log/err-memcache.log
-<span class="c1">#错误日志输出；
-</span><span class="c1"></span><span class="nv">stdout_logfile_maxbytes</span> <span class="o">=</span> 20MB
-<span class="c1">#标准日志文件大小，默认50MB；
-</span><span class="c1"></span><span class="nv">stdout_logfile_backups</span> <span class="o">=</span> <span class="m">20</span>
-<span class="c1">#标准日志文件备份数；  
-</span><span class="c1"></span>
+<span class="c1">#启动程序的命令；</span>
+<span class="nv">autostart</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="c1">#在supervisord启动的时候也自动启动；</span>
+<span class="nv">autorestart</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="c1">#程序异常退出后自动重启；</span>
+<span class="nv">startsecs</span> <span class="o">=</span> <span class="m">5</span>
+<span class="c1">#启动5秒后没有异常退出，就当作已经正常启动了；</span>
+<span class="nv">startretries</span> <span class="o">=</span> <span class="m">3</span>
+<span class="c1">#启动失败自动重试次数，默认是3；</span>
+<span class="c1">#user = nobody</span>
+<span class="c1">#开启进程使用哪个用户和组启动(这里memcached启动时指定了nobody用户所以就不用再指定了)；</span>
+<span class="nv">redirect_stderr</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="c1">#把stderr重定向到stdout，默认false；</span>
+<span class="nv">stdout_logfile</span><span class="o">=</span>/var/log/out-memcache.log
+<span class="c1">#标准日志输出；</span>
+<span class="nv">stderr_logfile</span><span class="o">=</span>/var/log/err-memcache.log
+<span class="c1">#错误日志输出；</span>
+<span class="nv">stdout_logfile_maxbytes</span> <span class="o">=</span> 20MB
+<span class="c1">#标准日志文件大小，默认50MB；</span>
+<span class="nv">stdout_logfile_backups</span> <span class="o">=</span> <span class="m">20</span>
+<span class="c1">#标准日志文件备份数；</span>  
+
 <span class="nv">process_name</span><span class="o">=</span>%<span class="o">(</span>process_num<span class="o">)</span>s
 <span class="nv">numprocs</span><span class="o">=</span><span class="m">3</span> </code></pre></td></tr></table>
 </div>
@@ -623,8 +623,8 @@ supervisorctl reload
 supervisorctl update
 注意：显示状态为stop停止掉的进程，用reload或者update都不会自动重启。
 交互式
-<span class="o">[</span>root@aaa <span class="o">]</span><span class="c1"># supervisorctl
-</span><span class="c1"></span>memcached                       RUNNING   pid <span class="m">1234</span>, uptime <span class="m">0</span>:01:47
+<span class="o">[</span>root@aaa <span class="o">]</span><span class="c1"># supervisorctl</span>
+memcached                       RUNNING   pid <span class="m">1234</span>, uptime <span class="m">0</span>:01:47
 supervisor&gt; stop <span class="nb">test</span>
 memcached: stopped
 supervisor&gt; start <span class="nb">test</span>
@@ -857,7 +857,7 @@ supervisor&gt;</code></pre></td></tr></table>
     &copy;
     
       2017 -
-    2018
+    2019
     <span class="heart">
       
       <i class="iconfont">

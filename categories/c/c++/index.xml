@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C/C&#43;&#43; on 吕海峰的博客</title>
+    <link>https://www.brianlv.com/categories/c/c&#43;&#43;/</link>
+    <description>Recent content in C/C&#43;&#43; on 吕海峰的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 15 Dec 2018 17:14:08 +0800</lastBuildDate>
+    
+	<atom:link href="https://www.brianlv.com/categories/c/c++/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>C/C&#43;&#43; Development In Visual Studio Code</title>
+      <link>https://www.brianlv.com/post/vscode-c&#43;&#43;ide/</link>
+      <pubDate>Sat, 15 Dec 2018 17:14:08 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/post/vscode-c&#43;&#43;ide/</guid>
+      <description>&lt;p&gt;由于我工作环境是Linux和Mac,个人的工作目录和开发环境一直来回切换，之前一直使用emacs，emacs非常强大和可定制化。最近看到vscode的社区不断壮大，在好基友的推荐下，试用vscode，发现非常不错。于是记录和分享到博客中。今天主要给大家讲解的&lt;strong&gt;vscode配置c/c++ ide开发环境&lt;/strong&gt;，当然官网支持很多种可定制化的配置。&lt;/p&gt;
+
+&lt;h2 id=&#34;开发环境搭建&#34;&gt;开发环境搭建&lt;/h2&gt;
+
+&lt;p&gt;我们首先安装&lt;strong&gt;vscode&lt;/strong&gt;，官网是：&lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;vscode&lt;/a&gt;。我们下面来安装支持c/c++开发环境的安装包。
+* cpptools
+* cmake
+* C/C++ Clang&lt;/p&gt;
+
+&lt;p&gt;我们在工作目录依次安装如下，&lt;strong&gt;c_cpp_properties.json(指定c/c++包和平台相关的配置文件),launch.json(debug 调试),tasks.json(你的编译等命令)&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.49.2" />
+<meta name="generator" content="Hugo 0.54.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/post/python-gil/" />
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.28854364c052ec02eba4ee5867bc889d3a567cdf337ba3a355c33511d20bee1e.css" integrity="sha256-KIVDZMBS7ALrpO5YZ7yInTpWfN8ze6OjVcM1EdIL7h4=" media="screen">
+<link rel="stylesheet" href="/sass/jane.min.ee2da86e0e0bb049417813d23ca8f6b2ab96ba6e9e26f8b71648de38bd6dcd6a.css" integrity="sha256-7i2obg4LsElBeBPSPKj2squWum6eJvi3FkjeOL1tzWo=" media="screen">
 
 
 
@@ -59,7 +59,8 @@
 <meta property="og:title" content="Python GIL" />
 <meta property="og:description" content="Python GIL" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.brianlv.com/post/python-gil/" /><meta property="article:published_time" content="2018-12-10T21:24:57&#43;08:00"/>
+<meta property="og:url" content="https://www.brianlv.com/post/python-gil/" />
+<meta property="article:published_time" content="2018-12-10T21:24:57&#43;08:00"/>
 <meta property="article:modified_time" content="2018-12-10T21:24:57&#43;08:00"/>
 
 <meta itemprop="name" content="Python GIL">
@@ -382,9 +383,9 @@ code.has-jax {
 
 <h3 id="线程执行模型">线程执行模型</h3>
 
-<p>我们先看一下Python下多任务线程执行模型，下面的图取自<strong>David Beazley</strong>大神，并且在他的个人网站中对GIL进行深度的解剖。如果想了解更深入的东西，可以去逛逛他的网站。
+<p>我们先看一下Python下多任务线程执行模型，下面的图取自<strong>David Beazley</strong>大神，并且在他的个人网站中对GIL进行深度的解剖。如果想了解更深入的东西，可以去逛逛他的网站。</p>
 
-<img src="/image/gil-threads.png" alt="Thread Execution Model" /></p>
+<p><img src="/image/gil-threads.png" alt="Thread Execution Model" /></p>
 
 <p>从上图中可以看出，这个是三个线程”协作式“执行，当Thread1执行时它获得GIL，其它线程一直在等待；当遇到I/O处理时，Thread1会释放GIL，Thread2得到GIL，Thread2开始运行，如此反复直到任务完成。<strong>当任一个线程正在运行时，它控制着GIL，并且在处理I/O(read,write,send,recv,etc.)时释放GIL。CPU密集型(不提供I/O操作)的线程作为特殊的情况被处理，即每运行100个低级的解释器指令进行检查并根据线程优先级进行释放/重新获取或者释放GIL。</strong></p>
 
@@ -673,7 +674,7 @@ count函数里面主要做的是计算,I/O操作一直没有触发，那么就�
     &copy;
     
       2017 -
-    2018
+    2019
     <span class="heart">
       
       <i class="iconfont">

@@ -115,14 +115,14 @@
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/categories/c-c&#43;&#43;/</loc>
+    <loc>https://www.brianlv.com/tags/c/c&#43;&#43;/</loc>
     <lastmod>2018-12-15T17:14:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/tags/c-c&#43;&#43;/</loc>
+    <loc>https://www.brianlv.com/categories/c/c&#43;&#43;/</loc>
     <lastmod>2018-12-15T17:14:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -143,13 +143,6 @@
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/categories/linux/</loc>
-    <lastmod>2018-12-10T21:24:21+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://www.brianlv.com/tags/linux/</loc>
     <lastmod>2018-12-10T21:24:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -157,8 +150,8 @@
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/categories/machine-learning/</loc>
-    <lastmod>2018-12-10T23:16:18+08:00</lastmod>
+    <loc>https://www.brianlv.com/categories/linux/</loc>
+    <lastmod>2018-12-10T21:24:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -171,14 +164,21 @@
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/categories/opencv/</loc>
-    <lastmod>2018-12-10T21:23:57+08:00</lastmod>
+    <loc>https://www.brianlv.com/categories/machine-learning/</loc>
+    <lastmod>2018-12-10T23:16:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://www.brianlv.com/tags/opencv/</loc>
+    <lastmod>2018-12-10T21:23:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.brianlv.com/categories/opencv/</loc>
     <lastmod>2018-12-10T21:23:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -192,14 +192,14 @@
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/categories/python/</loc>
+    <loc>https://www.brianlv.com/tags/python/</loc>
     <lastmod>2018-12-10T21:31:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/tags/python/</loc>
+    <loc>https://www.brianlv.com/categories/python/</loc>
     <lastmod>2018-12-10T21:31:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
