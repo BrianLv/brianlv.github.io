@@ -6,17 +6,53 @@
     <description>Recent content in Categories on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 10 Dec 2018 21:30:53 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 15 Dec 2018 17:14:08 +0800</lastBuildDate>
     
 	<atom:link href="https://www.brianlv.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>C/C&#43;&#43;</title>
+      <link>https://www.brianlv.com/categories/c/c&#43;&#43;.html</link>
+      <pubDate>Sat, 15 Dec 2018 17:14:08 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/categories/c/c&#43;&#43;.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>https://www.brianlv.com/categories/machine-learning.html</link>
+      <pubDate>Mon, 10 Dec 2018 23:16:18 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/categories/machine-learning.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Python</title>
       <link>https://www.brianlv.com/categories/python.html</link>
-      <pubDate>Mon, 10 Dec 2018 21:30:53 +0800</pubDate>
+      <pubDate>Mon, 10 Dec 2018 21:31:00 +0800</pubDate>
       
       <guid>https://www.brianlv.com/categories/python.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://www.brianlv.com/categories/linux.html</link>
+      <pubDate>Mon, 10 Dec 2018 21:24:21 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/categories/linux.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>OpenCV</title>
+      <link>https://www.brianlv.com/categories/opencv.html</link>
+      <pubDate>Mon, 10 Dec 2018 21:23:57 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/categories/opencv.html</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="zh" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Linux 后台服务 - 吕海峰的博客</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="吕海峰(BrianLv)" /><meta name="description" content="Linux 后台服务" />
+<meta name="keywords" content="Linux 后台服务" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6" />
+
+
+<link rel="canonical" href="https://www.brianlv.com/201812/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.ec807d8b802a40889537c26e014f733206312ea440d42e1f0dabed80918de1ac.css" integrity="sha256-7IB9i4AqQIiVN8JuAU9zMgYxLqRA1C4fDavtgJGN4aw=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="Linux 后台服务" />
+<meta property="og:description" content="Linux 后台服务" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.brianlv.com/201812/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html" />
+<meta property="article:published_time" content="2018-12-10T21:24:21&#43;08:00"/>
+<meta property="article:modified_time" content="2018-12-10T21:24:21&#43;08:00"/>
+
+<meta itemprop="name" content="Linux 后台服务">
+<meta itemprop="description" content="Linux 后台服务">
+
+
+<meta itemprop="datePublished" content="2018-12-10T21:24:21&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-10T21:24:21&#43;08:00" />
+<meta itemprop="wordCount" content="2170">
+
+
+
+<meta itemprop="keywords" content="Linux," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux 后台服务"/>
+<meta name="twitter:description" content="Linux 后台服务"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+<script type="text/javascript">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">吕海峰的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/">首页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/series.html">专题</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/books.html">读书</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/about.html">关于</a>
+          
+        
+      </li>
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css" integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css" integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin="anonymous">
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      吕海峰的博客
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/">首页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/series.html">专题</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/books.html">读书</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/about.html">关于</a>
+          
+
+        
+
+      </li>
+    
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">Linux 后台服务</h1>
+      
+      <div class="post-meta">
+        <time datetime="2018-12-10" class="post-time">
+          2018-12-10
+        </time>
+        <div class="post-category">
+            <a href="https://www.brianlv.com/categories/linux.html"> Linux </a>
+            
+          </div>
+        <span class="more-meta"> 约 2170 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+
+        
+        
+          <span id="busuanzi_container_page_pv">
+            | 阅读 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#概述">概述</a></li>
+<li><a href="#任务">任务</a></li>
+<li><a href="#后台任务工具">后台任务工具</a>
+<ul>
+<li><a href="#screen">screen</a></li>
+<li><a href="#supervisor">supervisor</a>
+<ul>
+<li><a href="#supervisor使用">supervisor使用</a></li>
+</ul></li>
+<li><a href="#systemd">Systemd</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <h2 id="概述">概述</h2>
+
+<p>研发人员交付测试和上线产品时，需要对服务和产品以后台进程的方式启动。所以便利的后台进程工具可以很好的帮助你管理你的进程。确切的说：成为系统的守护进程(daemon)。</p>
+
+<h2 id="任务">任务</h2>
+
+<p>我们一般通过如下方式的命令运行的大多数是<strong>前台任务</strong>，：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task</span>
+python main.py
+<span class="c1">#nodejs task</span>
+nodejs main.js</code></pre></td></tr></table>
+</div>
+</div>
+<p>前台任务有很大的限制。我们无法获得标准输入<strong>stdin</strong>(它独占窗口session)，当前的session中断和退出，会立即中断任务。如果想结束改task只能等待完成或者手动结束。我们更倾向于<strong>后台任务</strong>，通过如下方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task</span>
+python main.py <span class="p">&amp;</span>
+<span class="c1">#nodejs task</span>
+nodejs main.js <span class="p">&amp;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这样就会把当前进程置为后台进程。如果想让前台任务变为后台任务，可以先通过<strong>CTRL+Z</strong>再执行，<strong>bg</strong>命令。快捷键说明：
+&gt;  <strong>CTRL+C</strong>是强制中断程序的执行,,进程已经终止。
+&gt; <strong>CTRL+Z</strong>将任务暂停或者挂起，此任务并没有结束,它仍然在进程中。只是维持挂起的状态,用户可以使用fg/bg操作继续前台或后台的任务,fg命令重新启动前台被中断的任务,bg命令把被中断的任务放在后台执行。
+&gt; <strong>CTRL+D</strong> 发送一个特殊的二进制值，表示 EOF。
+后天任务继承当前session的<strong>stdout</strong>和<strong>stderr</strong>。后台任务和前台任务的这种主要通过<strong>SIGHUB</strong>信号来处理和判断的，SIGHUB都有固定的标识和意义。
+1.用户创建session，会向OS发送一个SIGHUP信号表示我可以调用操作系统的资源和进程。
+2.用户退出session，通过系统调用发送给OS SIGHUP信号，OS将SIGHUP信号发送给session开启的所有进程和子进程，当收到退出SIGHUB指令后会回收资源并自动退出。由于前台任务是独占窗口session，所以当session退出时前台任务会收到SIGHUP信号并退出。后台任务主要通过<strong>huponexit</strong>参数来决定后台任务是否收到SIGHUB命令。该参数默认为<strong>off</strong>,所以后台任务默认是不会接收到SIGHUB信号的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">vm@vm:~$ <span class="nb">shopt</span> <span class="p">|</span> grep huponexit
+huponexit      	off</code></pre></td></tr></table>
+</div>
+</div>
+<p>如果启用了该参数，那么我们的后台任务也会退出。所以我们如果想写出稳定的后台服务，应该是避免SIGHUB信号。</p>
+
+<h2 id="后台任务工具">后台任务工具</h2>
+
+<p><strong>nohup、disown、screen、supervisor和Systemd</strong>等工具都可以避免SIGHUB信号，首推Systemd，但是备受争议它为违背了&quot;keep simple, keep stupid&quot;Unix哲学，其次supervisor和screen。</p>
+
+<h3 id="screen">screen</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 创建screen并制定名字</span>
+$ screen -S name
+<span class="c1"># 切回指定 session</span>
+$ screen -r name or pid_number
+<span class="c1"># 列出所有 session</span>
+$ screen -ls</code></pre></td></tr></table>
+</div>
+</div>
+<p>创建完screen后，在新的session书写自己的后台服务即可，书写完成之后通过<strong>CTRL+a，d</strong> 来退出当前会话。</p>
+
+<h3 id="supervisor">supervisor</h3>
+
+<p>supervisor是一个后台进程管理工具，方便管理进程的工具。最主要有下面两个功能：
+1）将非daemon程序变成deamon方式运行，对于daemon程序则不能监控。比如你通过python自己写的一个daemon服务是无法监控的。
+2）对程序进行监控，当程序退出时，可以自动拉起程序。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pip</span> <span class="n">install</span> <span class="n">supervisor</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>如果你监控多个daemon时可通过定制化进程conf来配置，可以创建一个confs的文件夹，把每个daemon的进程的服务放到改文件夹下，最后在supervisor的默认conf文件中包含该所有的配置文件即可。如果只是单个daemon，可以直接使用默认conf中。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#第一种，创建confs</span>
+mkdir -m <span class="m">755</span> -p /etc/supervisor/conf.d/
+emacs /etc/supervisor/supervisord.conf
+<span class="c1">#找到如下节点进行配置</span>
+<span class="o">[</span>include<span class="o">]</span>
+<span class="nv">files</span> <span class="o">=</span> /etc/supervisor/conf.d/*.conf
+<span class="c1">#第二种，直接采用默认conf</span>
+echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf</code></pre></td></tr></table>
+</div>
+</div>
+<p>进行自动化配置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="o">[</span>program:test<span class="o">]</span>
+<span class="nb">command</span> <span class="o">=</span> /usr/bin/test
+<span class="c1">#启动程序的命令；</span>
+<span class="nv">autostart</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="c1">#在supervisord启动的时候也自动启动；</span>
+<span class="nv">autorestart</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="c1">#程序异常退出后自动重启；</span>
+<span class="nv">startsecs</span> <span class="o">=</span> <span class="m">5</span>
+<span class="c1">#启动5秒后没有异常退出，就当作已经正常启动了；</span>
+<span class="nv">startretries</span> <span class="o">=</span> <span class="m">3</span>
+<span class="c1">#启动失败自动重试次数，默认是3；</span>
+<span class="c1">#user = nobody</span>
+<span class="c1">#开启进程使用哪个用户和组启动(这里memcached启动时指定了nobody用户所以就不用再指定了)；</span>
+<span class="nv">redirect_stderr</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="c1">#把stderr重定向到stdout，默认false；</span>
+<span class="nv">stdout_logfile</span><span class="o">=</span>/var/log/out-memcache.log
+<span class="c1">#标准日志输出；</span>
+<span class="nv">stderr_logfile</span><span class="o">=</span>/var/log/err-memcache.log
+<span class="c1">#错误日志输出；</span>
+<span class="nv">stdout_logfile_maxbytes</span> <span class="o">=</span> 20MB
+<span class="c1">#标准日志文件大小，默认50MB；</span>
+<span class="nv">stdout_logfile_backups</span> <span class="o">=</span> <span class="m">20</span>
+<span class="c1">#标准日志文件备份数；</span>  
+
+<span class="nv">process_name</span><span class="o">=</span>%<span class="o">(</span>process_num<span class="o">)</span>s
+<span class="nv">numprocs</span><span class="o">=</span><span class="m">3</span> </code></pre></td></tr></table>
+</div>
+</div>
+<p>最后启动生效并测试是否成功启动：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">supervisord -c /etc/supervisor/supervisord.conf
+ps -ef <span class="p">|</span> grep supervisor <span class="p">|</span> grep -v grep</code></pre></td></tr></table>
+</div>
+</div>
+<h4 id="supervisor使用">supervisor使用</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="m">1</span>.查询各进程运行状态
+supervisorctl status
+<span class="m">2</span>.启、停、重启业务进程,test为进程名,即<span class="o">[</span>program:test<span class="o">]</span>里配置的值
+supervisorctl start <span class="nb">test</span>
+supervisorctl stop <span class="nb">test</span>
+supervisorctl restart <span class="nb">test</span>
+<span class="m">3</span>.重启所有属于名为groupworker这个分组的进程
+supervisorctl start groupworker
+supervisorctl stop groupworker
+supervisorctl restart groupworker
+<span class="m">4</span>.启、停、重启全部进程<span class="o">(</span>不会载入最新的配置文件<span class="o">)</span>
+supervisorctl start all
+supervisorctl stop all
+supervisorctl restart all
+<span class="m">5</span>.重新加载配置文件，停止原有进程并按新的配置启动所有进程（注意：所有进程会停止并重启，线上操作慎重）
+supervisorctl reload
+<span class="m">6</span>.根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而被重启（注意：这才是线上可以操作的命令，不会重启原有进程）
+supervisorctl update
+注意：显示状态为stop停止掉的进程，用reload或者update都不会自动重启。
+交互式
+<span class="o">[</span>root@aaa <span class="o">]</span><span class="c1"># supervisorctl</span>
+memcached                       RUNNING   pid <span class="m">1234</span>, uptime <span class="m">0</span>:01:47
+supervisor&gt; stop <span class="nb">test</span>
+memcached: stopped
+supervisor&gt; start <span class="nb">test</span>
+memcached: started
+supervisor&gt; status
+memcached                       RUNNING   pid <span class="m">1234</span>, uptime <span class="m">0</span>:00:04
+supervisor&gt; restart <span class="nb">test</span>
+memcached: stopped
+memcached: started
+supervisor&gt; status
+memcached                       RUNNING   pid <span class="m">1234</span>, uptime <span class="m">0</span>:00:02
+supervisor&gt;</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="systemd">Systemd</h3>
+
+<p>关于Systemd，即可网上有一个非常详细的教程，大家可以search一下。</p>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">吕海峰(BrianLv)</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2018-12-10</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0-原创文章，如需转载请注明文章作者和出处。谢谢！</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/image/wechatpay.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div>
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://www.brianlv.com/tags/linux.html">Linux</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/201812/linux-install-jupyter.html">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">Linux Install Jupyter</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+          <a class="next" href="/201812/ubuntu-16.04-install-opencv.html">
+            <span class="next-text nav-default">Ubuntu 16.04 Install OpenCV</span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    <div id="lv-container" class="disqus-comment" data-id="city" data-uid="MTAyMC8zNDc2My8xMTMwMA==">
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+    <noscript>
+      Please enable JavaScript to view the
+      <a href="https://www.livere.com">comments powered by LiveRe.</a>
+    </noscript>
+   </div>
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:brian.lv@outlook.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://www.brianlv.com/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2018 -
+    2019
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        吕海峰
+        
+      </span></span>
+
+  
+  
+    <span id="busuanzi_container">
+      访客数/访问量：<span id="busuanzi_value_site_uv"></span>/<span id="busuanzi_value_site_pv"></span>
+    </span>
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+<script id="tencent_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+	hm.src = "//tajs.qq.com/stats?sId=66124387";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.js" integrity="sha256-AC9ChpELidrhGHX23ZU53vmRdz3FhKaN9E28+BbcWBw=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js" integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin="anonymous"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

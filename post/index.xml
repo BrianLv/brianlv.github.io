@@ -6,10 +6,378 @@
     <description>Recent content in Posts on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh</language>
-    <lastBuildDate>Mon, 10 Dec 2018 21:30:53 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 15 Dec 2018 17:14:08 +0800</lastBuildDate>
     
 	<atom:link href="https://www.brianlv.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C/C&#43;&#43; Development In Visual Studio Code</title>
+      <link>https://www.brianlv.com/201812/c/c-development-in-visual-studio-code.html</link>
+      <pubDate>Sat, 15 Dec 2018 17:14:08 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/c/c-development-in-visual-studio-code.html</guid>
+      <description>&lt;p&gt;由于我工作环境是Linux和Mac,个人的工作目录和开发环境一直来回切换，之前一直使用emacs，emacs非常强大和可定制化。最近看到vscode的社区不断壮大，在好基友的推荐下，试用vscode，发现非常不错。于是记录和分享到博客中。今天主要给大家讲解的&lt;strong&gt;vscode配置c/c++ ide开发环境&lt;/strong&gt;，当然官网支持很多种可定制化的配置。&lt;/p&gt;
+
+&lt;h2 id=&#34;开发环境搭建&#34;&gt;开发环境搭建&lt;/h2&gt;
+
+&lt;p&gt;我们首先安装&lt;strong&gt;vscode&lt;/strong&gt;，官网是：&lt;a href=&#34;https://code.visualstudio.com/&#34;&gt;vscode&lt;/a&gt;。我们下面来安装支持c/c++开发环境的安装包。
+* cpptools
+* cmake
+* C/C++ Clang&lt;/p&gt;
+
+&lt;p&gt;我们在工作目录依次安装如下，&lt;strong&gt;c_cpp_properties.json(指定c/c++包和平台相关的配置文件),launch.json(debug 调试),tasks.json(你的编译等命令)&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>机器学习性能度量</title>
+      <link>https://www.brianlv.com/201812/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F.html</link>
+      <pubDate>Mon, 10 Dec 2018 23:16:18 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F.html</guid>
+      <description>&lt;p&gt;我们在进行机器学习时需要衡量机器学习的优劣和本身模型的准确程度，比如简单的衡量数据的准确率和错误率，但是我们更关心的是模型的泛化能力的指标，即基于模型的所选的item相关性以及模型分类指标的好坏。&lt;/p&gt;
+
+&lt;h2 id=&#34;机器学习度量&#34;&gt;机器学习度量&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;error rate(错误率)&lt;/strong&gt;:把分类错误的样本数占样本总数的比例。$$E=a/m$$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;accuracy(精确度)&lt;/strong&gt;:分类正确的样本数占样本总数的比例。$$acc=1-E$$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;training error(训练误差):&lt;/strong&gt;学习器在训练集上的误差。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;generalization error(泛华误差):&lt;/strong&gt;在新样本上的误差。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在机器学习中由很多机器学习算法，那么如何选择这些算法和模型，如何评估这些算法和模型,评估模型的算法和准确率的方式很多，我们依次来介绍一下几个常用的指标。&lt;strong&gt;TP、TN、FP、FN、Acc、Recall、F1、ROC和ROI&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;各种机器学习衡量指标&#34;&gt;各种机器学习衡量指标&lt;/h2&gt;
+
+&lt;h3 id=&#34;accuracy-precision-recall和f1-score&#34;&gt;Accuracy、Precision、Recall和F1-Score&lt;/h3&gt;
+
+&lt;p&gt;混淆矩阵是按照预测分类和实际分类的类别对比,如下图所示:
+&lt;img src=&#34;https://www.brianlv.com/image/precision-recall.png&#34; alt=&#34;混淆矩阵&#34; /&gt;
+如上表所示，行表示预测的label值，列表示真实label值。TP，FP，FN，TN分别表示如下意思：
+* TP（true positive）：表示样本的真实类别为正，最后预测得到的结果也为正
+* FP（false positive）：表示样本的真实类别为负，最后预测得到的结果却为正
+* FN（false negative）：表示样本的真实类别为正，最后预测得到的结果却为负
+* TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负&lt;/p&gt;
+
+&lt;p&gt;$$
+Accuracy = \frac{TP+TN}{TP+FP+TN+FN}
+$$
+$$
+Precision = \frac{TP}{TP+FP}
+$$
+$$
+Recall = \frac{TP}{TP+FN}
+$$
+$$
+SP = \frac{TN}{TN + FP}&lt;br /&gt;
+$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Accuracy：表示预测结果的精确度，预测正确的样本数除以总样本数。&lt;/li&gt;
+&lt;li&gt;Precision，准确率，表示预测结果中，预测为正样本的样本中，正确预测为正样本的概率；&lt;/li&gt;
+&lt;li&gt;Recall，召回率，表示在原始样本的正样本中，最后被正确预测为正样本的概率；&lt;/li&gt;
+&lt;li&gt;Specificity，常常称作特异性，它研究的样本集是原始样本中的负样本，表示的是在这些负样本中最后被正确预测为负样本的概率。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在实际当中，我们往往希望得到的precision和recall都比较高，比如当FN和FP等于0的时候，他们的值都等于1。但是，它们往往在某种情况下是互斥的。例如，有50个正样本，50个负样本，结果全部预测为正样本，那么TP=50,FP=50,TN=0,FN=0,按照上面的公式计算，可以得到正样本的recall却为1，precision却为0.5.所以需要一种折衷的方式，因此就有了F1-score。&lt;/p&gt;
+
+&lt;p&gt;$$
+F1-score = \frac{2\times recall \times precision}{ recall + precision}
+$$&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;F1-score表示的是precision和recall的调和平均评估指标.&lt;/strong&gt;
+另外还有一个指标，即MCC，该指标对于不均衡数据集的评估非常有效，公式如下：&lt;/p&gt;
+
+&lt;p&gt;$$
+MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP+FP)\times(TP+FN)\times(TN+FP)\times(TN+FN)}}
+$$&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>结构化的机器学习流程</title>
+      <link>https://www.brianlv.com/201812/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B.html</link>
+      <pubDate>Mon, 10 Dec 2018 23:05:11 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B.html</guid>
+      <description>&lt;p&gt;机器学习可以通过结构化的流程来梳理:&lt;strong&gt;1.定义问题和需求分析-&amp;gt;2.数据探索-&amp;gt;3.数据准备-&amp;gt;4.评估算法-&amp;gt;5.优化模型-&amp;gt;6.部署&lt;/strong&gt;。
+* 导入类库
+* 导入数据集
+* 数据统计分析
+* 数据可视化
+* 数据清洗
+* 特征选择
+* 数据转换
+* 分离数据集
+* 定义模型评估标准
+* 算法审查
+* 算法比较
+* 算法调参
+* 集成算法
+* 预测评估数据集
+* 利用数据生成模型
+* 序列化模型&lt;/p&gt;
+
+&lt;h2 id=&#34;数据理解&#34;&gt;数据理解&lt;/h2&gt;
+
+&lt;p&gt;数据的理解主要在于分析数据维度、数据类型属性、数据分布以及相关性等。数据属性的相关性是指数据的两个属性的互相影响。&lt;/p&gt;
+
+&lt;h3 id=&#34;数据统计分析&#34;&gt;数据统计分析&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 数据导入与数据维度探索&lt;/span&gt;
+&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;numpy&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;loadtxt&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filename&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;rt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rawdata&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;loadtxt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rawdata&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;delimiter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;shape&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#数据属性和描述性统计&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dtype&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;describe&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#数据根据类别分类&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;group&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;class&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#数据属性相关性(皮尔逊相关系数，1完全正相关，-1完全负相关，0不相关)&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;corr&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;method&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;pearson&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#数据分布分析,skew代表高斯分布的偏离程度，数据接近于0表示数据偏差非常小&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;skew&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>熵的理解</title>
+      <link>https://www.brianlv.com/201812/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3.html</link>
+      <pubDate>Mon, 10 Dec 2018 22:17:19 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3.html</guid>
+      <description>&lt;p&gt;熵在信息论中代表随机变量不确定度的度量。一个离散型随机变量X的熵H(X)定义为：
+$$
+H(X)=- \sum_{x \in X} p(x) \cdot logp(x)
+$$
+明确定义的科学名词且与内容无关，而且不随信息的具体表达式的变化而变化。是独立于形式，反映了信息表达式中统计方面的性质。是统计学上的抽象概念。信息熵的一种解释是，它表示的是最短的平均编码长度。同样的，不确定性越大，熵就越大。信息熵的单位是比特(bit)。我们举两个简单的例子：
+第一个例子：
+32支球队，在无任何先验信息的前提下，用二分法猜冠军队伍，最多猜5次，即：
+$$
+log\frac{1}{32}=5log\frac{1}{32}=5bit
+$$
+第二个例子：赌马比赛里，有4匹马A,B,C,D，获胜概率分别为
+$$ \frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{8} $$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;如果 X=A ，那么需要问1次（问题1：是不是A？），概率为
+$$ \frac{1}{2} $$&lt;/li&gt;
+&lt;li&gt;如果 X=B ，那么需要问2次（问题1：是不是A？问题2：是不是B？），概率为
+$$ \frac{1}{4}$$&lt;/li&gt;
+&lt;li&gt;如果 X=C ，那么需要问3次（问题1，问题2，问题3），概率为&lt;br /&gt;
+$$ \frac{1}{8}$$&lt;/li&gt;
+&lt;li&gt;如果 X=D ，那么同样需要问3次（问题1，问题2，问题3），概率为
+$$ \frac{1}{8}$$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;通过熵的定义得到&lt;/p&gt;
+
+&lt;p&gt;$$
+H(x)=-\sum_{x \in {A,B,C,D}}p(x)\cdot log p(x)=\frac{1}{2} \cdot log2+\frac{1}{4} \cdot log4+\frac{1}{8} \cdot log8+\frac{1}{8} \cdot log8=1.75
+$$&lt;/p&gt;
+
+&lt;p&gt;在二进制计算机中，一个比特为0或1(代表二元问题)。在计算机中，我们给哪一匹马夺冠这个事件进行编码，所需要的平均码长为1.75个比特。其定义为:&lt;/p&gt;
+
+&lt;p&gt;$$
+L(C)=\sum_{x \in X}p(x)l(x)
+$$&lt;/p&gt;
+
+&lt;p&gt;为了尽可能减少码长，我们要给发生概率p(x)较大的事件，分配较短的码长l(x)。所以那么
+$${A,B,C,D}$$
+四个实践，可以分别由
+$${0,10,110,111}$$
+表示.
+（1）信息熵只反映内容的随机性，与内容本身无关。不管是什么样内容的文件，只要服从同样的概率分布，就会计算得到同样的信息熵。
+（2）信息熵越大，表示占用的二进制位越长，因此就可以表达更多的符号。所以，人们有时也说，信息熵越大，表示信息量越大。不过，由于第一点的原因，这种说法很容易产生误导。较大的信息熵，只表示可能出现的符号较多，并不意味着你可以从中得到更多的信息。
+（3）信息熵与热力学的熵，基本无关。&lt;/p&gt;
+
+&lt;h2 id=&#34;相对熵-kl离散度&#34;&gt;相对熵(KL离散度)&lt;/h2&gt;
+
+&lt;p&gt;相对熵又叫做KL离散度，其定义为：
+$$
+KL(f(x)||g(x))=-\sum_{x \in X} f(x) \cdot log\frac{f(x)}{g(x)}
+$$
+KL 散度是两个概率分布f(x)和g(x)差别的非对称性的度量。KL散度是用来度量使用基于f(x)的编码来编码来自g(x)的样本平均所需的额外的位元数。
+很容易证明，有三个结论：
+(1) 两函数完全相同时，KL=0
+(2) KL越大，差异越大
+(3) 对概率分布或者概率密度函数(&amp;gt;0), KL可用来衡量两个随机变量分布的差异性。&lt;/p&gt;
+
+&lt;h2 id=&#34;交叉熵&#34;&gt;交叉熵&lt;/h2&gt;
+
+&lt;p&gt;对一随机事件，其真实概率分布为p(i)，从数据中得到的概率分布为q(i)，则我们定义，交叉熵为:
+$$
+H(p,q)=\displaystyle\sum _{x}p(x)log\frac{1}{q(x)}=-\sum _{x}p(x)logq(x)
+$$&lt;/p&gt;
+
+&lt;p&gt;核心理解：
+* 用p来衡量识别一个样本的信息量即最小编码长度（&lt;strong&gt;信息熵&lt;/strong&gt;）。&lt;/p&gt;
+
+&lt;p&gt;$$
+H(p)=\sum p \cdot log\frac{1}{p}
+$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;q来估计真实分布为p的样本的信息量.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$
+H(q,p)=\sum p \cdot \frac{1}{q}
+$$&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;则估算多出来的冗余信息量.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;$$
+D(p||q)=H(p,q)-H(p)=\sum p \cdot log\frac{p}{q}(KL离散度)
+$$&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;在机器学习中，p通常设定为真实标记的分布，q设定为训练后模型预测标记的分布：&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;$$
+H(p,q)=H(p)+D_{KL}(pq)
+$$&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;即：交叉熵=信息熵+KL散度（相对熵）&lt;/strong&gt;
+由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&amp;quot;距离&amp;quot;。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python进阶系列三</title>
+      <link>https://www.brianlv.com/201812/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%89.html</link>
+      <pubDate>Mon, 10 Dec 2018 21:31:00 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%89.html</guid>
+      <description>&lt;h2 id=&#34;python-进阶&#34;&gt;Python 进阶&lt;/h2&gt;
+
+&lt;p&gt;我们在&lt;strong&gt;Python进阶教程(二)&lt;/strong&gt;，介绍了一些Python进阶用法。今天给大家介绍的是和&lt;strong&gt;c/c++&lt;/strong&gt;混合编程的用法。我们都知道特别是Python2.x版本GIL的影响造成多线程计算方面是鸡肋，并且常常在高性能计算方面依赖很多包。如果我们想切合我们自己的业务处理，比如高性能部分我们用&lt;strong&gt;C/C++&lt;/strong&gt;生成动态链接库，Python调用该动态链接库。我们今天主要介绍Python在和&lt;strong&gt;c/c++&lt;/strong&gt;混合编程。&lt;/p&gt;
+
+&lt;h3 id=&#34;python和c-c-混合编程&#34;&gt;Python和C/C++混合编程&lt;/h3&gt;
+
+&lt;p&gt;在和&lt;strong&gt;C/C++代码&lt;/strong&gt;进行混合编程时，我们通常需要采用以下几个技术点：
+* &lt;strong&gt;Ctypes&lt;/strong&gt;:C++编译成动态链接库(DLL,即运行时动态调用)，然后通过&lt;strong&gt;ctypes&lt;/strong&gt;来解析和加载动态链接库，python调用该动态链接库。从ctypes的文档中可以推断，在各个平台上均使用了对应平台动态加载动态链接库的方法，并通过一套类型映射的方式将Python与二进制动态链接库相连接。ctypes 实现了一系列的类型转换方法，Python的数据类型会包装或直接推算为C类型，作为函数的调用参数；函数的返回值也经过一系列的包装成为Python类型。
+&lt;strong&gt;优点：&lt;/strong&gt;
+1.Python内建，不需要单独安装
+2.可以直接调用二进制的动态链接库
+3.在Python一侧，不需要了解Python内部的工作方式
+4.在C/C++一侧，也不需要了解Python内部的工作方式
+5.对基本类型的相互映射有良好的支持
+&lt;strong&gt;缺点：&lt;/strong&gt;
+1.平台兼容性差
+2.不能够直接调用动态链接库中未经导出的函数或变量
+3.对C++的支持差
+* &lt;strong&gt;SWIG&lt;/strong&gt;:通过提供的接口文件来调用。
+* &lt;strong&gt;Python/C&lt;/strong&gt;在C中直接扩展Python的代码。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python进阶系列二</title>
+      <link>https://www.brianlv.com/201812/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%BA%8C.html</link>
+      <pubDate>Mon, 10 Dec 2018 21:30:57 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%BA%8C.html</guid>
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
+
+&lt;p&gt;在上一篇博客中，我们介绍了&lt;strong&gt;&lt;a href=&#34;https://www.brianlv.com/post/python进阶一&#34;&gt;Python进阶系列一&lt;/a&gt;&lt;/strong&gt;，还有一些新的技巧没有翻译完，我们下面来继续我们的翻译。&lt;/p&gt;
+
+&lt;h2 id=&#34;intermediate-python-中译-二&#34;&gt;Intermediate Python 中译(二)&lt;/h2&gt;
+
+&lt;h3 id=&#34;decorators&#34;&gt;Decorators&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Decorators&lt;/strong&gt;装饰器是Pytho非常重要的特性，相当于Java注解功能。装饰器是修饰函数的一种语法特性，可以使其功能发生一些改变。在Python函数也是第一等公民，可以直接赋值对象和使用。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;hi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;brian&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;hi,&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#输出&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;hi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;brian&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;greet&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;hi&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;greet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#输出&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;hi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;brian&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#此时已经删除hi对象，无法运行hi()方法，但是可以通过greet()方法运行&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;del&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;hi&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;greet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#输出&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;hi&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;brian&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;我们也可以在函数内定义函数&lt;/strong&gt;，比如：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;hi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;brian&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;now you are inside in the hi() method&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;greet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;now you are in inside the greet() method&amp;#34;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;welcome&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;now you are in inside the welcome() method&amp;#34;&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;greet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;welcome&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;now you are back in the hi() method&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;hi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#输出为&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;you&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;are&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;inside&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;hi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;method&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;you&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;are&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;inside&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;greet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;method&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;you&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;are&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;inside&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;welcome&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;method&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;you&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;are&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;back&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;the&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;hi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;method&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;我们可以看到在函数(主函数)内定义函数(子函数)，只要是不调用子函数，子函数只是声明并不执行，当执行完子函数时又返回了主函数。&lt;/strong&gt;由于Python只是函数第一等公民的功能特性，那么在Python代码中是可以将Python的函数可以作为变量使用并将其作为返回值亦可。&lt;strong&gt;从主函数中返回子函数(即从函数中返回函数)&lt;/strong&gt;。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Python进阶系列一</title>
@@ -143,6 +511,397 @@
 &lt;span class=&#34;n&#34;&gt;someclass&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_info&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_info&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python 性能分析</title>
+      <link>https://www.brianlv.com/201812/python-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90.html</link>
+      <pubDate>Mon, 10 Dec 2018 21:25:23 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/python-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90.html</guid>
+      <description>&lt;h1 id=&#34;python性能分析与优化&#34;&gt;Python性能分析与优化&lt;/h1&gt;
+
+&lt;p&gt;一个优秀的程序员，在保证业务正常的条件下都会追求自己的程序更快、更省。更快：运行时间短；更省：相对节省计算机资源（比如：CPU、Memory）。一般都是以这两种衡量方式来度量自己的程序及进一步优化自己程序的空间。更专业的性能分析软件一般有两类方法论：&lt;strong&gt;event-based profiling和statistical profiling&lt;/strong&gt; 。&lt;/p&gt;
+
+&lt;h2 id=&#34;event-based-profiling&#34;&gt;Event-based Profiling&lt;/h2&gt;
+
+&lt;p&gt;并不是所有编程语言都支持这类性能分析，支持这类分析的语言主要有：&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Java:JVMTI（JVM Tools Interface,JVM工具接口）为性能提供了钩子，可以跟踪函数调用和事件执行等等。&lt;/li&gt;
+&lt;li&gt;.NET :也提供了事件监听器，主要得益于.net 运行时。&lt;/li&gt;
+&lt;li&gt;Python：可以利用sys.setprofile函数来跟踪函数python&lt;em&gt;(call,return,exception)或者c&lt;/em&gt;(call,return,exception).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;基于事件的性能分析(event-based profiler or tracing profiler)是通过手机程序执行过程中的具体事件进行工作的，这些性能分析会产生大量的数据，基本而言，你监听的事件越多产生的数据量句越多。这导致它们不太实用，在开始对程序进行性能往往不是首选，当其他性能分析不够用或者不精准它们可以作为最后的选择。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Python GIL</title>
+      <link>https://www.brianlv.com/201812/python-gil.html</link>
+      <pubDate>Mon, 10 Dec 2018 21:24:57 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/python-gil.html</guid>
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;GIL（Global Interpreter    Lock）&lt;/strong&gt;是什么东东？为什么当一些Pythoners在开发一些多线程操作的时候，都会有些很多疑问？多线程真的很糟糕吗？我该如何实现多线程并发操作？今天博主带你详细的介绍一下GIL。&lt;/p&gt;
+
+&lt;h2 id=&#34;gil原理&#34;&gt;GIL原理&lt;/h2&gt;
+
+&lt;p&gt;由于Python是动态解释性语言，即解释运行。运行Python代码时都会通过Python解释器解释执行，Python官方默认的解释器是Cython,当然你也可以选择自己的Python解释器(PyPy,JPython),其中JPython就没有GIL的限制。在解释器解释执行任何Python代码时，首先都需要&lt;strong&gt;they  acquire GIL when running，release GIL when blocking for I/O&lt;/strong&gt;。如果没有涉及I/O操作，只是CPU密集型操作或者，解释器会每隔&lt;strong&gt;100 ticks&lt;/strong&gt;(低级的解释器指令)就释放GIL(通过 sys.setcheckinterval来修改)。&lt;strong&gt;GIL是实现Python解释器(Cython)时所引入的一个概念。GIL不是Python的特性。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;线程执行模型&#34;&gt;线程执行模型&lt;/h3&gt;
+
+&lt;p&gt;我们先看一下Python下多任务线程执行模型，下面的图取自&lt;strong&gt;David Beazley&lt;/strong&gt;大神，并且在他的个人网站中对GIL进行深度的解剖。如果想了解更深入的东西，可以去逛逛他的网站。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux Install Jupyter</title>
+      <link>https://www.brianlv.com/201812/linux-install-jupyter.html</link>
+      <pubDate>Mon, 10 Dec 2018 21:24:38 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/linux-install-jupyter.html</guid>
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
+
+&lt;p&gt;由于我的开发环境是CentOS，现在主要是以Python为主，偶尔夹杂C/C++和GoLang语言。在本地开发、测试、提交git和在生产环境再去测试、开发，并且会在生产环境会有临时性的开发任务和调整，都是比较浪费时间的。&lt;strong&gt;不建议直接修改生产环境的代码，临时性的修改后一定要测试并稳定运行一段时间。&lt;/strong&gt; 写这篇博客主要是为了利用线上资源，实现跨平台开发和测试代码示例用的。所以就在服务器安装了&lt;strong&gt;IPython，Jupyter和Notebook&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h2 id=&#34;安装和配置&#34;&gt;安装和配置&lt;/h2&gt;
+
+&lt;p&gt;在安装&lt;strong&gt;IPython，Jupyter和Notebook&lt;/strong&gt;时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如(&#39;Development Tools‘)。废话少说，直接写代码。&lt;/p&gt;
+
+&lt;h3 id=&#34;基本包安装&#34;&gt;基本包安装&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;yum update -y
+yum install python-pip -y
+yum install bzip2 -y
+yum groupinstall &lt;span class=&#34;s2&#34;&gt;&amp;#34;Development Tools&amp;#34;&lt;/span&gt; -y&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;安装完pip之后，最好把pip源改为国内源，修改如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;mkdir ~/.pip
+cat &amp;gt; ~/.pip/pip.conf &lt;span class=&#34;s&#34;&gt;&amp;lt;&amp;lt; EOF
+&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;[global]
+&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;index-url = http://mirrors.aliyun.com/pypi/simple/
+&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;[install]
+&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;trusted-host=mirrors.aliyun.com
+&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;EOF&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux 后台服务</title>
+      <link>https://www.brianlv.com/201812/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html</link>
+      <pubDate>Mon, 10 Dec 2018 21:24:21 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html</guid>
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
+
+&lt;p&gt;研发人员交付测试和上线产品时，需要对服务和产品以后台进程的方式启动。所以便利的后台进程工具可以很好的帮助你管理你的进程。确切的说：成为系统的守护进程(daemon)。&lt;/p&gt;
+
+&lt;h2 id=&#34;任务&#34;&gt;任务&lt;/h2&gt;
+
+&lt;p&gt;我们一般通过如下方式的命令运行的大多数是&lt;strong&gt;前台任务&lt;/strong&gt;，：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#python task&lt;/span&gt;
+python main.py
+&lt;span class=&#34;c1&#34;&gt;#nodejs task&lt;/span&gt;
+nodejs main.js&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;前台任务有很大的限制。我们无法获得标准输入&lt;strong&gt;stdin&lt;/strong&gt;(它独占窗口session)，当前的session中断和退出，会立即中断任务。如果想结束改task只能等待完成或者手动结束。我们更倾向于&lt;strong&gt;后台任务&lt;/strong&gt;，通过如下方式：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#python task&lt;/span&gt;
+python main.py &lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;
+&lt;span class=&#34;c1&#34;&gt;#nodejs task&lt;/span&gt;
+nodejs main.js &lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu 16.04 Install OpenCV</title>
+      <link>https://www.brianlv.com/201812/ubuntu-16.04-install-opencv.html</link>
+      <pubDate>Mon, 10 Dec 2018 21:23:57 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/ubuntu-16.04-install-opencv.html</guid>
+      <description>&lt;h1 id=&#34;概述&#34;&gt;概述&lt;/h1&gt;
+
+&lt;p&gt;安装opencv有很多种方式，我列出了三种方式。并针对第二种方式进行了详细的安装解释，强烈推荐使用第三种方式。&lt;/p&gt;
+
+&lt;h2 id=&#34;1-从ubuntu源安装opencv&#34;&gt;1.从Ubuntu源安装opencv&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo apt-get install libopencv-dev python-opencv&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id=&#34;2-从opencv官方源代码安装&#34;&gt;2.从opencv官方源代码安装&lt;/h2&gt;
+
+&lt;p&gt;1.安装opencv所依赖的包&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# KEEP UBUNTU OR DEBIAN UP TO DATE&lt;/span&gt;
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y dist-upgrade
+sudo apt-get -y autoremove
+&lt;span class=&#34;c1&#34;&gt;# install package&lt;/span&gt;
+sudo apt-get install build-essential cmake pkg-config
+sudo apt-get install libatlas-base-dev gfortran
+&lt;span class=&#34;c1&#34;&gt;# GUI (if you want to use GTK instead of Qt, replace &amp;#39;qt5-default&amp;#39; with &amp;#39;libgtkglext1-dev&amp;#39; and remove &amp;#39;-DWITH_QT=ON&amp;#39; option in CMake):&lt;/span&gt;
+sudo apt-get install -y qt5-default libvtk6-dev
+
+&lt;span class=&#34;c1&#34;&gt;# Media I/O:&lt;/span&gt;
+sudo apt-get install -y zlib1g-dev libjpeg-dev libwebp-dev libpng-dev libtiff5-dev libjasper-dev libopenexr-dev libgdal-dev
+
+&lt;span class=&#34;c1&#34;&gt;# Video I/O:&lt;/span&gt;
+sudo apt-get install -y libdc1394-22-dev libavcodec-dev libavformat-dev libswscale-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev yasm libopencore-amrnb-dev libopencore-amrwb-dev libv4l-dev libxine2-dev
+
+&lt;span class=&#34;c1&#34;&gt;# Parallelism and linear algebra libraries:&lt;/span&gt;
+sudo apt-get install -y libtbb-dev libeigen3-dev
+
+&lt;span class=&#34;c1&#34;&gt;# Python:&lt;/span&gt;
+sudo apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk python3-numpy
+
+&lt;span class=&#34;c1&#34;&gt;# Java:&lt;/span&gt;
+sudo apt-get install -y ant default-jdk
+
+&lt;span class=&#34;c1&#34;&gt;# Documentation:&lt;/span&gt;
+sudo apt-get install -y doxygen&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu Install Vnc</title>
+      <link>https://www.brianlv.com/201812/ubuntu-install-vnc.html</link>
+      <pubDate>Mon, 10 Dec 2018 21:23:21 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/ubuntu-install-vnc.html</guid>
+      <description>&lt;h1 id=&#34;概述&#34;&gt;概述&lt;/h1&gt;
+
+&lt;p&gt;由于最近开发cuda的并行运算所以需要安装VNC来调试和cuda开发。
+安装X11VNC&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo apt install x11vnc -y&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;配置访问密码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;sudo x11vnc -storepasswd /etc/x11vnc.pass&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;创建服务：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;vi /lib/systemd/system/x11vnc.service
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Unit&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;Description&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;Start x11vnc at startup.
+&lt;span class=&#34;nv&#34;&gt;After&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;multi-user.target
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Service&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;Type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;simple
+&lt;span class=&#34;nv&#34;&gt;ExecStart&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/usr/bin/x11vnc -auth guess -forever -loop -noxdamage -repeat -rfbauth /etc/x11vnc.pass -rfbport &lt;span class=&#34;m&#34;&gt;5900&lt;/span&gt; -shared
+&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;Install&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;WantedBy&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;multi-user.target&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>CentOS6 升级Python2.7.X和Python3.X</title>
+      <link>https://www.brianlv.com/201812/centos6-%E5%8D%87%E7%BA%A7python2.7.x%E5%92%8Cpython3.x.html</link>
+      <pubDate>Mon, 10 Dec 2018 21:16:50 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/centos6-%E5%8D%87%E7%BA%A7python2.7.x%E5%92%8Cpython3.x.html</guid>
+      <description>&lt;h2 id=&#34;简述&#34;&gt;简述&lt;/h2&gt;
+
+&lt;p&gt;由于产品需要从裸机开始开发所以所有的配置和开发也是从零开始，这个导航是基于centos6.x版本升级默认的Centos的Python，升级到Python2.7或者Python3.3。我们不仅升级了Python，同样基于Python的setuptools, pip, virtualenv and pyvenv这些工具也同样安装和升级以便于项目需要。&lt;/p&gt;
+
+&lt;h2 id=&#34;安装基本的开发工具包&#34;&gt;安装基本的开发工具包&lt;/h2&gt;
+
+&lt;p&gt;为了确保编译Python成功，先安装下面的这几个package和类库。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;yum groupinstall &lt;span class=&#34;s2&#34;&gt;&amp;#34;Development tools&amp;#34;&lt;/span&gt;
+yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>深入理解Python的With-as语句</title>
+      <link>https://www.brianlv.com/201812/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html</link>
+      <pubDate>Sun, 02 Dec 2018 21:57:43 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/201812/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html</guid>
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
+
+&lt;p&gt;学习Python有一段时间了，最近做一个项目会涉及到文件的读取和关闭。比如：我想把一些对象序列化到文件里面，然后当我再次使用的时候，在从文件里面读取反序列化成对象。像这种操作一般都是用&lt;strong&gt;try…except…finally&lt;/strong&gt;。但是经过自己对Python的研究发现会有更出色的方法，比如：with-as语句也有的人称为&lt;strong&gt;context manager。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;with-as-用法&#34;&gt;With-as 用法&lt;/h2&gt;
+
+&lt;p&gt;我们先看一下例子，当我们需要打开一个文件的时，比如：txt等，一般经常会这么操作：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;rw&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;except&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;finally&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;这是错误，因为file.open是否打开文件是不确定，而在出现异常的时候你却关闭了已经打开的文件。文件没有打开怎么能直接关闭呢？你可以按照下面的解决方法来解决上述出现的问题。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
+    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;rw&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;except&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
+    &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
+    &lt;span class=&#34;o&#34;&gt;//&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;出现异常直接返回或者退出，这说明&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;file并没有打开&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
+
+&lt;span class=&#34;o&#34;&gt;//&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;已经成功打开&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;file文件&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，所以你需要在&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;finally中关闭打开的文件&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
+    &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;except&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
+    &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;finally&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
+    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;你会发现这么做会非常麻烦，并且try……except…..finally嵌套也比较啰嗦。那有没有好的解决办法能解决上述问题，并且还能减少代码量呢？(类似于C#中的using关键字)答案是肯定的，那就是with……as语句。&lt;strong&gt;With语句适用于对I/O、文件流、数据流等资源进行访问的场合，确保不管使用过程中是否发生异常都会执行必要的“清理”操作，释放资源.比如文件使用后自动关闭、线程中锁的自动获取和释放等等。&lt;/strong&gt; 我们来看一下with-as的用法：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;/etc/passwd&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
+    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;line&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+        &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;line&lt;/span&gt;
+        &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;more&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;processing&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;code&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;这个语句执行完成之后，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄,确实比try……except……finally好多了。在这个例子中f就是上下文管理器enter()的返回值，返回的是当前文件自身的引用。Python内建对象都加入了对上下文管理器的支持，可以用在with语句中。比如:file、 threading、decimal等等，在多线程模块中，lock和条件变量也是支持with语句的。例如：&lt;/p&gt;</description>
     </item>
     
   </channel>

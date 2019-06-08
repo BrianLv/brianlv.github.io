@@ -1,0 +1,1359 @@
+<!DOCTYPE html>
+<html lang="zh" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>深入理解Python的With-as语句 - 吕海峰的博客</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="吕海峰(BrianLv)" /><meta name="description" content="Python with-as" />
+<meta name="keywords" content="Python, with-as" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6" />
+
+
+<link rel="canonical" href="https://www.brianlv.com/201812/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.ec807d8b802a40889537c26e014f733206312ea440d42e1f0dabed80918de1ac.css" integrity="sha256-7IB9i4AqQIiVN8JuAU9zMgYxLqRA1C4fDavtgJGN4aw=" media="screen" crossorigin="anonymous">
+
+
+
+
+
+<meta property="og:title" content="深入理解Python的With-as语句" />
+<meta property="og:description" content="Python with-as" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.brianlv.com/201812/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html" />
+<meta property="article:published_time" content="2018-12-02T21:57:43&#43;08:00"/>
+<meta property="article:modified_time" content="2018-12-02T21:57:43&#43;08:00"/>
+
+<meta itemprop="name" content="深入理解Python的With-as语句">
+<meta itemprop="description" content="Python with-as">
+
+
+<meta itemprop="datePublished" content="2018-12-02T21:57:43&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-02T21:57:43&#43;08:00" />
+<meta itemprop="wordCount" content="4629">
+
+
+
+<meta itemprop="keywords" content="Python," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深入理解Python的With-as语句"/>
+<meta name="twitter:description" content="Python with-as"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+<script type="text/javascript">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">吕海峰的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/">首页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/series.html">专题</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">归档</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/books.html">读书</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/about.html">关于</a>
+          
+        
+      </li>
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css" integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css" integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin="anonymous">
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      吕海峰的博客
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/">首页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/series.html">专题</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">归档</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/books.html">读书</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/about.html">关于</a>
+          
+
+        
+
+      </li>
+    
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">深入理解Python的With-as语句</h1>
+      
+      <div class="post-meta">
+        <time datetime="2018-12-02" class="post-time">
+          2018-12-02
+        </time>
+        <div class="post-category">
+            <a href="https://www.brianlv.com/categories/python.html"> Python </a>
+            
+          </div>
+        <span class="more-meta"> 约 4629 字 </span>
+          <span class="more-meta"> 预计阅读 10 分钟 </span>
+
+        
+        
+          <span id="busuanzi_container_page_pv">
+            | 阅读 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#概述">概述</a></li>
+<li><a href="#with-as-用法">With-as 用法</a></li>
+<li><a href="#python术语">Python术语</a>
+<ul>
+<li><a href="#上下文管理协议">上下文管理协议</a></li>
+<li><a href="#the-contextlib-module">The contextlib module</a>
+<ul>
+<li><a href="#contextmanager">contextmanager</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#参考文献">参考文献</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <h2 id="概述">概述</h2>
+
+<p>学习Python有一段时间了，最近做一个项目会涉及到文件的读取和关闭。比如：我想把一些对象序列化到文件里面，然后当我再次使用的时候，在从文件里面读取反序列化成对象。像这种操作一般都是用<strong>try…except…finally</strong>。但是经过自己对Python的研究发现会有更出色的方法，比如：with-as语句也有的人称为<strong>context manager。</strong></p>
+
+<h2 id="with-as-用法">With-as 用法</h2>
+
+<p>我们先看一下例子，当我们需要打开一个文件的时，比如：txt等，一般经常会这么操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这是错误，因为file.open是否打开文件是不确定，而在出现异常的时候你却关闭了已经打开的文件。文件没有打开怎么能直接关闭呢？你可以按照下面的解决方法来解决上述出现的问题。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>  
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">except</span><span class="p">:</span>  
+    <span class="n">To</span> <span class="n">Do</span>
+    <span class="o">//</span><span class="err">出现异常直接返回或者退出，这说明</span><span class="n">file并没有打开</span><span class="err">。</span>
+    <span class="k">return</span><span class="o">/</span><span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="o">//</span><span class="err">已经成功打开</span><span class="n">file文件</span><span class="err">，所以你需要在</span><span class="n">finally中关闭打开的文件</span><span class="err">。</span>
+<span class="k">try</span><span class="p">:</span>  
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">except</span><span class="p">:</span>  
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">finally</span><span class="p">:</span>  
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>你会发现这么做会非常麻烦，并且try……except…..finally嵌套也比较啰嗦。那有没有好的解决办法能解决上述问题，并且还能减少代码量呢？(类似于C#中的using关键字)答案是肯定的，那就是with……as语句。<strong>With语句适用于对I/O、文件流、数据流等资源进行访问的场合，确保不管使用过程中是否发生异常都会执行必要的“清理”操作，释放资源.比如文件使用后自动关闭、线程中锁的自动获取和释放等等。</strong> 我们来看一下with-as的用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">line</span>
+        <span class="o">...</span> <span class="n">more</span> <span class="n">processing</span> <span class="n">code</span> <span class="o">...</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这个语句执行完成之后，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄,确实比try……except……finally好多了。在这个例子中f就是上下文管理器enter()的返回值，返回的是当前文件自身的引用。Python内建对象都加入了对上下文管理器的支持，可以用在with语句中。比如:file、 threading、decimal等等，在多线程模块中，lock和条件变量也是支持with语句的。例如：</p>
+
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>  
+<span class="k">with</span> <span class="n">lock</span><span class="p">:</span>  
+    <span class="c1"># Critical section of code</span>
+    <span class="o">...</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>在代码执行之前lock总是先获得，只要block代码完成lock就会被释放。要想彻底了解Python的With-As语句，请继续往下看。</p>
+
+<h2 id="python术语">Python术语</h2>
+
+<p><strong>Context Management Protocol(上下文管理协议):包含方法__enter()__和__exit()__，支持该协议的对象要实现这两个方法。上下文管理器（Context Manager）：支持上下文管理协议的对象，这种对象实现了__enter()__ 和__exit()__ 方法。</strong>上下文管理器定义执行 with 语句时要建立的运行时上下文，负责执行 with 语句块上下文中的进入与退出操作。通常使用 with 语句调用上下文管理器，也可以通过直接调用其方法来使用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python">    <span class="n">context_manager</span> <span class="o">=</span> <span class="n">context_expression</span>  
+    <span class="nb">exit</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">context_manager</span><span class="p">)</span><span class="o">.</span><span class="fm">__exit__</span>  
+    <span class="n">value</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">context_manager</span><span class="p">)</span><span class="o">.</span><span class="fm">__enter__</span><span class="p">(</span><span class="n">context_manager</span><span class="p">)</span>
+    <span class="c1"># True 表示正常执行，即便有异常也忽略；False 表示重新抛出异常，需要对异常进行处理.</span>
+    <span class="n">exc</span> <span class="o">=</span> <span class="bp">True</span>  
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">value</span>  <span class="c1"># 如果使用了 as 子句</span>
+        <span class="k">with</span><span class="o">-</span><span class="n">body</span>     <span class="c1"># 执行 with-body</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="c1"># 执行过程中有异常发生</span>
+        <span class="n">exc</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="c1"># 如果 __exit__ 返回 True，则异常被忽略；如果返回 False，则重新抛出异常</span>
+        <span class="c1"># 由外层代码对异常进行处理</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">exit</span><span class="p">(</span><span class="n">context_manager</span><span class="p">,</span> <span class="o">*</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()):</span>
+            <span class="k">raise</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="c1"># 正常退出，或者通过 statement-body 中的 break/continue/return 语句退出</span>
+        <span class="c1"># 或者忽略异常退出</span>
+        <span class="k">if</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="nb">exit</span><span class="p">(</span><span class="n">context_manager</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> 
+        <span class="c1"># 缺省返回 None，None 在布尔上下文中看做是 False</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="上下文管理协议">上下文管理协议</h3>
+
+<p>with表达式执行生成一个叫做上下文管理器的对象，上下文管理器必须包含enter()和exit()方法，并且要实现该两个方法。 上下文管理器的enter()方法被调用，返回值将赋值给var，如果没有as var，则返回值被丢弃。 执行With-Body语句体。 不管是否执行过程中是否发生了异常，执行上下文管理器的 exit() 方法，exit() 方法负责执行“clean-up”工作，如释放资源等。如果执行过程中没有出现异常，或者语句体中执行了语句( break/continue/return)，则以 None 作为参数调用 exit(None, None, None) ；如果执行过程中出现异常，则使用 sys.excinfo 得到的异常信息为参数调用 exit(exctype, excvalue, exctraceback),通常返回值是一个tuple, (type, value/message, traceback)。 出现异常时，如果 exit(type, value, traceback) 返回 False，则会重新抛出异常，让with 之外的语句逻辑来处理异常，这也是通用做法；如果返回 True，则忽略异常，不再对异常进行处理。 运行时上下文（runtime context）：通过上下文管理器创建，并由上下文管理器的 enter() 和exit() 方法实现，enter() 方法在语句体执行之前进入运行时上下文，exit() 在语句体执行完后从运行时上下文退出。返回一个布尔值表示是否对发生的异常进行处理。如果退出时没有发生异常，则3个参数都为(None,None,None)。如果发生异常，返回True :不处理异常，否则会在退出该方法后重新抛出异常以由 with 语句之外的代码进行处理。如果该方法内部产生异常,不能重新抛出通过参数传递进来的异常，只需要return False 就可以。之后，上下文管理代码会检测是否 exit() 失败来捕获和处理异常。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#-*- coding: utf-8 -*-</span>
+
+<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+        <span class="k">print</span> <span class="n">msg</span>
+
+<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Commits current transaction&#34;</span>
+    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Rolls back current transaction&#34;</span>
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Go into __enter__()&#34;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">Cursor</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">cursor</span>
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Go into __exit__()&#34;</span>
+        <span class="c1">#raise Exception(&#34;__exit__......Exception&#34;)</span>
+        <span class="k">if</span> <span class="n">exc_tb</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c1">#如果没有异常，则提交事务</span>
+            <span class="k">print</span> <span class="s2">&#34;Exited Without Exception&#34;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1">#如果有异常，则回滚</span>
+            <span class="k">print</span> <span class="s2">&#34;Exited with exception raised&#34;</span>
+            <span class="k">print</span> <span class="s2">&#34;type:[&#34;</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="s2">&#34;],value:[&#34;</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="s2">&#34;],exc_tb:[&#34;</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">,</span><span class="s2">&#34;]&#34;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&#34;__main__&#34;</span><span class="p">:</span>  
+    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">db_connection</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;insert into......&#34;</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;delete from......&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>代码运行效果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Go</span> <span class="n">into</span> <span class="fm">__enter__</span><span class="p">()</span>  
+<span class="n">insert</span> <span class="n">into</span><span class="o">......</span>  
+<span class="n">delete</span> <span class="n">from</span><span class="o">......</span>  
+<span class="n">Go</span> <span class="n">into</span> <span class="fm">__exit__</span><span class="p">()</span>  
+<span class="n">Exited</span> <span class="n">Without</span> <span class="ne">Exception</span>  
+<span class="n">Commits</span> <span class="n">current</span> <span class="n">transaction</span>  </code></pre></td></tr></table>
+</div>
+</div>
+<p>上述代码正好验证了我们之前的分析，当运行with dbconnection运行时，进入我们自定义的__enter()__方法，当执行完with包裹的代码块时，就会进入__exit()__方法，如果没有异常(通过exctb是否为None来判断，当然也可以用其他两个参数判断。)则执行相应的代码逻辑。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/env python</span>
+<span class="c1">#-*- coding: utf-8 -*-</span>
+
+<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+        <span class="k">print</span> <span class="n">msg</span>
+
+<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Commits current transaction&#34;</span>
+    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Rolls back current transaction&#34;</span>
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Go into __enter__()&#34;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">Cursor</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">cursor</span>
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Go into __exit__()&#34;</span>
+        <span class="c1">#raise Exception(&#34;__exit__......Exception&#34;)</span>
+        <span class="k">if</span> <span class="n">exc_tb</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c1">#如果没有异常，则提交事务</span>
+            <span class="k">print</span> <span class="s2">&#34;Exited Without Exception&#34;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1">#如果有异常，则回滚</span>
+            <span class="k">print</span> <span class="s2">&#34;Exited With Exception raised&#34;</span>
+            <span class="k">print</span> <span class="s2">&#34;type:[&#34;</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="s2">&#34;],value:[&#34;</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="s2">&#34;],exc_tb:[&#34;</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">,</span><span class="s2">&#34;]&#34;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&#34;__main__&#34;</span><span class="p">:</span>  
+    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">db_connection</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;insert into......&#34;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&#34;raise exception&#34;</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;delete from......&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>该代码示例中，我在with包裹的代码块中造成一个异常。我们来看一下效果：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Go</span> <span class="n">into</span> <span class="fm">__enter__</span><span class="p">()</span>  
+<span class="n">insert</span> <span class="n">into</span><span class="o">......</span>  
+<span class="n">Go</span> <span class="n">into</span> <span class="fm">__exit__</span><span class="p">()</span>  
+<span class="n">Exited</span> <span class="n">With</span> <span class="ne">Exception</span> <span class="n">raised</span>  
+<span class="nb">type</span><span class="p">:[</span> <span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;exceptions.Exception&#39;</span><span class="o">&gt;</span> <span class="p">],</span><span class="n">value</span><span class="p">:[</span> <span class="k">raise</span> <span class="n">exception</span> <span class="p">],</span><span class="n">exc_tb</span><span class="p">:[</span> <span class="o">&lt;</span><span class="n">traceback</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0252A878</span><span class="o">&gt;</span> <span class="p">]</span>  
+<span class="n">Rolls</span> <span class="n">back</span> <span class="n">current</span> <span class="n">transaction</span>  
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>  
+  <span class="n">File</span> <span class="s2">&#34;D:\Test\DatabaseConnection.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">34</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&#34;raise exception&#34;</span><span class="p">)</span>
+<span class="ne">Exception</span><span class="p">:</span> <span class="k">raise</span> <span class="n">exception</span>  </code></pre></td></tr></table>
+</div>
+</div>
+<p>当with包裹的代码块一旦出现异常，则进入exit()方法内，并根据该方法的参数全不为None。如果你在exit方法内你不手动返回一个值的话，则默认返回False。如果你返回True,则不会捕捉该异常，即使你在with代码块最外面包裹一个try……except…finally也不会捕捉到该异常，如果返回False则with之外的try–except也能捕捉到。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/env python</span>
+<span class="c1">#-*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+        <span class="k">print</span> <span class="n">msg</span>
+
+<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Commits current transaction&#34;</span>
+    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Rolls back current transaction&#34;</span>
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Go into __enter__()&#34;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">Cursor</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">cursor</span>
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Go into __exit__()&#34;</span>
+        <span class="c1">#raise Exception(&#34;__exit__......Exception&#34;)</span>
+        <span class="k">if</span> <span class="n">exc_tb</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="c1">#如果没有异常，则提交事务</span>
+            <span class="k">print</span> <span class="s2">&#34;Exited Without Exception&#34;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1">#如果有异常，则回滚</span>
+            <span class="k">print</span> <span class="s2">&#34;Exited With Exception raised&#34;</span>
+            <span class="k">print</span> <span class="s2">&#34;type:[&#34;</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="s2">&#34;],value:[&#34;</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="s2">&#34;],exc_tb:[&#34;</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">,</span><span class="s2">&#34;]&#34;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">True</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&#34;__main__&#34;</span><span class="p">:</span>  
+    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">db_connection</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;insert into......&#34;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&#34;raise exception&#34;</span><span class="p">)</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;delete from......&#34;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span><span class="s2">&#34;包裹with语句的try &#34;</span><span class="p">,</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>运行效果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Go</span> <span class="n">into</span> <span class="fm">__enter__</span><span class="p">()</span>  
+<span class="n">insert</span> <span class="n">into</span><span class="o">......</span>  
+<span class="n">Go</span> <span class="n">into</span> <span class="fm">__exit__</span><span class="p">()</span>  
+<span class="n">Exited</span> <span class="n">With</span> <span class="ne">Exception</span> <span class="n">raised</span>  
+<span class="nb">type</span><span class="p">:[</span> <span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;exceptions.Exception&#39;</span><span class="o">&gt;</span> <span class="p">],</span><span class="n">value</span><span class="p">:[</span> <span class="k">raise</span> <span class="n">exception</span> <span class="p">],</span><span class="n">exc_tb</span><span class="p">:[</span> <span class="o">&lt;</span><span class="n">traceback</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0252A878</span><span class="o">&gt;</span> <span class="p">]</span>  
+<span class="n">Rolls</span> <span class="n">back</span> <span class="n">current</span> <span class="n">transaction</span>  </code></pre></td></tr></table>
+</div>
+</div>
+<p>基本上Python的常用的用法我就了解这么多，至于代码希望你动手试一下你也能了解Python with语句的原理.</p>
+
+<h3 id="the-contextlib-module">The contextlib module</h3>
+
+<p>contextlib模块支持一些函数和装饰器，比如：装饰器 contextmanager、函数 nested 和上下文管理器closing。使用这些对象，可以对已有的生成器(yield)函数或者对象进行包装，加入对上下文管理协议的支持，这样可以避免专门编写上下文管理器来支持 with 语句。</p>
+
+<h4 id="contextmanager">contextmanager</h4>
+
+<p>contextmanager 用于对生成器(yield)函数进行装饰，生成器(yield)函数被装饰以后，返回的是一个ContextManager(上下文管理器)，其 __enter()__ 和 __exit()__ 方法由 contextmanager 负责提供，而不是之前通过一个上下文管理器重写这两个方法了。被装饰的函数只能产生一个值，否则会导致异常 RuntimeError；并且会把yield的值赋值给as后面的变量。看一下例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/env python</span>
+<span class="c1">#-*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>  
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+
+<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+        <span class="k">print</span> <span class="n">msg</span>
+
+<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Create a instance of Cursor&#34;</span>
+        <span class="k">return</span> <span class="n">Cursor</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Commits current transaction&#34;</span>
+    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Rolls back current transaction&#34;</span>
+
+
+<span class="nd">@contextmanager</span>
+<span class="k">def</span> <span class="nf">db_transaction</span><span class="p">(</span><span class="n">connection</span><span class="p">):</span>  
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s2">&#34;yeild 执行之前......&#34;</span>
+        <span class="k">yield</span> <span class="n">cursor</span>
+        <span class="k">print</span> <span class="s2">&#34;yeild 执行之后......&#34;</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s2">&#34;db_transaction raise exception&#34;</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="s2">&#34;Existed without exception&#34;</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&#34;__main__&#34;</span><span class="p">:</span>  
+    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">db_transaction</span><span class="p">(</span><span class="n">db_connection</span><span class="p">)</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;insert into......&#34;</span><span class="p">)</span>
+            <span class="c1">#raise Exception(&#34;raise exception&#34;)</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;delete from......&#34;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>运行结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Create</span> <span class="n">a</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">Cursor</span>  
+<span class="n">yeild</span> <span class="err">执行之前</span><span class="o">......</span>  
+<span class="n">insert</span> <span class="n">into</span><span class="o">......</span>  
+<span class="n">delete</span> <span class="n">from</span><span class="o">......</span>  
+<span class="n">yeild</span> <span class="err">执行之后</span><span class="o">......</span>  
+<span class="n">Existed</span> <span class="n">without</span> <span class="n">exception</span>  
+<span class="n">Commits</span> <span class="n">current</span> <span class="n">transaction</span>  </code></pre></td></tr></table>
+</div>
+</div>
+<p>通过上述运行结果，可以看出，生成器函数中 yield 之前的语句在 enter() 方法中执行，yield 之后的语句在__exit()__ 中执行，而 yield 产生的值赋给了 as 后面的 变量。这个contextmanager修饰器 只是省略了 __enter()__ / __exit()__ 的编写，但并不负责实现“获取资源”和“清理资源”工作；“获取资源”操作需要定义在 yield 语句之前，“清理资源”操作需要定义 yield 语句之后，这样 with 语句在执行__enter()__ / __exit()__ 方法时会执行这些语句以获取/释放资源，即生成器函数中需要实现必要的逻辑控制，包括资源访问出现错误时抛出适当的异常。 nested(mgr1, mgr2, ...)() contextlib模块也有个nested(mgr1, mgr2, ...)()函数，这个函数可以作用在多个上下文管理器。例如下面的例子with 语句不仅开启一个transaction也获得了一个线程锁，让当前操作不被其他线程干扰。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/env python</span>
+<span class="c1">#-*- coding: utf-8 -*-</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>  
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span><span class="p">,</span><span class="n">nested</span><span class="p">,</span><span class="n">closing</span>  
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+        <span class="k">print</span> <span class="n">msg</span>
+
+<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
+    <span class="k">def</span> <span class="nf">cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Create a instance of Cursor&#34;</span>
+        <span class="k">return</span> <span class="n">Cursor</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Commits current transaction&#34;</span>
+    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span> <span class="s2">&#34;Rolls back current transaction&#34;</span>
+
+
+<span class="nd">@contextmanager</span>
+<span class="k">def</span> <span class="nf">db_transaction</span><span class="p">(</span><span class="n">connection</span><span class="p">):</span>  
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s2">&#34;yeild 执行之前......&#34;</span>
+        <span class="k">yield</span> <span class="n">cursor</span>
+        <span class="k">print</span> <span class="s2">&#34;yeild 执行之后......&#34;</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s2">&#34;db_transaction raise exception&#34;</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="s2">&#34;Existed without exception&#34;</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&#34;__main__&#34;</span><span class="p">:</span>  
+    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">()</span>
+    <span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">nested</span><span class="p">(</span><span class="n">db_transaction</span><span class="p">(</span><span class="n">db_connection</span><span class="p">),</span><span class="n">lock</span><span class="p">)</span> <span class="k">as</span> <span class="p">(</span><span class="n">cursor</span><span class="p">,</span><span class="n">locked</span><span class="p">):</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;insert into......&#34;</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;delete from......&#34;</span><span class="p">)</span>
+<span class="err">运行结果如下：</span>
+
+<span class="n">Create</span> <span class="n">a</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">Cursor</span>  
+<span class="n">yeild</span> <span class="err">执行之前</span><span class="o">......</span>  
+<span class="n">insert</span> <span class="n">into</span><span class="o">......</span>  
+<span class="n">delete</span> <span class="n">from</span><span class="o">......</span>  
+<span class="n">yeild</span> <span class="err">执行之后</span><span class="o">......</span>  
+<span class="n">Existed</span> <span class="n">without</span> <span class="n">exception</span>  
+<span class="n">Commits</span> <span class="n">current</span> <span class="n">transaction</span>  </code></pre></td></tr></table>
+</div>
+</div>
+<p>closing(object)()方法返回一个对象可以绑定到as后面的变量，保证了打开的对象在 with-body(with包裹的代码) 执行完后会关闭掉。closing 上下文管理器包装起来的对象必须提供 close() 方法的定义，否则执行时会报错误。closing 适用于提供了 close() 实现的对象，比如：网络连接、数据库连接有非常的用武之地，也可以在自定义类时通过接口 close() 来执行所需要的资源“清理”工作。当然上述的这些操作你完全可以按照自己的逻辑去执行。请看如下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">urllib</span><span class="o">,</span> <span class="nn">sys</span>  
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">closing</span>
+
+<span class="k">with</span> <span class="n">closing</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s1">&#39;http://www.yahoo.com&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>基本上python的With语句的理解到此结束。希望本文对你有用，如有用请打赏一下。</p>
+
+<h2 id="参考文献">参考文献</h2>
+
+<blockquote>
+<ul>
+<li><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-pythonwith/">浅谈 Python 的 with 语句</a> 这篇文章写得不错，里面的术语解释的很到位，本文中用到的术语多来源于这篇文章。</li>
+<li><a href="https://docs.python.org/release/2.6/whatsnew/2.6.html#module-contextlib">Python 2.6 官方介绍</a>言简意赅突出主题，文中的例子来源于这篇文章。自己把它实现了啊。</li>
+<li><a href="http://zhoutall.com/archives/325">理解Python中的with…as…语法</a>可以参考一下，这篇文章作者介绍的还可以，但是没有给出更全面的介绍没有第一个文章中术语介绍的详细。</li>
+<li><a href="http://blog.csdn.net/suwei19870312/article/details/23258495">理解Python的with语句</a>只是一般介绍没有深入。</li>
+</ul>
+</blockquote>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">吕海峰(BrianLv)</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">2018-12-02</span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0-原创文章，如需转载请注明文章作者和出处。谢谢！</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/image/wechatpay.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div>
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://www.brianlv.com/tags/python.html">Python</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/201812/centos6-%E5%8D%87%E7%BA%A7python2.7.x%E5%92%8Cpython3.x.html">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">CentOS6 升级Python2.7.X和Python3.X</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    <div id="lv-container" class="disqus-comment" data-id="city" data-uid="MTAyMC8zNDc2My8xMTMwMA==">
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+    <noscript>
+      Please enable JavaScript to view the
+      <a href="https://www.livere.com">comments powered by LiveRe.</a>
+    </noscript>
+   </div>
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:brian.lv@outlook.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://www.brianlv.com/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2018 -
+    2019
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        吕海峰
+        
+      </span></span>
+
+  
+  
+    <span id="busuanzi_container">
+      访客数/访问量：<span id="busuanzi_value_site_uv"></span>/<span id="busuanzi_value_site_pv"></span>
+    </span>
+  
+
+  
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+<script id="tencent_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+	hm.src = "//tajs.qq.com/stats?sId=66124387";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.js" integrity="sha256-AC9ChpELidrhGHX23ZU53vmRdz3FhKaN9E28+BbcWBw=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js" integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin="anonymous"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
