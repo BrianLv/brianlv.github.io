@@ -16,14 +16,14 @@
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/categories/c/c&#43;&#43;.html</loc>
+    <loc>https://www.brianlv.com/tags/c/c&#43;&#43;.html</loc>
     <lastmod>2018-12-15T17:14:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/tags/c/c&#43;&#43;.html</loc>
+    <loc>https://www.brianlv.com/categories/c/c&#43;&#43;.html</loc>
     <lastmod>2018-12-15T17:14:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -58,14 +58,14 @@
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/categories/machine-learning.html</loc>
+    <loc>https://www.brianlv.com/tags/machine-learning.html</loc>
     <lastmod>2018-12-10T23:16:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/tags/machine-learning.html</loc>
+    <loc>https://www.brianlv.com/categories/machine-learning.html</loc>
     <lastmod>2018-12-10T23:16:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
