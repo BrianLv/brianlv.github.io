@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 吕海峰的博客</title>
-    <link>https://www.brianlv.com/categories.html</link>
+    <link>https://www.brianlv.com/categories/</link>
     <description>Recent content in Categories on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
@@ -13,46 +13,46 @@
     
     <item>
       <title>C/C&#43;&#43;</title>
-      <link>https://www.brianlv.com/categories/c/c&#43;&#43;.html</link>
+      <link>https://www.brianlv.com/categories/c/c&#43;&#43;/</link>
       <pubDate>Sat, 15 Dec 2018 17:14:08 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/categories/c/c&#43;&#43;.html</guid>
+      <guid>https://www.brianlv.com/categories/c/c&#43;&#43;/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Machine Learning</title>
-      <link>https://www.brianlv.com/categories/machine-learning.html</link>
+      <link>https://www.brianlv.com/categories/machine-learning/</link>
       <pubDate>Mon, 10 Dec 2018 23:16:18 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/categories/machine-learning.html</guid>
+      <guid>https://www.brianlv.com/categories/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>https://www.brianlv.com/categories/python.html</link>
+      <link>https://www.brianlv.com/categories/python/</link>
       <pubDate>Mon, 10 Dec 2018 21:31:00 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/categories/python.html</guid>
+      <guid>https://www.brianlv.com/categories/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>https://www.brianlv.com/categories/linux.html</link>
+      <link>https://www.brianlv.com/categories/linux/</link>
       <pubDate>Mon, 10 Dec 2018 21:24:21 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/categories/linux.html</guid>
+      <guid>https://www.brianlv.com/categories/linux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>OpenCV</title>
-      <link>https://www.brianlv.com/categories/opencv.html</link>
+      <link>https://www.brianlv.com/categories/opencv/</link>
       <pubDate>Mon, 10 Dec 2018 21:23:57 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/categories/opencv.html</guid>
+      <guid>https://www.brianlv.com/categories/opencv/</guid>
       <description></description>
     </item>
     

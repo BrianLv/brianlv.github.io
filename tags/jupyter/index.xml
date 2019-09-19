@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jupyter on 吕海峰的博客</title>
-    <link>https://www.brianlv.com/tags/jupyter.html</link>
+    <link>https://www.brianlv.com/tags/jupyter/</link>
     <description>Recent content in Jupyter on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>Linux Install Jupyter</title>
-      <link>https://www.brianlv.com/20181210/linux-install-jupyter.html</link>
+      <link>https://www.brianlv.com/20181210/linux-install-jupyter/</link>
       <pubDate>Mon, 10 Dec 2018 21:24:38 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/20181210/linux-install-jupyter.html</guid>
+      <guid>https://www.brianlv.com/20181210/linux-install-jupyter/</guid>
       <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
 
 &lt;p&gt;由于我的开发环境是CentOS，现在主要是以Python为主，偶尔夹杂C/C++和GoLang语言。在本地开发、测试、提交git和在生产环境再去测试、开发，并且会在生产环境会有临时性的开发任务和调整，都是比较浪费时间的。&lt;strong&gt;不建议直接修改生产环境的代码，临时性的修改后一定要测试并稳定运行一段时间。&lt;/strong&gt; 写这篇博客主要是为了利用线上资源，实现跨平台开发和测试代码示例用的。所以就在服务器安装了&lt;strong&gt;IPython，Jupyter和Notebook&lt;/strong&gt;。&lt;/p&gt;

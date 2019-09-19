@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>OpenCV on 吕海峰的博客</title>
-    <link>https://www.brianlv.com/categories/opencv.html</link>
+    <link>https://www.brianlv.com/categories/opencv/</link>
     <description>Recent content in OpenCV on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>Ubuntu 16.04 Install OpenCV</title>
-      <link>https://www.brianlv.com/20181210/ubuntu-16.04-install-opencv.html</link>
+      <link>https://www.brianlv.com/20181210/ubuntu-16.04-install-opencv/</link>
       <pubDate>Mon, 10 Dec 2018 21:23:57 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/20181210/ubuntu-16.04-install-opencv.html</guid>
+      <guid>https://www.brianlv.com/20181210/ubuntu-16.04-install-opencv/</guid>
       <description>&lt;h1 id=&#34;概述&#34;&gt;概述&lt;/h1&gt;
 
 &lt;p&gt;安装opencv有很多种方式，我列出了三种方式。并针对第二种方式进行了详细的安装解释，强烈推荐使用第三种方式。&lt;/p&gt;

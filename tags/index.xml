@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on 吕海峰的博客</title>
-    <link>https://www.brianlv.com/tags.html</link>
+    <link>https://www.brianlv.com/tags/</link>
     <description>Recent content in Tags on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
@@ -13,64 +13,64 @@
     
     <item>
       <title>C/C&#43;&#43;</title>
-      <link>https://www.brianlv.com/tags/c/c&#43;&#43;.html</link>
+      <link>https://www.brianlv.com/tags/c/c&#43;&#43;/</link>
       <pubDate>Sat, 15 Dec 2018 17:14:08 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/tags/c/c&#43;&#43;.html</guid>
+      <guid>https://www.brianlv.com/tags/c/c&#43;&#43;/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Machine Learning</title>
-      <link>https://www.brianlv.com/tags/machine-learning.html</link>
+      <link>https://www.brianlv.com/tags/machine-learning/</link>
       <pubDate>Mon, 10 Dec 2018 23:16:18 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/tags/machine-learning.html</guid>
+      <guid>https://www.brianlv.com/tags/machine-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>https://www.brianlv.com/tags/python.html</link>
+      <link>https://www.brianlv.com/tags/python/</link>
       <pubDate>Mon, 10 Dec 2018 21:31:00 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/tags/python.html</guid>
+      <guid>https://www.brianlv.com/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Jupyter</title>
-      <link>https://www.brianlv.com/tags/jupyter.html</link>
+      <link>https://www.brianlv.com/tags/jupyter/</link>
       <pubDate>Mon, 10 Dec 2018 21:24:38 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/tags/jupyter.html</guid>
+      <guid>https://www.brianlv.com/tags/jupyter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linux</title>
-      <link>https://www.brianlv.com/tags/linux.html</link>
+      <link>https://www.brianlv.com/tags/linux/</link>
       <pubDate>Mon, 10 Dec 2018 21:24:21 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/tags/linux.html</guid>
+      <guid>https://www.brianlv.com/tags/linux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>OpenCV</title>
-      <link>https://www.brianlv.com/tags/opencv.html</link>
+      <link>https://www.brianlv.com/tags/opencv/</link>
       <pubDate>Mon, 10 Dec 2018 21:23:57 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/tags/opencv.html</guid>
+      <guid>https://www.brianlv.com/tags/opencv/</guid>
       <description></description>
     </item>
     
     <item>
       <title>VNC</title>
-      <link>https://www.brianlv.com/tags/vnc.html</link>
+      <link>https://www.brianlv.com/tags/vnc/</link>
       <pubDate>Mon, 10 Dec 2018 21:23:21 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/tags/vnc.html</guid>
+      <guid>https://www.brianlv.com/tags/vnc/</guid>
       <description></description>
     </item>
     
