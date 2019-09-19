@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://www.brianlv.com/books.html</loc>
-    <lastmod>2017-08-28T21:41:52+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
     <loc>https://www.brianlv.com/about.html</loc>
     <lastmod>2017-08-28T21:41:52+08:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -16,19 +9,21 @@
   </url>
   
   <url>
+    <loc>https://www.brianlv.com/20181215/c-development-in-visual-studio-code.html</loc>
+    <lastmod>2018-12-15T17:14:08+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://www.brianlv.com/categories/c/c&#43;&#43;.html</loc>
     <lastmod>2018-12-15T17:14:08+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://www.brianlv.com/tags/c/c&#43;&#43;.html</loc>
-    <lastmod>2018-12-15T17:14:08+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.brianlv.com/201812/c/c-development-in-visual-studio-code.html</loc>
     <lastmod>2018-12-15T17:14:08+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -37,55 +32,61 @@
   <url>
     <loc>https://www.brianlv.com/categories.html</loc>
     <lastmod>2018-12-15T17:14:08+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://www.brianlv.com/post.html</loc>
     <lastmod>2018-12-15T17:14:08+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://www.brianlv.com/tags.html</loc>
     <lastmod>2018-12-15T17:14:08+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://www.brianlv.com/</loc>
     <lastmod>2018-12-15T17:14:08+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://www.brianlv.com/categories/machine-learning.html</loc>
-    <lastmod>2018-12-10T23:16:18+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.brianlv.com/tags/machine-learning.html</loc>
-    <lastmod>2018-12-10T23:16:18+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.brianlv.com/201812/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F.html</loc>
     <lastmod>2018-12-10T23:16:18+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/201812/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B.html</loc>
+    <loc>https://www.brianlv.com/tags/machine-learning.html</loc>
+    <lastmod>2018-12-10T23:16:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.brianlv.com/20181210/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F.html</loc>
+    <lastmod>2018-12-10T23:16:18+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.brianlv.com/20181210/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B.html</loc>
     <lastmod>2018-12-10T23:05:11+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/201812/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3.html</loc>
+    <loc>https://www.brianlv.com/20181210/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3.html</loc>
     <lastmod>2018-12-10T22:17:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -94,45 +95,47 @@
   <url>
     <loc>https://www.brianlv.com/categories/python.html</loc>
     <lastmod>2018-12-10T21:31:00+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://www.brianlv.com/tags/python.html</loc>
-    <lastmod>2018-12-10T21:31:00+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.brianlv.com/201812/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%89.html</loc>
     <lastmod>2018-12-10T21:31:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/201812/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%BA%8C.html</loc>
+    <loc>https://www.brianlv.com/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%89.html</loc>
+    <lastmod>2018-12-10T21:31:00+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.brianlv.com/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%BA%8C.html</loc>
     <lastmod>2018-12-10T21:30:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/201812/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%80.html</loc>
+    <loc>https://www.brianlv.com/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%80.html</loc>
     <lastmod>2018-12-10T21:30:53+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/201812/python-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90.html</loc>
+    <loc>https://www.brianlv.com/20181210/python-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90.html</loc>
     <lastmod>2018-12-10T21:25:23+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/201812/python-gil.html</loc>
+    <loc>https://www.brianlv.com/20181210/python-gil.html</loc>
     <lastmod>2018-12-10T21:24:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -141,12 +144,20 @@
   <url>
     <loc>https://www.brianlv.com/tags/jupyter.html</loc>
     <lastmod>2018-12-10T21:24:38+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/201812/linux-install-jupyter.html</loc>
+    <loc>https://www.brianlv.com/20181210/linux-install-jupyter.html</loc>
     <lastmod>2018-12-10T21:24:38+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.brianlv.com/tags/linux.html</loc>
+    <lastmod>2018-12-10T21:24:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -154,17 +165,12 @@
   <url>
     <loc>https://www.brianlv.com/categories/linux.html</loc>
     <lastmod>2018-12-10T21:24:21+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/tags/linux.html</loc>
-    <lastmod>2018-12-10T21:24:21+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.brianlv.com/201812/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html</loc>
+    <loc>https://www.brianlv.com/20181210/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html</loc>
     <lastmod>2018-12-10T21:24:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -173,24 +179,26 @@
   <url>
     <loc>https://www.brianlv.com/categories/opencv.html</loc>
     <lastmod>2018-12-10T21:23:57+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://www.brianlv.com/tags/opencv.html</loc>
-    <lastmod>2018-12-10T21:23:57+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.brianlv.com/201812/ubuntu-16.04-install-opencv.html</loc>
     <lastmod>2018-12-10T21:23:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/201812/ubuntu-install-vnc.html</loc>
+    <loc>https://www.brianlv.com/20181210/ubuntu-16.04-install-opencv.html</loc>
+    <lastmod>2018-12-10T21:23:57+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.brianlv.com/20181210/ubuntu-install-vnc.html</loc>
     <lastmod>2018-12-10T21:23:21+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -199,31 +207,34 @@
   <url>
     <loc>https://www.brianlv.com/tags/vnc.html</loc>
     <lastmod>2018-12-10T21:23:21+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/201812/centos6-%E5%8D%87%E7%BA%A7python2.7.x%E5%92%8Cpython3.x.html</loc>
+    <loc>https://www.brianlv.com/20181210/centos6-%E5%8D%87%E7%BA%A7python2.7.x%E5%92%8Cpython3.x.html</loc>
     <lastmod>2018-12-10T21:16:50+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/201812/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html</loc>
+    <loc>https://www.brianlv.com/20181202/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html</loc>
     <lastmod>2018-12-02T21:57:43+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/series.html</loc>
-    <priority>0</priority>
+    <loc>https://www.brianlv.com/zh-cn.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://www.brianlv.com/%E5%90%95%E6%B5%B7%E5%B3%B0.html</loc>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
 </urlset>

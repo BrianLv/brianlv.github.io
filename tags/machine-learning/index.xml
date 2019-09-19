@@ -5,7 +5,7 @@
     <link>https://www.brianlv.com/tags/machine-learning.html</link>
     <description>Recent content in Machine Learning on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh</language>
+    <language>zh-cn</language>
     <lastBuildDate>Mon, 10 Dec 2018 23:16:18 +0800</lastBuildDate>
     
 	<atom:link href="https://www.brianlv.com/tags/machine-learning/index.xml" rel="self" type="application/rss+xml" />
@@ -13,10 +13,10 @@
     
     <item>
       <title>机器学习性能度量</title>
-      <link>https://www.brianlv.com/201812/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F.html</link>
+      <link>https://www.brianlv.com/20181210/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F.html</link>
       <pubDate>Mon, 10 Dec 2018 23:16:18 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/201812/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F.html</guid>
+      <guid>https://www.brianlv.com/20181210/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F.html</guid>
       <description>&lt;p&gt;我们在进行机器学习时需要衡量机器学习的优劣和本身模型的准确程度，比如简单的衡量数据的准确率和错误率，但是我们更关心的是模型的泛化能力的指标，即基于模型的所选的item相关性以及模型分类指标的好坏。&lt;/p&gt;
 
 &lt;h2 id=&#34;机器学习度量&#34;&gt;机器学习度量&lt;/h2&gt;
@@ -78,10 +78,10 @@ $$&lt;/p&gt;</description>
     
     <item>
       <title>结构化的机器学习流程</title>
-      <link>https://www.brianlv.com/201812/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B.html</link>
+      <link>https://www.brianlv.com/20181210/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B.html</link>
       <pubDate>Mon, 10 Dec 2018 23:05:11 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/201812/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B.html</guid>
+      <guid>https://www.brianlv.com/20181210/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B.html</guid>
       <description>&lt;p&gt;机器学习可以通过结构化的流程来梳理:&lt;strong&gt;1.定义问题和需求分析-&amp;gt;2.数据探索-&amp;gt;3.数据准备-&amp;gt;4.评估算法-&amp;gt;5.优化模型-&amp;gt;6.部署&lt;/strong&gt;。
 * 导入类库
 * 导入数据集
@@ -143,10 +143,10 @@ $$&lt;/p&gt;</description>
     
     <item>
       <title>熵的理解</title>
-      <link>https://www.brianlv.com/201812/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3.html</link>
+      <link>https://www.brianlv.com/20181210/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3.html</link>
       <pubDate>Mon, 10 Dec 2018 22:17:19 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/201812/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3.html</guid>
+      <guid>https://www.brianlv.com/20181210/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3.html</guid>
       <description>&lt;p&gt;熵在信息论中代表随机变量不确定度的度量。一个离散型随机变量X的熵H(X)定义为：
 $$
 H(X)=- \sum_{x \in X} p(x) \cdot logp(x)
@@ -180,7 +180,7 @@ $$&lt;/p&gt;
 &lt;p&gt;在二进制计算机中，一个比特为0或1(代表二元问题)。在计算机中，我们给哪一匹马夺冠这个事件进行编码，所需要的平均码长为1.75个比特。其定义为:&lt;/p&gt;
 
 &lt;p&gt;$$
-L(C)=\sum_{x \in X}p(x)l(x)
+L&amp;copy;=\sum_{x \in X}p(x)l(x)
 $$&lt;/p&gt;
 
 &lt;p&gt;为了尽可能减少码长，我们要给发生概率p(x)较大的事件，分配较短的码长l(x)。所以那么
@@ -241,7 +241,7 @@ H(p,q)=H(p)+D_{KL}(pq)
 $$&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;即：交叉熵=信息熵+KL散度（相对熵）&lt;/strong&gt;
-由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&amp;quot;距离&amp;quot;。&lt;/p&gt;</description>
+由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&amp;rdquo;距离&amp;rdquo;。&lt;/p&gt;</description>
     </item>
     
   </channel>

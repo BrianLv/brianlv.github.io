@@ -5,7 +5,7 @@
     <link>https://www.brianlv.com/tags/python.html</link>
     <description>Recent content in Python on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh</language>
+    <language>zh-cn</language>
     <lastBuildDate>Mon, 10 Dec 2018 21:31:00 +0800</lastBuildDate>
     
 	<atom:link href="https://www.brianlv.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
@@ -13,10 +13,10 @@
     
     <item>
       <title>Python进阶系列三</title>
-      <link>https://www.brianlv.com/201812/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%89.html</link>
+      <link>https://www.brianlv.com/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%89.html</link>
       <pubDate>Mon, 10 Dec 2018 21:31:00 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/201812/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%89.html</guid>
+      <guid>https://www.brianlv.com/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%89.html</guid>
       <description>&lt;h2 id=&#34;python-进阶&#34;&gt;Python 进阶&lt;/h2&gt;
 
 &lt;p&gt;我们在&lt;strong&gt;Python进阶教程(二)&lt;/strong&gt;，介绍了一些Python进阶用法。今天给大家介绍的是和&lt;strong&gt;c/c++&lt;/strong&gt;混合编程的用法。我们都知道特别是Python2.x版本GIL的影响造成多线程计算方面是鸡肋，并且常常在高性能计算方面依赖很多包。如果我们想切合我们自己的业务处理，比如高性能部分我们用&lt;strong&gt;C/C++&lt;/strong&gt;生成动态链接库，Python调用该动态链接库。我们今天主要介绍Python在和&lt;strong&gt;c/c++&lt;/strong&gt;混合编程。&lt;/p&gt;
@@ -41,10 +41,10 @@
     
     <item>
       <title>Python进阶系列二</title>
-      <link>https://www.brianlv.com/201812/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%BA%8C.html</link>
+      <link>https://www.brianlv.com/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%BA%8C.html</link>
       <pubDate>Mon, 10 Dec 2018 21:30:57 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/201812/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%BA%8C.html</guid>
+      <guid>https://www.brianlv.com/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%BA%8C.html</guid>
       <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
 
 &lt;p&gt;在上一篇博客中，我们介绍了&lt;strong&gt;&lt;a href=&#34;https://www.brianlv.com/post/python进阶一&#34;&gt;Python进阶系列一&lt;/a&gt;&lt;/strong&gt;，还有一些新的技巧没有翻译完，我们下面来继续我们的翻译。&lt;/p&gt;
@@ -130,10 +130,10 @@
     
     <item>
       <title>Python进阶系列一</title>
-      <link>https://www.brianlv.com/201812/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%80.html</link>
+      <link>https://www.brianlv.com/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%80.html</link>
       <pubDate>Mon, 10 Dec 2018 21:30:53 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/201812/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%80.html</guid>
+      <guid>https://www.brianlv.com/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%80.html</guid>
       <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
 
 &lt;p&gt;hi，朋友们大家好，今天将英文原著作者 @yasoob《Intermediate Python》进行翻译和在工作中使用的Python技巧进行了总结。Gitbook里面有翻译的版本，大家可以下载下来看看。我今天主要是将该英文原著翻译成适合自己的理解的语言，并附加一些自己在工作中使用Python的技巧。废话少说，下面我们依次来学习一下@yasoob的原著。&lt;/p&gt;
@@ -243,7 +243,7 @@
 2.函数定义
 3.单元测试
 4.猴子补丁(在运行时修改某些代码)，在英文版本里面主要介绍了通过猴子补丁修改API来进行测试。
-......&lt;/p&gt;
+&amp;hellip;&amp;hellip;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -264,10 +264,10 @@
     
     <item>
       <title>Python 性能分析</title>
-      <link>https://www.brianlv.com/201812/python-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90.html</link>
+      <link>https://www.brianlv.com/20181210/python-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90.html</link>
       <pubDate>Mon, 10 Dec 2018 21:25:23 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/201812/python-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90.html</guid>
+      <guid>https://www.brianlv.com/20181210/python-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90.html</guid>
       <description>&lt;h1 id=&#34;python性能分析与优化&#34;&gt;Python性能分析与优化&lt;/h1&gt;
 
 &lt;p&gt;一个优秀的程序员，在保证业务正常的条件下都会追求自己的程序更快、更省。更快：运行时间短；更省：相对节省计算机资源（比如：CPU、Memory）。一般都是以这两种衡量方式来度量自己的程序及进一步优化自己程序的空间。更专业的性能分析软件一般有两类方法论：&lt;strong&gt;event-based profiling和statistical profiling&lt;/strong&gt; 。&lt;/p&gt;
@@ -287,10 +287,10 @@
     
     <item>
       <title>Python GIL</title>
-      <link>https://www.brianlv.com/201812/python-gil.html</link>
+      <link>https://www.brianlv.com/20181210/python-gil.html</link>
       <pubDate>Mon, 10 Dec 2018 21:24:57 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/201812/python-gil.html</guid>
+      <guid>https://www.brianlv.com/20181210/python-gil.html</guid>
       <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;GIL（Global Interpreter    Lock）&lt;/strong&gt;是什么东东？为什么当一些Pythoners在开发一些多线程操作的时候，都会有些很多疑问？多线程真的很糟糕吗？我该如何实现多线程并发操作？今天博主带你详细的介绍一下GIL。&lt;/p&gt;
@@ -306,17 +306,17 @@
     
     <item>
       <title>Linux Install Jupyter</title>
-      <link>https://www.brianlv.com/201812/linux-install-jupyter.html</link>
+      <link>https://www.brianlv.com/20181210/linux-install-jupyter.html</link>
       <pubDate>Mon, 10 Dec 2018 21:24:38 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/201812/linux-install-jupyter.html</guid>
+      <guid>https://www.brianlv.com/20181210/linux-install-jupyter.html</guid>
       <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
 
 &lt;p&gt;由于我的开发环境是CentOS，现在主要是以Python为主，偶尔夹杂C/C++和GoLang语言。在本地开发、测试、提交git和在生产环境再去测试、开发，并且会在生产环境会有临时性的开发任务和调整，都是比较浪费时间的。&lt;strong&gt;不建议直接修改生产环境的代码，临时性的修改后一定要测试并稳定运行一段时间。&lt;/strong&gt; 写这篇博客主要是为了利用线上资源，实现跨平台开发和测试代码示例用的。所以就在服务器安装了&lt;strong&gt;IPython，Jupyter和Notebook&lt;/strong&gt;。&lt;/p&gt;
 
 &lt;h2 id=&#34;安装和配置&#34;&gt;安装和配置&lt;/h2&gt;
 
-&lt;p&gt;在安装&lt;strong&gt;IPython，Jupyter和Notebook&lt;/strong&gt;时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如(&#39;Development Tools‘)。废话少说，直接写代码。&lt;/p&gt;
+&lt;p&gt;在安装&lt;strong&gt;IPython，Jupyter和Notebook&lt;/strong&gt;时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如(&amp;lsquo;Development Tools‘)。废话少说，直接写代码。&lt;/p&gt;
 
 &lt;h3 id=&#34;基本包安装&#34;&gt;基本包安装&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -358,10 +358,10 @@ cat &amp;gt; ~/.pip/pip.conf &lt;span class=&#34;s&#34;&gt;&amp;lt;&amp;lt; EOF
     
     <item>
       <title>CentOS6 升级Python2.7.X和Python3.X</title>
-      <link>https://www.brianlv.com/201812/centos6-%E5%8D%87%E7%BA%A7python2.7.x%E5%92%8Cpython3.x.html</link>
+      <link>https://www.brianlv.com/20181210/centos6-%E5%8D%87%E7%BA%A7python2.7.x%E5%92%8Cpython3.x.html</link>
       <pubDate>Mon, 10 Dec 2018 21:16:50 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/201812/centos6-%E5%8D%87%E7%BA%A7python2.7.x%E5%92%8Cpython3.x.html</guid>
+      <guid>https://www.brianlv.com/20181210/centos6-%E5%8D%87%E7%BA%A7python2.7.x%E5%92%8Cpython3.x.html</guid>
       <description>&lt;h2 id=&#34;简述&#34;&gt;简述&lt;/h2&gt;
 
 &lt;p&gt;由于产品需要从裸机开始开发所以所有的配置和开发也是从零开始，这个导航是基于centos6.x版本升级默认的Centos的Python，升级到Python2.7或者Python3.3。我们不仅升级了Python，同样基于Python的setuptools, pip, virtualenv and pyvenv这些工具也同样安装和升级以便于项目需要。&lt;/p&gt;
@@ -383,10 +383,10 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
     
     <item>
       <title>深入理解Python的With-as语句</title>
-      <link>https://www.brianlv.com/201812/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html</link>
+      <link>https://www.brianlv.com/20181202/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html</link>
       <pubDate>Sun, 02 Dec 2018 21:57:43 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/201812/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html</guid>
+      <guid>https://www.brianlv.com/20181202/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html</guid>
       <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
 
 &lt;p&gt;学习Python有一段时间了，最近做一个项目会涉及到文件的读取和关闭。比如：我想把一些对象序列化到文件里面，然后当我再次使用的时候，在从文件里面读取反序列化成对象。像这种操作一般都是用&lt;strong&gt;try…except…finally&lt;/strong&gt;。但是经过自己对Python的研究发现会有更出色的方法，比如：with-as语句也有的人称为&lt;strong&gt;context manager。&lt;/strong&gt;&lt;/p&gt;
@@ -406,7 +406,7 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;rw&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;rw&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
     &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;except&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
     &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
@@ -435,7 +435,7 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
-    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;rw&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;test.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;rw&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
     &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
 &lt;span class=&#34;k&#34;&gt;except&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
     &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
