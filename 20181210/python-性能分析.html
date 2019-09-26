@@ -70,7 +70,7 @@
 
 <meta itemprop="datePublished" content="2018-12-10T21:25:23&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-10T21:25:23&#43;08:00" />
-<meta itemprop="wordCount" content="1651">
+<meta itemprop="wordCount" content="1664">
 
 
 
@@ -307,7 +307,7 @@
             <a href="https://www.brianlv.com/categories/python.html"> Python </a>
             
           </div>
-        <span class="more-meta"> 约 1651 字 </span>
+        <span class="more-meta"> 约 1664 字 </span>
           <span class="more-meta"> 预计阅读 4 分钟 </span>
 
         
@@ -515,24 +515,42 @@
 <h3 id="性能分析器line-profile">性能分析器line_Profile</h3>
 
 <p>这个是耕细粒度的性能分析，这个分析一行一行函数分析,不过得需要装饰器注册@profile然后还得需要kernprof脚本将会在执行的时候将它自动地注入到你的脚步的运行时。下面我们来看一下例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">cProfile</span>
+<span class="kn">import</span> <span class="nn">pstats</span>
 
-<p> ```python
-import cProfile
-import pstats</p>
+<span class="nd">@profile</span>
+<span class="k">def</span> <span class="nf">get_result</span><span class="p">():</span>
+    <span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+        <span class="nb">sum</span> <span class="o">+=</span> <span class="n">add_result</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">sum</span>
 
-<p>@profile
-def get_result():
-    sum = 0
-    for i in range(10000):
-        sum += add_result(i,i+1)
-    return sum</p>
-
-<p>def add_result(a,b):
-    return a+b</p>
-
-<p>if <strong>name</strong> == &ldquo;<strong>main</strong>&ldquo;:
-    get_result()
-```</p>
+<span class="k">def</span> <span class="nf">add_result</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
+  
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">get_result</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
     </div>
 
     
