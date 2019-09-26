@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>VNC on 吕海峰的博客</title>
-    <link>https://www.brianlv.com/tags/vnc/</link>
+    <link>https://www.brianlv.com/tags/vnc.html</link>
     <description>Recent content in VNC on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>Ubuntu Install Vnc</title>
-      <link>https://www.brianlv.com/20181210/ubuntu-install-vnc/</link>
+      <link>https://www.brianlv.com/20181210/ubuntu-install-vnc.html</link>
       <pubDate>Mon, 10 Dec 2018 21:23:21 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/20181210/ubuntu-install-vnc/</guid>
+      <guid>https://www.brianlv.com/20181210/ubuntu-install-vnc.html</guid>
       <description>&lt;h1 id=&#34;概述&#34;&gt;概述&lt;/h1&gt;
 
 &lt;p&gt;由于最近开发cuda的并行运算所以需要安装VNC来调试和cuda开发。

@@ -116,21 +116,21 @@
         
           
           
-            <a class="menu-item-link" href="https://www.brianlv.com/post/">全部文章</a>
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">全部文章</a>
           
         
       </li><li class="mobile-menu-item">
         
           
           
-            <a class="menu-item-link" href="https://www.brianlv.com/tags/">标签</a>
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
           
         
       </li><li class="mobile-menu-item">
         
           
           
-            <a class="menu-item-link" href="https://www.brianlv.com/categories/">分类</a>
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
           
         
       </li><li class="mobile-menu-item">
@@ -240,7 +240,7 @@
         
           
           
-            <a class="menu-item-link" href="https://www.brianlv.com/post/">全部文章</a>
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">全部文章</a>
           
 
         
@@ -251,7 +251,7 @@
         
           
           
-            <a class="menu-item-link" href="https://www.brianlv.com/tags/">标签</a>
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
           
 
         
@@ -262,7 +262,7 @@
         
           
           
-            <a class="menu-item-link" href="https://www.brianlv.com/categories/">分类</a>
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
           
 
         
@@ -682,12 +682,9 @@ sudo ln -s /usr/local/bin/python2.7 python</code></pre></td></tr></table>
   
 
   
-
-    
-      <script type="text/javascript" async
-  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML">
-</script>
-<script type="text/x-mathjax-config">
+    <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 MathJax.Hub.Config({
   tex2jax: {
     inlineMath: [['$','$'], ['\\(','\\)']],
@@ -701,11 +698,11 @@ MathJax.Hub.Config({
 });
 
 MathJax.Hub.Queue(function() {
-    // Fix <code> tags after MathJax finishes running. This is a
-    // hack to overcome a shortcoming of Markdown. Discussion at
-    // https://github.com/mojombo/jekyll/issues/199
+    
+    
+    
     var all = MathJax.Hub.getAllJax(), i;
-    for(i = 0; i &lt; all.length; i += 1) {
+    for(i = 0; i < all.length; i += 1) {
         all[i].SourceElement().parentNode.className += ' has-jax';
     }
 });
@@ -720,8 +717,6 @@ code.has-jax {
     color: #515151;
 }
 </style>
-
-    
 </div>
 
     </footer>

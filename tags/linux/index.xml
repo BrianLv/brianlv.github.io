@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on 吕海峰的博客</title>
-    <link>https://www.brianlv.com/tags/linux/</link>
+    <link>https://www.brianlv.com/tags/linux.html</link>
     <description>Recent content in Linux on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>Linux 后台服务</title>
-      <link>https://www.brianlv.com/20181210/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1/</link>
+      <link>https://www.brianlv.com/20181210/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html</link>
       <pubDate>Mon, 10 Dec 2018 21:24:21 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/20181210/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1/</guid>
+      <guid>https://www.brianlv.com/20181210/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html</guid>
       <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
 
 &lt;p&gt;研发人员交付测试和上线产品时，需要对服务和产品以后台进程的方式启动。所以便利的后台进程工具可以很好的帮助你管理你的进程。确切的说：成为系统的守护进程(daemon)。&lt;/p&gt;
@@ -57,10 +57,10 @@ nodejs main.js &lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/code&gt;
     
     <item>
       <title>Ubuntu Install Vnc</title>
-      <link>https://www.brianlv.com/20181210/ubuntu-install-vnc/</link>
+      <link>https://www.brianlv.com/20181210/ubuntu-install-vnc.html</link>
       <pubDate>Mon, 10 Dec 2018 21:23:21 +0800</pubDate>
       
-      <guid>https://www.brianlv.com/20181210/ubuntu-install-vnc/</guid>
+      <guid>https://www.brianlv.com/20181210/ubuntu-install-vnc.html</guid>
       <description>&lt;h1 id=&#34;概述&#34;&gt;概述&lt;/h1&gt;
 
 &lt;p&gt;由于最近开发cuda的并行运算所以需要安装VNC来调试和cuda开发。
