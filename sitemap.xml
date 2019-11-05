@@ -16,7 +16,7 @@
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/tags/flask.html</loc>
+    <loc>https://www.brianlv.com/categories/deep-learning.html</loc>
     <lastmod>2018-12-18T21:24:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -31,13 +31,6 @@
   
   <url>
     <loc>https://www.brianlv.com/tags.html</loc>
-    <lastmod>2018-12-18T21:24:57+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.brianlv.com/categories/tensorflow.html</loc>
     <lastmod>2018-12-18T21:24:57+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -121,14 +114,14 @@
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/categories/python.html</loc>
+    <loc>https://www.brianlv.com/tags/python.html</loc>
     <lastmod>2018-12-10T21:31:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.brianlv.com/tags/python.html</loc>
+    <loc>https://www.brianlv.com/categories/python.html</loc>
     <lastmod>2018-12-10T21:31:00+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
