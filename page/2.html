@@ -64,7 +64,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.brianlv.com/" />
 
-<meta property="og:updated_time" content="2018-12-15T17:14:08+08:00" />
+<meta property="og:updated_time" content="2018-12-18T21:24:57+08:00" />
 <meta itemprop="name" content="吕海峰的博客">
 <meta itemprop="description" content="吕海峰的个人博客">
 
@@ -294,6 +294,56 @@
     
   
   
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      <a class="post-link" href="/20181210/python-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90.html">Python 性能分析</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-10" class="post-time">
+        2018-12-10
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/python.html"> Python </a>
+          
+        </div>
+      <span class="more-meta"> 约 1664 字 </span>
+      <span class="more-meta"> 预计阅读 4 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h1 id="python性能分析与优化">Python性能分析与优化</h1>
+
+<p>一个优秀的程序员，在保证业务正常的条件下都会追求自己的程序更快、更省。更快：运行时间短；更省：相对节省计算机资源（比如：CPU、Memory）。一般都是以这两种衡量方式来度量自己的程序及进一步优化自己程序的空间。更专业的性能分析软件一般有两类方法论：<strong>event-based profiling和statistical profiling</strong> 。</p>
+
+<h2 id="event-based-profiling">Event-based Profiling</h2>
+
+<p>并不是所有编程语言都支持这类性能分析，支持这类分析的语言主要有：</p>
+
+<ul>
+<li>Java:JVMTI（JVM Tools Interface,JVM工具接口）为性能提供了钩子，可以跟踪函数调用和事件执行等等。</li>
+<li>.NET :也提供了事件监听器，主要得益于.net 运行时。</li>
+<li>Python：可以利用sys.setprofile函数来跟踪函数python<em>(call,return,exception)或者c</em>(call,return,exception).</li>
+</ul>
+
+<p>基于事件的性能分析(event-based profiler or tracing profiler)是通过手机程序执行过程中的具体事件进行工作的，这些性能分析会产生大量的数据，基本而言，你监听的事件越多产生的数据量句越多。这导致它们不太实用，在开始对程序进行性能往往不是首选，当其他性能分析不够用或者不精准它们可以作为最后的选择。</p>
+    </div>
+    <div class="read-more">
+      <a href="/20181210/python-%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90.html" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
   
     <article class="post bg-white">
   <header class="post-header">

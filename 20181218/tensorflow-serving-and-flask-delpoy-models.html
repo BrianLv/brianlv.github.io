@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>TensorFlow Serving and Flask Delpoy Models - 吕海峰的博客</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="吕海峰(BrianLv)" /><meta name="description" content="TensorFlow Serving and Flask Deploy Models" />
+<meta name="keywords" content="TensorFlow, Flask" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.2" />
+
+
+<link rel="canonical" href="https://www.brianlv.com/20181218/tensorflow-serving-and-flask-delpoy-models.html" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+
+
+
+
+<link rel="stylesheet" href="/css/">
+
+
+<meta property="og:title" content="TensorFlow Serving and Flask Delpoy Models" />
+<meta property="og:description" content="TensorFlow Serving and Flask Deploy Models" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.brianlv.com/20181218/tensorflow-serving-and-flask-delpoy-models.html" />
+<meta property="article:published_time" content="2018-12-18T21:24:57+08:00" />
+<meta property="article:modified_time" content="2018-12-18T21:24:57+08:00" />
+<meta itemprop="name" content="TensorFlow Serving and Flask Delpoy Models">
+<meta itemprop="description" content="TensorFlow Serving and Flask Deploy Models">
+
+
+<meta itemprop="dateModified" content="2018-12-18T21:24:57&#43;08:00" />
+<meta itemprop="wordCount" content="2730">
+
+
+
+<meta itemprop="keywords" content="TensorFlow,Flask," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="TensorFlow Serving and Flask Delpoy Models"/>
+<meta name="twitter:description" content="TensorFlow Serving and Flask Deploy Models"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">吕海峰的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">全部文章</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/about.html">关于</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      吕海峰的博客
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">全部文章</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/about.html">关于</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">TensorFlow Serving and Flask Delpoy Models</h1>
+      
+      <div class="post-meta">
+        <time datetime="2018-12-18" class="post-time">
+          2018-12-18
+        </time>
+        <div class="post-category">
+            <a href="https://www.brianlv.com/categories/tensorflow.html"> TensorFlow </a>
+            
+          </div>
+        <span class="more-meta"> 约 2730 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+
+        
+        
+          <span id="busuanzi_container_page_pv">
+            | 阅读 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#概述">概述</a></li>
+<li><a href="#tensorflow-serving">TensorFlow Serving</a>
+<ul>
+<li><a href="#安装tf-serving">安装TF-Serving</a></li>
+<li><a href="#启动tensorflow-serving-服务">启动TensorFlow Serving 服务</a></li>
+<li><a href="#测试tensorflow-serving服务">测试TensorFlow Serving服务</a></li>
+<li><a href="#多模型部署">多模型部署</a></li>
+</ul></li>
+<li><a href="#flask-部署多个tf-models">Flask 部署多个TF models</a></li>
+<li><a href="#对比">对比</a>
+<ul>
+<li><a href="#参考文献">参考文献</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <h2 id="概述">概述</h2>
+
+<p>当我们要去部署和测试深度学习models时，我们经常需要一个比较便利和接口方便的web server，这样我们只需要专注在Model本身即可，通过web server一方面不仅可以进行调试和测试，
+另外一方面还可以将自己的成果输出给第三方和用户去体验深度学习带来的便利。大家经常使用的方式有以下两种(以TensorFlow为主):</p>
+
+<ul>
+<li><strong>TensorFlow Serving</strong></li>
+<li><strong>TensorFlow Models + web server</strong></li>
+</ul>
+
+<p>如果你的模型很多，那么就需要结合云计算的AI工具箱进而支持大规模的深度学习线上、线下训练、预测以及发布等等，还会结合yarn和k8s进行节点、服务调度，微服务化的方式支持业务线。</p>
+
+<h2 id="tensorflow-serving">TensorFlow Serving</h2>
+
+<p>我们首先介绍一下TensorFlow Serving，说的直白一点。TensorFlow Serving 使我们使用已训练好的模型一种解耦的技巧。我们创建TensorFlow Serving服务来管理和部署我们的服务。<strong>TensorFlow Serving是一个用于深度学习模型Serving的高性能开源库，使用gRPC作为接口接收外部调用。</strong> 以下是TensorFlow Serving整体架构图：</p>
+
+<p><img src="/image/ten-serving1.png" alt="TensorFlow Serving 2" /></p>
+
+<p>其中几个很关键的核心的概念可以参考TF的官方文档:</p>
+
+<blockquote>
+<ul>
+<li><p>Servables:客户端执行计算的底层对象。</p></li>
+
+<li><p>Loaders:负责管理Servable的生命周期，将一个Servable的生命周期的API进行标准化。</p></li>
+
+<li><p>Sources:提供Servables的插件模块。</p></li>
+
+<li><p>Managers 维护Servables的整个生命周期，包括</p>
+
+<ul>
+<li><p>加载 Servables</p></li>
+
+<li><p>为 Servables 提供服务</p></li>
+
+<li><p>卸载 Servables</p></li>
+
+<li><p>Core  TensorFlow Serving Core通过 TensorFlow Serving APIs 管理 Servales 的如下方面：</p>
+
+<ul>
+<li>生命周期 (lifecycle)</li>
+<li>度量信息 (metrics)</li>
+</ul>
+
+<p>TensorFlow Serving Core 将 Servables 和 Loaders 视为不透明的对象 (opaque objects)。</p></li>
+</ul></li>
+</ul>
+</blockquote>
+
+<p><img src="/image/tf-serving.png" alt="TensorFlow Serving" /></p>
+
+<p>Client端会不断给Manager发送请求，Manager会根据版本管理策略管理模型更新，并将最新的模型计算结果返回给Client端。更为详细的为:</p>
+
+<ol>
+<li>一个 Source 插件对一个特定的 Version 创建一个 Loader，这个 Loader 包含了需要载入 Servable 的全部元信息。</li>
+<li>Source 通过一个回调函数来通知 Manager 此时的 Aspired Version。</li>
+<li>Manager 根据 Version Policy 的设置决定接下来的操作，可能是卸载之前的 Version，或是载入一个新的 Version。</li>
+<li>如果 Manager 的认为操作是安全的，则会赋予 Loader 相应的资源并通知 Loader 载入一个新的 Version。</li>
+<li>客户端向 Manager 请求 Servable，可指定一个版本或是请求最新的版本，Manager 返回一个对应的处理器。</li>
+</ol>
+
+<h3 id="安装tf-serving">安装TF-Serving</h3>
+
+<p>个人建议安装虚拟化的独立环境，本人基于Ubuntu 16.10 的Python环境安装执行的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"> <span class="nb">echo</span> <span class="s2">&#34;deb [arch=amd64] http://storage.googleapis.com/tensorflow-serving-apt stable tensorflow-model-server tensorflow-model-server-universal&#34;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/tensorflow-serving.list <span class="o">&amp;&amp;</span> curl https://storage.googleapis.com/tensorflow-serving-apt/tensorflow-serving.release.pub.gpg <span class="p">|</span> sudo apt-key add -
+ sudo apt install curl tensorflow-model-server</code></pre></td></tr></table>
+</div>
+</div>
+<p>下一步是将自己已训练好的一个模型进行服务管理和发布</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">keras.applications.inception_v3</span> <span class="kn">import</span> <span class="n">InceptionV3</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">Input</span>
+
+<span class="n">inception_model</span> <span class="o">=</span> <span class="n">InceptionV3</span><span class="p">(</span><span class="n">weights</span><span class="o">=</span><span class="s1">&#39;imagenet&#39;</span><span class="p">,</span> <span class="n">input_tensor</span><span class="o">=</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="n">inception_model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;inception.h5&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>现在我们的Inception的模型以Keras格式保存的，下一步是将TensorFlow server可以处理的格式导出模型。可以参考下，<a href="https://github.com/himanshurawlani/keras-and-tensorflow-serving。">https://github.com/himanshurawlani/keras-and-tensorflow-serving。</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">model</span> <span class="nb">compile</span><span class="p">()</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">saved_model</span><span class="o">.</span><span class="n">simple_save</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="启动tensorflow-serving-服务">启动TensorFlow Serving 服务</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">tensorflow_model_server</span> <span class="o">--</span><span class="n">model_base_path</span><span class="o">=/</span><span class="n">modelpath</span><span class="o">/</span><span class="n">image_classifier</span> <span class="o">--</span><span class="n">rest_api_port</span><span class="o">=</span><span class="mi">9000</span> <span class="o">--</span><span class="n">model_name</span><span class="o">=</span><span class="n">ImageClassifier</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="测试tensorflow-serving服务">测试TensorFlow Serving服务</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">keras.applications</span> <span class="kn">import</span> <span class="n">inception_v3</span>
+<span class="kn">from</span> <span class="nn">keras.preprocessing</span> <span class="kn">import</span> <span class="n">image</span>
+
+<span class="c1"># Argument parser for giving input image_path from command line</span>
+<span class="n">ap</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">ap</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&#34;-i&#34;</span><span class="p">,</span> <span class="s2">&#34;--image&#34;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                <span class="n">help</span><span class="o">=</span><span class="s2">&#34;path of the image&#34;</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="nb">vars</span><span class="p">(</span><span class="n">ap</span><span class="o">.</span><span class="n">parse_args</span><span class="p">())</span>
+
+<span class="n">image_path</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+<span class="c1"># Preprocessing our input image</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">img_to_array</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">load_img</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">target_size</span><span class="o">=</span><span class="p">(</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">)))</span> <span class="o">/</span> <span class="mf">255.</span>
+
+<span class="c1"># this line is added because of a bug in tf_serving(1.10.0-dev)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float16&#39;</span><span class="p">)</span>
+
+<span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&#34;instances&#34;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;input_image&#39;</span><span class="p">:</span> <span class="n">img</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}]</span>
+<span class="p">}</span>
+
+<span class="c1"># sending post request to TensorFlow Serving server</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;http://localhost:9000/v1/models/ImageClassifier:predict&#39;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+
+<span class="c1"># Decoding the response</span>
+<span class="c1"># decode_predictions(preds, top=5) by default gives top 5 results</span>
+<span class="c1"># You can pass &#34;top=10&#34; to get top 10 predicitons</span>
+<span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">inception_v3</span><span class="o">.</span><span class="n">decode_predictions</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pred</span><span class="p">[</span><span class="s1">&#39;predictions&#39;</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]))</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>输出的内容为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">python</span> <span class="n">serving_sample_request</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">i</span> <span class="o">../</span><span class="n">test_images</span><span class="o">/</span><span class="n">car</span><span class="o">.</span><span class="n">png</span>
+<span class="n">Using</span> <span class="n">TensorFlow</span> <span class="n">backend</span><span class="o">.</span>
+<span class="p">[[</span><span class="s2">&#34;n04285008&#34;</span><span class="p">,</span> <span class="s2">&#34;sports_car&#34;</span><span class="p">,</span> <span class="mf">0.998414</span><span class="p">],</span> <span class="p">[</span><span class="s2">&#34;n04037443&#34;</span><span class="p">,</span> <span class="s2">&#34;racer&#34;</span><span class="p">,</span> <span class="mf">0.00140099</span><span class="p">],</span> <span class="p">[</span><span class="s2">&#34;n03459775&#34;</span><span class="p">,</span> <span class="s2">&#34;grille&#34;</span><span class="p">,</span> <span class="mf">0.000160794</span><span class="p">],</span> <span class="p">[</span><span class="s2">&#34;n02974003&#34;</span><span class="p">,</span> <span class="s2">&#34;car_wheel&#34;</span><span class="p">,</span> <span class="mf">9.57862e-06</span><span class="p">],</span> <span class="p">[</span><span class="s2">&#34;n03100240&#34;</span><span class="p">,</span> <span class="s2">&#34;convertible&#34;</span><span class="p">,</span> <span class="mf">6.01581e-06</span><span class="p">]]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>那么如果是多个TF models怎么办呢？比如：model1，model2和model3</p>
+
+<h3 id="多模型部署">多模型部署</h3>
+
+<p>可以创建一个model.config的文件，内容为:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="err">model_config_list:</span><span class="p">{</span>
+    <span class="err">config:{</span>
+      <span class="err">name:</span><span class="nt">&#34;model1&#34;</span><span class="p">,</span>
+      <span class="err">base_path:</span><span class="nt">&#34;/models/model1&#34;</span><span class="p">,</span>
+      <span class="err">model_platform:</span><span class="nt">&#34;tensorflow&#34;</span>
+    <span class="p">}</span><span class="err">,</span>
+    <span class="err">config:</span><span class="p">{</span>
+      <span class="err">name:</span><span class="nt">&#34;model2&#34;</span><span class="p">,</span>
+      <span class="err">base_path:</span><span class="nt">&#34;/models/model2&#34;</span><span class="p">,</span>
+      <span class="err">model_platform:</span><span class="nt">&#34;tensorflow&#34;</span>
+    <span class="p">}</span><span class="err">,</span>
+    <span class="err">config:</span><span class="p">{</span>
+      <span class="err">name:</span><span class="nt">&#34;model3&#34;</span><span class="p">,</span>
+      <span class="err">base_path:</span><span class="nt">&#34;/models/model3&#34;</span><span class="p">,</span>
+      <span class="err">model_platform:</span><span class="nt">&#34;tensorflow&#34;</span>
+    <span class="p">}</span> 
+<span class="err">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>创建完后的即可运行的models，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">通过--model_config_file<span class="o">=</span>/models/models.config指定</code></pre></td></tr></table>
+</div>
+</div>
+<p>如果一个model有多个版本时候，也可以通过版本号来指定传入server api即可。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span> 
+<span class="n">SERVER_URL</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:8501/v1/models/model3:predict&#39;</span>  
+<span class="c1">#注意SERVER_URL中的‘model3’是config文件中定义的模型name,不是文件夹名称</span>
+<span class="c1">#SERVER_URL = &#39;http://localhost:8501/v1/models/model1/versions/100003:predict&#39;  </span>
+
+<span class="k">def</span> <span class="nf">prediction</span><span class="p">():</span> 
+    <span class="n">predict_request</span><span class="o">=</span><span class="s1">&#39;{&#34;instances&#34;:</span><span class="si">%s</span><span class="s1">}&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">([[[</span><span class="mi">10</span><span class="p">]</span><span class="o">*</span><span class="mi">7</span><span class="p">]</span><span class="o">*</span><span class="mi">7</span><span class="p">])</span> 
+    <span class="k">print</span><span class="p">(</span><span class="n">predict_request</span><span class="p">)</span> 
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">SERVER_URL</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">predict_request</span><span class="p">)</span> 
+    <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">&#39;predictions&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> 
+    <span class="k">print</span><span class="p">(</span><span class="n">prediction</span><span class="p">)</span> 
+
+
+<span class="n">prediction</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="flask-部署多个tf-models">Flask 部署多个TF models</h2>
+
+<p>我们先定义和你保存模型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">model_a</span><span class="p">():</span>
+	<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">	model placeholder : an actual model shall be defined like some CNN/LSTM etc.
+</span><span class="s2">	But for the purpose of demonstration, 
+</span><span class="s2">	all we need is a simple Graph with Variable in it
+</span><span class="s2">	&#34;&#34;&#34;</span>
+	<span class="c1">#some supposed input</span>
+	<span class="n">A</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+	<span class="c1">#&#34;weights&#34; of the model</span>
+	<span class="n">B</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random_uniform</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="o">.</span><span class="n">as_list</span><span class="p">()),</span> <span class="n">name</span><span class="o">=</span><span class="s2">&#34;my_model_a_weight&#34;</span><span class="p">)</span>
+	<span class="c1">#model (haha)</span>
+	<span class="n">C</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>	
+	
+	<span class="c1">#define a dummy class for convenience</span>
+	<span class="k">class</span> <span class="nc">Model</span><span class="p">():</span>
+		<span class="k">pass</span>
+	
+	<span class="c1">#fake model instance for easy referencing</span>
+	<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
+	
+	<span class="c1">#give input to the Graph at this node</span>
+	<span class="n">model</span><span class="o">.</span><span class="n">input_placeholder</span> <span class="o">=</span> <span class="n">A</span>
+	
+	<span class="c1">#get output from the Graph at this node</span>
+	<span class="n">model</span><span class="o">.</span><span class="n">output_node</span> <span class="o">=</span> <span class="n">C</span>
+	<span class="k">return</span> <span class="n">model</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">model_a</span><span class="p">()</span>
+
+<span class="n">saver</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Saver</span><span class="p">()</span>
+<span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">())</span>
+
+<span class="c1">#train here to change weights or however</span>
+<span class="c1">#training_model()</span>
+<span class="c1">#once the model is trained, or not, save the session</span>
+<span class="n">saver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="s2">&#34;model1.ckpt&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>我们接下来定义第二个模型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">model_b</span><span class="p">():</span>
+	<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">	model placeholder : an actual model shall be defined, like some CNN/LSTM etc.
+</span><span class="s2">	But for the purpose of demonstration, 
+</span><span class="s2">	all we need is a simple Graph with Variable in it
+</span><span class="s2">	&#34;&#34;&#34;</span>
+	<span class="c1">#some supposed input</span>
+	<span class="n">P</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+	<span class="c1">#&#34;weights&#34; of the model</span>
+	<span class="n">Q</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
+	<span class="c1">#model (haha)</span>
+	<span class="n">R</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
+	
+	<span class="c1">#define a dummy class for convenience</span>
+	<span class="k">class</span> <span class="nc">Model</span><span class="p">():</span>
+		<span class="k">pass</span>
+	
+	<span class="c1">#fake model instance for easy referencing</span>
+	<span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
+	
+	<span class="c1">#give input to the Graph at this node</span>
+	<span class="n">model</span><span class="o">.</span><span class="n">input_placeholder</span> <span class="o">=</span> <span class="n">P</span>
+	
+	<span class="c1">#get output from the Graph at this node</span>
+	<span class="n">model</span><span class="o">.</span><span class="n">output_node</span> <span class="o">=</span> <span class="n">R</span>
+	<span class="k">return</span> <span class="n">model</span>
+
+<span class="c1">#graph</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">model_b</span><span class="p">()</span>
+
+<span class="n">saver</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Saver</span><span class="p">()</span>
+<span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">())</span>
+
+<span class="c1">#train here to change weights or however</span>
+<span class="c1">#training_model()</span>
+<span class="c1">#once the model is trained, or not, save the session</span>
+<span class="n">saver</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> <span class="s2">&#34;model2.ckpt&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>现在两个模型已经定义完和被保存，我们需要定义一个包装类用来将Graph和Session的类对象放在一起。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">model_a</span> <span class="kn">import</span> <span class="n">model_a</span>
+<span class="kn">from</span> <span class="nn">model_b</span> <span class="kn">import</span> <span class="n">model_b</span>
+
+<span class="k">class</span> <span class="nc">ModelA</span><span class="p">():</span>
+	<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">	This is a wrapper class on all the compexity that one comes across.
+</span><span class="s2">	Principle : 
+</span><span class="s2">	&lt;START&gt;
+</span><span class="s2">		Define graph
+</span><span class="s2">		Add nodes
+</span><span class="s2">		Assign session to the graph
+</span><span class="s2">		Restore sess from saved ckpt
+</span><span class="s2">	&lt;DONE&gt;
+</span><span class="s2">	&#34;&#34;&#34;</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="c1">#defines graph</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+		<span class="c1">#following step is very important</span>
+		<span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+			<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">			consider whatever the &#39;graph&#39; has as the default graph
+</span><span class="s2">			within the lifetime of the instance of this class
+</span><span class="s2">			&#34;&#34;&#34;</span>
+			<span class="c1">#add nodes</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model_a</span><span class="p">()</span>
+			<span class="c1">#assign sess</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+			<span class="c1">#saver</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">saver</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Saver</span><span class="p">()</span>
+			<span class="c1">#restore the model</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">saver</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sess</span><span class="p">,</span> <span class="s2">&#34;model1.ckpt&#34;</span><span class="p">)</span>
+	
+	<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_vec</span><span class="p">):</span>
+		<span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">output_node</span><span class="p">,</span>
+			<span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">input_placeholder</span><span class="p">:</span><span class="n">input_vec</span>
+			<span class="p">}</span>
+		<span class="p">)</span>
+		<span class="k">return</span> <span class="n">result</span>
+
+	
+<span class="k">class</span> <span class="nc">ModelB</span><span class="p">():</span>
+	<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">	This is a wrapper class on all the compexity that one comes across.
+</span><span class="s2">	Principle : 
+</span><span class="s2">	&lt;START&gt;
+</span><span class="s2">		Define graph
+</span><span class="s2">		Add nodes
+</span><span class="s2">		Assign session to the graph
+</span><span class="s2">		Restore sess from saved ckpt
+</span><span class="s2">	&lt;DONE&gt;
+</span><span class="s2">	&#34;&#34;&#34;</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="c1">#defines graph</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">graph</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+		<span class="c1">#following step is very important</span>
+		<span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">as_default</span><span class="p">():</span>
+			<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">			consider whatever the &#39;graph&#39; has as the default graph
+</span><span class="s2">			within the lifetime of the instance of this class
+</span><span class="s2">			&#34;&#34;&#34;</span>
+			<span class="c1">#add nodes</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model_b</span><span class="p">()</span>
+			<span class="c1">#assign sess</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+			<span class="c1">#saver</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">saver</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">Saver</span><span class="p">()</span>
+			<span class="c1">#restore the model</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">saver</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sess</span><span class="p">,</span> <span class="s2">&#34;model2.ckpt&#34;</span><span class="p">)</span>
+	
+	<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_vec</span><span class="p">):</span>
+		<span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">output_node</span><span class="p">,</span>
+			<span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">input_placeholder</span><span class="p">:</span><span class="n">input_vec</span>
+			<span class="p">}</span>
+		<span class="p">)</span>
+		<span class="k">return</span> <span class="n">result</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>下面我们需要将创建flask APP公布restful api，如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">jsonify</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span><span class="n">make_response</span>
+<span class="kn">from</span> <span class="nn">flask_cors</span> <span class="kn">import</span> <span class="n">CORS</span>
+
+<span class="kn">from</span> <span class="nn">model_wrappers</span> <span class="kn">import</span> <span class="n">ModelA</span><span class="p">,</span> <span class="n">ModelB</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">ModelA</span><span class="p">()</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">ModelB</span><span class="p">()</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">CORS</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">featurize1</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    Dummy featurizer for model_a
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">model_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">model_size</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">featurize2</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    Dummy featurizer for model_b
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">model_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">model_size</span><span class="p">)</span>
+
+
+<span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/get_my_predictions&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">get_predictions</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">json</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">)</span>
+    <span class="n">vec1</span> <span class="o">=</span> <span class="n">featurize1</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">vec2</span> <span class="o">=</span> <span class="n">featurize2</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">resp_a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">vec1</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">resp_b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">vec2</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">jsonify</span><span class="p">({</span><span class="s2">&#34;Response&#34;</span><span class="p">:[{</span><span class="s2">&#34;model_a&#34;</span><span class="p">:</span> <span class="n">resp_a</span><span class="p">},</span> <span class="p">{</span><span class="s2">&#34;model_b&#34;</span><span class="p">:</span><span class="n">resp_b</span><span class="p">}]})</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span><span class="n">threaded</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="对比">对比</h2>
+
+<p>TensorFlow Serving和Flask各有优势，如果在大型云计算结合AI服务应用建议使用TensorFlow Serving；如果模型比较单一建议使用Flask简单快捷。</p>
+
+<h3 id="参考文献">参考文献</h3>
+
+<p>1.<a href="https://medium.com/@chingxi720/tensorflow-sessions-and-graphs-426e5f3f82ba">Flask Deploy Multi models</a></p>
+
+<p>2.<a href="https://towardsdatascience.com/deploying-keras-models-using-tensorflow-serving-and-flask-508ba00f1037">TF-Serving models</a></p>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">吕海峰(BrianLv)</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+      2018-12-18
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/image/wechatpay.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div>
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://www.brianlv.com/tags/tensorflow.html">TensorFlow</a>
+          <a href="https://www.brianlv.com/tags/flask.html">Flask</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/20181215/c-development-in-visual-studio-code.html">
+            <span class="next-text nav-default">C&#43;&#43; Development In Visual Studio Code</span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+    <div id="lv-container" class="disqus-comment" data-id="city" data-uid="MTAyMC8zNDc2My8xMTMwMA==">
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+    <noscript>
+      Please enable JavaScript to view the
+      <a href="https://www.livere.com">comments powered by LiveRe.</a>
+    </noscript>
+   </div>
+
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:brian.lv@outlook.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://www.brianlv.com/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2017 -
+    2019
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        吕海峰
+        
+      </span></span>
+
+  
+  
+    <span id="busuanzi_container">
+      访客数/访问量：<span id="busuanzi_value_site_uv"></span>/<span id="busuanzi_value_site_pv"></span>
+    </span>
+  
+
+  
+    <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+<script id="tencent_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+	hm.src = "//tajs.qq.com/stats?sId=66124387";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/"></script>
+
+
+</body>
+</html>
