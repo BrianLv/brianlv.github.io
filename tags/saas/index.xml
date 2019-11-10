@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SaaS on 吕海峰的博客</title>
+    <link>https://www.brianlv.com/tags/saas.html</link>
+    <description>Recent content in SaaS on 吕海峰的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 19 Dec 2018 14:30:51 +0800</lastBuildDate>
+    
+	<atom:link href="https://www.brianlv.com/tags/saas/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>平台化SaaS实践之Docker Stack应用</title>
+      <link>https://www.brianlv.com/20181219/%E5%B9%B3%E5%8F%B0%E5%8C%96saas%E5%AE%9E%E8%B7%B5%E4%B9%8Bdocker-stack%E5%BA%94%E7%94%A8.html</link>
+      <pubDate>Wed, 19 Dec 2018 14:30:51 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/20181219/%E5%B9%B3%E5%8F%B0%E5%8C%96saas%E5%AE%9E%E8%B7%B5%E4%B9%8Bdocker-stack%E5%BA%94%E7%94%A8.html</guid>
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;SaaS&lt;/strong&gt; (软件即服务)是一种许可和交付模式，其中软件由提供商集中托管和管理，并通过订阅的方式提供给用户,用户也可以按需或者即用即付方式进行购买。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。提供商负责管理硬件和软件，并根据适当的服务协议确保应用和数据的可用性和安全性。现在很多传统软件向SaaS“转变”时，更多的是向&lt;strong&gt;平台化SaaS软件&lt;/strong&gt;靠拢，借助此模式来交付的产品优势很多，比如:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;提供灵活的方式满足客户需求&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;提高运营效率，使其专注于产品&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;打破地域的限制，全球覆盖面，从任何位置访问应用数据&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;按需交付，多维度&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自传播&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;隔离性、安全性、可定制性度高&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;平台+软件=平台化SaaS=支撑层+应用层&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;saas平台的挑战&#34;&gt;SaaS平台的挑战&lt;/h2&gt;
+
+&lt;p&gt;我个人觉得传统软件向SaaS过渡原因主要分为两方面：&lt;/p&gt;
+
+&lt;p&gt;1.&lt;strong&gt;从外因分析是市场趋势、价值和效率的方式转变&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;传统软件在其整个生命周期内，价值的体现最终要依赖于大客户需求+解决方案+(服务能力)+销售(话有点大，呵呵)。而在其生命周期过程中，无论是任何一方都在变化，市场、需求和趋势也在发生变化，等产品面向市场时，其实已经&amp;rdquo;慢半拍或者多拍&amp;rdquo;了，很多决策主要依赖于&amp;rdquo;拍脑袋&amp;rdquo;，粗略的数据分析和统计很难满足复杂多变的外因。&lt;/p&gt;
+
+&lt;p&gt;2.&lt;strong&gt;从内因分析无非是弄清楚以下关键的内容&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;什么对客户有价值&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;怎么快速交付价值&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;产品的核心价值、杀手锏是什么&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;怎么知道做的对不对&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;最终我们产品的目的：&lt;strong&gt;要发现和快速交付价值，所以最后的本质是效率和价值的优势，而转型的问题又变成了组织的问题。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;进而在发生质变的过程中需要不断的完成量变的挑战，那么会有如下挑战去突破:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1.如何重新设计组织的能力&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://www.brianlv.com/image/sass_create.png&#34; alt=&#34;重新设计组织的能力&#34; /&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

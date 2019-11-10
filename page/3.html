@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>标签 - 吕海峰的博客</title>
+  <title>吕海峰的博客</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -34,8 +34,8 @@
 <meta name="generator" content="Hugo 0.58.2" />
 
 
-<link rel="canonical" href="https://www.brianlv.com/tags.html" />
-<link href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/tags/index.xml%20https://www.brianlv.com/tags/index.xml%7d" rel="alternate" type="application/rss+xml" title="吕海峰的博客" />
+<link rel="canonical" href="https://www.brianlv.com/" />
+<link href="%7balternate%20%7bRSS%20application/rss&#43;xml%20%20index%20alternate%20%20false%20false%20true%20false%20false%200%7d%20/index.xml%20https://www.brianlv.com/index.xml%7d" rel="alternate" type="application/rss+xml" title="吕海峰的博客" />
 
 
 
@@ -59,17 +59,17 @@
 <link rel="stylesheet" href="/css/">
 
 
-<meta property="og:title" content="Tags" />
+<meta property="og:title" content="吕海峰的博客" />
 <meta property="og:description" content="吕海峰的个人博客" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="https://www.brianlv.com/tags.html" />
+<meta property="og:url" content="https://www.brianlv.com/" />
 
 <meta property="og:updated_time" content="2018-12-19T14:30:51+08:00" />
-<meta itemprop="name" content="Tags">
+<meta itemprop="name" content="吕海峰的博客">
 <meta itemprop="description" content="吕海峰的个人博客">
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Tags"/>
+<meta name="twitter:title" content="吕海峰的博客"/>
 <meta name="twitter:description" content="吕海峰的个人博客"/>
 
 <!--[if lte IE 9]>
@@ -218,7 +218,7 @@
   <ul id="menu" class="menu">
     
     
-        <li class="menu-item">
+        <li class="menu-item active">
         
           
           
@@ -240,7 +240,7 @@
 
       </li>
     
-        <li class="menu-item active">
+        <li class="menu-item">
         
           
           
@@ -288,131 +288,173 @@
       <div class="content-wrapper">
         <div id="content" class="content container">
           
+<section id="posts" class="posts">
   
+  
+    
+  
+  
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      <a class="post-link" href="/20181202/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html">深入理解Python的With-as语句</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-02" class="post-time">
+        2018-12-02
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/python.html"> Python </a>
+          
+        </div>
+      <span class="more-meta"> 约 4634 字 </span>
+      <span class="more-meta"> 预计阅读 10 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="概述">概述</h2>
+
+<p>学习Python有一段时间了，最近做一个项目会涉及到文件的读取和关闭。比如：我想把一些对象序列化到文件里面，然后当我再次使用的时候，在从文件里面读取反序列化成对象。像这种操作一般都是用<strong>try…except…finally</strong>。但是经过自己对Python的研究发现会有更出色的方法，比如：with-as语句也有的人称为<strong>context manager。</strong></p>
+
+<h2 id="with-as-用法">With-as 用法</h2>
+
+<p>我们先看一下例子，当我们需要打开一个文件的时，比如：txt等，一般经常会这么操作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这是错误，因为file.open是否打开文件是不确定，而在出现异常的时候你却关闭了已经打开的文件。文件没有打开怎么能直接关闭呢？你可以按照下面的解决方法来解决上述出现的问题。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>  
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">except</span><span class="p">:</span>  
+    <span class="n">To</span> <span class="n">Do</span>
+    <span class="o">//</span><span class="err">出现异常直接返回或者退出，这说明</span><span class="n">file并没有打开</span><span class="err">。</span>
+    <span class="k">return</span><span class="o">/</span><span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
+
+<span class="o">//</span><span class="err">已经成功打开</span><span class="n">file文件</span><span class="err">，所以你需要在</span><span class="n">finally中关闭打开的文件</span><span class="err">。</span>
+<span class="k">try</span><span class="p">:</span>  
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">except</span><span class="p">:</span>  
+    <span class="n">To</span> <span class="n">Do</span>
+<span class="k">finally</span><span class="p">:</span>  
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>你会发现这么做会非常麻烦，并且try……except…..finally嵌套也比较啰嗦。那有没有好的解决办法能解决上述问题，并且还能减少代码量呢？(类似于C#中的using关键字)答案是肯定的，那就是with……as语句。<strong>With语句适用于对I/O、文件流、数据流等资源进行访问的场合，确保不管使用过程中是否发生异常都会执行必要的“清理”操作，释放资源.比如文件使用后自动关闭、线程中锁的自动获取和释放等等。</strong> 我们来看一下with-as的用法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">line</span>
+        <span class="o">...</span> <span class="n">more</span> <span class="n">processing</span> <span class="n">code</span> <span class="o">...</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>这个语句执行完成之后，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄,确实比try……except……finally好多了。在这个例子中f就是上下文管理器enter()的返回值，返回的是当前文件自身的引用。Python内建对象都加入了对上下文管理器的支持，可以用在with语句中。比如:file、 threading、decimal等等，在多线程模块中，lock和条件变量也是支持with语句的。例如：</p>
+    </div>
+    <div class="read-more">
+      <a href="/20181202/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
+  
+</section>
+
+
+
+
+
+
   
   
   
 
   
   
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <div class="tag-cloud" style="padding: 5px 15px">
-      <div class="tag-cloud-title">
-        共计 9 个标签
-      </div>
-      <div class="tag-cloud-tags">
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://www.brianlv.com/tags/c/c&#43;&#43;.html"
-          style="font-size:1rem">c/c&#43;&#43;</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://www.brianlv.com/tags/jupyter.html"
-          style="font-size:1rem">jupyter</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://www.brianlv.com/tags/linux.html"
-          style="font-size:1.473197315178593rem">linux</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://www.brianlv.com/tags/machine-learning.html"
-          style="font-size:1.7499999999999998rem">machine-learning</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://www.brianlv.com/tags/opencv.html"
-          style="font-size:1rem">opencv</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://www.brianlv.com/tags/python.html"
-          style="font-size:2.419591945535779rem">python</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://www.brianlv.com/tags/saas.html"
-          style="font-size:1rem">saas</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://www.brianlv.com/tags/tensorflow.html"
-          style="font-size:1rem">tensorflow</a>
-        
-      
-        
-        
-        
-        
-        
-        
-        
-        <a href="https://www.brianlv.com/tags/vnc.html"
-          style="font-size:1rem">vnc</a>
-        
-      
-      </div>
-    </div>
+
   
   
+
+  
+  
+
+  
+  
+  <nav class="pagination">
+    <ul>
+      
+      <li >
+        <a href="/">1</a>
+      </li>
+      
+      <li >
+        <a href="/page/2.html">2</a>
+      </li>
+      
+      <li  class="active" >
+        <a href="/page/3.html">3</a>
+      </li>
+      
+    </ul>
+  </nav>
+
+  
+  
+
+
+
 
 
         </div>
@@ -546,6 +588,13 @@ code.has-jax {
 
 
 
+  <script type="text/javascript">
+    window.MathJax = {
+      showProcessingMessages: false,
+      messageStyle: 'none'
+    };
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
 
 
 

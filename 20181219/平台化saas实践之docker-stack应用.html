@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>平台化SaaS实践之Docker Stack应用 - 吕海峰的博客</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="吕先生(BrianLv)" />
+  <meta name="description" content="概述 SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商集中托管和管理，并通过订阅的方式提供给用户,用户也可以按需或者即用即付方式进行购买。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。提供商负责管理硬件和软件，并根据适当的服务协议确保应用和数据的可用性和安全性。现在很多传统软件向SaaS“转变”时，更多的是向平台化SaaS软件靠拢，借助此模式来交付的产品优势很多，比如:
+ 提供灵活的方式满足客户需求 提高运营效率，使其专注于产品 打破地域的限制，全球覆盖面，从任何位置访问应用数据 按需交付，多维度 自传播 隔离性、安全性、可定制性度高  平台&#43;软件=平台化SaaS=支撑层&#43;应用层
+SaaS平台的挑战 我个人觉得传统软件向SaaS过渡原因主要分为两方面：
+1.从外因分析是市场趋势、价值和效率的方式转变
+传统软件在其整个生命周期内，价值的体现最终要依赖于大客户需求&#43;解决方案&#43;(服务能力)&#43;销售(话有点大，呵呵)。而在其生命周期过程中，无论是任何一方都在变化，市场、需求和趋势也在发生变化，等产品面向市场时，其实已经&amp;rdquo;慢半拍或者多拍&amp;rdquo;了，很多决策主要依赖于&amp;rdquo;拍脑袋&amp;rdquo;，粗略的数据分析和统计很难满足复杂多变的外因。
+2.从内因分析无非是弄清楚以下关键的内容
+  什么对客户有价值 怎么快速交付价值 产品的核心价值、杀手锏是什么 怎么知道做的对不对   最终我们产品的目的：要发现和快速交付价值，所以最后的本质是效率和价值的优势，而转型的问题又变成了组织的问题。
+进而在发生质变的过程中需要不断的完成量变的挑战，那么会有如下挑战去突破:
+1.如何重新设计组织的能力
+" />
+
+  <meta name="keywords" content="吕海峰, BrianLv, 自然语言处理, 深度学习, 机器学习" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.2" />
+
+
+<link rel="canonical" href="https://www.brianlv.com/20181219/%E5%B9%B3%E5%8F%B0%E5%8C%96saas%E5%AE%9E%E8%B7%B5%E4%B9%8Bdocker-stack%E5%BA%94%E7%94%A8.html" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+
+
+
+
+<link rel="stylesheet" href="/css/">
+
+
+<meta property="og:title" content="平台化SaaS实践之Docker Stack应用" />
+<meta property="og:description" content="概述
+
+SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商集中托管和管理，并通过订阅的方式提供给用户,用户也可以按需或者即用即付方式进行购买。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。提供商负责管理硬件和软件，并根据适当的服务协议确保应用和数据的可用性和安全性。现在很多传统软件向SaaS“转变”时，更多的是向平台化SaaS软件靠拢，借助此模式来交付的产品优势很多，比如:
+
+
+提供灵活的方式满足客户需求
+提高运营效率，使其专注于产品
+打破地域的限制，全球覆盖面，从任何位置访问应用数据
+按需交付，多维度
+自传播
+隔离性、安全性、可定制性度高
+
+
+平台&#43;软件=平台化SaaS=支撑层&#43;应用层
+
+SaaS平台的挑战
+
+我个人觉得传统软件向SaaS过渡原因主要分为两方面：
+
+1.从外因分析是市场趋势、价值和效率的方式转变
+
+传统软件在其整个生命周期内，价值的体现最终要依赖于大客户需求&#43;解决方案&#43;(服务能力)&#43;销售(话有点大，呵呵)。而在其生命周期过程中，无论是任何一方都在变化，市场、需求和趋势也在发生变化，等产品面向市场时，其实已经&rdquo;慢半拍或者多拍&rdquo;了，很多决策主要依赖于&rdquo;拍脑袋&rdquo;，粗略的数据分析和统计很难满足复杂多变的外因。
+
+2.从内因分析无非是弄清楚以下关键的内容
+
+
+
+什么对客户有价值
+怎么快速交付价值
+产品的核心价值、杀手锏是什么
+怎么知道做的对不对
+
+
+
+最终我们产品的目的：要发现和快速交付价值，所以最后的本质是效率和价值的优势，而转型的问题又变成了组织的问题。
+
+进而在发生质变的过程中需要不断的完成量变的挑战，那么会有如下挑战去突破:
+
+1.如何重新设计组织的能力
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.brianlv.com/20181219/%E5%B9%B3%E5%8F%B0%E5%8C%96saas%E5%AE%9E%E8%B7%B5%E4%B9%8Bdocker-stack%E5%BA%94%E7%94%A8.html" />
+<meta property="article:published_time" content="2018-12-19T14:30:51+08:00" />
+<meta property="article:modified_time" content="2018-12-19T14:30:51+08:00" />
+<meta itemprop="name" content="平台化SaaS实践之Docker Stack应用">
+<meta itemprop="description" content="概述
+
+SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商集中托管和管理，并通过订阅的方式提供给用户,用户也可以按需或者即用即付方式进行购买。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。提供商负责管理硬件和软件，并根据适当的服务协议确保应用和数据的可用性和安全性。现在很多传统软件向SaaS“转变”时，更多的是向平台化SaaS软件靠拢，借助此模式来交付的产品优势很多，比如:
+
+
+提供灵活的方式满足客户需求
+提高运营效率，使其专注于产品
+打破地域的限制，全球覆盖面，从任何位置访问应用数据
+按需交付，多维度
+自传播
+隔离性、安全性、可定制性度高
+
+
+平台&#43;软件=平台化SaaS=支撑层&#43;应用层
+
+SaaS平台的挑战
+
+我个人觉得传统软件向SaaS过渡原因主要分为两方面：
+
+1.从外因分析是市场趋势、价值和效率的方式转变
+
+传统软件在其整个生命周期内，价值的体现最终要依赖于大客户需求&#43;解决方案&#43;(服务能力)&#43;销售(话有点大，呵呵)。而在其生命周期过程中，无论是任何一方都在变化，市场、需求和趋势也在发生变化，等产品面向市场时，其实已经&rdquo;慢半拍或者多拍&rdquo;了，很多决策主要依赖于&rdquo;拍脑袋&rdquo;，粗略的数据分析和统计很难满足复杂多变的外因。
+
+2.从内因分析无非是弄清楚以下关键的内容
+
+
+
+什么对客户有价值
+怎么快速交付价值
+产品的核心价值、杀手锏是什么
+怎么知道做的对不对
+
+
+
+最终我们产品的目的：要发现和快速交付价值，所以最后的本质是效率和价值的优势，而转型的问题又变成了组织的问题。
+
+进而在发生质变的过程中需要不断的完成量变的挑战，那么会有如下挑战去突破:
+
+1.如何重新设计组织的能力
+
+">
+
+
+<meta itemprop="datePublished" content="2018-12-19T14:30:51&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-19T14:30:51&#43;08:00" />
+<meta itemprop="wordCount" content="2186">
+
+
+
+<meta itemprop="keywords" content="SaaS," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="平台化SaaS实践之Docker Stack应用"/>
+<meta name="twitter:description" content="概述
+
+SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商集中托管和管理，并通过订阅的方式提供给用户,用户也可以按需或者即用即付方式进行购买。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。提供商负责管理硬件和软件，并根据适当的服务协议确保应用和数据的可用性和安全性。现在很多传统软件向SaaS“转变”时，更多的是向平台化SaaS软件靠拢，借助此模式来交付的产品优势很多，比如:
+
+
+提供灵活的方式满足客户需求
+提高运营效率，使其专注于产品
+打破地域的限制，全球覆盖面，从任何位置访问应用数据
+按需交付，多维度
+自传播
+隔离性、安全性、可定制性度高
+
+
+平台&#43;软件=平台化SaaS=支撑层&#43;应用层
+
+SaaS平台的挑战
+
+我个人觉得传统软件向SaaS过渡原因主要分为两方面：
+
+1.从外因分析是市场趋势、价值和效率的方式转变
+
+传统软件在其整个生命周期内，价值的体现最终要依赖于大客户需求&#43;解决方案&#43;(服务能力)&#43;销售(话有点大，呵呵)。而在其生命周期过程中，无论是任何一方都在变化，市场、需求和趋势也在发生变化，等产品面向市场时，其实已经&rdquo;慢半拍或者多拍&rdquo;了，很多决策主要依赖于&rdquo;拍脑袋&rdquo;，粗略的数据分析和统计很难满足复杂多变的外因。
+
+2.从内因分析无非是弄清楚以下关键的内容
+
+
+
+什么对客户有价值
+怎么快速交付价值
+产品的核心价值、杀手锏是什么
+怎么知道做的对不对
+
+
+
+最终我们产品的目的：要发现和快速交付价值，所以最后的本质是效率和价值的优势，而转型的问题又变成了组织的问题。
+
+进而在发生质变的过程中需要不断的完成量变的挑战，那么会有如下挑战去突破:
+
+1.如何重新设计组织的能力
+
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">吕海峰的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">全部文章</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/about.html">关于</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      吕海峰的博客
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">全部文章</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/about.html">关于</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">平台化SaaS实践之Docker Stack应用</h1>
+      
+      <div class="post-meta">
+        <time datetime="2018-12-19" class="post-time">
+          2018-12-19
+        </time>
+        <div class="post-category">
+            <a href="https://www.brianlv.com/categories/docker.html"> Docker </a>
+            <a href="https://www.brianlv.com/categories/saas.html"> SaaS </a>
+            
+          </div>
+        <span class="more-meta"> 约 2186 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+
+        
+        
+          <span id="busuanzi_container_page_pv">
+            | 阅读 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    
+    <div class="post-content">
+      <h2 id="概述">概述</h2>
+
+<p><strong>SaaS</strong> (软件即服务)是一种许可和交付模式，其中软件由提供商集中托管和管理，并通过订阅的方式提供给用户,用户也可以按需或者即用即付方式进行购买。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。提供商负责管理硬件和软件，并根据适当的服务协议确保应用和数据的可用性和安全性。现在很多传统软件向SaaS“转变”时，更多的是向<strong>平台化SaaS软件</strong>靠拢，借助此模式来交付的产品优势很多，比如:</p>
+
+<ul>
+<li><strong>提供灵活的方式满足客户需求</strong></li>
+<li><strong>提高运营效率，使其专注于产品</strong></li>
+<li><strong>打破地域的限制，全球覆盖面，从任何位置访问应用数据</strong></li>
+<li><strong>按需交付，多维度</strong></li>
+<li><strong>自传播</strong></li>
+<li><strong>隔离性、安全性、可定制性度高</strong></li>
+</ul>
+
+<p><strong>平台+软件=平台化SaaS=支撑层+应用层</strong></p>
+
+<h2 id="saas平台的挑战">SaaS平台的挑战</h2>
+
+<p>我个人觉得传统软件向SaaS过渡原因主要分为两方面：</p>
+
+<p>1.<strong>从外因分析是市场趋势、价值和效率的方式转变</strong></p>
+
+<p>传统软件在其整个生命周期内，价值的体现最终要依赖于大客户需求+解决方案+(服务能力)+销售(话有点大，呵呵)。而在其生命周期过程中，无论是任何一方都在变化，市场、需求和趋势也在发生变化，等产品面向市场时，其实已经&rdquo;慢半拍或者多拍&rdquo;了，很多决策主要依赖于&rdquo;拍脑袋&rdquo;，粗略的数据分析和统计很难满足复杂多变的外因。</p>
+
+<p>2.<strong>从内因分析无非是弄清楚以下关键的内容</strong></p>
+
+<blockquote>
+<ul>
+<li><strong>什么对客户有价值</strong></li>
+<li><strong>怎么快速交付价值</strong></li>
+<li><strong>产品的核心价值、杀手锏是什么</strong></li>
+<li><strong>怎么知道做的对不对</strong></li>
+</ul>
+</blockquote>
+
+<p>最终我们产品的目的：<strong>要发现和快速交付价值，所以最后的本质是效率和价值的优势，而转型的问题又变成了组织的问题。</strong></p>
+
+<p>进而在发生质变的过程中需要不断的完成量变的挑战，那么会有如下挑战去突破:</p>
+
+<p><strong>1.如何重新设计组织的能力</strong></p>
+
+<p><img src="/image/sass_create.png" alt="重新设计组织的能力" /></p>
+
+<p>2.如何去除不务实的需求，进而统一需求列表并打通用户反馈渠道**</p>
+
+<p><strong>需求问题：</strong></p>
+
+<blockquote>
+<ul>
+<li><strong>如何对需求划分，需求场景？</strong></li>
+<li><strong>如何以业务为单元，如何评估，怎么梳理业务逻辑，评估系统规模，展开系统设计？</strong></li>
+<li><strong>如何建立有效的沟通机制及时与用户进行沟通，确定好需求？</strong></li>
+</ul>
+</blockquote>
+
+<p><strong>用户反馈问题:</strong></p>
+
+<blockquote>
+<ul>
+<li><strong>如何打通售前和售后的用户反馈？</strong></li>
+<li><strong>如何打通产品阶段的用户反馈?</strong></li>
+<li><strong>如何打通运营阶段的用户反馈?</strong></li>
+</ul>
+</blockquote>
+
+<p><strong>3.如何搭建SaaS基础的技术、架构(技术架构、业务架构、数据架构)、运营平台</strong></p>
+
+<p>纯技术硬核+数据支撑+应用+运营融合体的&rdquo;大杂烩&rdquo;</p>
+
+<p><strong>4.如何选择SaaS软件服务</strong></p>
+
+<ul>
+<li>软件有没有能够帮助客户提高运营的水平，获得从未有过的新知，从而帮助客户企业的员工建立一种新的能力，是软件成熟度和客户口碑的关键，产品最好能透射专业和行业最佳实践？</li>
+<li>在线API、文档、在线服务，需求为租户提供健全的用户入场协助？</li>
+</ul>
+
+<p><strong>SaaS挑战核心是平衡，需要面对很多矛盾点，有效决策和逻辑性的思考，建立快速试错和纠正的机制，寻找出一系列的平衡规则。</strong>【收入、成本和增长】</p>
+
+<h2 id="基于docker微服务式构建saas解决方案">基于Docker微服务式构建SaaS解决方案</h2>
+
+<p><strong>容器技术加速应用云化，现在很多云厂商基于微服务的架构设计模式来实现SaaS,而服务的载体依赖于Docker实现</strong>，主要是Docker具备很多天然优势能很好的满足SaaS。即通过<strong>封装、隔离、高效</strong>来解决<strong>私有化部署、安全问题、大客户问题、定制化问题</strong>。很多机遇SaaS化比较典型的技术架构网上很多，感兴趣的可以参考下。废话不少说，让我们开启Docker的实践之路吧，由于微服务架构模式涉及的东西很多，给华为微服务框架打个小广告，已经纳入Apache了。如下图所示：</p>
+
+<p><img src="/image/servicemicro.png" alt="micro-service" /></p>
+
+<p>本篇博客只介绍Docker Service的Stack应用部署和管理，后续的博客再详细介绍,微服务架构模式和Docker内核技术，如下图所示。</p>
+
+<p><img src="/image/docker_app.png" alt="Docker" /></p>
+
+<p><strong>计算机经典的一种解耦思想：分层</strong>，并不像kvm(基于内核的虚拟机)，配合QEMU（处理器虚拟软件），需要CPU支持虚拟化技术（并且在BIOS里打开虚拟化选项），效率可达到物理机的80％以上，kvm在实现虚拟化过程中需要配合其它的类库：QEMU、libvirt等，但是在网络虚拟化(SDN)和存储满足跨AZ和调度是十分复杂的。当然Docker也有不足，特别是在安全性和Kernel依赖方面，现在正在按照<strong>OCI</strong>进行模块化。</p>
+
+<h3 id="docker-stack应用的部署和管理">Docker Stack应用的部署和管理</h3>
+
+<p>我们来看下Docker Stack体系结构:</p>
+
+<p><img src="/image/docker_stack.gif" alt="Docker Stack" /></p>
+
+<p>我们采用一个Demo来实践Stack，该Demo来自Docker大牛Nigel的官网，如下图所示，该应用由 5 个服务、3 个网络、4 个密钥以及 3 组端口映射构成。</p>
+
+<p><img src="/image/docker_atsea.gif" alt="Docker Apps" /></p>
+
+<p>我们首先编写Stack文件，需要创建<strong>over-lay网络、秘钥和服务，包括后续滚动升级的副本、延迟关闭等</strong></p>
+
+<p>其次我们需要部署我们的应用，<strong>Docker Stack部署依赖于Swarm模式，所以要合理规划管理和工作节点</strong>。下面让我们搭建实验环境：</p>
+
+<p>1.<strong>创建Swarm</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#先让管理节点加入工作集群中</span>
+docker swarm init</code></pre></td></tr></table>
+</div>
+</div>
+<p>2.<strong>添加工作节点</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#让相应的多个工作节点加入到工作集群中</span>
+docker swarm join --token xxxx
+<span class="c1">#检查确认各个角色节点是否正常</span>
+docker node ls</code></pre></td></tr></table>
+</div>
+</div>
+<p>3.<strong>添加label</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker node update --label-add <span class="nv">pcidss</span><span class="o">=</span>yes worker-1</code></pre></td></tr></table>
+</div>
+</div>
+<p>4.<strong>可以通过openssh生成秘钥</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">openssl rsa:4096 xx.key xxxx</code></pre></td></tr></table>
+</div>
+</div>
+<p>5.<strong>让docker使用生成的秘钥</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker secret create xxx token</code></pre></td></tr></table>
+</div>
+</div>
+<p>6.<strong>部署app服务代码</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker stack deploy -c stack.yml demo</code></pre></td></tr></table>
+</div>
+</div>
+<p>7.<strong>检查相应的服务和node是否正常</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker stack ps demo
+<span class="c1">#如果相应的服务副本出现问题则可以查看日志</span>
+docker service logs</code></pre></td></tr></table>
+</div>
+</div>
+<p>8.<strong>管理应用</strong></p>
+
+<p>比如我们想扩充服务的副本数或者部分升级都是可以的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker service scale</code></pre></td></tr></table>
+</div>
+</div>
+<p>可以访问相应的app了，如果业务代码采用了微服务的架构模式，要注意<strong>服务的状态性、链路熔断、数据的一致性</strong>问题了。</p>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">吕先生(BrianLv)</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+      2018-12-19
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/image/wechatpay.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div>
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://www.brianlv.com/tags/saas.html">SaaS</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/20181218/tensorflow-serving-and-flask-delpoy-models.html">
+            <span class="next-text nav-default">TensorFlow Serving and Flask Delpoy Models</span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:brian.lv@outlook.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://www.brianlv.com/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2017 -
+    2019
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        吕海峰
+        
+      </span></span>
+
+  
+  
+    <span id="busuanzi_container">
+      访客数/访问量：<span id="busuanzi_value_site_uv"></span>/<span id="busuanzi_value_site_pv"></span>
+    </span>
+  
+
+  
+    <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+<script id="tencent_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+	hm.src = "//tajs.qq.com/stats?sId=66124387";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/"></script>
+
+
+</body>
+</html>
