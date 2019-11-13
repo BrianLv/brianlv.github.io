@@ -70,7 +70,7 @@
 
 <meta itemprop="datePublished" content="2018-12-10T21:16:50&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-10T21:16:50&#43;08:00" />
-<meta itemprop="wordCount" content="1169">
+<meta itemprop="wordCount" content="1158">
 
 
 
@@ -307,7 +307,7 @@
             <a href="https://www.brianlv.com/categories/python.html"> Python </a>
             
           </div>
-        <span class="more-meta"> 约 1169 字 </span>
+        <span class="more-meta"> 约 1158 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
 
         
@@ -366,10 +366,10 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
 </div>
 <p>下面需要关心的两个问题：
 &gt; * Unicode
-    如果为了支持更多的编码字符集，可以采用UTF-32的编码能有更好的扩展性，好的扩展性是需要牺牲一部分内存。嘿嘿，所以占用的内存就比之前的多。在Python2.7.x版本支持标准是<strong>&ndash;enable-unicode=ucs4</strong>，在Python3.X版本中支持的标志是<strong>&ndash;with-wide-unicode</strong>。
+    如果为了支持更多的编码字符集，可以采用UTF-32的编码能有更好的扩展性，好的扩展性是需要牺牲一部分内存。嘿嘿，所以占用的内存就比之前的多。在Python2.7.x版本支持标准是<strong>--enable-unicode=ucs4</strong>，在Python3.X版本中支持的标志是<strong>--with-wide-unicode</strong>。
 &gt; * Shared library
 你或许应该编译Python作为共享库，如果没有共享库的话有些第三方工具类库,比如：mod_wsgi和Blender是无法正常工作的，所以我们需要编译成共享库。我们有两种方式编译成共享库：
-    1. 在编译之前就指定相应的配置命令，<strong>LDFLAGS=&ldquo;-Wl,-rpath /usr/local/lib&rdquo;</strong>
+    1. 在编译之前就指定相应的配置命令，<strong>LDFLAGS=&quot;-Wl,-rpath /usr/local/lib&quot;</strong>
     2. 打开<strong>/etc/ld.so.conf</strong>，增加<strong>/usr/local/lib</strong>在末尾。然后运行<strong>/sbin/ldconfig</strong>确保动态链接改变成功。
     <code>bash
     include ld.so.conf.d/*.conf

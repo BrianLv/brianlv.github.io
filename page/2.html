@@ -64,7 +64,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.brianlv.com/" />
 
-<meta property="og:updated_time" content="2018-12-19T14:30:51+08:00" />
+<meta property="og:updated_time" content="2018-12-20T21:39:15+08:00" />
 <meta itemprop="name" content="吕海峰的博客">
 <meta itemprop="description" content="吕海峰的个人博客">
 
@@ -299,6 +299,122 @@
   <header class="post-header">
     <h1 class="post-title">
       
+      <a class="post-link" href="/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%BA%8C.html">Python进阶系列二</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-10" class="post-time">
+        2018-12-10
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/python.html"> Python </a>
+          
+        </div>
+      <span class="more-meta"> 约 5651 字 </span>
+      <span class="more-meta"> 预计阅读 12 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="概述">概述</h2>
+
+<p>在上一篇博客中，我们介绍了<strong><a href="https://www.brianlv.com/post/python进阶一">Python进阶系列一</a></strong>，还有一些新的技巧没有翻译完，我们下面来继续我们的翻译。</p>
+
+<h2 id="intermediate-python-中译-二">Intermediate Python 中译(二)</h2>
+
+<h3 id="decorators">Decorators</h3>
+
+<p><strong>Decorators</strong>装饰器是Pytho非常重要的特性，相当于Java注解功能。装饰器是修饰函数的一种语法特性，可以使其功能发生一些改变。在Python函数也是第一等公民，可以直接赋值对象和使用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&#34;hi,&#34;</span><span class="o">+</span><span class="n">name</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hi</span><span class="p">())</span>
+<span class="c1">#输出</span>
+<span class="n">hi</span><span class="p">,</span><span class="n">brian</span>
+<span class="n">greet</span> <span class="o">=</span> <span class="n">hi</span>
+<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
+<span class="c1">#输出</span>
+<span class="n">hi</span><span class="p">,</span><span class="n">brian</span>
+<span class="c1">#此时已经删除hi对象，无法运行hi()方法，但是可以通过greet()方法运行</span>
+<span class="k">del</span> <span class="n">hi</span>
+<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
+<span class="c1">#输出</span>
+<span class="n">hi</span><span class="err">，</span><span class="n">brian</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>我们也可以在函数内定义函数</strong>，比如：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;now you are inside in the hi() method&#34;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">greet</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s2">&#34;now you are in inside the greet() method&#34;</span>
+    <span class="k">def</span> <span class="nf">welcome</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s2">&#34;now you are in inside the welcome() method&#34;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">welcome</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;now you are back in the hi() method&#34;</span><span class="p">)</span>
+<span class="n">hi</span><span class="p">()</span>
+<span class="c1">#输出为</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">inside</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">()</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">greet</span><span class="p">()</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">welcome</span><span class="p">()</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">back</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">()</span> <span class="n">method</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><strong>我们可以看到在函数(主函数)内定义函数(子函数)，只要是不调用子函数，子函数只是声明并不执行，当执行完子函数时又返回了主函数。</strong>由于Python只是函数第一等公民的功能特性，那么在Python代码中是可以将Python的函数可以作为变量使用并将其作为返回值亦可。<strong>从主函数中返回子函数(即从函数中返回函数)</strong>。</p>
+    </div>
+    <div class="read-more">
+      <a href="/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%BA%8C.html" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
       <a class="post-link" href="/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%80.html">Python进阶系列一</a>
     </h1>
     
@@ -430,7 +546,7 @@
 2.函数定义
 3.单元测试
 4.猴子补丁(在运行时修改某些代码)，在英文版本里面主要介绍了通过猴子补丁修改API来进行测试。
-&hellip;&hellip;</p>
+......</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
@@ -567,7 +683,7 @@
           <a href="https://www.brianlv.com/categories/python.html"> Python </a>
           
         </div>
-      <span class="more-meta"> 约 1054 字 </span>
+      <span class="more-meta"> 约 1048 字 </span>
       <span class="more-meta"> 预计阅读 3 分钟 </span>
       
       
@@ -584,7 +700,7 @@
 
 <h2 id="安装和配置">安装和配置</h2>
 
-<p>在安装<strong>IPython，Jupyter和Notebook</strong>时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如(&lsquo;Development Tools‘)。废话少说，直接写代码。</p>
+<p>在安装<strong>IPython，Jupyter和Notebook</strong>时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如('Development Tools‘)。废话少说，直接写代码。</p>
 
 <h3 id="基本包安装">基本包安装</h3>
 <div class="highlight"><div class="chroma">
@@ -646,7 +762,7 @@ cat &gt; ~/.pip/pip.conf <span class="s">&lt;&lt; EOF
           <a href="https://www.brianlv.com/categories/linux.html"> Linux </a>
           
         </div>
-      <span class="more-meta"> 约 2172 字 </span>
+      <span class="more-meta"> 约 2170 字 </span>
       <span class="more-meta"> 预计阅读 5 分钟 </span>
       
       
@@ -890,58 +1006,6 @@ sudo apt-get install -y doxygen</code></pre></td></tr></table>
     </div>
     <div class="read-more">
       <a href="/20181210/ubuntu-install-vnc.html" class="read-more-link">阅读全文</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/20181210/centos6-%E5%8D%87%E7%BA%A7python2.7.x%E5%92%8Cpython3.x.html">CentOS6 升级Python2.7.X和Python3.X</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2018-12-10" class="post-time">
-        2018-12-10
-      </time>
-      <div class="post-category">
-          <a href="https://www.brianlv.com/categories/python.html"> Python </a>
-          
-        </div>
-      <span class="more-meta"> 约 1169 字 </span>
-      <span class="more-meta"> 预计阅读 3 分钟 </span>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      <h2 id="简述">简述</h2>
-
-<p>由于产品需要从裸机开始开发所以所有的配置和开发也是从零开始，这个导航是基于centos6.x版本升级默认的Centos的Python，升级到Python2.7或者Python3.3。我们不仅升级了Python，同样基于Python的setuptools, pip, virtualenv and pyvenv这些工具也同样安装和升级以便于项目需要。</p>
-
-<h2 id="安装基本的开发工具包">安装基本的开发工具包</h2>
-
-<p>为了确保编译Python成功，先安装下面的这几个package和类库。</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">yum groupinstall <span class="s2">&#34;Development tools&#34;</span>
-yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel</code></pre></td></tr></table>
-</div>
-</div>
-    </div>
-    <div class="read-more">
-      <a href="/20181210/centos6-%E5%8D%87%E7%BA%A7python2.7.x%E5%92%8Cpython3.x.html" class="read-more-link">阅读全文</a>
     </div>
     
   </div>

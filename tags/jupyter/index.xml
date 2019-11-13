@@ -23,7 +23,7 @@
 
 &lt;h2 id=&#34;安装和配置&#34;&gt;安装和配置&lt;/h2&gt;
 
-&lt;p&gt;在安装&lt;strong&gt;IPython，Jupyter和Notebook&lt;/strong&gt;时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如(&amp;lsquo;Development Tools‘)。废话少说，直接写代码。&lt;/p&gt;
+&lt;p&gt;在安装&lt;strong&gt;IPython，Jupyter和Notebook&lt;/strong&gt;时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如(&#39;Development Tools‘)。废话少说，直接写代码。&lt;/p&gt;
 
 &lt;h3 id=&#34;基本包安装&#34;&gt;基本包安装&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

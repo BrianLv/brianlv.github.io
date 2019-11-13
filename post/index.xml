@@ -6,10 +6,23 @@
     <description>Recent content in Posts on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 19 Dec 2018 14:30:51 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 20 Dec 2018 21:39:15 +0800</lastBuildDate>
     
 	<atom:link href="https://www.brianlv.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>机器学习十大算法系列之感知机</title>
+      <link>https://www.brianlv.com/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%A4%A7%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA.html</link>
+      <pubDate>Thu, 20 Dec 2018 21:39:15 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%A4%A7%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA.html</guid>
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;感知机(perceptron)&lt;/strong&gt;是个二类分类的线性分类模型，该算法对应于特征空间将实例划分为正负两类的分离超平面，属于判别模型。&lt;strong&gt;判别模型是一种对未观测数据y与已观测数据x之间关系进行建模的方法，直接对条件概率p(y|x;θ)建模&lt;/strong&gt;。从机器学习的角度来讲，感知机属于监督学习（supervised learning），它是一个单层的二分类器。如下图所示:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://www.brianlv.com/image/ml_perceptron.png&#34; alt=&#34;感知机算法&#34; /&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>平台化SaaS实践之Docker Stack应用</title>
@@ -38,7 +51,7 @@
 
 &lt;p&gt;1.&lt;strong&gt;从外因分析是市场趋势、价值和效率的方式转变&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;传统软件在其整个生命周期内，价值的体现最终要依赖于大客户需求+解决方案+(服务能力)+销售(话有点大，呵呵)。而在其生命周期过程中，无论是任何一方都在变化，市场、需求和趋势也在发生变化，等产品面向市场时，其实已经&amp;rdquo;慢半拍或者多拍&amp;rdquo;了，很多决策主要依赖于&amp;rdquo;拍脑袋&amp;rdquo;，粗略的数据分析和统计很难满足复杂多变的外因。&lt;/p&gt;
+&lt;p&gt;传统软件在其整个生命周期内，价值的体现最终要依赖于大客户需求+解决方案+(服务能力)+销售(话有点大，呵呵)。而在其生命周期过程中，无论是任何一方都在变化，市场、需求和趋势也在发生变化，等产品面向市场时，其实已经&amp;quot;慢半拍或者多拍&amp;quot;了，很多决策主要依赖于&amp;quot;拍脑袋&amp;quot;，粗略的数据分析和统计很难满足复杂多变的外因。&lt;/p&gt;
 
 &lt;p&gt;2.&lt;strong&gt;从内因分析无非是弄清楚以下关键的内容&lt;/strong&gt;&lt;/p&gt;
 
@@ -266,7 +279,7 @@ $$&lt;/p&gt;
 &lt;p&gt;在二进制计算机中，一个比特为0或1(代表二元问题)。在计算机中，我们给哪一匹马夺冠这个事件进行编码，所需要的平均码长为1.75个比特。其定义为:&lt;/p&gt;
 
 &lt;p&gt;$$
-L&amp;copy;=\sum_{x \in X}p(x)l(x)
+L(C)=\sum_{x \in X}p(x)l(x)
 $$&lt;/p&gt;
 
 &lt;p&gt;为了尽可能减少码长，我们要给发生概率p(x)较大的事件，分配较短的码长l(x)。所以那么
@@ -327,7 +340,7 @@ H(p,q)=H(p)+D_{KL}(pq)
 $$&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;即：交叉熵=信息熵+KL散度（相对熵）&lt;/strong&gt;
-由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&amp;rdquo;距离&amp;rdquo;。&lt;/p&gt;</description>
+由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&amp;quot;距离&amp;quot;。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -562,7 +575,7 @@ $$&lt;/p&gt;
 2.函数定义
 3.单元测试
 4.猴子补丁(在运行时修改某些代码)，在英文版本里面主要介绍了通过猴子补丁修改API来进行测试。
-&amp;hellip;&amp;hellip;&lt;/p&gt;
+......&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -635,7 +648,7 @@ $$&lt;/p&gt;
 
 &lt;h2 id=&#34;安装和配置&#34;&gt;安装和配置&lt;/h2&gt;
 
-&lt;p&gt;在安装&lt;strong&gt;IPython，Jupyter和Notebook&lt;/strong&gt;时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如(&amp;lsquo;Development Tools‘)。废话少说，直接写代码。&lt;/p&gt;
+&lt;p&gt;在安装&lt;strong&gt;IPython，Jupyter和Notebook&lt;/strong&gt;时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如(&#39;Development Tools‘)。废话少说，直接写代码。&lt;/p&gt;
 
 &lt;h3 id=&#34;基本包安装&#34;&gt;基本包安装&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

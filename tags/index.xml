@@ -6,10 +6,28 @@
     <description>Recent content in Tags on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 19 Dec 2018 14:30:51 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 20 Dec 2018 21:39:15 +0800</lastBuildDate>
     
 	<atom:link href="https://www.brianlv.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Machine Learning</title>
+      <link>https://www.brianlv.com/tags/machine-learning.html</link>
+      <pubDate>Thu, 20 Dec 2018 21:39:15 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/tags/machine-learning.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>perceptron</title>
+      <link>https://www.brianlv.com/tags/perceptron.html</link>
+      <pubDate>Thu, 20 Dec 2018 21:39:15 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/tags/perceptron.html</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>SaaS</title>
@@ -35,15 +53,6 @@
       <pubDate>Sat, 15 Dec 2018 17:14:08 +0800</pubDate>
       
       <guid>https://www.brianlv.com/tags/c/c&#43;&#43;.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Machine Learning</title>
-      <link>https://www.brianlv.com/tags/machine-learning.html</link>
-      <pubDate>Mon, 10 Dec 2018 23:16:18 +0800</pubDate>
-      
-      <guid>https://www.brianlv.com/tags/machine-learning.html</guid>
       <description></description>
     </item>
     

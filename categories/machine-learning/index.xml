@@ -6,10 +6,23 @@
     <description>Recent content in Machine Learning on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 10 Dec 2018 23:16:18 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 20 Dec 2018 21:39:15 +0800</lastBuildDate>
     
 	<atom:link href="https://www.brianlv.com/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>机器学习十大算法系列之感知机</title>
+      <link>https://www.brianlv.com/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%A4%A7%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA.html</link>
+      <pubDate>Thu, 20 Dec 2018 21:39:15 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%A4%A7%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA.html</guid>
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;感知机(perceptron)&lt;/strong&gt;是个二类分类的线性分类模型，该算法对应于特征空间将实例划分为正负两类的分离超平面，属于判别模型。&lt;strong&gt;判别模型是一种对未观测数据y与已观测数据x之间关系进行建模的方法，直接对条件概率p(y|x;θ)建模&lt;/strong&gt;。从机器学习的角度来讲，感知机属于监督学习（supervised learning），它是一个单层的二分类器。如下图所示:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://www.brianlv.com/image/ml_perceptron.png&#34; alt=&#34;感知机算法&#34; /&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>机器学习性能度量</title>
@@ -180,7 +193,7 @@ $$&lt;/p&gt;
 &lt;p&gt;在二进制计算机中，一个比特为0或1(代表二元问题)。在计算机中，我们给哪一匹马夺冠这个事件进行编码，所需要的平均码长为1.75个比特。其定义为:&lt;/p&gt;
 
 &lt;p&gt;$$
-L&amp;copy;=\sum_{x \in X}p(x)l(x)
+L(C)=\sum_{x \in X}p(x)l(x)
 $$&lt;/p&gt;
 
 &lt;p&gt;为了尽可能减少码长，我们要给发生概率p(x)较大的事件，分配较短的码长l(x)。所以那么
@@ -241,7 +254,7 @@ H(p,q)=H(p)+D_{KL}(pq)
 $$&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;即：交叉熵=信息熵+KL散度（相对熵）&lt;/strong&gt;
-由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&amp;rdquo;距离&amp;rdquo;。&lt;/p&gt;</description>
+由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&amp;quot;距离&amp;quot;。&lt;/p&gt;</description>
     </item>
     
   </channel>

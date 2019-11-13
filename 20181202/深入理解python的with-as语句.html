@@ -70,7 +70,7 @@
 
 <meta itemprop="datePublished" content="2018-12-02T21:57:43&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-02T21:57:43&#43;08:00" />
-<meta itemprop="wordCount" content="4634">
+<meta itemprop="wordCount" content="4629">
 
 
 
@@ -307,7 +307,7 @@
             <a href="https://www.brianlv.com/categories/python.html"> Python </a>
             
           </div>
-        <span class="more-meta"> 约 4634 字 </span>
+        <span class="more-meta"> 约 4629 字 </span>
           <span class="more-meta"> 预计阅读 10 分钟 </span>
 
         
@@ -928,7 +928,7 @@
 <span class="n">Commits</span> <span class="n">current</span> <span class="n">transaction</span>  </code></pre></td></tr></table>
 </div>
 </div>
-<p>通过上述运行结果，可以看出，生成器函数中 yield 之前的语句在 enter() 方法中执行，yield 之后的语句在__exit()__ 中执行，而 yield 产生的值赋给了 as 后面的 变量。这个contextmanager修饰器 只是省略了 __enter()__ / __exit()__ 的编写，但并不负责实现“获取资源”和“清理资源”工作；“获取资源”操作需要定义在 yield 语句之前，“清理资源”操作需要定义 yield 语句之后，这样 with 语句在执行__enter()__ / __exit()__ 方法时会执行这些语句以获取/释放资源，即生成器函数中需要实现必要的逻辑控制，包括资源访问出现错误时抛出适当的异常。 nested(mgr1, mgr2, &hellip;)() contextlib模块也有个nested(mgr1, mgr2, &hellip;)()函数，这个函数可以作用在多个上下文管理器。例如下面的例子with 语句不仅开启一个transaction也获得了一个线程锁，让当前操作不被其他线程干扰。</p>
+<p>通过上述运行结果，可以看出，生成器函数中 yield 之前的语句在 enter() 方法中执行，yield 之后的语句在__exit()__ 中执行，而 yield 产生的值赋给了 as 后面的 变量。这个contextmanager修饰器 只是省略了 __enter()__ / __exit()__ 的编写，但并不负责实现“获取资源”和“清理资源”工作；“获取资源”操作需要定义在 yield 语句之前，“清理资源”操作需要定义 yield 语句之后，这样 with 语句在执行__enter()__ / __exit()__ 方法时会执行这些语句以获取/释放资源，即生成器函数中需要实现必要的逻辑控制，包括资源访问出现错误时抛出适当的异常。 nested(mgr1, mgr2, ...)() contextlib模块也有个nested(mgr1, mgr2, ...)()函数，这个函数可以作用在多个上下文管理器。例如下面的例子with 语句不仅开启一个transaction也获得了一个线程锁，让当前操作不被其他线程干扰。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
