@@ -19,9 +19,9 @@
       <guid>https://www.brianlv.com/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%A4%A7%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA.html</guid>
       <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;感知机(perceptron)&lt;/strong&gt;是个二类分类的线性分类模型，该算法对应于特征空间将实例划分为正负两类的分离超平面，属于判别模型。&lt;strong&gt;判别模型是一种对未观测数据y与已观测数据x之间关系进行建模的方法，直接对条件概率p(y|x;θ)建模&lt;/strong&gt;。从机器学习的角度来讲，感知机属于监督学习（supervised learning），它是一个单层的二分类器。如下图所示:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;感知机(perceptron)&lt;/strong&gt;是个二类分类的线性分类模型，该算法对应于特征空间将实例划分为正负两类的分离超平面，属于判别模型。&lt;strong&gt;判别模型是一种对未观测数据y与已观测数据x之间关系进行建模的方法，直接对条件概率p(y|x;θ)建模。直接假设判别函数的参数形式是已知的 ，然后基于训练样本，使用某种学习算法，来学习判别函数的参数值，被称为判别式方法，感知机所得到的是一个线性判别函数。而一般来说，寻找线性判别函数的问题，会被形式化为极小化准则函数的问题，以分类为目的的准则函数可以是样本的风险函数，或者是训练误差&lt;/strong&gt;。 从机器学习的角度来讲，感知机属于监督学习（supervised learning），它是一个单层的二分类器。感知机算法非常重要，它是神经网络和SVM的基础。感知机算法如下图所示:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;https://www.brianlv.com/image/ml_perceptron.png&#34; alt=&#34;感知机算法&#34; /&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://www.brianlv.com/image/ml_perceptron.png&#34; alt=&#34;感知机算法&#34;&gt;&lt;/figure&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
