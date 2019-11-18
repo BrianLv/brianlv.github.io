@@ -64,7 +64,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.brianlv.com/" />
 
-<meta property="og:updated_time" content="2018-12-20T21:39:15+08:00" />
+<meta property="og:updated_time" content="2018-12-21T21:24:38+08:00" />
 <meta itemprop="name" content="吕海峰的博客">
 <meta itemprop="description" content="吕海峰的个人博客">
 
@@ -294,6 +294,78 @@
     
   
   
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      <a class="post-link" href="/20181221/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8.html">大规模分布式机器学习之参数服务器</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-21" class="post-time">
+        2018-12-21
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/deep-learning.html"> Deep Learning </a>
+          
+        </div>
+      <span class="more-meta"> 约 2661 字 </span>
+      <span class="more-meta"> 预计阅读 6 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="概述">概述</h2>
+
+<p><strong>参数服务器</strong>是分布式机器学习框架中用来作为参数同步的框架，现在很多大规模的分布式机器学习都采用<strong>参数服务器架构</strong>用来进行参数的同步以提升大规模的模型的速度和效率。由于我们现在正处于一个大数据的时代，如何结合海量数据和超大规模的模型进行应用？比如现在以小视频和短视频(时序特征+内容特征+用户等多维度特征巨大)为主的推荐、广告、视频算法、搜索等都要采用大规模分布式机器学习系统,比如短视频为主的多模态学习更是需要大规模的分布式机器学习来快速满足产品场景化需求、画像更新、视频流算法、智能化内容创作、聚类、灰度算法及时调整、老用户的运营模型以及如何将流量转为价值过程中的模型，大规模分布式机器学习系统都充当了底层基石。<strong>分布式学习系统包括两大模块：模型和分布式系统。</strong>其中模型需要解决训练和正确率的问题，分布式系统需要考虑并行、网络、慢机、故障处理、调度、数据一致性等问题。最近在看mxnet的源码，我们一起学习一下参数服务的架构和设计，更为详细的可以参考mxnet官网。</p>
+
+<p><strong>现有系统的不足</strong>：</p>
+
+<blockquote>
+<p><strong>MapReduce：迭代式计算低效，节点之间通信效率不高</strong></p>
+
+<p><strong>MPI：无法支撑大数据，任意节点挂掉，任务就失败,多节点共享内存的方式以及测试比较复杂和调试困难</strong></p>
+
+<p><strong>Graph：用图来做抽象，类似深度学习无法高效求解，只能同步，不支持异步</strong></p>
+
+<p><strong>Spark：通用框架，高维度和稀疏数据支持不够，Spark的并行梯度下降方法是同步阻断式的，且模型参数需通过全局广播的形式发送到各节点</strong></p>
+</blockquote>
+
+<p>2014年分布式可扩展的Parameter Server被沐神(李沐)提出，几乎完美的解决了机器模型的分布式训练问题，现在我们常说的<strong>Parameter Server</strong>属于第三代参数服务器。其特点如下:</p>
+
+<ul>
+<li><p><strong>Efficient Communication</strong>：异步通信模型，最优化机器学习任务来减少网络负担。</p></li>
+
+<li><p><strong>Flexible Consistency Models</strong>：允许算法设计者去平衡算法收敛率与系统效率。</p></li>
+
+<li><p><strong>Elastic Scalability</strong>：在无需重启运行中的框架下便可添加新节点。</p></li>
+
+<li><p><strong>Fault Tolerance and Durability</strong></p></li>
+
+<li><p><strong>Ease of Use</strong></p></li>
+</ul>
+
+<p>综合考虑性价比高的选择是<strong>参数服务器(Parameter Sever)</strong>，其架构如下图所示:</p>
+
+<p><figure><img src="/image/parameter_server.png" alt="参数服务器"></figure></p>
+
+<p>其算法如下:</p>
+
+<p><figure><img src="/image/sgd_ps.png" alt="参数服务器算法"></figure></p>
+    </div>
+    <div class="read-more">
+      <a href="/20181221/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8.html" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
   
     <article class="post bg-white">
   <header class="post-header">
@@ -784,61 +856,6 @@ $$</p>
     </div>
     <div class="read-more">
       <a href="/20181210/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3.html" class="read-more-link">阅读全文</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%89.html">Python进阶系列三</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2018-12-10" class="post-time">
-        2018-12-10
-      </time>
-      <div class="post-category">
-          <a href="https://www.brianlv.com/categories/python.html"> Python </a>
-          
-        </div>
-      <span class="more-meta"> 约 3115 字 </span>
-      <span class="more-meta"> 预计阅读 7 分钟 </span>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      <h2 id="python-进阶">Python 进阶</h2>
-
-<p>我们在<strong>Python进阶教程(二)</strong>，介绍了一些Python进阶用法。今天给大家介绍的是和<strong>c/c++</strong>混合编程的用法。我们都知道特别是Python2.x版本GIL的影响造成多线程计算方面是鸡肋，并且常常在高性能计算方面依赖很多包。如果我们想切合我们自己的业务处理，比如高性能部分我们用<strong>C/C++</strong>生成动态链接库，Python调用该动态链接库。我们今天主要介绍Python在和<strong>c/c++</strong>混合编程。</p>
-
-<h3 id="python和c-c-混合编程">Python和C/C++混合编程</h3>
-
-<p>在和<strong>C/C++代码</strong>进行混合编程时，我们通常需要采用以下几个技术点：
-* <strong>Ctypes</strong>:C++编译成动态链接库(DLL,即运行时动态调用)，然后通过<strong>ctypes</strong>来解析和加载动态链接库，python调用该动态链接库。从ctypes的文档中可以推断，在各个平台上均使用了对应平台动态加载动态链接库的方法，并通过一套类型映射的方式将Python与二进制动态链接库相连接。ctypes 实现了一系列的类型转换方法，Python的数据类型会包装或直接推算为C类型，作为函数的调用参数；函数的返回值也经过一系列的包装成为Python类型。
-<strong>优点：</strong>
-1.Python内建，不需要单独安装
-2.可以直接调用二进制的动态链接库
-3.在Python一侧，不需要了解Python内部的工作方式
-4.在C/C++一侧，也不需要了解Python内部的工作方式
-5.对基本类型的相互映射有良好的支持
-<strong>缺点：</strong>
-1.平台兼容性差
-2.不能够直接调用动态链接库中未经导出的函数或变量
-3.对C++的支持差
-* <strong>SWIG</strong>:通过提供的接口文件来调用。
-* <strong>Python/C</strong>在C中直接扩展Python的代码。</p>
-    </div>
-    <div class="read-more">
-      <a href="/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%89.html" class="read-more-link">阅读全文</a>
     </div>
     
   </div>

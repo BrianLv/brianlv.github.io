@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>大规模分布式机器学习之参数服务器 - 吕海峰的博客</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="吕海峰(BrianLv)" /><meta name="description" content="大规模分布式机器学习" />
+<meta name="keywords" content="大规模分布式机器学习" />
+
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.58.2" />
+
+
+<link rel="canonical" href="https://www.brianlv.com/20181221/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8.html" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+
+
+
+
+<link rel="stylesheet" href="/css/">
+
+
+<meta property="og:title" content="大规模分布式机器学习之参数服务器" />
+<meta property="og:description" content="大规模分布式机器学习" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.brianlv.com/20181221/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8.html" />
+<meta property="article:published_time" content="2018-12-21T21:24:38+08:00" />
+<meta property="article:modified_time" content="2018-12-21T21:24:38+08:00" />
+<meta itemprop="name" content="大规模分布式机器学习之参数服务器">
+<meta itemprop="description" content="大规模分布式机器学习">
+
+
+<meta itemprop="datePublished" content="2018-12-21T21:24:38&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-21T21:24:38&#43;08:00" />
+<meta itemprop="wordCount" content="2661">
+
+
+
+<meta itemprop="keywords" content="Deep Learning," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="大规模分布式机器学习之参数服务器"/>
+<meta name="twitter:description" content="大规模分布式机器学习"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">吕海峰的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">全部文章</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/about.html">关于</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      吕海峰的博客
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">全部文章</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/about.html">关于</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">大规模分布式机器学习之参数服务器</h1>
+      
+      <div class="post-meta">
+        <time datetime="2018-12-21" class="post-time">
+          2018-12-21
+        </time>
+        <div class="post-category">
+            <a href="https://www.brianlv.com/categories/deep-learning.html"> Deep Learning </a>
+            
+          </div>
+        <span class="more-meta"> 约 2661 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+
+        
+        
+          <span id="busuanzi_container_page_pv">
+            | 阅读 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+<div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content">
+    
+  </div>
+</div>
+
+    
+    <div class="post-content">
+      <h2 id="概述">概述</h2>
+
+<p><strong>参数服务器</strong>是分布式机器学习框架中用来作为参数同步的框架，现在很多大规模的分布式机器学习都采用<strong>参数服务器架构</strong>用来进行参数的同步以提升大规模的模型的速度和效率。由于我们现在正处于一个大数据的时代，如何结合海量数据和超大规模的模型进行应用？比如现在以小视频和短视频(时序特征+内容特征+用户等多维度特征巨大)为主的推荐、广告、视频算法、搜索等都要采用大规模分布式机器学习系统,比如短视频为主的多模态学习更是需要大规模的分布式机器学习来快速满足产品场景化需求、画像更新、视频流算法、智能化内容创作、聚类、灰度算法及时调整、老用户的运营模型以及如何将流量转为价值过程中的模型，大规模分布式机器学习系统都充当了底层基石。<strong>分布式学习系统包括两大模块：模型和分布式系统。</strong>其中模型需要解决训练和正确率的问题，分布式系统需要考虑并行、网络、慢机、故障处理、调度、数据一致性等问题。最近在看mxnet的源码，我们一起学习一下参数服务的架构和设计，更为详细的可以参考mxnet官网。</p>
+
+<p><strong>现有系统的不足</strong>：</p>
+
+<blockquote>
+<p><strong>MapReduce：迭代式计算低效，节点之间通信效率不高</strong></p>
+
+<p><strong>MPI：无法支撑大数据，任意节点挂掉，任务就失败,多节点共享内存的方式以及测试比较复杂和调试困难</strong></p>
+
+<p><strong>Graph：用图来做抽象，类似深度学习无法高效求解，只能同步，不支持异步</strong></p>
+
+<p><strong>Spark：通用框架，高维度和稀疏数据支持不够，Spark的并行梯度下降方法是同步阻断式的，且模型参数需通过全局广播的形式发送到各节点</strong></p>
+</blockquote>
+
+<p>2014年分布式可扩展的Parameter Server被沐神(李沐)提出，几乎完美的解决了机器模型的分布式训练问题，现在我们常说的<strong>Parameter Server</strong>属于第三代参数服务器。其特点如下:</p>
+
+<ul>
+<li><p><strong>Efficient Communication</strong>：异步通信模型，最优化机器学习任务来减少网络负担。</p></li>
+
+<li><p><strong>Flexible Consistency Models</strong>：允许算法设计者去平衡算法收敛率与系统效率。</p></li>
+
+<li><p><strong>Elastic Scalability</strong>：在无需重启运行中的框架下便可添加新节点。</p></li>
+
+<li><p><strong>Fault Tolerance and Durability</strong></p></li>
+
+<li><p><strong>Ease of Use</strong></p></li>
+</ul>
+
+<p>综合考虑性价比高的选择是<strong>参数服务器(Parameter Sever)</strong>，其架构如下图所示:</p>
+
+<p><figure><img src="/image/parameter_server.png" alt="参数服务器"></figure></p>
+
+<p>其算法如下:</p>
+
+<p><figure><img src="/image/sgd_ps.png" alt="参数服务器算法"></figure></p>
+
+<h2 id="工作原理">工作原理</h2>
+
+<p>参数服务器结点中包含一个服务器管理者结点, 该管理者结点负责维护服务器各结点元数据的一致性,管理 服务器各结点的生命周期以及分配资源.工作结点负责处理 数据,一个工作结点处理一部分训练数据,计算局部梯度并进 行数据分析,各工作结点间互不通信.任务调度管理器为对 应工作结点下的机器分配工作负载并监督机器处理的进程, 增删工作结点时,任务调度器为它们重新分配未完成的任务.工作结点之间独立运行,可实现多租户模式,不同类型的应用 可在不同工作结点中并行运行,同类型的应用也可同时分配 到多个工作结点中同步执行以提高并行性.参数服务器模型由工作结点和服务器端参数服务器结点 组成,工作结点和服务器结点都各自包含多台机器.服务器结 点下的每台机器都包含一部分全局的共享参数。如下图所示：</p>
+
+<p><figure><img src="/image/shared_weight.png" alt="参数共享"></figure></p>
+
+<p>补充两个小概念:<strong>数据并行和模型并行</strong>。</p>
+
+<p><strong>Model Parallelism:</strong>可以理解为单个的模型分布在多个机器上。将深度神经网络放在多台机器上并行训练所能获得的性能提升效果主要取决于模型的结构。具有大量参数的模型通常可以获得更多CPU内核和内存，因此，并行化大型模型会显著提高性能，从而缩短训练时间。</p>
+
+<p><strong>Data Parallelism:</strong>减少训练时间的一般思路是，采用n个workers同时并行计算n个不同的数据块（partitions，分区），来优化一个central model的参数。在这种情况下，把n个模型副本放在n个处理节点上，即每个节点（或进程）都拥有一个模型的副本。然后，每个worker使用指定的数据块来训练一个局部的模型副本。但是，可以让所有的workers同时一致工作，优化同一个目标。</p>
+
+<h2 id="模型参数">模型参数</h2>
+
+<p>模型参数默认采用<strong><key,value></strong>集合，key 就是 feature ID(slotId)，value 是其权值。对于不存在的key，可认为其权值为0。也有对<key,value>进行抽象的。</p>
+
+<h2 id="接口">接口</h2>
+
+<p>workers和servers之间通信是通过 push() 和 pull() 方法进行的。worker通过 push() 将计算好的梯度发送到 server，然后通过 pull() 从 server 获取更新参数。</p>
+
+<p>为了提高通信效率，PS允许用户使用 Range Push/Range Pull 操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">w</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+<span class="n">w</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="同步协议">同步协议</h2>
+
+<p>Parameter Server 一般会提供如下三个级别的异步控制协议： <strong>BSP（Bulk Synchronous Parallel），SSP（Stalness Synchronous Parallel） 和 ASP（Asynchronous Parallel）</strong>， 它们的同步限制依次放宽。为了追求更快的计算速度，算法可以选择更宽松的同步协议。</p>
+
+<p><figure><img src="/image/sync_controller.png" alt="同步协议"></figure></p>
+
+<h4 id="1-bsp">1. BSP</h4>
+
+<p>一般的分布式计算采用的同步协议，例如 Spark。在每一轮迭代中都需要等待所有的Task计算完成。</p>
+
+<ul>
+<li>优点：适用范围广；每一轮迭代收敛质量高</li>
+<li>缺点：但是每一轮迭代都需要等待最慢的Task，整体任务计算时间长</li>
+</ul>
+
+<h4 id="2-ssp">2. SSP</h4>
+
+<p>允许一定程度的Task进度不一致，但这个不一致有一个上限，我们称之为 staleness 值，即最快的Task最多领先最慢的Task staleness 轮迭代。</p>
+
+<ul>
+<li>优点：一定程度减少了Task之间的等待时间，计算速度较快</li>
+<li>缺点：每一轮迭代的收敛质量不如BSP，达到同样的收敛效果可能需要更多轮的迭代；适用性也不如BSP，部分算法不适用</li>
+</ul>
+
+<h4 id="3-asp">3. ASP</h4>
+
+<p>Task之间完全不用相互等待，先完成的Task，继续下一轮的训练。</p>
+
+<ul>
+<li>优点：消除了等待慢Task的时间，计算速度快</li>
+<li>缺点：适用性差，在一些情况下并不能保证收敛性</li>
+</ul>
+
+<h2 id="工业界参数服务器">工业界参数服务器</h2>
+
+<p>我们看下腾讯的参数服务器:</p>
+
+<p><figure><img src="/image/angel_architecture.png" alt="Angel"></figure></p>
+
+<ol>
+<li><strong>Parameter Server层</strong>：提供通用的<code>参数服务器</code>服务，负责模型的分布存储，通讯同步和协调计算，并通过PSAgent提供<code>PS Service</code></li>
+<li><strong>Worker层</strong>： 基于Angel自身模型设计的分布式运行节点，自动读取并划分数据，局部训练出模型增量，通过<code>PS Client</code>和<code>PS Server</code>通信，完成模型训练和预测。一个Worker包含一个或者多个Task，Task是Angel计算单元，这样设计的原因是可以让Task共享Worker的许多公共资源。</li>
+<li><strong>Model层</strong>： 这是一层虚拟抽象层，并非真实存在的物理层。关于Model的Push和Pull，各种异步控制，模型分区路由，自定义函数……是连通Worker和PSServer的桥梁。</li>
+</ol>
+
+<p>蚂蚁金服的参数服务器如下:</p>
+
+<p><figure><img src="/image/alibab_ps.png" alt="PS"></figure></p>
+
+<ol>
+<li>内置Failover机制，稳健性大大提升；</li>
+<li>架构中有多个Server，模型的可扩展性非常强；</li>
+<li>完美支持同步和异步，可以达到更快的收敛速度，同时不影响模型的精度；</li>
+<li>同时在稀疏性的上支持，让worker和server节点在通信效率上大幅度提升。</li>
+</ol>
+
+<h2 id="参考链接"><strong>参考链接</strong></h2>
+
+<p>1.<a href="https://zhuanlan.zhihu.com/p/82116922">参数服务器参考</a></p>
+
+<p>2.<a href="舒娜、刘波">分布式机器学习平台与算法-舒娜</a></p>
+
+<p>3.<a href="https://blog.csdn.net/qq_28954371/article/details/52850096?utm_source=blogxgwz3">参数服务器参考</a></p>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">吕海峰(BrianLv)</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+      2018-12-21
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/image/wechatpay.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div>
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://www.brianlv.com/tags/deep-learning.html">Deep Learning</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+        
+          <a class="next" href="/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%A4%A7%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA.html">
+            <span class="next-text nav-default">机器学习十大算法入门系列之感知机</span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:brian.lv@outlook.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://www.brianlv.com/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2017 -
+    2019
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        吕海峰
+        
+      </span></span>
+
+  
+  
+    <span id="busuanzi_container">
+      访客数/访问量：<span id="busuanzi_value_site_uv"></span>/<span id="busuanzi_value_site_pv"></span>
+    </span>
+  
+
+  
+    <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css"
+    integrity="sha384-BdGj8xC2eZkQaxoQ8nSLefg4AV4/AwB3Fj+8SUSo7pnKP6Eoy18liIKTPn9oBYNG"
+    crossorigin="anonymous">
+
+  
+  <script defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.js"
+    integrity="sha384-JiKN5O8x9Hhs/UE5cT5AAJqieYlOZbGT3CHws/y97o3ty4R7/O5poG9F3JoiOYw1"
+    crossorigin="anonymous"></script>
+
+  
+  <script defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI"
+    crossorigin="anonymous" onload="renderMathInElement(document.body);">
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+        
+      });
+    });
+  </script>
+<script id="tencent_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+	hm.src = "//tajs.qq.com/stats?sId=66124387";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/"></script>
+
+
+</body>
+</html>

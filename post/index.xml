@@ -6,10 +6,55 @@
     <description>Recent content in Posts on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 20 Dec 2018 21:39:15 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 21 Dec 2018 21:24:38 +0800</lastBuildDate>
     
 	<atom:link href="https://www.brianlv.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>大规模分布式机器学习之参数服务器</title>
+      <link>https://www.brianlv.com/20181221/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8.html</link>
+      <pubDate>Fri, 21 Dec 2018 21:24:38 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/20181221/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8.html</guid>
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;参数服务器&lt;/strong&gt;是分布式机器学习框架中用来作为参数同步的框架，现在很多大规模的分布式机器学习都采用&lt;strong&gt;参数服务器架构&lt;/strong&gt;用来进行参数的同步以提升大规模的模型的速度和效率。由于我们现在正处于一个大数据的时代，如何结合海量数据和超大规模的模型进行应用？比如现在以小视频和短视频(时序特征+内容特征+用户等多维度特征巨大)为主的推荐、广告、视频算法、搜索等都要采用大规模分布式机器学习系统,比如短视频为主的多模态学习更是需要大规模的分布式机器学习来快速满足产品场景化需求、画像更新、视频流算法、智能化内容创作、聚类、灰度算法及时调整、老用户的运营模型以及如何将流量转为价值过程中的模型，大规模分布式机器学习系统都充当了底层基石。&lt;strong&gt;分布式学习系统包括两大模块：模型和分布式系统。&lt;/strong&gt;其中模型需要解决训练和正确率的问题，分布式系统需要考虑并行、网络、慢机、故障处理、调度、数据一致性等问题。最近在看mxnet的源码，我们一起学习一下参数服务的架构和设计，更为详细的可以参考mxnet官网。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;现有系统的不足&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;MapReduce：迭代式计算低效，节点之间通信效率不高&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;MPI：无法支撑大数据，任意节点挂掉，任务就失败,多节点共享内存的方式以及测试比较复杂和调试困难&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Graph：用图来做抽象，类似深度学习无法高效求解，只能同步，不支持异步&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Spark：通用框架，高维度和稀疏数据支持不够，Spark的并行梯度下降方法是同步阻断式的，且模型参数需通过全局广播的形式发送到各节点&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;2014年分布式可扩展的Parameter Server被沐神(李沐)提出，几乎完美的解决了机器模型的分布式训练问题，现在我们常说的&lt;strong&gt;Parameter Server&lt;/strong&gt;属于第三代参数服务器。其特点如下:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Efficient Communication&lt;/strong&gt;：异步通信模型，最优化机器学习任务来减少网络负担。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Flexible Consistency Models&lt;/strong&gt;：允许算法设计者去平衡算法收敛率与系统效率。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Elastic Scalability&lt;/strong&gt;：在无需重启运行中的框架下便可添加新节点。&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Fault Tolerance and Durability&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Ease of Use&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;综合考虑性价比高的选择是&lt;strong&gt;参数服务器(Parameter Sever)&lt;/strong&gt;，其架构如下图所示:&lt;/p&gt;
+
+&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://www.brianlv.com/image/parameter_server.png&#34; alt=&#34;参数服务器&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
+
+&lt;p&gt;其算法如下:&lt;/p&gt;
+
+&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://www.brianlv.com/image/sgd_ps.png&#34; alt=&#34;参数服务器算法&#34;&gt;&lt;/figure&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>机器学习十大算法入门系列之感知机</title>

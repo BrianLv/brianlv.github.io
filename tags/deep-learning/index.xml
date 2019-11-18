@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Deep Learning on 吕海峰的博客</title>
-    <link>https://www.brianlv.com/categories/deep-learning.html</link>
+    <link>https://www.brianlv.com/tags/deep-learning.html</link>
     <description>Recent content in Deep Learning on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 21 Dec 2018 21:24:38 +0800</lastBuildDate>
     
-	<atom:link href="https://www.brianlv.com/categories/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.brianlv.com/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -54,25 +54,6 @@
 &lt;p&gt;其算法如下:&lt;/p&gt;
 
 &lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://www.brianlv.com/image/sgd_ps.png&#34; alt=&#34;参数服务器算法&#34;&gt;&lt;/figure&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>TensorFlow Serving and Flask Delpoy Models</title>
-      <link>https://www.brianlv.com/20181218/tensorflow-serving-and-flask-delpoy-models.html</link>
-      <pubDate>Tue, 18 Dec 2018 21:24:57 +0800</pubDate>
-      
-      <guid>https://www.brianlv.com/20181218/tensorflow-serving-and-flask-delpoy-models.html</guid>
-      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
-
-&lt;p&gt;当我们要去部署和测试深度学习models时，我们经常需要一个比较便利和接口方便的web server，这样我们只需要专注在Model本身即可，通过web server一方面不仅可以进行调试和测试，
-另外一方面还可以将自己的成果输出给第三方和用户去体验深度学习带来的便利。大家经常使用的方式有以下两种(以TensorFlow为主):&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;TensorFlow Serving&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;TensorFlow Models + web server&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;如果你的模型很多，那么就需要结合云计算的AI工具箱进而支持大规模的深度学习线上、线下训练、预测以及发布等等，还会结合yarn和k8s进行节点、服务调度，微服务化的方式支持业务线。&lt;/p&gt;</description>
     </item>
     
   </channel>
