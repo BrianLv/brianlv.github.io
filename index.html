@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.2" />
+<meta name="generator" content="Hugo 0.60.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/" />
@@ -63,12 +63,9 @@
 <meta property="og:description" content="吕海峰的个人博客" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.brianlv.com/" />
-
-<meta property="og:updated_time" content="2018-12-21T21:24:38+08:00" />
+<meta property="og:updated_time" content="2018-12-22T21:24:38+08:00" />
 <meta itemprop="name" content="吕海峰的博客">
-<meta itemprop="description" content="吕海峰的个人博客">
-
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="吕海峰的个人博客"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="吕海峰的博客"/>
 <meta name="twitter:description" content="吕海峰的个人博客"/>
 
@@ -299,6 +296,55 @@
   <header class="post-header">
     <h1 class="post-title">
       
+      <a class="post-link" href="/20181222/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bknn%E7%AE%97%E6%B3%95.html">机器学习之KNN算法</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-22" class="post-time">
+        2018-12-22
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/machine-learning.html"> Machine Learning </a>
+          
+        </div>
+      <span class="more-meta"> 约 1549 字 </span>
+      <span class="more-meta"> 预计阅读 4 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="概述">概述</h2>
+
+<p>KNN算法(<strong>K最近邻算法</strong>)也是一种基本的机器学习算法，可以用于分类和回归任务中。即对于给定一个训练数据集，对新的实例在训练数据集中找到与该实例最邻近的k个实例。我们看一下可视化的KNN算法：</p>
+
+<p><figure><img src="/image/ml_knn.jpeg" alt="KNN 算法"></figure></p>
+
+<p>如上图我们看到，给定一个新输入实例对于k的取值不同,对该算法的结果影响比较大,其次是当训练样本数大、特征向量维度很高时计算复杂度也高。因为我们在预测时需要计算预测样本和每一个训练样本的距离，并且对距离进行排序找到最近的k个样本并将结果返回。</p>
+
+<blockquote>
+<ul>
+<li>1.  <strong>使用高效的部分排序算法，只找出最小的k个数。</strong></li>
+<li>2. <strong>k-d树实现快速的近邻查找。</strong></li>
+</ul>
+</blockquote>
+    </div>
+    <div class="read-more">
+      <a href="/20181222/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bknn%E7%AE%97%E6%B3%95.html" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
       <a class="post-link" href="/20181221/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8.html">大规模分布式机器学习之参数服务器</a>
     </h1>
     
@@ -371,7 +417,7 @@
   <header class="post-header">
     <h1 class="post-title">
       
-      <a class="post-link" href="/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%A4%A7%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA.html">机器学习十大算法入门系列之感知机</a>
+      <a class="post-link" href="/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA%E7%AE%97%E6%B3%95.html">机器学习之感知机算法</a>
     </h1>
     
     <div class="post-meta">
@@ -400,7 +446,7 @@
 <p><figure><img src="/image/ml_perceptron.png" alt="感知机算法"></figure></p>
     </div>
     <div class="read-more">
-      <a href="/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%A4%A7%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA.html" class="read-more-link">阅读全文</a>
+      <a href="/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA%E7%AE%97%E6%B3%95.html" class="read-more-link">阅读全文</a>
     </div>
     
   </div>
@@ -423,7 +469,7 @@
           <a href="https://www.brianlv.com/categories/saas.html"> SaaS </a>
           
         </div>
-      <span class="more-meta"> 约 2180 字 </span>
+      <span class="more-meta"> 约 2182 字 </span>
       <span class="more-meta"> 预计阅读 5 分钟 </span>
       
       
@@ -434,10 +480,8 @@
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="概述">概述</h2>
-
+      <h2 id="heading">概述</h2>
 <p><strong>SaaS</strong> (软件即服务)是一种许可和交付模式，其中软件由提供商集中托管和管理，并通过订阅的方式提供给用户,用户也可以按需或者即用即付方式进行购买。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。提供商负责管理硬件和软件，并根据适当的服务协议确保应用和数据的可用性和安全性。现在很多传统软件向SaaS“转变”时，更多的是向<strong>平台化SaaS软件</strong>靠拢，借助此模式来交付的产品优势很多，比如:</p>
-
 <ul>
 <li><strong>提供灵活的方式满足客户需求</strong></li>
 <li><strong>提高运营效率，使其专注于产品</strong></li>
@@ -446,7 +490,6 @@
 <li><strong>自传播</strong></li>
 <li><strong>隔离性、安全性、可定制性度高</strong></li>
 </ul>
-
 <p><strong>平台+软件=平台化SaaS=支撑层+应用层</strong></p>
     </div>
     <div class="read-more">
@@ -472,7 +515,7 @@
           <a href="https://www.brianlv.com/categories/deep-learning.html"> Deep Learning </a>
           
         </div>
-      <span class="more-meta"> 约 2730 字 </span>
+      <span class="more-meta"> 约 2698 字 </span>
       <span class="more-meta"> 预计阅读 6 分钟 </span>
       
       
@@ -483,16 +526,13 @@
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="概述">概述</h2>
-
+      <h2 id="heading">概述</h2>
 <p>当我们要去部署和测试深度学习models时，我们经常需要一个比较便利和接口方便的web server，这样我们只需要专注在Model本身即可，通过web server一方面不仅可以进行调试和测试，
 另外一方面还可以将自己的成果输出给第三方和用户去体验深度学习带来的便利。大家经常使用的方式有以下两种(以TensorFlow为主):</p>
-
 <ul>
 <li><strong>TensorFlow Serving</strong></li>
 <li><strong>TensorFlow Models + web server</strong></li>
 </ul>
-
 <p>如果你的模型很多，那么就需要结合云计算的AI工具箱进而支持大规模的深度学习线上、线下训练、预测以及发布等等，还会结合yarn和k8s进行节点、服务调度，微服务化的方式支持业务线。</p>
     </div>
     <div class="read-more">
@@ -518,7 +558,7 @@
           <a href="https://www.brianlv.com/categories/c/c&#43;&#43;.html"> C/C&#43;&#43; </a>
           
         </div>
-      <span class="more-meta"> 约 714 字 </span>
+      <span class="more-meta"> 约 711 字 </span>
       <span class="more-meta"> 预计阅读 2 分钟 </span>
       
       
@@ -530,14 +570,13 @@
     
     <div class="post-summary">
       <p>由于我工作环境是Linux和Mac,个人的工作目录和开发环境一直来回切换，之前一直使用emacs，emacs非常强大和可定制化。最近看到vscode的社区不断壮大，在好基友的推荐下，试用vscode，发现非常不错。于是记录和分享到博客中。今天主要给大家讲解的<strong>vscode配置c/c++ ide开发环境</strong>，当然官网支持很多种可定制化的配置。</p>
-
-<h2 id="开发环境搭建">开发环境搭建</h2>
-
-<p>我们首先安装<strong>vscode</strong>，官网是：<a href="https://code.visualstudio.com/">vscode</a>。我们下面来安装支持c/c++开发环境的安装包。
-* cpptools
-* cmake
-* C/C++ Clang</p>
-
+<h2 id="heading">开发环境搭建</h2>
+<p>我们首先安装<strong>vscode</strong>，官网是：<a href="https://code.visualstudio.com/">vscode</a>。我们下面来安装支持c/c++开发环境的安装包。</p>
+<ul>
+<li>cpptools</li>
+<li>cmake</li>
+<li>C/C++ Clang</li>
+</ul>
 <p>我们在工作目录依次安装如下，<strong>c_cpp_properties.json(指定c/c++包和平台相关的配置文件),launch.json(debug 调试),tasks.json(你的编译等命令)</strong>。</p>
     </div>
     <div class="read-more">
@@ -575,30 +614,25 @@
     
     <div class="post-summary">
       <p>我们在进行机器学习时需要衡量机器学习的优劣和本身模型的准确程度，比如简单的衡量数据的准确率和错误率，但是我们更关心的是模型的泛化能力的指标，即基于模型的所选的item相关性以及模型分类指标的好坏。</p>
-
-<h2 id="机器学习度量">机器学习度量</h2>
-
+<h2 id="heading">机器学习度量</h2>
 <ul>
 <li><strong>error rate(错误率)</strong>:把分类错误的样本数占样本总数的比例。$$E=a/m$$</li>
 <li><strong>accuracy(精确度)</strong>:分类正确的样本数占样本总数的比例。$$acc=1-E$$</li>
-<li><strong>training error(训练误差):</strong>学习器在训练集上的误差。</li>
-<li><strong>generalization error(泛华误差):</strong>在新样本上的误差。</li>
+<li>**training error(训练误差):**学习器在训练集上的误差。</li>
+<li>**generalization error(泛华误差):**在新样本上的误差。</li>
 </ul>
-
 <p>在机器学习中由很多机器学习算法，那么如何选择这些算法和模型，如何评估这些算法和模型,评估模型的算法和准确率的方式很多，我们依次来介绍一下几个常用的指标。<strong>TP、TN、FP、FN、Acc、Recall、F1、ROC和ROI</strong></p>
-
-<h2 id="各种机器学习衡量指标">各种机器学习衡量指标</h2>
-
-<h3 id="accuracy-precision-recall和f1-score">Accuracy、Precision、Recall和F1-Score</h3>
-
+<h2 id="heading1">各种机器学习衡量指标</h2>
+<h3 id="accuracyprecisionrecallf1score">Accuracy、Precision、Recall和F1-Score</h3>
 <p>混淆矩阵是按照预测分类和实际分类的类别对比,如下图所示:
-<img src="/image/precision-recall.png" alt="混淆矩阵" />
-如上表所示，行表示预测的label值，列表示真实label值。TP，FP，FN，TN分别表示如下意思：
-* TP（true positive）：表示样本的真实类别为正，最后预测得到的结果也为正
-* FP（false positive）：表示样本的真实类别为负，最后预测得到的结果却为正
-* FN（false negative）：表示样本的真实类别为正，最后预测得到的结果却为负
-* TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负</p>
-
+<img src="/image/precision-recall.png" alt="混淆矩阵">
+如上表所示，行表示预测的label值，列表示真实label值。TP，FP，FN，TN分别表示如下意思：</p>
+<ul>
+<li>TP（true positive）：表示样本的真实类别为正，最后预测得到的结果也为正</li>
+<li>FP（false positive）：表示样本的真实类别为负，最后预测得到的结果却为正</li>
+<li>FN（false negative）：表示样本的真实类别为正，最后预测得到的结果却为负</li>
+<li>TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负</li>
+</ul>
 <p>$$
 Accuracy = \frac{TP+TN}{TP+FP+TN+FN}
 $$
@@ -609,25 +643,20 @@ $$
 Recall = \frac{TP}{TP+FN}
 $$
 $$
-SP = \frac{TN}{TN + FP}<br />
+SP = \frac{TN}{TN + FP}\<br>
 $$</p>
-
 <ul>
 <li>Accuracy：表示预测结果的精确度，预测正确的样本数除以总样本数。</li>
 <li>Precision，准确率，表示预测结果中，预测为正样本的样本中，正确预测为正样本的概率；</li>
 <li>Recall，召回率，表示在原始样本的正样本中，最后被正确预测为正样本的概率；</li>
 <li>Specificity，常常称作特异性，它研究的样本集是原始样本中的负样本，表示的是在这些负样本中最后被正确预测为负样本的概率。</li>
 </ul>
-
 <p>在实际当中，我们往往希望得到的precision和recall都比较高，比如当FN和FP等于0的时候，他们的值都等于1。但是，它们往往在某种情况下是互斥的。例如，有50个正样本，50个负样本，结果全部预测为正样本，那么TP=50,FP=50,TN=0,FN=0,按照上面的公式计算，可以得到正样本的recall却为1，precision却为0.5.所以需要一种折衷的方式，因此就有了F1-score。</p>
-
 <p>$$
 F1-score = \frac{2\times recall \times precision}{ recall + precision}
 $$</p>
-
 <p><strong>F1-score表示的是precision和recall的调和平均评估指标.</strong>
 另外还有一个指标，即MCC，该指标对于不均衡数据集的评估非常有效，公式如下：</p>
-
 <p>$$
 MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP+FP)\times(TP+FN)\times(TN+FP)\times(TN+FN)}}
 $$</p>
@@ -655,7 +684,7 @@ $$</p>
           <a href="https://www.brianlv.com/categories/machine-learning.html"> Machine Learning </a>
           
         </div>
-      <span class="more-meta"> 约 4778 字 </span>
+      <span class="more-meta"> 约 4798 字 </span>
       <span class="more-meta"> 预计阅读 10 分钟 </span>
       
       
@@ -666,32 +695,31 @@ $$</p>
   <div class="post-content">
     
     <div class="post-summary">
-      <p>机器学习可以通过结构化的流程来梳理:<strong>1.定义问题和需求分析-&gt;2.数据探索-&gt;3.数据准备-&gt;4.评估算法-&gt;5.优化模型-&gt;6.部署</strong>。
-* 导入类库
-* 导入数据集
-* 数据统计分析
-* 数据可视化
-* 数据清洗
-* 特征选择
-* 数据转换
-* 分离数据集
-* 定义模型评估标准
-* 算法审查
-* 算法比较
-* 算法调参
-* 集成算法
-* 预测评估数据集
-* 利用数据生成模型
-* 序列化模型</p>
-
-<h2 id="数据理解">数据理解</h2>
-
+      <p>机器学习可以通过结构化的流程来梳理:<strong>1.定义问题和需求分析-&gt;2.数据探索-&gt;3.数据准备-&gt;4.评估算法-&gt;5.优化模型-&gt;6.部署</strong>。</p>
+<ul>
+<li>导入类库</li>
+<li>导入数据集</li>
+<li>数据统计分析</li>
+<li>数据可视化</li>
+<li>数据清洗</li>
+<li>特征选择</li>
+<li>数据转换</li>
+<li>分离数据集</li>
+<li>定义模型评估标准</li>
+<li>算法审查</li>
+<li>算法比较</li>
+<li>算法调参</li>
+<li>集成算法</li>
+<li>预测评估数据集</li>
+<li>利用数据生成模型</li>
+<li>序列化模型</li>
+</ul>
+<h2 id="heading">数据理解</h2>
 <p>数据的理解主要在于分析数据维度、数据类型属性、数据分布以及相关性等。数据属性的相关性是指数据的两个属性的互相影响。</p>
-
-<h3 id="数据统计分析">数据统计分析</h3>
+<h3 id="heading1">数据统计分析</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -709,153 +737,24 @@ $$</p>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 数据导入与数据维度探索</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">loadtxt</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rawdata</span><span class="p">:</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="n">rawdata</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">rt</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rawdata</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="n">rawdata</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">,</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="c1">#数据属性和描述性统计</span>
 <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
 <span class="c1">#数据根据类别分类</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&#34;class&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">class</span><span class="s2">&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
 <span class="c1">#数据属性相关性(皮尔逊相关系数，1完全正相关，-1完全负相关，0不相关)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&#34;pearson&#34;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">pearson</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">)</span>
 <span class="c1">#数据分布分析,skew代表高斯分布的偏离程度，数据接近于0表示数据偏差非常小</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">skew</span><span class="p">())</span></code></pre></td></tr></table>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">skew</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>
     <div class="read-more">
       <a href="/20181210/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B.html" class="read-more-link">阅读全文</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/20181210/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3.html">熵的理解</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2018-12-10" class="post-time">
-        2018-12-10
-      </time>
-      <div class="post-category">
-          <a href="https://www.brianlv.com/categories/machine-learning.html"> Machine Learning </a>
-          
-        </div>
-      <span class="more-meta"> 约 1272 字 </span>
-      <span class="more-meta"> 预计阅读 3 分钟 </span>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      <p>熵在信息论中代表随机变量不确定度的度量。一个离散型随机变量X的熵H(X)定义为：
-$$
-H(X)=- \sum_{x \in X} p(x) \cdot logp(x)
-$$
-明确定义的科学名词且与内容无关，而且不随信息的具体表达式的变化而变化。是独立于形式，反映了信息表达式中统计方面的性质。是统计学上的抽象概念。信息熵的一种解释是，它表示的是最短的平均编码长度。同样的，不确定性越大，熵就越大。信息熵的单位是比特(bit)。我们举两个简单的例子：
-第一个例子：
-32支球队，在无任何先验信息的前提下，用二分法猜冠军队伍，最多猜5次，即：
-$$
-log\frac{1}{32}=5log\frac{1}{32}=5bit
-$$
-第二个例子：赌马比赛里，有4匹马A,B,C,D，获胜概率分别为
-$$ \frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{8} $$</p>
-
-<ul>
-<li>如果 X=A ，那么需要问1次（问题1：是不是A？），概率为
-$$ \frac{1}{2} $$</li>
-<li>如果 X=B ，那么需要问2次（问题1：是不是A？问题2：是不是B？），概率为
-$$ \frac{1}{4}$$</li>
-<li>如果 X=C ，那么需要问3次（问题1，问题2，问题3），概率为<br />
-$$ \frac{1}{8}$$</li>
-<li>如果 X=D ，那么同样需要问3次（问题1，问题2，问题3），概率为
-$$ \frac{1}{8}$$</li>
-</ul>
-
-<p>通过熵的定义得到</p>
-
-<p>$$
-H(x)=-\sum_{x \in {A,B,C,D}}p(x)\cdot log p(x)=\frac{1}{2} \cdot log2+\frac{1}{4} \cdot log4+\frac{1}{8} \cdot log8+\frac{1}{8} \cdot log8=1.75
-$$</p>
-
-<p>在二进制计算机中，一个比特为0或1(代表二元问题)。在计算机中，我们给哪一匹马夺冠这个事件进行编码，所需要的平均码长为1.75个比特。其定义为:</p>
-
-<p>$$
-L(C)=\sum_{x \in X}p(x)l(x)
-$$</p>
-
-<p>为了尽可能减少码长，我们要给发生概率p(x)较大的事件，分配较短的码长l(x)。所以那么
-$${A,B,C,D}$$
-四个实践，可以分别由
-$${0,10,110,111}$$
-表示.
-（1）信息熵只反映内容的随机性，与内容本身无关。不管是什么样内容的文件，只要服从同样的概率分布，就会计算得到同样的信息熵。
-（2）信息熵越大，表示占用的二进制位越长，因此就可以表达更多的符号。所以，人们有时也说，信息熵越大，表示信息量越大。不过，由于第一点的原因，这种说法很容易产生误导。较大的信息熵，只表示可能出现的符号较多，并不意味着你可以从中得到更多的信息。
-（3）信息熵与热力学的熵，基本无关。</p>
-
-<h2 id="相对熵-kl离散度">相对熵(KL离散度)</h2>
-
-<p>相对熵又叫做KL离散度，其定义为：
-$$
-KL(f(x)||g(x))=-\sum_{x \in X} f(x) \cdot log\frac{f(x)}{g(x)}
-$$
-KL 散度是两个概率分布f(x)和g(x)差别的非对称性的度量。KL散度是用来度量使用基于f(x)的编码来编码来自g(x)的样本平均所需的额外的位元数。
-很容易证明，有三个结论：
-(1) 两函数完全相同时，KL=0
-(2) KL越大，差异越大
-(3) 对概率分布或者概率密度函数(&gt;0), KL可用来衡量两个随机变量分布的差异性。</p>
-
-<h2 id="交叉熵">交叉熵</h2>
-
-<p>对一随机事件，其真实概率分布为p(i)，从数据中得到的概率分布为q(i)，则我们定义，交叉熵为:
-$$
-H(p,q)=\displaystyle\sum _{x}p(x)log\frac{1}{q(x)}=-\sum _{x}p(x)logq(x)
-$$</p>
-
-<p>核心理解：
-* 用p来衡量识别一个样本的信息量即最小编码长度（<strong>信息熵</strong>）。</p>
-
-<p>$$
-H(p)=\sum p \cdot log\frac{1}{p}
-$$</p>
-
-<ul>
-<li>q来估计真实分布为p的样本的信息量.</li>
-</ul>
-
-<p>$$
-H(q,p)=\sum p \cdot \frac{1}{q}
-$$</p>
-
-<ul>
-<li>则估算多出来的冗余信息量.</li>
-</ul>
-
-<p>$$
-D(p||q)=H(p,q)-H(p)=\sum p \cdot log\frac{p}{q}(KL离散度)
-$$</p>
-
-<p><strong>在机器学习中，p通常设定为真实标记的分布，q设定为训练后模型预测标记的分布：</strong></p>
-
-<p>$$
-H(p,q)=H(p)+D_{KL}(pq)
-$$</p>
-
-<p><strong>即：交叉熵=信息熵+KL散度（相对熵）</strong>
-由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&quot;距离&quot;。</p>
-    </div>
-    <div class="read-more">
-      <a href="/20181210/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3.html" class="read-more-link">阅读全文</a>
     </div>
     
   </div>

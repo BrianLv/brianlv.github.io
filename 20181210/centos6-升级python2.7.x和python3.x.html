@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.2" />
+<meta name="generator" content="Hugo 0.60.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/centos6-%E5%8D%87%E7%BA%A7python2.7.x%E5%92%8Cpython3.x.html" />
@@ -66,16 +66,13 @@
 <meta property="article:modified_time" content="2018-12-10T21:16:50+08:00" />
 <meta itemprop="name" content="CentOS6 升级Python2.7.X和Python3.X">
 <meta itemprop="description" content="Python upgrade">
-
-
 <meta itemprop="datePublished" content="2018-12-10T21:16:50&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-10T21:16:50&#43;08:00" />
-<meta itemprop="wordCount" content="1158">
+<meta itemprop="wordCount" content="1187">
 
 
 
-<meta itemprop="keywords" content="Python," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="CentOS6 升级Python2.7.X和Python3.X"/>
 <meta name="twitter:description" content="Python upgrade"/>
 
@@ -307,7 +304,7 @@
             <a href="https://www.brianlv.com/categories/python.html"> Python </a>
             
           </div>
-        <span class="more-meta"> 约 1158 字 </span>
+        <span class="more-meta"> 约 1187 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
 
         
@@ -328,59 +325,54 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#简述">简述</a></li>
-<li><a href="#安装基本的开发工具包">安装基本的开发工具包</a></li>
-<li><a href="#下载-安装和编译python">下载、安装和编译Python</a></li>
-<li><a href="#安装python-pip-virtualenv和virtualenvwapper">安装Python pip、virtualenv和virtualenvwapper</a>
-<ul>
-<li><a href="#安装pip">安装pip</a></li>
-<li><a href="#安装virtualenv和virtualenvwapper">安装virtualenv和virtualenvwapper</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">简述</a></li>
+    <li><a href="#heading1">安装基本的开发工具包</a></li>
+    <li><a href="#python">下载、安装和编译Python</a></li>
+    <li><a href="#python-pipvirtualenvvirtualenvwapper">安装Python pip、virtualenv和virtualenvwapper</a>
+      <ul>
+        <li><a href="#pip">安装pip</a></li>
+        <li><a href="#virtualenvvirtualenvwapper">安装virtualenv和virtualenvwapper</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
 
     
     <div class="post-content">
-      <h2 id="简述">简述</h2>
-
+      <h2 id="heading">简述</h2>
 <p>由于产品需要从裸机开始开发所以所有的配置和开发也是从零开始，这个导航是基于centos6.x版本升级默认的Centos的Python，升级到Python2.7或者Python3.3。我们不仅升级了Python，同样基于Python的setuptools, pip, virtualenv and pyvenv这些工具也同样安装和升级以便于项目需要。</p>
-
-<h2 id="安装基本的开发工具包">安装基本的开发工具包</h2>
-
+<h2 id="heading1">安装基本的开发工具包</h2>
 <p>为了确保编译Python成功，先安装下面的这几个package和类库。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">yum groupinstall <span class="s2">&#34;Development tools&#34;</span>
-yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel</code></pre></td></tr></table>
+yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>下面需要关心的两个问题：
-&gt; * Unicode
-    如果为了支持更多的编码字符集，可以采用UTF-32的编码能有更好的扩展性，好的扩展性是需要牺牲一部分内存。嘿嘿，所以占用的内存就比之前的多。在Python2.7.x版本支持标准是<strong>--enable-unicode=ucs4</strong>，在Python3.X版本中支持的标志是<strong>--with-wide-unicode</strong>。
-&gt; * Shared library
+</div><p>下面需要关心的两个问题：</p>
+<blockquote>
+<ul>
+<li>Unicode
+如果为了支持更多的编码字符集，可以采用UTF-32的编码能有更好的扩展性，好的扩展性是需要牺牲一部分内存。嘿嘿，所以占用的内存就比之前的多。在Python2.7.x版本支持标准是**&ndash;enable-unicode=ucs4**，在Python3.X版本中支持的标志是**&ndash;with-wide-unicode**。</li>
+<li>Shared library
 你或许应该编译Python作为共享库，如果没有共享库的话有些第三方工具类库,比如：mod_wsgi和Blender是无法正常工作的，所以我们需要编译成共享库。我们有两种方式编译成共享库：
-    1. 在编译之前就指定相应的配置命令，<strong>LDFLAGS=&quot;-Wl,-rpath /usr/local/lib&quot;</strong>
-    2. 打开<strong>/etc/ld.so.conf</strong>，增加<strong>/usr/local/lib</strong>在末尾。然后运行<strong>/sbin/ldconfig</strong>确保动态链接改变成功。
-    <code>bash
-    include ld.so.conf.d/*.conf
-    /usr/local/lib
-</code>
-&gt; * 使用make altinstall 预防出现问题</p>
-
-<h2 id="下载-安装和编译python">下载、安装和编译Python</h2>
+1. 在编译之前就指定相应的配置命令，<strong>LDFLAGS=&rdquo;-Wl,-rpath /usr/local/lib&rdquo;</strong>
+2. 打开**/etc/ld.so.conf**，增加**/usr/local/lib**在末尾。然后运行**/sbin/ldconfig**确保动态链接改变成功。
+<code>bash include ld.so.conf.d/*.conf /usr/local/lib</code></li>
+<li>使用make altinstall 预防出现问题</li>
+</ul>
+</blockquote>
+<h2 id="python">下载、安装和编译Python</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -407,28 +399,26 @@ wget http://python.org/ftp/python/3.5.2/Python-3.5.2.tar.xz
 tar xf Python-3.5.2.tar.xz
 <span class="nb">cd</span> Python-3.5.2
 ./configure --prefix<span class="o">=</span>/usr/local --enable-shared <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&#34;-Wl,-rpath /usr/local/lib&#34;</span>
-make <span class="o">&amp;&amp;</span> make altinstall</code></pre></td></tr></table>
+make <span class="o">&amp;&amp;</span> make altinstall
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>安装完成成功之后会分别在如下目录里面:<strong>/usr/local/bin/python2.7</strong> 或者 <strong>/usr/local/bin/python3.5</strong>，这样不会影响系统的默认python环境。当然你可以通过自定制你的Python为2.7，如果改变/usr/bin/python的默认python的话，请相应的修改yum源的Python。</p>
-
-<h2 id="安装python-pip-virtualenv和virtualenvwapper">安装Python pip、virtualenv和virtualenvwapper</h2>
-
-<h3 id="安装pip">安装pip</h3>
+</div><p>安装完成成功之后会分别在如下目录里面:<strong>/usr/local/bin/python2.7</strong> 或者 <strong>/usr/local/bin/python3.5</strong>，这样不会影响系统的默认python环境。当然你可以通过自定制你的Python为2.7，如果改变/usr/bin/python的默认python的话，请相应的修改yum源的Python。</p>
+<h2 id="python-pipvirtualenvvirtualenvwapper">安装Python pip、virtualenv和virtualenvwapper</h2>
+<h3 id="pip">安装pip</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash"> wget https://bootstrap.pypa.io/get-pip.py
- python2.7 get-pip.py</code></pre></td></tr></table>
+ python2.7 get-pip.py
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="安装virtualenv和virtualenvwapper">安装virtualenv和virtualenvwapper</h3>
+</div><h3 id="virtualenvvirtualenvwapper">安装virtualenv和virtualenvwapper</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -439,13 +429,13 @@ make <span class="o">&amp;&amp;</span> make altinstall</code></pre></td></tr></t
 <span class="c1">#.bash_profile</span>
 <span class="nb">export</span> <span class="nv">WORKON_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/.virtualenvs
 <span class="nb">export</span> <span class="nv">PROJECT_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/workspace
-<span class="nb">source</span> /usr/local/bin/virtualenvwrapper.sh</code></pre></td></tr></table>
+<span class="nb">source</span> /usr/local/bin/virtualenvwrapper.sh
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>并在<strong>/etc/sudoers</strong>设置如下：</p>
+</div><p>并在**/etc/sudoers**设置如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -468,10 +458,10 @@ ln -s /usr/local/bin/python2.7 python
 nano /usr/bin/yum
 修改 <span class="c1">#!/usr/bin/python 为 #!/usr/bin/python2</span>
 <span class="c1">#4.创建新的Python软连接</span>
-sudo ln -s /usr/local/bin/python2.7 python</code></pre></td></tr></table>
+sudo ln -s /usr/local/bin/python2.7 python
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>到此你的所有安装已完毕并能正常使用Python。</p>
+</div><p>到此你的所有安装已完毕并能正常使用Python。</p>
     </div>
 
     

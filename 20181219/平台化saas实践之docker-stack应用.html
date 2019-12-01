@@ -34,7 +34,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.2" />
+<meta name="generator" content="Hugo 0.60.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181219/%E5%B9%B3%E5%8F%B0%E5%8C%96saas%E5%AE%9E%E8%B7%B5%E4%B9%8Bdocker-stack%E5%BA%94%E7%94%A8.html" />
@@ -63,9 +63,7 @@
 
 <meta property="og:title" content="平台化SaaS实践之Docker Stack应用" />
 <meta property="og:description" content="概述
-
 SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商集中托管和管理，并通过订阅的方式提供给用户,用户也可以按需或者即用即付方式进行购买。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。提供商负责管理硬件和软件，并根据适当的服务协议确保应用和数据的可用性和安全性。现在很多传统软件向SaaS“转变”时，更多的是向平台化SaaS软件靠拢，借助此模式来交付的产品优势很多，比如:
-
 
 提供灵活的方式满足客户需求
 提高运营效率，使其专注于产品
@@ -73,7 +71,6 @@ SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商�
 按需交付，多维度
 自传播
 隔离性、安全性、可定制性度高
-
 
 平台&#43;软件=平台化SaaS=支撑层&#43;应用层" />
 <meta property="og:type" content="article" />
@@ -82,9 +79,7 @@ SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商�
 <meta property="article:modified_time" content="2018-12-19T14:30:51+08:00" />
 <meta itemprop="name" content="平台化SaaS实践之Docker Stack应用">
 <meta itemprop="description" content="概述
-
 SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商集中托管和管理，并通过订阅的方式提供给用户,用户也可以按需或者即用即付方式进行购买。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。提供商负责管理硬件和软件，并根据适当的服务协议确保应用和数据的可用性和安全性。现在很多传统软件向SaaS“转变”时，更多的是向平台化SaaS软件靠拢，借助此模式来交付的产品优势很多，比如:
-
 
 提供灵活的方式满足客户需求
 提高运营效率，使其专注于产品
@@ -92,24 +87,18 @@ SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商�
 按需交付，多维度
 自传播
 隔离性、安全性、可定制性度高
-
 
 平台&#43;软件=平台化SaaS=支撑层&#43;应用层">
-
-
 <meta itemprop="datePublished" content="2018-12-19T14:30:51&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-19T14:30:51&#43;08:00" />
-<meta itemprop="wordCount" content="2180">
+<meta itemprop="wordCount" content="2182">
 
 
 
-<meta itemprop="keywords" content="SaaS," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="SaaS," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="平台化SaaS实践之Docker Stack应用"/>
 <meta name="twitter:description" content="概述
-
 SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商集中托管和管理，并通过订阅的方式提供给用户,用户也可以按需或者即用即付方式进行购买。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。提供商负责管理硬件和软件，并根据适当的服务协议确保应用和数据的可用性和安全性。现在很多传统软件向SaaS“转变”时，更多的是向平台化SaaS软件靠拢，借助此模式来交付的产品优势很多，比如:
-
 
 提供灵活的方式满足客户需求
 提高运营效率，使其专注于产品
@@ -117,7 +106,6 @@ SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商�
 按需交付，多维度
 自传播
 隔离性、安全性、可定制性度高
-
 
 平台&#43;软件=平台化SaaS=支撑层&#43;应用层"/>
 
@@ -350,7 +338,7 @@ SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商�
             <a href="https://www.brianlv.com/categories/saas.html"> SaaS </a>
             
           </div>
-        <span class="more-meta"> 约 2180 字 </span>
+        <span class="more-meta"> 约 2182 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
 
         
@@ -370,10 +358,8 @@ SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商�
 
     
     <div class="post-content">
-      <h2 id="概述">概述</h2>
-
+      <h2 id="heading">概述</h2>
 <p><strong>SaaS</strong> (软件即服务)是一种许可和交付模式，其中软件由提供商集中托管和管理，并通过订阅的方式提供给用户,用户也可以按需或者即用即付方式进行购买。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。提供商负责管理硬件和软件，并根据适当的服务协议确保应用和数据的可用性和安全性。现在很多传统软件向SaaS“转变”时，更多的是向<strong>平台化SaaS软件</strong>靠拢，借助此模式来交付的产品优势很多，比如:</p>
-
 <ul>
 <li><strong>提供灵活的方式满足客户需求</strong></li>
 <li><strong>提高运营效率，使其专注于产品</strong></li>
@@ -382,19 +368,12 @@ SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商�
 <li><strong>自传播</strong></li>
 <li><strong>隔离性、安全性、可定制性度高</strong></li>
 </ul>
-
 <p><strong>平台+软件=平台化SaaS=支撑层+应用层</strong></p>
-
-<h2 id="saas平台的挑战">SaaS平台的挑战</h2>
-
+<h2 id="saas">SaaS平台的挑战</h2>
 <p>我个人觉得传统软件向SaaS过渡原因主要分为两方面：</p>
-
 <p>1.<strong>从外因分析是市场趋势、价值和效率的方式转变</strong></p>
-
-<p>传统软件在其整个生命周期内，价值的体现最终要依赖于大客户需求+解决方案+(服务能力)+销售(话有点大，呵呵)。而在其生命周期过程中，无论是任何一方都在变化，市场、需求和趋势也在发生变化，等产品面向市场时，其实已经&quot;慢半拍或者多拍&quot;了，很多决策主要依赖于&quot;拍脑袋&quot;，粗略的数据分析和统计很难满足复杂多变的外因。</p>
-
+<p>传统软件在其整个生命周期内，价值的体现最终要依赖于大客户需求+解决方案+(服务能力)+销售(话有点大，呵呵)。而在其生命周期过程中，无论是任何一方都在变化，市场、需求和趋势也在发生变化，等产品面向市场时，其实已经&quot;慢半拍或者多拍&quot;了，很多决策主要依赖于&quot;拍脑袋&rdquo;，粗略的数据分析和统计很难满足复杂多变的外因。</p>
 <p>2.<strong>从内因分析无非是弄清楚以下关键的内容</strong></p>
-
 <blockquote>
 <ul>
 <li><strong>什么对客户有价值</strong></li>
@@ -403,19 +382,12 @@ SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商�
 <li><strong>怎么知道做的对不对</strong></li>
 </ul>
 </blockquote>
-
 <p>最终我们产品的目的：<strong>要发现和快速交付价值，所以最后的本质是效率和价值的优势，而转型的问题又变成了组织的问题。</strong></p>
-
 <p>进而在发生质变的过程中需要不断的完成量变的挑战，那么会有如下挑战去突破:</p>
-
 <p><strong>1.如何重新设计组织的能力</strong></p>
-
-<p><img src="/image/sass_create.png" alt="重新设计组织的能力" /></p>
-
+<p><img src="/image/sass_create.png" alt="重新设计组织的能力"></p>
 <p>2.如何去除不务实的需求，进而统一需求列表并打通用户反馈渠道**</p>
-
 <p><strong>需求问题：</strong></p>
-
 <blockquote>
 <ul>
 <li><strong>如何对需求划分，需求场景？</strong></li>
@@ -423,9 +395,7 @@ SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商�
 <li><strong>如何建立有效的沟通机制及时与用户进行沟通，确定好需求？</strong></li>
 </ul>
 </blockquote>
-
 <p><strong>用户反馈问题:</strong></p>
-
 <blockquote>
 <ul>
 <li><strong>如何打通售前和售后的用户反馈？</strong></li>
@@ -433,61 +403,42 @@ SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商�
 <li><strong>如何打通运营阶段的用户反馈?</strong></li>
 </ul>
 </blockquote>
-
 <p><strong>3.如何搭建SaaS基础的技术、架构(技术架构、业务架构、数据架构)、运营平台</strong></p>
-
-<p>纯技术硬核+数据支撑+应用+运营融合体的&quot;大杂烩&quot;</p>
-
+<p>纯技术硬核+数据支撑+应用+运营融合体的&quot;大杂烩&rdquo;</p>
 <p><strong>4.如何选择SaaS软件服务</strong></p>
-
 <ul>
 <li>软件有没有能够帮助客户提高运营的水平，获得从未有过的新知，从而帮助客户企业的员工建立一种新的能力，是软件成熟度和客户口碑的关键，产品最好能透射专业和行业最佳实践？</li>
 <li>在线API、文档、在线服务，需求为租户提供健全的用户入场协助？</li>
 </ul>
-
 <p><strong>SaaS挑战核心是平衡，需要面对很多矛盾点，有效决策和逻辑性的思考，建立快速试错和纠正的机制，寻找出一系列的平衡规则。</strong>【收入、成本和增长】</p>
-
-<h2 id="基于docker微服务式构建saas解决方案">基于Docker微服务式构建SaaS解决方案</h2>
-
+<h2 id="dockersaas">基于Docker微服务式构建SaaS解决方案</h2>
 <p><strong>容器技术加速应用云化，现在很多云厂商基于微服务的架构设计模式来实现SaaS,而服务的载体依赖于Docker实现</strong>，主要是Docker具备很多天然优势能很好的满足SaaS。即通过<strong>封装、隔离、高效</strong>来解决<strong>私有化部署、安全问题、大客户问题、定制化问题</strong>。很多机遇SaaS化比较典型的技术架构网上很多，感兴趣的可以参考下。废话不少说，让我们开启Docker的实践之路吧，由于微服务架构模式涉及的东西很多，给华为微服务框架打个小广告，已经纳入Apache了。如下图所示：</p>
-
-<p><img src="/image/servicemicro.png" alt="micro-service" /></p>
-
+<p><img src="/image/servicemicro.png" alt="micro-service"></p>
 <p>本篇博客只介绍Docker Service的Stack应用部署和管理，后续的博客再详细介绍,微服务架构模式和Docker内核技术，如下图所示。</p>
-
-<p><img src="/image/docker_app.png" alt="Docker" /></p>
-
+<p><img src="/image/docker_app.png" alt="Docker"></p>
 <p><strong>计算机经典的一种解耦思想：分层</strong>，并不像kvm(基于内核的虚拟机)，配合QEMU（处理器虚拟软件），需要CPU支持虚拟化技术（并且在BIOS里打开虚拟化选项），效率可达到物理机的80％以上，kvm在实现虚拟化过程中需要配合其它的类库：QEMU、libvirt等，但是在网络虚拟化(SDN)和存储满足跨AZ和调度是十分复杂的。当然Docker也有不足，特别是在安全性和Kernel依赖方面，现在正在按照<strong>OCI</strong>进行模块化。</p>
-
-<h3 id="docker-stack应用的部署和管理">Docker Stack应用的部署和管理</h3>
-
+<h3 id="docker-stack">Docker Stack应用的部署和管理</h3>
 <p>我们来看下Docker Stack体系结构:</p>
-
-<p><img src="/image/docker_stack.gif" alt="Docker Stack" /></p>
-
+<p><img src="/image/docker_stack.gif" alt="Docker Stack"></p>
 <p>我们采用一个Demo来实践Stack，该Demo来自Docker大牛Nigel的官网，如下图所示，该应用由 5 个服务、3 个网络、4 个密钥以及 3 组端口映射构成。</p>
-
-<p><img src="/image/docker_atsea.gif" alt="Docker Apps" /></p>
-
+<p><img src="/image/docker_atsea.gif" alt="Docker Apps"></p>
 <p>我们首先编写Stack文件，需要创建<strong>over-lay网络、秘钥和服务，包括后续滚动升级的副本、延迟关闭等</strong></p>
-
 <p>其次我们需要部署我们的应用，<strong>Docker Stack部署依赖于Swarm模式，所以要合理规划管理和工作节点</strong>。下面让我们搭建实验环境：</p>
-
 <p>1.<strong>创建Swarm</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#先让管理节点加入工作集群中</span>
-docker swarm init</code></pre></td></tr></table>
+docker swarm init
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>2.<strong>添加工作节点</strong></p>
+</div><p>2.<strong>添加工作节点</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -496,70 +447,69 @@ docker swarm init</code></pre></td></tr></table>
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#让相应的多个工作节点加入到工作集群中</span>
 docker swarm join --token xxxx
 <span class="c1">#检查确认各个角色节点是否正常</span>
-docker node ls</code></pre></td></tr></table>
+docker node ls
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>3.<strong>添加label</strong></p>
+</div><p>3.<strong>添加label</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">docker node update --label-add <span class="nv">pcidss</span><span class="o">=</span>yes worker-1</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker node update --label-add <span class="nv">pcidss</span><span class="o">=</span>yes worker-1
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>4.<strong>可以通过openssh生成秘钥</strong></p>
+</div><p>4.<strong>可以通过openssh生成秘钥</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">openssl rsa:4096 xx.key xxxx</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">openssl rsa:4096 xx.key xxxx
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>5.<strong>让docker使用生成的秘钥</strong></p>
+</div><p>5.<strong>让docker使用生成的秘钥</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">docker secret create xxx token</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker secret create xxx token
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>6.<strong>部署app服务代码</strong></p>
+</div><p>6.<strong>部署app服务代码</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">docker stack deploy -c stack.yml demo</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker stack deploy -c stack.yml demo
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>7.<strong>检查相应的服务和node是否正常</strong></p>
+</div><p>7.<strong>检查相应的服务和node是否正常</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">docker stack ps demo
 <span class="c1">#如果相应的服务副本出现问题则可以查看日志</span>
-docker service logs</code></pre></td></tr></table>
+docker service logs
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>8.<strong>管理应用</strong></p>
-
+</div><p>8.<strong>管理应用</strong></p>
 <p>比如我们想扩充服务的副本数或者部分升级都是可以的</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">docker service scale</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">docker service scale
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>可以访问相应的app了，如果业务代码采用了微服务的架构模式，要注意<strong>服务的状态性、链路熔断、数据的一致性</strong>问题了。</p>
+</div><p>可以访问相应的app了，如果业务代码采用了微服务的架构模式，要注意<strong>服务的状态性、链路熔断、数据的一致性</strong>问题了。</p>
     </div>
 
     
@@ -609,7 +559,7 @@ docker service logs</code></pre></td></tr></table>
       
       <nav class="post-nav">
         
-          <a class="prev" href="/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%8D%81%E5%A4%A7%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8%E7%B3%BB%E5%88%97%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA.html">
+          <a class="prev" href="/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA%E7%AE%97%E6%B3%95.html">
             
             <i class="iconfont">
               <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -619,7 +569,7 @@ docker service logs</code></pre></td></tr></table>
 </svg>
 
             </i>
-            <span class="prev-text nav-default">机器学习十大算法入门系列之感知机</span>
+            <span class="prev-text nav-default">机器学习之感知机算法</span>
             <span class="prev-text nav-mobile">上一篇</span>
           </a>
         

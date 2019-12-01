@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.2" />
+<meta name="generator" content="Hugo 0.60.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html" />
@@ -66,16 +66,13 @@
 <meta property="article:modified_time" content="2018-12-10T21:24:21+08:00" />
 <meta itemprop="name" content="Linux 后台服务">
 <meta itemprop="description" content="Linux 后台服务">
-
-
 <meta itemprop="datePublished" content="2018-12-10T21:24:21&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-10T21:24:21&#43;08:00" />
-<meta itemprop="wordCount" content="2170">
+<meta itemprop="wordCount" content="2167">
 
 
 
-<meta itemprop="keywords" content="Linux," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Linux," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux 后台服务"/>
 <meta name="twitter:description" content="Linux 后台服务"/>
 
@@ -307,7 +304,7 @@
             <a href="https://www.brianlv.com/categories/linux.html"> Linux </a>
             
           </div>
-        <span class="more-meta"> 约 2170 字 </span>
+        <span class="more-meta"> 约 2167 字 </span>
           <span class="more-meta"> 预计阅读 5 分钟 </span>
 
         
@@ -328,38 +325,30 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#概述">概述</a></li>
-<li><a href="#任务">任务</a></li>
-<li><a href="#后台任务工具">后台任务工具</a>
-<ul>
-<li><a href="#screen">screen</a></li>
-<li><a href="#supervisor">supervisor</a>
-<ul>
-<li><a href="#supervisor使用">supervisor使用</a></li>
-</ul></li>
-<li><a href="#systemd">Systemd</a></li>
-</ul></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">概述</a></li>
+    <li><a href="#heading1">任务</a></li>
+    <li><a href="#heading2">后台任务工具</a>
+      <ul>
+        <li><a href="#screen">screen</a></li>
+        <li><a href="#supervisor">supervisor</a></li>
+        <li><a href="#systemd">Systemd</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav>
   </div>
 </div>
 
     
     <div class="post-content">
-      <h2 id="概述">概述</h2>
-
+      <h2 id="heading">概述</h2>
 <p>研发人员交付测试和上线产品时，需要对服务和产品以后台进程的方式启动。所以便利的后台进程工具可以很好的帮助你管理你的进程。确切的说：成为系统的守护进程(daemon)。</p>
-
-<h2 id="任务">任务</h2>
-
+<h2 id="heading1">任务</h2>
 <p>我们一般通过如下方式的命令运行的大多数是<strong>前台任务</strong>，：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -368,13 +357,13 @@
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task</span>
 python main.py
 <span class="c1">#nodejs task</span>
-nodejs main.js</code></pre></td></tr></table>
+nodejs main.js
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>前台任务有很大的限制。我们无法获得标准输入<strong>stdin</strong>(它独占窗口session)，当前的session中断和退出，会立即中断任务。如果想结束改task只能等待完成或者手动结束。我们更倾向于<strong>后台任务</strong>，通过如下方式：</p>
+</div><p>前台任务有很大的限制。我们无法获得标准输入<strong>stdin</strong>(它独占窗口session)，当前的session中断和退出，会立即中断任务。如果想结束改task只能等待完成或者手动结束。我们更倾向于<strong>后台任务</strong>，通过如下方式：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -383,36 +372,35 @@ nodejs main.js</code></pre></td></tr></table>
 <pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task</span>
 python main.py <span class="p">&amp;</span>
 <span class="c1">#nodejs task</span>
-nodejs main.js <span class="p">&amp;</span></code></pre></td></tr></table>
+nodejs main.js <span class="p">&amp;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>这样就会把当前进程置为后台进程。如果想让前台任务变为后台任务，可以先通过<strong>CTRL+Z</strong>再执行，<strong>bg</strong>命令。快捷键说明：
-&gt;  <strong>CTRL+C</strong>是强制中断程序的执行,,进程已经终止。
-&gt; <strong>CTRL+Z</strong>将任务暂停或者挂起，此任务并没有结束,它仍然在进程中。只是维持挂起的状态,用户可以使用fg/bg操作继续前台或后台的任务,fg命令重新启动前台被中断的任务,bg命令把被中断的任务放在后台执行。
-&gt; <strong>CTRL+D</strong> 发送一个特殊的二进制值，表示 EOF。
+</div><p>这样就会把当前进程置为后台进程。如果想让前台任务变为后台任务，可以先通过<strong>CTRL+Z</strong>再执行，<strong>bg</strong>命令。快捷键说明：</p>
+<blockquote>
+<p><strong>CTRL+C</strong>是强制中断程序的执行,,进程已经终止。
+<strong>CTRL+Z</strong>将任务暂停或者挂起，此任务并没有结束,它仍然在进程中。只是维持挂起的状态,用户可以使用fg/bg操作继续前台或后台的任务,fg命令重新启动前台被中断的任务,bg命令把被中断的任务放在后台执行。
+<strong>CTRL+D</strong> 发送一个特殊的二进制值，表示 EOF。
 后天任务继承当前session的<strong>stdout</strong>和<strong>stderr</strong>。后台任务和前台任务的这种主要通过<strong>SIGHUB</strong>信号来处理和判断的，SIGHUB都有固定的标识和意义。
 1.用户创建session，会向OS发送一个SIGHUP信号表示我可以调用操作系统的资源和进程。
 2.用户退出session，通过系统调用发送给OS SIGHUP信号，OS将SIGHUP信号发送给session开启的所有进程和子进程，当收到退出SIGHUB指令后会回收资源并自动退出。由于前台任务是独占窗口session，所以当session退出时前台任务会收到SIGHUP信号并退出。后台任务主要通过<strong>huponexit</strong>参数来决定后台任务是否收到SIGHUB命令。该参数默认为<strong>off</strong>,所以后台任务默认是不会接收到SIGHUB信号的。</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">vm@vm:~$ <span class="nb">shopt</span> <span class="p">|</span> grep huponexit
-huponexit      	off</code></pre></td></tr></table>
+huponexit      	off
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>如果启用了该参数，那么我们的后台任务也会退出。所以我们如果想写出稳定的后台服务，应该是避免SIGHUB信号。</p>
-
-<h2 id="后台任务工具">后台任务工具</h2>
-
+</div><p>如果启用了该参数，那么我们的后台任务也会退出。所以我们如果想写出稳定的后台服务，应该是避免SIGHUB信号。</p>
+<h2 id="heading2">后台任务工具</h2>
 <p><strong>nohup、disown、screen、supervisor和Systemd</strong>等工具都可以避免SIGHUB信号，首推Systemd，但是备受争议它为违背了&quot;keep simple, keep stupid&quot;Unix哲学，其次supervisor和screen。</p>
-
 <h3 id="screen">screen</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -425,28 +413,26 @@ $ screen -S name
 <span class="c1"># 切回指定 session</span>
 $ screen -r name or pid_number
 <span class="c1"># 列出所有 session</span>
-$ screen -ls</code></pre></td></tr></table>
+$ screen -ls
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>创建完screen后，在新的session书写自己的后台服务即可，书写完成之后通过<strong>CTRL+a，d</strong> 来退出当前会话。</p>
-
+</div><p>创建完screen后，在新的session书写自己的后台服务即可，书写完成之后通过<strong>CTRL+a，d</strong> 来退出当前会话。</p>
 <h3 id="supervisor">supervisor</h3>
-
 <p>supervisor是一个后台进程管理工具，方便管理进程的工具。最主要有下面两个功能：
 1）将非daemon程序变成deamon方式运行，对于daemon程序则不能监控。比如你通过python自己写的一个daemon服务是无法监控的。
 2）对程序进行监控，当程序退出时，可以自动拉起程序。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pip</span> <span class="n">install</span> <span class="n">supervisor</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">pip</span> <span class="n">install</span> <span class="n">supervisor</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>如果你监控多个daemon时可通过定制化进程conf来配置，可以创建一个confs的文件夹，把每个daemon的进程的服务放到改文件夹下，最后在supervisor的默认conf文件中包含该所有的配置文件即可。如果只是单个daemon，可以直接使用默认conf中。</p>
+</div><p>如果你监控多个daemon时可通过定制化进程conf来配置，可以创建一个confs的文件夹，把每个daemon的进程的服务放到改文件夹下，最后在supervisor的默认conf文件中包含该所有的配置文件即可。如果只是单个daemon，可以直接使用默认conf中。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -463,13 +449,13 @@ emacs /etc/supervisor/supervisord.conf
 <span class="o">[</span>include<span class="o">]</span>
 <span class="nv">files</span> <span class="o">=</span> /etc/supervisor/conf.d/*.conf
 <span class="c1">#第二种，直接采用默认conf</span>
-echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf</code></pre></td></tr></table>
+echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>进行自动化配置：</p>
+</div><p>进行自动化配置：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -522,24 +508,24 @@ echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf</code></pre></td></t
 <span class="c1">#标准日志文件备份数；</span>  
 
 <span class="nv">process_name</span><span class="o">=</span>%<span class="o">(</span>process_num<span class="o">)</span>s
-<span class="nv">numprocs</span><span class="o">=</span><span class="m">3</span> </code></pre></td></tr></table>
+<span class="nv">numprocs</span><span class="o">=</span><span class="m">3</span> 
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>最后启动生效并测试是否成功启动：</p>
+</div><p>最后启动生效并测试是否成功启动：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">supervisord -c /etc/supervisor/supervisord.conf
-ps -ef <span class="p">|</span> grep supervisor <span class="p">|</span> grep -v grep</code></pre></td></tr></table>
+ps -ef <span class="p">|</span> grep supervisor <span class="p">|</span> grep -v grep
+</code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="supervisor使用">supervisor使用</h4>
+</div><h4 id="supervisor1">supervisor使用</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -575,44 +561,43 @@ ps -ef <span class="p">|</span> grep supervisor <span class="p">|</span> grep -v
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="m">1</span>.查询各进程运行状态
+<pre class="chroma"><code class="language-bash" data-lang="bash">1.查询各进程运行状态
 supervisorctl status
-<span class="m">2</span>.启、停、重启业务进程,test为进程名,即<span class="o">[</span>program:test<span class="o">]</span>里配置的值
+2.启、停、重启业务进程,test为进程名,即<span class="o">[</span>program:test<span class="o">]</span>里配置的值
 supervisorctl start <span class="nb">test</span>
 supervisorctl stop <span class="nb">test</span>
 supervisorctl restart <span class="nb">test</span>
-<span class="m">3</span>.重启所有属于名为groupworker这个分组的进程
+3.重启所有属于名为groupworker这个分组的进程
 supervisorctl start groupworker
 supervisorctl stop groupworker
 supervisorctl restart groupworker
-<span class="m">4</span>.启、停、重启全部进程<span class="o">(</span>不会载入最新的配置文件<span class="o">)</span>
+4.启、停、重启全部进程<span class="o">(</span>不会载入最新的配置文件<span class="o">)</span>
 supervisorctl start all
 supervisorctl stop all
 supervisorctl restart all
-<span class="m">5</span>.重新加载配置文件，停止原有进程并按新的配置启动所有进程（注意：所有进程会停止并重启，线上操作慎重）
+5.重新加载配置文件，停止原有进程并按新的配置启动所有进程（注意：所有进程会停止并重启，线上操作慎重）
 supervisorctl reload
-<span class="m">6</span>.根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而被重启（注意：这才是线上可以操作的命令，不会重启原有进程）
+6.根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不会受影响而被重启（注意：这才是线上可以操作的命令，不会重启原有进程）
 supervisorctl update
 注意：显示状态为stop停止掉的进程，用reload或者update都不会自动重启。
 交互式
 <span class="o">[</span>root@aaa <span class="o">]</span><span class="c1"># supervisorctl</span>
-memcached                       RUNNING   pid <span class="m">1234</span>, uptime <span class="m">0</span>:01:47
+memcached                       RUNNING   pid 1234, uptime 0:01:47
 supervisor&gt; stop <span class="nb">test</span>
 memcached: stopped
 supervisor&gt; start <span class="nb">test</span>
 memcached: started
 supervisor&gt; status
-memcached                       RUNNING   pid <span class="m">1234</span>, uptime <span class="m">0</span>:00:04
+memcached                       RUNNING   pid 1234, uptime 0:00:04
 supervisor&gt; restart <span class="nb">test</span>
 memcached: stopped
 memcached: started
 supervisor&gt; status
-memcached                       RUNNING   pid <span class="m">1234</span>, uptime <span class="m">0</span>:00:02
-supervisor&gt;</code></pre></td></tr></table>
+memcached                       RUNNING   pid 1234, uptime 0:00:02
+supervisor&gt;
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="systemd">Systemd</h3>
-
+</div><h3 id="systemd">Systemd</h3>
 <p>关于Systemd，即可网上有一个非常详细的教程，大家可以search一下。</p>
     </div>
 

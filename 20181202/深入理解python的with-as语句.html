@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.2" />
+<meta name="generator" content="Hugo 0.60.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181202/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html" />
@@ -66,16 +66,13 @@
 <meta property="article:modified_time" content="2018-12-02T21:57:43+08:00" />
 <meta itemprop="name" content="深入理解Python的With-as语句">
 <meta itemprop="description" content="Python with-as">
-
-
 <meta itemprop="datePublished" content="2018-12-02T21:57:43&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-02T21:57:43&#43;08:00" />
-<meta itemprop="wordCount" content="4629">
+<meta itemprop="wordCount" content="4636">
 
 
 
-<meta itemprop="keywords" content="Python," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="深入理解Python的With-as语句"/>
 <meta name="twitter:description" content="Python with-as"/>
 
@@ -307,7 +304,7 @@
             <a href="https://www.brianlv.com/categories/python.html"> Python </a>
             
           </div>
-        <span class="more-meta"> 约 4629 字 </span>
+        <span class="more-meta"> 约 4636 字 </span>
           <span class="more-meta"> 预计阅读 10 分钟 </span>
 
         
@@ -328,38 +325,30 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#概述">概述</a></li>
-<li><a href="#with-as-用法">With-as 用法</a></li>
-<li><a href="#python术语">Python术语</a>
-<ul>
-<li><a href="#上下文管理协议">上下文管理协议</a></li>
-<li><a href="#the-contextlib-module">The contextlib module</a>
-<ul>
-<li><a href="#contextmanager">contextmanager</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#参考文献">参考文献</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">概述</a></li>
+    <li><a href="#withas-">With-as 用法</a></li>
+    <li><a href="#python">Python术语</a>
+      <ul>
+        <li><a href="#heading1">上下文管理协议</a></li>
+        <li><a href="#the-contextlib-module">The contextlib module</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading2">参考文献</a></li>
+  </ul>
 </nav>
   </div>
 </div>
 
     
     <div class="post-content">
-      <h2 id="概述">概述</h2>
-
+      <h2 id="heading">概述</h2>
 <p>学习Python有一段时间了，最近做一个项目会涉及到文件的读取和关闭。比如：我想把一些对象序列化到文件里面，然后当我再次使用的时候，在从文件里面读取反序列化成对象。像这种操作一般都是用<strong>try…except…finally</strong>。但是经过自己对Python的研究发现会有更出色的方法，比如：with-as语句也有的人称为<strong>context manager。</strong></p>
-
-<h2 id="with-as-用法">With-as 用法</h2>
-
+<h2 id="withas-">With-as 用法</h2>
 <p>我们先看一下例子，当我们需要打开一个文件的时，比如：txt等，一般经常会这么操作：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -369,18 +358,18 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">test.txt</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">rw</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">To</span> <span class="n">Do</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="n">To</span> <span class="n">Do</span>
 <span class="k">finally</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>这是错误，因为file.open是否打开文件是不确定，而在出现异常的时候你却关闭了已经打开的文件。文件没有打开怎么能直接关闭呢？你可以按照下面的解决方法来解决上述出现的问题。</p>
+</div><p>这是错误，因为file.open是否打开文件是不确定，而在出现异常的时候你却关闭了已经打开的文件。文件没有打开怎么能直接关闭呢？你可以按照下面的解决方法来解决上述出现的问题。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -398,61 +387,58 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>  
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">test.txt</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">rw</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">To</span> <span class="n">Do</span>
 <span class="k">except</span><span class="p">:</span>  
     <span class="n">To</span> <span class="n">Do</span>
-    <span class="o">//</span><span class="err">出现异常直接返回或者退出，这说明</span><span class="n">file并没有打开</span><span class="err">。</span>
+    <span class="o">/</span><span class="o">/</span><span class="err">出</span><span class="err">现</span><span class="err">异</span><span class="err">常</span><span class="err">直</span><span class="err">接</span><span class="err">返</span><span class="err">回</span><span class="err">或</span><span class="err">者</span><span class="err">退</span><span class="err">出</span><span class="err">，</span><span class="err">这</span><span class="err">说</span><span class="err">明</span><span class="n">file并没有打开</span><span class="err">。</span>
     <span class="k">return</span><span class="o">/</span><span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
 
-<span class="o">//</span><span class="err">已经成功打开</span><span class="n">file文件</span><span class="err">，所以你需要在</span><span class="n">finally中关闭打开的文件</span><span class="err">。</span>
+<span class="o">/</span><span class="o">/</span><span class="err">已</span><span class="err">经</span><span class="err">成</span><span class="err">功</span><span class="err">打</span><span class="err">开</span><span class="n">file文件</span><span class="err">，</span><span class="err">所</span><span class="err">以</span><span class="err">你</span><span class="err">需</span><span class="err">要</span><span class="err">在</span><span class="n">finally中关闭打开的文件</span><span class="err">。</span>
 <span class="k">try</span><span class="p">:</span>  
     <span class="n">To</span> <span class="n">Do</span>
 <span class="k">except</span><span class="p">:</span>  
     <span class="n">To</span> <span class="n">Do</span>
 <span class="k">finally</span><span class="p">:</span>  
-    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></code></pre></td></tr></table>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>你会发现这么做会非常麻烦，并且try……except…..finally嵌套也比较啰嗦。那有没有好的解决办法能解决上述问题，并且还能减少代码量呢？(类似于C#中的using关键字)答案是肯定的，那就是with……as语句。<strong>With语句适用于对I/O、文件流、数据流等资源进行访问的场合，确保不管使用过程中是否发生异常都会执行必要的“清理”操作，释放资源.比如文件使用后自动关闭、线程中锁的自动获取和释放等等。</strong> 我们来看一下with-as的用法：</p>
+</div><p>你会发现这么做会非常麻烦，并且try……except…..finally嵌套也比较啰嗦。那有没有好的解决办法能解决上述问题，并且还能减少代码量呢？(类似于C#中的using关键字)答案是肯定的，那就是with……as语句。<strong>With语句适用于对I/O、文件流、数据流等资源进行访问的场合，确保不管使用过程中是否发生异常都会执行必要的“清理”操作，释放资源.比如文件使用后自动关闭、线程中锁的自动获取和释放等等。</strong> 我们来看一下with-as的用法：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">/etc/passwd</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">r</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">print</span> <span class="n">line</span>
-        <span class="o">...</span> <span class="n">more</span> <span class="n">processing</span> <span class="n">code</span> <span class="o">...</span></code></pre></td></tr></table>
+        <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="n">more</span> <span class="n">processing</span> <span class="n">code</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>这个语句执行完成之后，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄,确实比try……except……finally好多了。在这个例子中f就是上下文管理器enter()的返回值，返回的是当前文件自身的引用。Python内建对象都加入了对上下文管理器的支持，可以用在with语句中。比如:file、 threading、decimal等等，在多线程模块中，lock和条件变量也是支持with语句的。例如：</p>
-
+</div><p>这个语句执行完成之后，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄,确实比try……except……finally好多了。在这个例子中f就是上下文管理器enter()的返回值，返回的是当前文件自身的引用。Python内建对象都加入了对上下文管理器的支持，可以用在with语句中。比如:file、 threading、decimal等等，在多线程模块中，lock和条件变量也是支持with语句的。例如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>  
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">(</span><span class="p">)</span>  
 <span class="k">with</span> <span class="n">lock</span><span class="p">:</span>  
     <span class="c1"># Critical section of code</span>
-    <span class="o">...</span></code></pre></td></tr></table>
+    <span class="o">.</span><span class="o">.</span><span class="o">.</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>在代码执行之前lock总是先获得，只要block代码完成lock就会被释放。要想彻底了解Python的With-As语句，请继续往下看。</p>
-
-<h2 id="python术语">Python术语</h2>
-
-<p><strong>Context Management Protocol(上下文管理协议):包含方法__enter()__和__exit()__，支持该协议的对象要实现这两个方法。上下文管理器（Context Manager）：支持上下文管理协议的对象，这种对象实现了__enter()__ 和__exit()__ 方法。</strong>上下文管理器定义执行 with 语句时要建立的运行时上下文，负责执行 with 语句块上下文中的进入与退出操作。通常使用 with 语句调用上下文管理器，也可以通过直接调用其方法来使用。</p>
+</div><p>在代码执行之前lock总是先获得，只要block代码完成lock就会被释放。要想彻底了解Python的With-As语句，请继续往下看。</p>
+<h2 id="python">Python术语</h2>
+<p>**Context Management Protocol(上下文管理协议):包含方法__enter()__和__exit()__，支持该协议的对象要实现这两个方法。上下文管理器（Context Manager）：支持上下文管理协议的对象，这种对象实现了__enter()__ 和__exit()__ 方法。**上下文管理器定义执行 with 语句时要建立的运行时上下文，负责执行 with 语句块上下文中的进入与退出操作。通常使用 with 语句调用上下文管理器，也可以通过直接调用其方法来使用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -490,22 +476,21 @@
         <span class="n">exc</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="c1"># 如果 __exit__ 返回 True，则异常被忽略；如果返回 False，则重新抛出异常</span>
         <span class="c1"># 由外层代码对异常进行处理</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">exit</span><span class="p">(</span><span class="n">context_manager</span><span class="p">,</span> <span class="o">*</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">exit</span><span class="p">(</span><span class="n">context_manager</span><span class="p">,</span> <span class="o">*</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">:</span>
             <span class="k">raise</span>
     <span class="k">finally</span><span class="p">:</span>
         <span class="c1"># 正常退出，或者通过 statement-body 中的 break/continue/return 语句退出</span>
         <span class="c1"># 或者忽略异常退出</span>
         <span class="k">if</span> <span class="n">exc</span><span class="p">:</span>
             <span class="nb">exit</span><span class="p">(</span><span class="n">context_manager</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> 
-        <span class="c1"># 缺省返回 None，None 在布尔上下文中看做是 False</span></code></pre></td></tr></table>
+        <span class="c1"># 缺省返回 None，None 在布尔上下文中看做是 False</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="上下文管理协议">上下文管理协议</h3>
-
+</div><h3 id="heading1">上下文管理协议</h3>
 <p>with表达式执行生成一个叫做上下文管理器的对象，上下文管理器必须包含enter()和exit()方法，并且要实现该两个方法。 上下文管理器的enter()方法被调用，返回值将赋值给var，如果没有as var，则返回值被丢弃。 执行With-Body语句体。 不管是否执行过程中是否发生了异常，执行上下文管理器的 exit() 方法，exit() 方法负责执行“clean-up”工作，如释放资源等。如果执行过程中没有出现异常，或者语句体中执行了语句( break/continue/return)，则以 None 作为参数调用 exit(None, None, None) ；如果执行过程中出现异常，则使用 sys.excinfo 得到的异常信息为参数调用 exit(exctype, excvalue, exctraceback),通常返回值是一个tuple, (type, value/message, traceback)。 出现异常时，如果 exit(type, value, traceback) 返回 False，则会重新抛出异常，让with 之外的语句逻辑来处理异常，这也是通用做法；如果返回 True，则忽略异常，不再对异常进行处理。 运行时上下文（runtime context）：通过上下文管理器创建，并由上下文管理器的 enter() 和exit() 方法实现，enter() 方法在语句体执行之前进入运行时上下文，exit() 在语句体执行完后从运行时上下文退出。返回一个布尔值表示是否对发生的异常进行处理。如果退出时没有发生异常，则3个参数都为(None,None,None)。如果发生异常，返回True :不处理异常，否则会在退出该方法后重新抛出异常以由 with 语句之外的代码进行处理。如果该方法内部产生异常,不能重新抛出通过参数传递进来的异常，只需要return False 就可以。之后，上下文管理代码会检测是否 exit() 失败来捕获和处理异常。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -542,43 +527,43 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#-*- coding: utf-8 -*-</span>
 
-<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span><span class="p">:</span>
         <span class="k">print</span> <span class="n">msg</span>
 
-<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
-    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Commits current transaction&#34;</span>
-    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Rolls back current transaction&#34;</span>
-    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Go into __enter__()&#34;</span>
-        <span class="n">cursor</span> <span class="o">=</span> <span class="n">Cursor</span><span class="p">()</span>
+<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Commits current transaction</span><span class="s2">&#34;</span>
+    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Rolls back current transaction</span><span class="s2">&#34;</span>
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Go into __enter__()</span><span class="s2">&#34;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">Cursor</span><span class="p">(</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">cursor</span>
-    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Go into __exit__()&#34;</span>
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Go into __exit__()</span><span class="s2">&#34;</span>
         <span class="c1">#raise Exception(&#34;__exit__......Exception&#34;)</span>
         <span class="k">if</span> <span class="n">exc_tb</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="c1">#如果没有异常，则提交事务</span>
-            <span class="k">print</span> <span class="s2">&#34;Exited Without Exception&#34;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Exited Without Exception</span><span class="s2">&#34;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1">#如果有异常，则回滚</span>
-            <span class="k">print</span> <span class="s2">&#34;Exited with exception raised&#34;</span>
-            <span class="k">print</span> <span class="s2">&#34;type:[&#34;</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="s2">&#34;],value:[&#34;</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="s2">&#34;],exc_tb:[&#34;</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">,</span><span class="s2">&#34;]&#34;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Exited with exception raised</span><span class="s2">&#34;</span>
+            <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">type:[</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">],value:[</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">],exc_tb:[</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">]</span><span class="s2">&#34;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rollback</span><span class="p">(</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&#34;__main__&#34;</span><span class="p">:</span>  
-    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">()</span>
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">__main__</span><span class="s2">&#34;</span><span class="p">:</span>  
+    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">(</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">db_connection</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
-        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;insert into......&#34;</span><span class="p">)</span>
-        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;delete from......&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">insert into......</span><span class="s2">&#34;</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">delete from......</span><span class="s2">&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>代码运行效果如下：</p>
+</div><p>代码运行效果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -586,18 +571,18 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Go</span> <span class="n">into</span> <span class="fm">__enter__</span><span class="p">()</span>  
-<span class="n">insert</span> <span class="n">into</span><span class="o">......</span>  
-<span class="n">delete</span> <span class="n">from</span><span class="o">......</span>  
-<span class="n">Go</span> <span class="n">into</span> <span class="fm">__exit__</span><span class="p">()</span>  
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Go</span> <span class="n">into</span> <span class="fm">__enter__</span><span class="p">(</span><span class="p">)</span>  
+<span class="n">insert</span> <span class="n">into</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>  
+<span class="n">delete</span> <span class="n">from</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>  
+<span class="n">Go</span> <span class="n">into</span> <span class="fm">__exit__</span><span class="p">(</span><span class="p">)</span>  
 <span class="n">Exited</span> <span class="n">Without</span> <span class="ne">Exception</span>  
-<span class="n">Commits</span> <span class="n">current</span> <span class="n">transaction</span>  </code></pre></td></tr></table>
+<span class="n">Commits</span> <span class="n">current</span> <span class="n">transaction</span>  
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>上述代码正好验证了我们之前的分析，当运行with dbconnection运行时，进入我们自定义的__enter()__方法，当执行完with包裹的代码块时，就会进入__exit()__方法，如果没有异常(通过exctb是否为None来判断，当然也可以用其他两个参数判断。)则执行相应的代码逻辑。</p>
+</div><p>上述代码正好验证了我们之前的分析，当运行with dbconnection运行时，进入我们自定义的__enter()__方法，当执行完with包裹的代码块时，就会进入__exit()__方法，如果没有异常(通过exctb是否为None来判断，当然也可以用其他两个参数判断。)则执行相应的代码逻辑。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -637,44 +622,44 @@
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/env python</span>
 <span class="c1">#-*- coding: utf-8 -*-</span>
 
-<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span><span class="p">:</span>
         <span class="k">print</span> <span class="n">msg</span>
 
-<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
-    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Commits current transaction&#34;</span>
-    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Rolls back current transaction&#34;</span>
-    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Go into __enter__()&#34;</span>
-        <span class="n">cursor</span> <span class="o">=</span> <span class="n">Cursor</span><span class="p">()</span>
+<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Commits current transaction</span><span class="s2">&#34;</span>
+    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Rolls back current transaction</span><span class="s2">&#34;</span>
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Go into __enter__()</span><span class="s2">&#34;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">Cursor</span><span class="p">(</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">cursor</span>
-    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Go into __exit__()&#34;</span>
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Go into __exit__()</span><span class="s2">&#34;</span>
         <span class="c1">#raise Exception(&#34;__exit__......Exception&#34;)</span>
         <span class="k">if</span> <span class="n">exc_tb</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="c1">#如果没有异常，则提交事务</span>
-            <span class="k">print</span> <span class="s2">&#34;Exited Without Exception&#34;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Exited Without Exception</span><span class="s2">&#34;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1">#如果有异常，则回滚</span>
-            <span class="k">print</span> <span class="s2">&#34;Exited With Exception raised&#34;</span>
-            <span class="k">print</span> <span class="s2">&#34;type:[&#34;</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="s2">&#34;],value:[&#34;</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="s2">&#34;],exc_tb:[&#34;</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">,</span><span class="s2">&#34;]&#34;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Exited With Exception raised</span><span class="s2">&#34;</span>
+            <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">type:[</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">],value:[</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">],exc_tb:[</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">]</span><span class="s2">&#34;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rollback</span><span class="p">(</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&#34;__main__&#34;</span><span class="p">:</span>  
-    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">()</span>
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">__main__</span><span class="s2">&#34;</span><span class="p">:</span>  
+    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">(</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">db_connection</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
-        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;insert into......&#34;</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&#34;raise exception&#34;</span><span class="p">)</span>
-        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;delete from......&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">insert into......</span><span class="s2">&#34;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">raise exception</span><span class="s2">&#34;</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">delete from......</span><span class="s2">&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>该代码示例中，我在with包裹的代码块中造成一个异常。我们来看一下效果：</p>
+</div><p>该代码示例中，我在with包裹的代码块中造成一个异常。我们来看一下效果：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -686,22 +671,22 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Go</span> <span class="n">into</span> <span class="fm">__enter__</span><span class="p">()</span>  
-<span class="n">insert</span> <span class="n">into</span><span class="o">......</span>  
-<span class="n">Go</span> <span class="n">into</span> <span class="fm">__exit__</span><span class="p">()</span>  
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Go</span> <span class="n">into</span> <span class="fm">__enter__</span><span class="p">(</span><span class="p">)</span>  
+<span class="n">insert</span> <span class="n">into</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>  
+<span class="n">Go</span> <span class="n">into</span> <span class="fm">__exit__</span><span class="p">(</span><span class="p">)</span>  
 <span class="n">Exited</span> <span class="n">With</span> <span class="ne">Exception</span> <span class="n">raised</span>  
-<span class="nb">type</span><span class="p">:[</span> <span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;exceptions.Exception&#39;</span><span class="o">&gt;</span> <span class="p">],</span><span class="n">value</span><span class="p">:[</span> <span class="k">raise</span> <span class="n">exception</span> <span class="p">],</span><span class="n">exc_tb</span><span class="p">:[</span> <span class="o">&lt;</span><span class="n">traceback</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0252A878</span><span class="o">&gt;</span> <span class="p">]</span>  
+<span class="nb">type</span><span class="p">:</span><span class="p">[</span> <span class="o">&lt;</span><span class="nb">type</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">exceptions.Exception</span><span class="s1">&#39;</span><span class="o">&gt;</span> <span class="p">]</span><span class="p">,</span><span class="n">value</span><span class="p">:</span><span class="p">[</span> <span class="k">raise</span> <span class="n">exception</span> <span class="p">]</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">:</span><span class="p">[</span> <span class="o">&lt;</span><span class="n">traceback</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0252A878</span><span class="o">&gt;</span> <span class="p">]</span>  
 <span class="n">Rolls</span> <span class="n">back</span> <span class="n">current</span> <span class="n">transaction</span>  
-<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>  
-  <span class="n">File</span> <span class="s2">&#34;D:\Test\DatabaseConnection.py&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">34</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&#34;raise exception&#34;</span><span class="p">)</span>
-<span class="ne">Exception</span><span class="p">:</span> <span class="k">raise</span> <span class="n">exception</span>  </code></pre></td></tr></table>
+<span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span><span class="p">:</span>  
+  <span class="n">File</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">D:</span><span class="s2">\</span><span class="s2">Test</span><span class="s2">\</span><span class="s2">DatabaseConnection.py</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">34</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">raise exception</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="ne">Exception</span><span class="p">:</span> <span class="k">raise</span> <span class="n">exception</span>  
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>当with包裹的代码块一旦出现异常，则进入exit()方法内，并根据该方法的参数全不为None。如果你在exit方法内你不手动返回一个值的话，则默认返回False。如果你返回True,则不会捕捉该异常，即使你在with代码块最外面包裹一个try……except…finally也不会捕捉到该异常，如果返回False则with之外的try–except也能捕捉到。</p>
+</div><p>当with包裹的代码块一旦出现异常，则进入exit()方法内，并根据该方法的参数全不为None。如果你在exit方法内你不手动返回一个值的话，则默认返回False。如果你返回True,则不会捕捉该异常，即使你在with代码块最外面包裹一个try……except…finally也不会捕捉到该异常，如果返回False则with之外的try–except也能捕捉到。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -749,48 +734,48 @@
 
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span><span class="p">:</span>
         <span class="k">print</span> <span class="n">msg</span>
 
-<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
-    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Commits current transaction&#34;</span>
-    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Rolls back current transaction&#34;</span>
-    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Go into __enter__()&#34;</span>
-        <span class="n">cursor</span> <span class="o">=</span> <span class="n">Cursor</span><span class="p">()</span>
+<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Commits current transaction</span><span class="s2">&#34;</span>
+    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Rolls back current transaction</span><span class="s2">&#34;</span>
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Go into __enter__()</span><span class="s2">&#34;</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="n">Cursor</span><span class="p">(</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">cursor</span>
-    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Go into __exit__()&#34;</span>
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Go into __exit__()</span><span class="s2">&#34;</span>
         <span class="c1">#raise Exception(&#34;__exit__......Exception&#34;)</span>
         <span class="k">if</span> <span class="n">exc_tb</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="c1">#如果没有异常，则提交事务</span>
-            <span class="k">print</span> <span class="s2">&#34;Exited Without Exception&#34;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Exited Without Exception</span><span class="s2">&#34;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1">#如果有异常，则回滚</span>
-            <span class="k">print</span> <span class="s2">&#34;Exited With Exception raised&#34;</span>
-            <span class="k">print</span> <span class="s2">&#34;type:[&#34;</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="s2">&#34;],value:[&#34;</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="s2">&#34;],exc_tb:[&#34;</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">,</span><span class="s2">&#34;]&#34;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+            <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Exited With Exception raised</span><span class="s2">&#34;</span>
+            <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">type:[</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">exc_type</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">],value:[</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">exc_value</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">],exc_tb:[</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">]</span><span class="s2">&#34;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">rollback</span><span class="p">(</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">True</span>
 
-<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&#34;__main__&#34;</span><span class="p">:</span>  
-    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">()</span>
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">__main__</span><span class="s2">&#34;</span><span class="p">:</span>  
+    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">(</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">db_connection</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
-            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;insert into......&#34;</span><span class="p">)</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&#34;raise exception&#34;</span><span class="p">)</span>
-            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;delete from......&#34;</span><span class="p">)</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">insert into......</span><span class="s2">&#34;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">raise exception</span><span class="s2">&#34;</span><span class="p">)</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">delete from......</span><span class="s2">&#34;</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="k">print</span><span class="s2">&#34;包裹with语句的try &#34;</span><span class="p">,</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span></code></pre></td></tr></table>
+        <span class="k">print</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">包裹with语句的try </span><span class="s2">&#34;</span><span class="p">,</span><span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>运行效果如下：</p>
+</div><p>运行效果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -798,26 +783,22 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Go</span> <span class="n">into</span> <span class="fm">__enter__</span><span class="p">()</span>  
-<span class="n">insert</span> <span class="n">into</span><span class="o">......</span>  
-<span class="n">Go</span> <span class="n">into</span> <span class="fm">__exit__</span><span class="p">()</span>  
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Go</span> <span class="n">into</span> <span class="fm">__enter__</span><span class="p">(</span><span class="p">)</span>  
+<span class="n">insert</span> <span class="n">into</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>  
+<span class="n">Go</span> <span class="n">into</span> <span class="fm">__exit__</span><span class="p">(</span><span class="p">)</span>  
 <span class="n">Exited</span> <span class="n">With</span> <span class="ne">Exception</span> <span class="n">raised</span>  
-<span class="nb">type</span><span class="p">:[</span> <span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;exceptions.Exception&#39;</span><span class="o">&gt;</span> <span class="p">],</span><span class="n">value</span><span class="p">:[</span> <span class="k">raise</span> <span class="n">exception</span> <span class="p">],</span><span class="n">exc_tb</span><span class="p">:[</span> <span class="o">&lt;</span><span class="n">traceback</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0252A878</span><span class="o">&gt;</span> <span class="p">]</span>  
-<span class="n">Rolls</span> <span class="n">back</span> <span class="n">current</span> <span class="n">transaction</span>  </code></pre></td></tr></table>
+<span class="nb">type</span><span class="p">:</span><span class="p">[</span> <span class="o">&lt;</span><span class="nb">type</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">exceptions.Exception</span><span class="s1">&#39;</span><span class="o">&gt;</span> <span class="p">]</span><span class="p">,</span><span class="n">value</span><span class="p">:</span><span class="p">[</span> <span class="k">raise</span> <span class="n">exception</span> <span class="p">]</span><span class="p">,</span><span class="n">exc_tb</span><span class="p">:</span><span class="p">[</span> <span class="o">&lt;</span><span class="n">traceback</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x0252A878</span><span class="o">&gt;</span> <span class="p">]</span>  
+<span class="n">Rolls</span> <span class="n">back</span> <span class="n">current</span> <span class="n">transaction</span>  
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>基本上Python的常用的用法我就了解这么多，至于代码希望你动手试一下你也能了解Python with语句的原理.</p>
-
+</div><p>基本上Python的常用的用法我就了解这么多，至于代码希望你动手试一下你也能了解Python with语句的原理.</p>
 <h3 id="the-contextlib-module">The contextlib module</h3>
-
 <p>contextlib模块支持一些函数和装饰器，比如：装饰器 contextmanager、函数 nested 和上下文管理器closing。使用这些对象，可以对已有的生成器(yield)函数或者对象进行包装，加入对上下文管理协议的支持，这样可以避免专门编写上下文管理器来支持 with 语句。</p>
-
 <h4 id="contextmanager">contextmanager</h4>
-
 <p>contextmanager 用于对生成器(yield)函数进行装饰，生成器(yield)函数被装饰以后，返回的是一个ContextManager(上下文管理器)，其 __enter()__ 和 __exit()__ 方法由 contextmanager 负责提供，而不是之前通过一个上下文管理器重写这两个方法了。被装饰的函数只能产生一个值，否则会导致异常 RuntimeError；并且会把yield的值赋值给as后面的变量。看一下例子：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -868,49 +849,49 @@
 <span class="kn">import</span> <span class="nn">sys</span>  
 <span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
 
-<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span><span class="p">:</span>
         <span class="k">print</span> <span class="n">msg</span>
 
-<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
-    <span class="k">def</span> <span class="nf">cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Create a instance of Cursor&#34;</span>
-        <span class="k">return</span> <span class="n">Cursor</span><span class="p">()</span>
-    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Commits current transaction&#34;</span>
-    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Rolls back current transaction&#34;</span>
+<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="nf">cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Create a instance of Cursor</span><span class="s2">&#34;</span>
+        <span class="k">return</span> <span class="n">Cursor</span><span class="p">(</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Commits current transaction</span><span class="s2">&#34;</span>
+    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Rolls back current transaction</span><span class="s2">&#34;</span>
 
 
 <span class="nd">@contextmanager</span>
-<span class="k">def</span> <span class="nf">db_transaction</span><span class="p">(</span><span class="n">connection</span><span class="p">):</span>  
-    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">db_transaction</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span><span class="p">:</span>  
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s2">&#34;yeild 执行之前......&#34;</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">yeild 执行之前......</span><span class="s2">&#34;</span>
         <span class="k">yield</span> <span class="n">cursor</span>
-        <span class="k">print</span> <span class="s2">&#34;yeild 执行之后......&#34;</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">yeild 执行之后......</span><span class="s2">&#34;</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s2">&#34;db_transaction raise exception&#34;</span>
-        <span class="n">connection</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">db_transaction raise exception</span><span class="s2">&#34;</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">rollback</span><span class="p">(</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span><span class="s2">&#34;Existed without exception&#34;</span>
-        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">print</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Existed without exception</span><span class="s2">&#34;</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&#34;__main__&#34;</span><span class="p">:</span>  
-    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">()</span>
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">__main__</span><span class="s2">&#34;</span><span class="p">:</span>  
+    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">(</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">db_transaction</span><span class="p">(</span><span class="n">db_connection</span><span class="p">)</span> <span class="k">as</span> <span class="n">cursor</span><span class="p">:</span>
-            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;insert into......&#34;</span><span class="p">)</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">insert into......</span><span class="s2">&#34;</span><span class="p">)</span>
             <span class="c1">#raise Exception(&#34;raise exception&#34;)</span>
-            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;delete from......&#34;</span><span class="p">)</span>
+            <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">delete from......</span><span class="s2">&#34;</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">()</span></code></pre></td></tr></table>
+        <span class="k">print</span> <span class="n">sys</span><span class="o">.</span><span class="n">exc_info</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>运行结果如下：</p>
+</div><p>运行结果如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -920,18 +901,18 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Create</span> <span class="n">a</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">Cursor</span>  
-<span class="n">yeild</span> <span class="err">执行之前</span><span class="o">......</span>  
-<span class="n">insert</span> <span class="n">into</span><span class="o">......</span>  
-<span class="n">delete</span> <span class="n">from</span><span class="o">......</span>  
-<span class="n">yeild</span> <span class="err">执行之后</span><span class="o">......</span>  
+<span class="n">yeild</span> <span class="err">执</span><span class="err">行</span><span class="err">之</span><span class="err">前</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>  
+<span class="n">insert</span> <span class="n">into</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>  
+<span class="n">delete</span> <span class="n">from</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>  
+<span class="n">yeild</span> <span class="err">执</span><span class="err">行</span><span class="err">之</span><span class="err">后</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>  
 <span class="n">Existed</span> <span class="n">without</span> <span class="n">exception</span>  
-<span class="n">Commits</span> <span class="n">current</span> <span class="n">transaction</span>  </code></pre></td></tr></table>
+<span class="n">Commits</span> <span class="n">current</span> <span class="n">transaction</span>  
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>通过上述运行结果，可以看出，生成器函数中 yield 之前的语句在 enter() 方法中执行，yield 之后的语句在__exit()__ 中执行，而 yield 产生的值赋给了 as 后面的 变量。这个contextmanager修饰器 只是省略了 __enter()__ / __exit()__ 的编写，但并不负责实现“获取资源”和“清理资源”工作；“获取资源”操作需要定义在 yield 语句之前，“清理资源”操作需要定义 yield 语句之后，这样 with 语句在执行__enter()__ / __exit()__ 方法时会执行这些语句以获取/释放资源，即生成器函数中需要实现必要的逻辑控制，包括资源访问出现错误时抛出适当的异常。 nested(mgr1, mgr2, ...)() contextlib模块也有个nested(mgr1, mgr2, ...)()函数，这个函数可以作用在多个上下文管理器。例如下面的例子with 语句不仅开启一个transaction也获得了一个线程锁，让当前操作不被其他线程干扰。</p>
+</div><p>通过上述运行结果，可以看出，生成器函数中 yield 之前的语句在 enter() 方法中执行，yield 之后的语句在__exit()__ 中执行，而 yield 产生的值赋给了 as 后面的 变量。这个contextmanager修饰器 只是省略了 __enter()__ / __exit()__ 的编写，但并不负责实现“获取资源”和“清理资源”工作；“获取资源”操作需要定义在 yield 语句之前，“清理资源”操作需要定义 yield 语句之后，这样 with 语句在执行__enter()__ / __exit()__ 方法时会执行这些语句以获取/释放资源，即生成器函数中需要实现必要的逻辑控制，包括资源访问出现错误时抛出适当的异常。 nested(mgr1, mgr2, &hellip;)() contextlib模块也有个nested(mgr1, mgr2, &hellip;)()函数，这个函数可以作用在多个上下文管理器。例如下面的例子with 语句不仅开启一个transaction也获得了一个线程锁，让当前操作不被其他线程干扰。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -990,55 +971,55 @@
 <span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span><span class="p">,</span><span class="n">nested</span><span class="p">,</span><span class="n">closing</span>  
 <span class="kn">import</span> <span class="nn">threading</span>
 
-<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
-    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">msg</span><span class="p">)</span><span class="p">:</span>
         <span class="k">print</span> <span class="n">msg</span>
 
-<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>  
-    <span class="k">def</span> <span class="nf">cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Create a instance of Cursor&#34;</span>
-        <span class="k">return</span> <span class="n">Cursor</span><span class="p">()</span>
-    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Commits current transaction&#34;</span>
-    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s2">&#34;Rolls back current transaction&#34;</span>
+<span class="k">class</span> <span class="nc">DatabaseConnection</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>  
+    <span class="k">def</span> <span class="nf">cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Create a instance of Cursor</span><span class="s2">&#34;</span>
+        <span class="k">return</span> <span class="n">Cursor</span><span class="p">(</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">commit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Commits current transaction</span><span class="s2">&#34;</span>
+    <span class="k">def</span> <span class="nf">rollback</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Rolls back current transaction</span><span class="s2">&#34;</span>
 
 
 <span class="nd">@contextmanager</span>
-<span class="k">def</span> <span class="nf">db_transaction</span><span class="p">(</span><span class="n">connection</span><span class="p">):</span>  
-    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">db_transaction</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span><span class="p">:</span>  
+    <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s2">&#34;yeild 执行之前......&#34;</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">yeild 执行之前......</span><span class="s2">&#34;</span>
         <span class="k">yield</span> <span class="n">cursor</span>
-        <span class="k">print</span> <span class="s2">&#34;yeild 执行之后......&#34;</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">yeild 执行之后......</span><span class="s2">&#34;</span>
     <span class="k">except</span><span class="p">:</span>
-        <span class="k">print</span> <span class="s2">&#34;db_transaction raise exception&#34;</span>
-        <span class="n">connection</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+        <span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">db_transaction raise exception</span><span class="s2">&#34;</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">rollback</span><span class="p">(</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">print</span><span class="s2">&#34;Existed without exception&#34;</span>
-        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="k">print</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Existed without exception</span><span class="s2">&#34;</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s2">&#34;__main__&#34;</span><span class="p">:</span>  
-    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">()</span>
-    <span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
-    <span class="k">with</span> <span class="n">nested</span><span class="p">(</span><span class="n">db_transaction</span><span class="p">(</span><span class="n">db_connection</span><span class="p">),</span><span class="n">lock</span><span class="p">)</span> <span class="k">as</span> <span class="p">(</span><span class="n">cursor</span><span class="p">,</span><span class="n">locked</span><span class="p">):</span>
-        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;insert into......&#34;</span><span class="p">)</span>
-        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&#34;delete from......&#34;</span><span class="p">)</span>
-<span class="err">运行结果如下：</span>
+<span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">__main__</span><span class="s2">&#34;</span><span class="p">:</span>  
+    <span class="n">db_connection</span> <span class="o">=</span> <span class="n">DatabaseConnection</span><span class="p">(</span><span class="p">)</span>
+    <span class="n">lock</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Lock</span><span class="p">(</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">nested</span><span class="p">(</span><span class="n">db_transaction</span><span class="p">(</span><span class="n">db_connection</span><span class="p">)</span><span class="p">,</span><span class="n">lock</span><span class="p">)</span> <span class="k">as</span> <span class="p">(</span><span class="n">cursor</span><span class="p">,</span><span class="n">locked</span><span class="p">)</span><span class="p">:</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">insert into......</span><span class="s2">&#34;</span><span class="p">)</span>
+        <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">delete from......</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="err">运</span><span class="err">行</span><span class="err">结</span><span class="err">果</span><span class="err">如</span><span class="err">下</span><span class="err">：</span>
 
 <span class="n">Create</span> <span class="n">a</span> <span class="n">instance</span> <span class="n">of</span> <span class="n">Cursor</span>  
-<span class="n">yeild</span> <span class="err">执行之前</span><span class="o">......</span>  
-<span class="n">insert</span> <span class="n">into</span><span class="o">......</span>  
-<span class="n">delete</span> <span class="n">from</span><span class="o">......</span>  
-<span class="n">yeild</span> <span class="err">执行之后</span><span class="o">......</span>  
+<span class="n">yeild</span> <span class="err">执</span><span class="err">行</span><span class="err">之</span><span class="err">前</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>  
+<span class="n">insert</span> <span class="n">into</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>  
+<span class="n">delete</span> <span class="n">from</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>  
+<span class="n">yeild</span> <span class="err">执</span><span class="err">行</span><span class="err">之</span><span class="err">后</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="o">.</span>  
 <span class="n">Existed</span> <span class="n">without</span> <span class="n">exception</span>  
-<span class="n">Commits</span> <span class="n">current</span> <span class="n">transaction</span>  </code></pre></td></tr></table>
+<span class="n">Commits</span> <span class="n">current</span> <span class="n">transaction</span>  
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>closing(object)()方法返回一个对象可以绑定到as后面的变量，保证了打开的对象在 with-body(with包裹的代码) 执行完后会关闭掉。closing 上下文管理器包装起来的对象必须提供 close() 方法的定义，否则执行时会报错误。closing 适用于提供了 close() 实现的对象，比如：网络连接、数据库连接有非常的用武之地，也可以在自定义类时通过接口 close() 来执行所需要的资源“清理”工作。当然上述的这些操作你完全可以按照自己的逻辑去执行。请看如下代码：</p>
+</div><p>closing(object)()方法返回一个对象可以绑定到as后面的变量，保证了打开的对象在 with-body(with包裹的代码) 执行完后会关闭掉。closing 上下文管理器包装起来的对象必须提供 close() 方法的定义，否则执行时会报错误。closing 适用于提供了 close() 实现的对象，比如：网络连接、数据库连接有非常的用武之地，也可以在自定义类时通过接口 close() 来执行所需要的资源“清理”工作。当然上述的这些操作你完全可以按照自己的逻辑去执行。请看如下代码：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1049,15 +1030,13 @@
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">urllib</span><span class="o">,</span> <span class="nn">sys</span>  
 <span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">closing</span>
 
-<span class="k">with</span> <span class="n">closing</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s1">&#39;http://www.yahoo.com&#39;</span><span class="p">))</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
+<span class="k">with</span> <span class="n">closing</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">http://www.yahoo.com</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span></code></pre></td></tr></table>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>基本上python的With语句的理解到此结束。希望本文对你有用，如有用请打赏一下。</p>
-
-<h2 id="参考文献">参考文献</h2>
-
+</div><p>基本上python的With语句的理解到此结束。希望本文对你有用，如有用请打赏一下。</p>
+<h2 id="heading2">参考文献</h2>
 <blockquote>
 <ul>
 <li><a href="http://www.ibm.com/developerworks/cn/opensource/os-cn-pythonwith/">浅谈 Python 的 with 语句</a> 这篇文章写得不错，里面的术语解释的很到位，本文中用到的术语多来源于这篇文章。</li>

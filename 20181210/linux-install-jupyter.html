@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.2" />
+<meta name="generator" content="Hugo 0.60.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/linux-install-jupyter.html" />
@@ -66,16 +66,13 @@
 <meta property="article:modified_time" content="2018-12-10T21:24:38+08:00" />
 <meta itemprop="name" content="Linux Install Jupyter">
 <meta itemprop="description" content="Linux Install Jupyter">
-
-
 <meta itemprop="datePublished" content="2018-12-10T21:24:38&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-10T21:24:38&#43;08:00" />
-<meta itemprop="wordCount" content="1048">
+<meta itemprop="wordCount" content="1054">
 
 
 
-<meta itemprop="keywords" content="Python,Jupyter," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Python,Jupyter," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Linux Install Jupyter"/>
 <meta name="twitter:description" content="Linux Install Jupyter"/>
 
@@ -307,7 +304,7 @@
             <a href="https://www.brianlv.com/categories/python.html"> Python </a>
             
           </div>
-        <span class="more-meta"> 约 1048 字 </span>
+        <span class="more-meta"> 约 1054 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
 
         
@@ -328,36 +325,30 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#概述">概述</a></li>
-<li><a href="#安装和配置">安装和配置</a>
-<ul>
-<li><a href="#基本包安装">基本包安装</a></li>
-<li><a href="#配置">配置</a></li>
-</ul></li>
-<li><a href="#使用">使用</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">概述</a></li>
+    <li><a href="#heading1">安装和配置</a>
+      <ul>
+        <li><a href="#heading2">基本包安装</a></li>
+        <li><a href="#heading3">配置</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading4">使用</a></li>
+  </ul>
 </nav>
   </div>
 </div>
 
     
     <div class="post-content">
-      <h2 id="概述">概述</h2>
-
+      <h2 id="heading">概述</h2>
 <p>由于我的开发环境是CentOS，现在主要是以Python为主，偶尔夹杂C/C++和GoLang语言。在本地开发、测试、提交git和在生产环境再去测试、开发，并且会在生产环境会有临时性的开发任务和调整，都是比较浪费时间的。<strong>不建议直接修改生产环境的代码，临时性的修改后一定要测试并稳定运行一段时间。</strong> 写这篇博客主要是为了利用线上资源，实现跨平台开发和测试代码示例用的。所以就在服务器安装了<strong>IPython，Jupyter和Notebook</strong>。</p>
-
-<h2 id="安装和配置">安装和配置</h2>
-
-<p>在安装<strong>IPython，Jupyter和Notebook</strong>时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如('Development Tools‘)。废话少说，直接写代码。</p>
-
-<h3 id="基本包安装">基本包安装</h3>
+<h2 id="heading1">安装和配置</h2>
+<p>在安装<strong>IPython，Jupyter和Notebook</strong>时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如(&lsquo;Development Tools‘)。废话少说，直接写代码。</p>
+<h3 id="heading2">基本包安装</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -366,13 +357,13 @@
 <pre class="chroma"><code class="language-bash" data-lang="bash">yum update -y
 yum install python-pip -y
 yum install bzip2 -y
-yum groupinstall <span class="s2">&#34;Development Tools&#34;</span> -y</code></pre></td></tr></table>
+yum groupinstall <span class="s2">&#34;Development Tools&#34;</span> -y
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>安装完pip之后，最好把pip源改为国内源，修改如下：</p>
+</div><p>安装完pip之后，最好把pip源改为国内源，修改如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -387,13 +378,13 @@ cat &gt; ~/.pip/pip.conf <span class="s">&lt;&lt; EOF
 </span><span class="s">index-url = http://mirrors.aliyun.com/pypi/simple/
 </span><span class="s">[install]
 </span><span class="s">trusted-host=mirrors.aliyun.com
-</span><span class="s">EOF</span></code></pre></td></tr></table>
+</span><span class="s">EOF</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>由于服务器的生产环境的packages较多，版本也不一致，所以需要安装<strong>virtualenv和virtualenvwrapper</strong>并配置。</p>
+</div><p>由于服务器的生产环境的packages较多，版本也不一致，所以需要安装<strong>virtualenv和virtualenvwrapper</strong>并配置。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -412,61 +403,59 @@ nano .bashrc或者.bash_profile
 <span class="nb">export</span> <span class="nv">PROJECT_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/xxxx
 <span class="nb">source</span> /usr/local/bin/virtualenvwrapper.sh
 <span class="c1">#退出然后运行如下命令</span>
-<span class="nb">source</span> .bashrc或者.bash_profile</code></pre></td></tr></table>
+<span class="nb">source</span> .bashrc或者.bash_profile
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>现在只需要通过pip安装IPython，Jupyter和Notebook即可。</p>
+</div><p>现在只需要通过pip安装IPython，Jupyter和Notebook即可。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">pip install ipython jupyter notebook</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">pip install ipython jupyter notebook
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>所有需要的安装现在全部完毕，下面我们来配置使其生效。</p>
-
-<h3 id="配置">配置</h3>
-
+</div><p>所有需要的安装现在全部完毕，下面我们来配置使其生效。</p>
+<h3 id="heading3">配置</h3>
 <p>我了实现我们自定制设置，我们需要通过如下配置来完成，我们首先要生成一个jupyter的配置文件。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">jupyter notebook --generate-config
-<span class="c1">#生成的config file在/home/user/.jupyter/jupyter_notebook_config.py</span></code></pre></td></tr></table>
+<span class="c1">#生成的config file在/home/user/.jupyter/jupyter_notebook_config.py</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>然后我们为了比较安全的访问服务器资源，我们需要设置登录密码和设置https来实现安全登录。如果有条件可以通过安全认证中心来发放秘钥和认证。首先打开ipython，生成sha1的密码，如下：</p>
+</div><p>然后我们为了比较安全的访问服务器资源，我们需要设置登录密码和设置https来实现安全登录。如果有条件可以通过安全认证中心来发放秘钥和认证。首先打开ipython，生成sha1的密码，如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">notebook.auth</span> <span class="kn">import</span> <span class="n">passwd</span>
-<span class="n">passwd</span><span class="p">()</span>
+<span class="n">passwd</span><span class="p">(</span><span class="p">)</span>
 <span class="c1">#Enter password</span>
-<span class="c1">#output sha1:49acd1a985cc:beb1fb6859665bfa721e65e78fc511c41basdasa.</span></code></pre></td></tr></table>
+<span class="c1">#output sha1:49acd1a985cc:beb1fb6859665bfa721e65e78fc511c41basdasa.</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>然后生成一个自签名认证的key，如下：</p>
+</div><p>然后生成一个自签名认证的key，如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">openssl req -x509 -nodes -days <span class="m">365</span> -newkey rsa:4096 -keyout jkey.key -out jcert.pem</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">openssl req -x509 -nodes -days <span class="m">365</span> -newkey rsa:4096 -keyout jkey.key -out jcert.pem
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>最后如下配置即可：</p>
+</div><p>最后如下配置即可：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -483,23 +472,22 @@ c.NotebookApp.ip <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
 c.NotebookApp.open_browser <span class="o">=</span> False
 c.NotebookApp.certfile <span class="o">=</span> <span class="s1">&#39;/home/user/jcert.pem&#39;</span>
 c.NotebookApp.keyfile <span class="o">=</span> <span class="s1">&#39;/home/user/jkey.key&#39;</span>
-<span class="c1">#保存退出即可</span></code></pre></td></tr></table>
+<span class="c1">#保存退出即可</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="使用">使用</h2>
-
+</div><h2 id="heading4">使用</h2>
 <p>由于jupyter使用的8888作为默认端口，所以我需要把端口给开放并重启防火墙。通过如下代码设置：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span><span class="m">8888</span>/tcp --permanent
-systemctl restart firewalld.service</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">firewall-cmd --zone<span class="o">=</span>public --add-port<span class="o">=</span>8888/tcp --permanent
+systemctl restart firewalld.service
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>到这里所有的安装和基本的设置都已经完成，直接在命令行输入：<strong>jupyter notebook</strong>.就可以使用了。</p>
+</div><p>到这里所有的安装和基本的设置都已经完成，直接在命令行输入：<strong>jupyter notebook</strong>.就可以使用了。</p>
     </div>
 
     

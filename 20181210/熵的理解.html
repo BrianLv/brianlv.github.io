@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.2" />
+<meta name="generator" content="Hugo 0.60.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3.html" />
@@ -66,16 +66,13 @@
 <meta property="article:modified_time" content="2018-12-10T22:17:19+08:00" />
 <meta itemprop="name" content="熵的理解">
 <meta itemprop="description" content="熵的理解">
-
-
 <meta itemprop="datePublished" content="2018-12-10T22:17:19&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-10T22:17:19&#43;08:00" />
 <meta itemprop="wordCount" content="1272">
 
 
 
-<meta itemprop="keywords" content="Machine Learning," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Machine Learning," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="熵的理解"/>
 <meta name="twitter:description" content="熵的理解"/>
 
@@ -328,13 +325,10 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#相对熵-kl离散度">相对熵(KL离散度)</a></li>
-<li><a href="#交叉熵">交叉熵</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#kl">相对熵(KL离散度)</a></li>
+    <li><a href="#heading">交叉熵</a></li>
+  </ul>
 </nav>
   </div>
 </div>
@@ -353,30 +347,24 @@ log\frac{1}{32}=5log\frac{1}{32}=5bit
 $$
 第二个例子：赌马比赛里，有4匹马A,B,C,D，获胜概率分别为
 $$ \frac{1}{2},\frac{1}{4},\frac{1}{8},\frac{1}{8} $$</p>
-
 <ul>
 <li>如果 X=A ，那么需要问1次（问题1：是不是A？），概率为
 $$ \frac{1}{2} $$</li>
 <li>如果 X=B ，那么需要问2次（问题1：是不是A？问题2：是不是B？），概率为
 $$ \frac{1}{4}$$</li>
-<li>如果 X=C ，那么需要问3次（问题1，问题2，问题3），概率为<br />
+<li>如果 X=C ，那么需要问3次（问题1，问题2，问题3），概率为<br>
 $$ \frac{1}{8}$$</li>
 <li>如果 X=D ，那么同样需要问3次（问题1，问题2，问题3），概率为
 $$ \frac{1}{8}$$</li>
 </ul>
-
 <p>通过熵的定义得到</p>
-
 <p>$$
 H(x)=-\sum_{x \in {A,B,C,D}}p(x)\cdot log p(x)=\frac{1}{2} \cdot log2+\frac{1}{4} \cdot log4+\frac{1}{8} \cdot log8+\frac{1}{8} \cdot log8=1.75
 $$</p>
-
 <p>在二进制计算机中，一个比特为0或1(代表二元问题)。在计算机中，我们给哪一匹马夺冠这个事件进行编码，所需要的平均码长为1.75个比特。其定义为:</p>
-
 <p>$$
 L(C)=\sum_{x \in X}p(x)l(x)
 $$</p>
-
 <p>为了尽可能减少码长，我们要给发生概率p(x)较大的事件，分配较短的码长l(x)。所以那么
 $${A,B,C,D}$$
 四个实践，可以分别由
@@ -385,9 +373,7 @@ $${0,10,110,111}$$
 （1）信息熵只反映内容的随机性，与内容本身无关。不管是什么样内容的文件，只要服从同样的概率分布，就会计算得到同样的信息熵。
 （2）信息熵越大，表示占用的二进制位越长，因此就可以表达更多的符号。所以，人们有时也说，信息熵越大，表示信息量越大。不过，由于第一点的原因，这种说法很容易产生误导。较大的信息熵，只表示可能出现的符号较多，并不意味着你可以从中得到更多的信息。
 （3）信息熵与热力学的熵，基本无关。</p>
-
-<h2 id="相对熵-kl离散度">相对熵(KL离散度)</h2>
-
+<h2 id="kl">相对熵(KL离散度)</h2>
 <p>相对熵又叫做KL离散度，其定义为：
 $$
 KL(f(x)||g(x))=-\sum_{x \in X} f(x) \cdot log\frac{f(x)}{g(x)}
@@ -397,45 +383,36 @@ KL 散度是两个概率分布f(x)和g(x)差别的非对称性的度量。KL散�
 (1) 两函数完全相同时，KL=0
 (2) KL越大，差异越大
 (3) 对概率分布或者概率密度函数(&gt;0), KL可用来衡量两个随机变量分布的差异性。</p>
-
-<h2 id="交叉熵">交叉熵</h2>
-
+<h2 id="heading">交叉熵</h2>
 <p>对一随机事件，其真实概率分布为p(i)，从数据中得到的概率分布为q(i)，则我们定义，交叉熵为:
 $$
 H(p,q)=\displaystyle\sum _{x}p(x)log\frac{1}{q(x)}=-\sum _{x}p(x)logq(x)
 $$</p>
-
-<p>核心理解：
-* 用p来衡量识别一个样本的信息量即最小编码长度（<strong>信息熵</strong>）。</p>
-
+<p>核心理解：</p>
+<ul>
+<li>用p来衡量识别一个样本的信息量即最小编码长度（<strong>信息熵</strong>）。</li>
+</ul>
 <p>$$
 H(p)=\sum p \cdot log\frac{1}{p}
 $$</p>
-
 <ul>
 <li>q来估计真实分布为p的样本的信息量.</li>
 </ul>
-
 <p>$$
 H(q,p)=\sum p \cdot \frac{1}{q}
 $$</p>
-
 <ul>
 <li>则估算多出来的冗余信息量.</li>
 </ul>
-
 <p>$$
 D(p||q)=H(p,q)-H(p)=\sum p \cdot log\frac{p}{q}(KL离散度)
 $$</p>
-
 <p><strong>在机器学习中，p通常设定为真实标记的分布，q设定为训练后模型预测标记的分布：</strong></p>
-
 <p>$$
 H(p,q)=H(p)+D_{KL}(pq)
 $$</p>
-
 <p><strong>即：交叉熵=信息熵+KL散度（相对熵）</strong>
-由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&quot;距离&quot;。</p>
+由于信息熵H(p)H(p)是固定不变的，因此我们在机器学习中就用交叉熵作为损失函数。常见的做法是先用Softmax函数将神经网络的结果转换为概率分布，然后用交叉熵刻画估算的概率分布与真实的概率分布的&quot;距离&rdquo;。</p>
     </div>
 
     

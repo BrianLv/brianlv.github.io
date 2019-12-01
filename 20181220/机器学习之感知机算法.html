@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="zh-cn" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>机器学习之感知机算法 - 吕海峰的博客</title>
+  
+
+<meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="MobileOptimized" content="width"/>
+<meta name="HandheldFriendly" content="true"/>
+
+
+<meta name="applicable-device" content="pc,mobile">
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta name="author" content="吕先生(BrianLv)" />
+  <meta name="description" content="概述 感知机(perceptron)是个二类分类的线性分类模型，该算法对应于特征空间将实例划分为正负两类的分离超平面，属于判别模型。判别模型是一种对未观测数据y与已观测数据x之间关系进行建模的方法，直接对条件概率p(y|x;θ)建模。直接假设判别函数的参数形式是已知的 ，然后基于训练样本，使用某种学习算法，来学习判别函数的参数值，被称为判别式方法，感知机所得到的是一个线性判别函数。而一般来说，寻找线性判别函数的问题，会被形式化为极小化准则函数的问题，以分类为目的的准则函数可以是样本的风险函数，或者是训练误差。 从机器学习的角度来讲，感知机属于监督学习（supervised learning），它是一个单层的二分类器。感知机算法非常重要，它是神经网络和SVM的基础。感知机算法如下图所示:
+
+" />
+
+  <meta name="keywords" content="吕海峰, BrianLv, 自然语言处理, 深度学习, 机器学习" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.60.0" />
+
+
+<link rel="canonical" href="https://www.brianlv.com/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA%E7%AE%97%E6%B3%95.html" />
+
+
+
+<link rel="icon" href="/favicon.ico" />
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+
+
+
+
+<link rel="stylesheet" href="/css/">
+
+
+<meta property="og:title" content="机器学习之感知机算法" />
+<meta property="og:description" content="概述
+
+感知机(perceptron)是个二类分类的线性分类模型，该算法对应于特征空间将实例划分为正负两类的分离超平面，属于判别模型。判别模型是一种对未观测数据y与已观测数据x之间关系进行建模的方法，直接对条件概率p(y|x;θ)建模。直接假设判别函数的参数形式是已知的 ，然后基于训练样本，使用某种学习算法，来学习判别函数的参数值，被称为判别式方法，感知机所得到的是一个线性判别函数。而一般来说，寻找线性判别函数的问题，会被形式化为极小化准则函数的问题，以分类为目的的准则函数可以是样本的风险函数，或者是训练误差。 从机器学习的角度来讲，感知机属于监督学习（supervised learning），它是一个单层的二分类器。感知机算法非常重要，它是神经网络和SVM的基础。感知机算法如下图所示:
+
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.brianlv.com/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA%E7%AE%97%E6%B3%95.html" />
+<meta property="article:published_time" content="2018-12-20T21:39:15+08:00" />
+<meta property="article:modified_time" content="2018-12-20T21:39:15+08:00" />
+<meta itemprop="name" content="机器学习之感知机算法">
+<meta itemprop="description" content="概述
+
+感知机(perceptron)是个二类分类的线性分类模型，该算法对应于特征空间将实例划分为正负两类的分离超平面，属于判别模型。判别模型是一种对未观测数据y与已观测数据x之间关系进行建模的方法，直接对条件概率p(y|x;θ)建模。直接假设判别函数的参数形式是已知的 ，然后基于训练样本，使用某种学习算法，来学习判别函数的参数值，被称为判别式方法，感知机所得到的是一个线性判别函数。而一般来说，寻找线性判别函数的问题，会被形式化为极小化准则函数的问题，以分类为目的的准则函数可以是样本的风险函数，或者是训练误差。 从机器学习的角度来讲，感知机属于监督学习（supervised learning），它是一个单层的二分类器。感知机算法非常重要，它是神经网络和SVM的基础。感知机算法如下图所示:
+
+">
+<meta itemprop="datePublished" content="2018-12-20T21:39:15&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-20T21:39:15&#43;08:00" />
+<meta itemprop="wordCount" content="2972">
+
+
+
+<meta itemprop="keywords" content="Machine Learning,perceptron," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="机器学习之感知机算法"/>
+<meta name="twitter:description" content="概述
+
+感知机(perceptron)是个二类分类的线性分类模型，该算法对应于特征空间将实例划分为正负两类的分离超平面，属于判别模型。判别模型是一种对未观测数据y与已观测数据x之间关系进行建模的方法，直接对条件概率p(y|x;θ)建模。直接假设判别函数的参数形式是已知的 ，然后基于训练样本，使用某种学习算法，来学习判别函数的参数值，被称为判别式方法，感知机所得到的是一个线性判别函数。而一般来说，寻找线性判别函数的问题，会被形式化为极小化准则函数的问题，以分类为目的的准则函数可以是样本的风险函数，或者是训练误差。 从机器学习的角度来讲，感知机属于监督学习（supervised learning），它是一个单层的二分类器。感知机算法非常重要，它是神经网络和SVM的基础。感知机算法如下图所示:
+
+"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+
+
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">吕海峰的博客</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/">主页</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">全部文章</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
+          
+        
+      </li><li class="mobile-menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/about.html">关于</a>
+          
+        
+      </li>
+    
+
+    
+  </ul>
+</nav>
+
+
+  
+    
+
+
+
+
+
+
+  <link rel="stylesheet" href="/lib/photoswipe/photoswipe.min.css" />
+  <link rel="stylesheet" href="/lib/photoswipe/default-skin/default-skin.min.css" />
+
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+  
+
+  
+
+  
+
+  <header id="header" class="header container">
+    <div class="logo-wrapper">
+  <a href="/" class="logo">
+    
+      吕海峰的博客
+    
+  </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/">主页</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/post.html">全部文章</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/tags.html">标签</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/categories.html">分类</a>
+          
+
+        
+
+      </li>
+    
+        <li class="menu-item">
+        
+          
+          
+            <a class="menu-item-link" href="https://www.brianlv.com/about.html">关于</a>
+          
+
+        
+
+      </li>
+    
+
+    
+    
+
+    
+  </ul>
+</nav>
+
+  </header>
+
+  <div id="mobile-panel">
+    <main id="main" class="main bg-llight">
+      <div class="content-wrapper">
+        <div id="content" class="content container">
+          <article class="post bg-white">
+    
+    <header class="post-header">
+      <h1 class="post-title">机器学习之感知机算法</h1>
+      
+      <div class="post-meta">
+        <time datetime="2018-12-20" class="post-time">
+          2018-12-20
+        </time>
+        <div class="post-category">
+            <a href="https://www.brianlv.com/categories/machine-learning.html"> Machine Learning </a>
+            
+          </div>
+        <span class="more-meta"> 约 2972 字 </span>
+          <span class="more-meta"> 预计阅读 6 分钟 </span>
+
+        
+        
+          <span id="busuanzi_container_page_pv">
+            | 阅读 <span id="busuanzi_value_page_pv"></span>
+          </span>
+        
+
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    
+    <div class="post-content">
+      <h2 id="概述">概述</h2>
+
+<p><strong>感知机(perceptron)</strong>是个二类分类的线性分类模型，该算法对应于特征空间将实例划分为正负两类的分离超平面，属于判别模型。<strong>判别模型是一种对未观测数据y与已观测数据x之间关系进行建模的方法，直接对条件概率p(y|x;θ)建模。直接假设判别函数的参数形式是已知的 ，然后基于训练样本，使用某种学习算法，来学习判别函数的参数值，被称为判别式方法，感知机所得到的是一个线性判别函数。而一般来说，寻找线性判别函数的问题，会被形式化为极小化准则函数的问题，以分类为目的的准则函数可以是样本的风险函数，或者是训练误差</strong>。 从机器学习的角度来讲，感知机属于监督学习（supervised learning），它是一个单层的二分类器。感知机算法非常重要，它是神经网络和SVM的基础。感知机算法如下图所示:</p>
+
+<p><figure><img src="/image/ml_perceptron.png" alt="感知机算法"></figure></p>
+
+<h2 id="感知机模型">感知机模型</h2>
+
+<h3 id="算法定义">算法定义</h3>
+
+<p>假设我们的输入空间（特征空间）是X⊆R，输出空间是<strong><em>y</em></strong>={+1,−1}。输入<strong><em>x</em></strong>∈<strong><em>X</em></strong>表示实例的特征向量，对应于输入空间（特征空间）的点；输出y∈<strong><em>y</em></strong>表示实例的类别。由输入空间到输出空间的函数:</p>
+
+<p><span  class="math">\[
+f(x)=sign(w \cdot x+b)
+\]</span></p>
+
+<p>其中，其中w和b为感知机模型参数，$w \in R^n$ 叫做weight或者weight vector,$b \in R$ 叫做bias,$w \cdot x$ 表示w和x的内积,sign是符号函数。</p>
+
+<p><span  class="math">\[
+sign(x) = \begin{cases}
++1, &x \ge 0  \\
+-1, &x \lt 0 
+\end{cases}
+\]</span></p>
+
+<h3 id="感知机的几何模型">感知机的几何模型</h3>
+
+<ul>
+<li><p>线性方程 $w \cdot x +b=0$</p></li>
+
+<li><p>对应超平面S，w为法向量，b为截距，分离正负两类</p></li>
+
+<li><p>分离超平面如下如图所示:</p>
+
+<p><figure><img src="/image/ml_model_precetron.png" alt="感知机模型"></figure></p></li>
+</ul>
+
+<p><strong>感知机算法模型</strong></p>
+
+<h3 id="学习策略">学习策略</h3>
+
+<p>再详细介绍感知机学习策略之前，我们先了解下数据集的<strong>线性可分 vs 线性不可分</strong>。</p>
+
+<h5 id="线性可分">线性可分</h5>
+
+<p>给定一个数据集$T={(x_1,y_1),(x_2,y_2)......(x_n,y_n)}, x_i \in X=R^n,y_i \in Y,i=1,2,3...N$ ,如果存在某个超平面S</p>
+
+<p><span  class="math">\[w \cdot x + b = 0\]</span></p>
+
+<p>能够将数据集的正实例点(+1)和负实例点(-1)完全正确地划分到超平面的两侧，即对所有的$y_i = +1$的实例，有$w \cdot x_i + b &gt; 0$ ;对所有$y_i=-1$的实例，有$w \cdot x_i + b &lt; 0$,则称数据集T为线性可分数据集(Linearly Separable Data Set),否则为数据集T为线性不可分。也可以利用不同样本集用凸包包起来，判断不同凸包的边是否有交叉来判断是否线性可分。</p>
+
+<p>现在神经网络对于线性可分的定性理解特点如下：</p>
+
+<p><strong>线性可分的特点：低维转高维，还能保持原来的线性可分性的特点；但是高维转低维就不能保持原来的线性可分性。</strong></p>
+
+<p><strong>线性不可分的特点：只要是线性变化到高维或者是低维，都不能是线性可分；但是经过一次非线性变化+仿射变换后或者多次就能实现线性可分。</strong></p>
+
+<p>我们看下示意图：</p>
+
+<p><figure><img src="/image/linear_dataset.png" alt="线性可分 vs 线性不可分"></figure></p>
+
+<p>假设数据集T是线性可分的，感知机的学习目标是求得一个能将T完全正确分离的超平面S，即确定参数w和b。因此<strong>需要确定一个学习策略，即定义经验损失函数并将损失函数最小化</strong>。自然想到可能选择误分类点的个数，但是误分类点的个数不是参数w,b的连续可导函数，不易优化；我们选择<strong>误分类点到超平面的总距离作为我们的优化策略</strong>。首先写出输入空间 $R^n$ 中任一点 $x_i$到超平面S的距离：</p>
+
+<p><span  class="math">\[
+\frac {1}{||w||} \cdot (w^T \cdot x_i + b)
+\]</span></p>
+
+<p>假设误分类的点集为M，则任意误分类点$(x_i,y_i) \in M,$</p>
+
+<p><span  class="math">\[w^T \cdot x_i+b>0时，有y_i=-1\\\\\\ w^T \cdot x_i + b <0时，有y_i=+1\]</span></p>
+
+<p>所以误分类点$(x_i,y_i) \in M $,那么所有误分类点到超平面S的距离</p>
+
+<p><span  class="math">\[-\frac{1}{||w||} \sum_{(x_i,y_i) \in M}\cdot y_i(w^T \cdot x_i+b)\]</span></p>
+
+<p>先不考虑权重空间的范数，得到我们的损失函数,即感知机的经验风险函数:</p>
+
+<p><span  class="math">\[
+argminL(w,b)=-\sum_{(x_i,y_i) \in M}  y_i(w^T \cdot x_i +b)
+\]</span></p>
+
+<p><strong>所以，感知机模型的学习问题，最终成为了损失函数最小化的问题。</strong>这里需要注意一个特殊情况: 如果样本点刚好落在了决策超平面上这个点可以不予考虑。</p>
+
+<h4 id="求解感知机的损失函数">求解感知机的损失函数</h4>
+
+<h5 id="感知机算法的原始形式">感知机算法的原始形式</h5>
+
+<p>假设误分类点集合M是固定的，那么损失函数L(w,b)的梯度优化则如下:</p>
+
+<p><span  class="math">\[
+\nabla_w L(w,b)=-\sum_{x_i \in M} y_i \cdot x_i \\
+\nabla_b L(w,b)=-\sum_{x_i \in M} y_i
+\]</span></p>
+
+<p>随机选择一点对w,b进行更新，如下:</p>
+
+<p><span  class="math">\[
+w:=w+ \alpha \cdot x_i \cdot y_i \\
+b:=b+\alpha \cdot y_i
+\]</span></p>
+
+<p><strong>如果数据集是线性可分的，那么感知机算法一定是收敛的，即经过有限步的迭代后可以得出正确分类样本数据的参数w,b,虽然一定收敛但是分割超平面却不一定是惟一的。</strong> 详细的证明算法可以参考数学上的Novikoff定理，很多书籍资料都给出了详细的证明，感兴趣的朋友可以看下。</p>
+
+<h4 id="感知机算法原始形式代码实现">感知机算法原始形式代码实现</h4>
+
+<p>比如我们业务现在需要对现有数据进行分类，比如用户是否为真实用户还是作弊用户，这是一个简单的二分类模型。我们现在拿到了样本的数据，需要对该数据进行分类，当然前提是该数据集是线性可分的，可以将数据集进行可视化和初步分析看一下数据。比如样本实例只有两维特征，正实例点是[10,8],[6,9],[6,8],[7,6],[7,8],[9,6],[11,3],[10,6],[12,5]；负实例点是[1,2],[2,2],[3,1],[1,1],[3,6],[4,4],[3,2],[2,6],[6,2]。我们根据感知器算法进行学习并得到模型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="k">class</span> <span class="nc">Perceptron</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">result</span><span class="p">)</span><span class="p">:</span>
+        <span class="c1">#加载训练集数据</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="c1">#初始化w和b</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+        
+    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span><span class="o">=</span> <span class="mi">0</span> <span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">+</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">+</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span> <span class="p">:</span>
+                <span class="n">i</span> <span class="o">+</span><span class="o">=</span> <span class="mi">1</span>
+            <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span>
+            <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
+<span class="n">perceptron</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="p">)</span>
+<span class="n">perceptron</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>通过算法结果输出为:</p>
+
+<p><span  class="math">\[
+w = [7,2]^T \\
+b = -48
+\]</span></p>
+
+<h5 id="感知机算法的对偶形式">感知机算法的对偶形式</h5>
+
+<p>感知机模型最重要的并不是它的原始形式，而是他的对偶形式，这个里的对偶形式就是SVM求解中对偶形式的原型。</p>
+
+<blockquote>
+<p>每一个线性规划问题，我们称之为原始问题，都有一个与之对应的线性规划问题我们称之为对偶问题。原始问题与对偶问题的解是对应的，得出一个问题的解，另一个问题的解也就得到了。并且原始问题与对偶问题在形式上存在很简单的对应关系：</p>
+
+<ul>
+<li>目标函数对原始问题是极大化，对偶问题则是极小化</li>
+<li>原始问题目标函数中的系数，是对偶问题约束不等式中的右端常数，而原始问题约束不等式中的右端常数，则是对偶问题中目标函数的系数</li>
+<li>原始问题和对偶问题的约束不等式的符号方向相反</li>
+<li>原始问题约束不等式系数矩阵转置后，即为对偶问题的约束不等式的系数矩阵</li>
+<li>原始问题的约束方程数对应于对偶问题的变量数，而原始问题的变量数对应于对偶问题的约束方程数</li>
+<li>对偶问题的对偶问题是原始问题</li>
+</ul>
+</blockquote>
+
+<p>对偶形式的基本想法是，将w 和 b表示为实例$x_i和y_i$的线性组合的形式，通过求解其系数而求得 w 和 b ，我们在通过误分类点逐步修改w和b，我们假设修改了n次，则w,b关于$(x_i,y_i)$的增量分别是$\alpha y_i x_i和\alpha y_i$,这里$\alpha_i=n_i η$，这里具体的表示为:</p>
+
+<p><span  class="math">\[
+w=\sum_{i=1}^{n}\alpha_i \cdot x_i \cdot y_i \\
+b=\sum_{i=1}^{n}\alpha_i \cdot y_i
+\]</span></p>
+
+<p>输入是我们的训练数据集，输出$\alpha,b$而感知机模型</p>
+
+<p><span  class="math">\[f(x)= sign(\sum_{j=1}^{N}\alpha_j  {y_i} {x_i} \cdot x +b)\]</span></p>
+
+<p>其中$\alpha=(\alpha_1,\alpha_2,\alpha_3,......\alpha_n)^T$ 。</p>
+
+<ul>
+<li><p>$\alpha_0=0,b_0=0 $</p></li>
+
+<li><p>随机选取数据实例$(x_i,y_i)$</p></li>
+
+<li><p>那么如果
+<span  class="math">\(
+y_i(\sum_{j=1}^{N}\alpha_j y_j x_j \cdot x_i+b) \le 0 \\
+\alpha_i=\alpha_i+η \\
+b=b+ηy_i
+\)</span></p></li>
+</ul>
+
+<p>或者将数据集中的内积先计算出来并存储为矩阵，<strong>即Gram矩阵</strong>。</p>
+
+<p><span  class="math">\[G=[x_i \cdot x_j]_{M \times N}\]</span></p>
+
+<ul>
+<li>直到全部没有误分类点</li>
+</ul>
+
+<h4 id="感知机算法对偶形式代码实现">感知机算法对偶形式代码实现</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="k">class</span> <span class="nc">Perceptron</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">result</span><span class="p">)</span><span class="p">:</span>
+        <span class="c1">#加载训练集数据</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">calculateDual</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="c1">#首先计算gram矩阵</span>
+        <span class="n">gram</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="p">:</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">]</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="p">:</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="c1">#初始化参数a、w和b</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="p">:</span>
+            <span class="n">temp</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="p">)</span> <span class="p">:</span>
+                <span class="n">temp</span> <span class="o">+</span><span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">gram</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">temp</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span><span class="o">=</span> <span class="mi">0</span> <span class="p">:</span>
+                <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span><span class="o">=</span> <span class="mi">1</span>
+                <span class="n">b</span> <span class="o">+</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span> <span class="p">:</span>
+                <span class="n">i</span> <span class="o">+</span><span class="o">=</span> <span class="mi">1</span>
+       
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="p">)</span><span class="p">:</span>
+            <span class="n">w</span> <span class="o">+</span><span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">print</span> <span class="n">w</span>
+        <span class="k">print</span> <span class="n">b</span>
+<span class="n">perceptron</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="p">)</span>
+<span class="n">perceptron</span><span class="o">.</span><span class="n">calculateDual</span><span class="p">(</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    
+    
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">吕先生(BrianLv)</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+      2018-12-20
+      
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">许可协议</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+
+
+    
+    
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    
+      <label class="qr-code-image" for="reward">
+        <img class="image" src="/image/wechatpay.jpg">
+        <span>微信打赏</span>
+      </label>
+    
+  </div>
+</div>
+
+    <footer class="post-footer">
+      <div class="post-tags">
+          <a href="https://www.brianlv.com/tags/machine-learning.html">Machine Learning</a>
+          <a href="https://www.brianlv.com/tags/perceptron.html">perceptron</a>
+          
+        </div>
+
+      
+      <nav class="post-nav">
+        
+          <a class="prev" href="/20181221/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8.html">
+            
+            <i class="iconfont">
+              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
+</svg>
+
+            </i>
+            <span class="prev-text nav-default">大规模分布式机器学习之参数服务器</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        
+          <a class="next" href="/20181219/%E5%B9%B3%E5%8F%B0%E5%8C%96saas%E5%AE%9E%E8%B7%B5%E4%B9%8Bdocker-stack%E5%BA%94%E7%94%A8.html">
+            <span class="next-text nav-default">平台化SaaS实践之Docker Stack应用</span>
+            <span class="prev-text nav-mobile">下一篇</span>
+            
+            <i class="iconfont">
+              <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="18" height="18">
+  <path d="M332.091514 74.487481l-75.369571 89.491197c-10.963703 12.998035-10.285251 32.864502 1.499144 44.378743l286.278095 300.375162L266.565125 819.058374c-11.338233 12.190647-11.035334 32.285311 0.638543 44.850487l80.46666 86.564541c11.680017 12.583596 30.356378 12.893658 41.662889 0.716314l377.434212-421.426145c11.332093-12.183484 11.041474-32.266891-0.657986-44.844348l-80.46666-86.564541c-1.772366-1.910513-3.706415-3.533476-5.750981-4.877077L373.270379 71.774697C361.493148 60.273758 343.054193 61.470003 332.091514 74.487481z"></path>
+</svg>
+
+            </i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+
+  
+  
+  
+  
+
+  
+  
+
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="icon-links">
+  
+  
+    <a href="mailto:brian.lv@outlook.com" rel="me noopener" class="iconfont"
+      title="email" >
+      <svg class="icon" viewBox="0 0 1451 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="36" height="36">
+  <path d="M664.781909 681.472759 0 97.881301C0 3.997201 71.046997 0 71.046997 0L474.477909 0 961.649408 0 1361.641813 0C1361.641813 0 1432.688811 3.997201 1432.688811 97.881301L771.345323 681.472759C771.345323 681.472759 764.482731 685.154773 753.594283 688.65053L753.594283 688.664858C741.602731 693.493018 729.424896 695.068979 718.077952 694.839748 706.731093 695.068979 694.553173 693.493018 682.561621 688.664858L682.561621 688.65053C671.644501 685.140446 664.781909 681.472759 664.781909 681.472759L664.781909 681.472759ZM718.063616 811.603883C693.779541 811.016482 658.879232 802.205449 619.10784 767.734955 542.989056 701.759633 0 212.052267 0 212.052267L0 942.809523C0 942.809523 0 1024 83.726336 1024L682.532949 1024 753.579947 1024 1348.948139 1024C1432.688811 1024 1432.688811 942.809523 1432.688811 942.809523L1432.688811 212.052267C1432.688811 212.052267 893.138176 701.759633 817.019477 767.734955 777.248 802.205449 742.347691 811.03081 718.063616 811.603883L718.063616 811.603883Z"></path>
+</svg>
+
+    </a>
+
+
+<a href="https://www.brianlv.com/index.xml" rel="noopener alternate" type="application/rss&#43;xml"
+    class="iconfont" title="rss" target="_blank">
+    <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30" height="30">
+  <path d="M819.157333 1024C819.157333 574.592 449.408 204.8 0 204.8V0c561.706667 0 1024 462.293333 1024 1024h-204.842667zM140.416 743.04a140.8 140.8 0 0 1 140.501333 140.586667A140.928 140.928 0 0 1 140.074667 1024C62.72 1024 0 961.109333 0 883.626667s62.933333-140.544 140.416-140.586667zM678.784 1024h-199.04c0-263.210667-216.533333-479.786667-479.744-479.786667V345.173333c372.352 0 678.784 306.517333 678.784 678.826667z"></path>
+</svg>
+
+  </a>
+   
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - <a class="theme-link" href="https://github.com/xianmin/hugo-theme-jane">Jane</a>
+  </span>
+
+  <span class="copyright-year">
+    &copy;
+    
+      2017 -
+    2019
+    <span class="heart">
+      
+      <i class="iconfont">
+        <svg class="icon" viewBox="0 0 1025 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="14" height="14">
+  <path d="M1000.1 247.9c-15.5-37.3-37.6-70.6-65.7-98.9-54.4-54.8-125.8-85-201-85-85.7 0-166 39-221.4 107.4C456.6 103 376.3 64 290.6 64c-75.1 0-146.5 30.4-201.1 85.6-28.2 28.5-50.4 61.9-65.8 99.3-16 38.8-24 79.9-23.6 122.2 0.7 91.7 40.1 177.2 108.1 234.8 3.1 2.6 6 5.1 8.9 7.8 14.9 13.4 58 52.8 112.6 102.7 93.5 85.5 209.9 191.9 257.5 234.2 7 6.1 15.8 9.5 24.9 9.5 9.2 0 18.1-3.4 24.9-9.5 34.5-30.7 105.8-95.9 181.4-165 74.2-67.8 150.9-138 195.8-178.2 69.5-57.9 109.6-144.4 109.9-237.3 0.1-42.5-8-83.6-24-122.2z"
+   fill="#8a8a8a"></path>
+</svg>
+
+      </i>
+    </span><span class="author">
+        吕海峰
+        
+      </span></span>
+
+  
+  
+    <span id="busuanzi_container">
+      访客数/访问量：<span id="busuanzi_value_site_uv"></span>/<span id="busuanzi_value_site_pv"></span>
+    </span>
+  
+
+  
+    <script type="text/javascript"
+        async
+        src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[\[','\]\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+
+MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+});
+</script>
+
+<style>
+code.has-jax {
+    font: inherit;
+    font-size: 100%;
+    background: inherit;
+    border: inherit;
+    color: #515151;
+}
+</style>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont">
+        
+        <svg class="icon" viewBox="0 0 1024 1024" version="1.1"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="35" height="35">
+  <path d="M510.866688 227.694839 95.449397 629.218702l235.761562 0-2.057869 328.796468 362.40389 0L691.55698 628.188232l241.942331-3.089361L510.866688 227.694839zM63.840492 63.962777l894.052392 0 0 131.813095L63.840492 195.775872 63.840492 63.962777 63.840492 63.962777zM63.840492 63.962777"></path>
+</svg>
+
+      </i>
+    </div>
+  </div>
+  
+<script type="text/javascript" src="/lib/jquery/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/lib/slideout/slideout-1.0.1.min.js"></script>
+
+
+
+
+<script type="text/javascript" src="/js/main.638251f4230630f0335d8c6748e53a96f94b72670920b60c09a56fdc8bece214.js" integrity="sha256-Y4JR9CMGMPAzXYxnSOU6lvlLcmcJILYMCaVv3Ivs4hQ=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+  <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.css"
+    integrity="sha384-BdGj8xC2eZkQaxoQ8nSLefg4AV4/AwB3Fj+8SUSo7pnKP6Eoy18liIKTPn9oBYNG"
+    crossorigin="anonymous">
+
+  
+  <script defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/katex.min.js"
+    integrity="sha384-JiKN5O8x9Hhs/UE5cT5AAJqieYlOZbGT3CHws/y97o3ty4R7/O5poG9F3JoiOYw1"
+    crossorigin="anonymous"></script>
+
+  
+  <script defer
+    src="https://cdn.jsdelivr.net/npm/katex@0.11.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI"
+    crossorigin="anonymous" onload="renderMathInElement(document.body);">
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      renderMathInElement(document.body, {
+        
+      });
+    });
+  </script>
+<script id="tencent_analytics">
+  var _hmt = _hmt || [];
+  (function() {
+    if (window.location.hostname === 'localhost') return;
+    var hm = document.createElement("script"); hm.async = true;
+	hm.src = "//tajs.qq.com/stats?sId=66124387";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+
+
+
+
+  
+    <script type="text/javascript" src="/js/load-photoswipe.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe.min.js"></script>
+    <script type="text/javascript" src="/lib/photoswipe/photoswipe-ui-default.min.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+  <script src="/js/"></script>
+
+
+</body>
+</html>

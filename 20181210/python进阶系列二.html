@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.2" />
+<meta name="generator" content="Hugo 0.60.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%BA%8C.html" />
@@ -66,16 +66,13 @@
 <meta property="article:modified_time" content="2018-12-10T21:30:57+08:00" />
 <meta itemprop="name" content="Python进阶系列二">
 <meta itemprop="description" content="Python进阶">
-
-
 <meta itemprop="datePublished" content="2018-12-10T21:30:57&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-10T21:30:57&#43;08:00" />
-<meta itemprop="wordCount" content="5651">
+<meta itemprop="wordCount" content="5659">
 
 
 
-<meta itemprop="keywords" content="Python," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="Python," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Python进阶系列二"/>
 <meta name="twitter:description" content="Python进阶"/>
 
@@ -307,7 +304,7 @@
             <a href="https://www.brianlv.com/categories/python.html"> Python </a>
             
           </div>
-        <span class="more-meta"> 约 5651 字 </span>
+        <span class="more-meta"> 约 5659 字 </span>
           <span class="more-meta"> 预计阅读 12 分钟 </span>
 
         
@@ -328,56 +325,34 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#概述">概述</a></li>
-<li><a href="#intermediate-python-中译-二">Intermediate Python 中译(二)</a>
-<ul>
-<li><a href="#decorators">Decorators</a></li>
-<li><a href="#global-and-return">global and return</a>
-<ul>
-<li><a href="#变量名解析legb法则">变量名解析LEGB法则</a></li>
-</ul></li>
-<li><a href="#slots">__slots__</a></li>
-<li><a href="#collections">collections</a>
-<ul>
-<li><a href="#defaultdict">defaultdict</a></li>
-<li><a href="#counter">counter</a></li>
-<li><a href="#dequeue">dequeue</a></li>
-<li><a href="#namedtuple">namedtuple</a></li>
-<li><a href="#enum-enum">enum.Enum</a></li>
-<li><a href="#enumrable">enumrable</a></li>
-</ul></li>
-<li><a href="#comprehension">comprehension</a>
-<ul>
-<li><a href="#list-comprehension">list comprehension</a></li>
-<li><a href="#dict-comprehension">dict comprehension</a></li>
-<li><a href="#set-comprehension">set comprehension</a></li>
-</ul></li>
-<li><a href="#try-else">try/else</a></li>
-</ul></li>
-<li><a href="#总结">总结</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#heading">概述</a></li>
+    <li><a href="#intermediate-python-">Intermediate Python 中译(二)</a>
+      <ul>
+        <li><a href="#decorators">Decorators</a></li>
+        <li><a href="#global-and-return">global and return</a></li>
+        <li><a href="#slots">\_\_slots\_\_</a></li>
+        <li><a href="#collections">collections</a></li>
+        <li><a href="#comprehension">comprehension</a></li>
+        <li><a href="#tryelse">try/else</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading1">总结</a></li>
+  </ul>
 </nav>
   </div>
 </div>
 
     
     <div class="post-content">
-      <h2 id="概述">概述</h2>
-
-<p>在上一篇博客中，我们介绍了<strong><a href="https://www.brianlv.com/post/python进阶一">Python进阶系列一</a></strong>，还有一些新的技巧没有翻译完，我们下面来继续我们的翻译。</p>
-
-<h2 id="intermediate-python-中译-二">Intermediate Python 中译(二)</h2>
-
+      <h2 id="heading">概述</h2>
+<p>在上一篇博客中，我们介绍了**<a href="https://www.brianlv.com/post/python%E8%BF%9B%E9%98%B6%E4%B8%80">Python进阶系列一</a>**，还有一些新的技巧没有翻译完，我们下面来继续我们的翻译。</p>
+<h2 id="intermediate-python-">Intermediate Python 中译(二)</h2>
 <h3 id="decorators">Decorators</h3>
-
 <p><strong>Decorators</strong>装饰器是Pytho非常重要的特性，相当于Java注解功能。装饰器是修饰函数的一种语法特性，可以使其功能发生一些改变。在Python函数也是第一等公民，可以直接赋值对象和使用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -393,26 +368,26 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s2">&#34;hi,&#34;</span><span class="o">+</span><span class="n">name</span>
-<span class="k">print</span><span class="p">(</span><span class="n">hi</span><span class="p">())</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">hi,</span><span class="s2">&#34;</span><span class="o">+</span><span class="n">name</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hi</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
 <span class="c1">#输出</span>
 <span class="n">hi</span><span class="p">,</span><span class="n">brian</span>
 <span class="n">greet</span> <span class="o">=</span> <span class="n">hi</span>
-<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
 <span class="c1">#输出</span>
 <span class="n">hi</span><span class="p">,</span><span class="n">brian</span>
 <span class="c1">#此时已经删除hi对象，无法运行hi()方法，但是可以通过greet()方法运行</span>
 <span class="k">del</span> <span class="n">hi</span>
-<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="n">hi</span><span class="err">，</span><span class="n">brian</span></code></pre></td></tr></table>
+<span class="n">hi</span><span class="err">，</span><span class="n">brian</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><strong>我们也可以在函数内定义函数</strong>，比如：</p>
+</div><p><strong>我们也可以在函数内定义函数</strong>，比如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -429,28 +404,27 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;now you are inside in the hi() method&#34;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">greet</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s2">&#34;now you are in inside the greet() method&#34;</span>
-    <span class="k">def</span> <span class="nf">welcome</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s2">&#34;now you are in inside the welcome() method&#34;</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">welcome</span><span class="p">())</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;now you are back in the hi() method&#34;</span><span class="p">)</span>
-<span class="n">hi</span><span class="p">()</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">now you are inside in the hi() method</span><span class="s2">&#34;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">now you are in inside the greet() method</span><span class="s2">&#34;</span>
+    <span class="k">def</span> <span class="nf">welcome</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">now you are in inside the welcome() method</span><span class="s2">&#34;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">welcome</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">now you are back in the hi() method</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="n">hi</span><span class="p">(</span><span class="p">)</span>
 <span class="c1">#输出为</span>
-<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">inside</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">()</span> <span class="n">method</span>
-<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">greet</span><span class="p">()</span> <span class="n">method</span>
-<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">welcome</span><span class="p">()</span> <span class="n">method</span>
-<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">back</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">()</span> <span class="n">method</span></code></pre></td></tr></table>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">inside</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">(</span><span class="p">)</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">greet</span><span class="p">(</span><span class="p">)</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">welcome</span><span class="p">(</span><span class="p">)</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">back</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">(</span><span class="p">)</span> <span class="n">method</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><strong>我们可以看到在函数(主函数)内定义函数(子函数)，只要是不调用子函数，子函数只是声明并不执行，当执行完子函数时又返回了主函数。</strong>由于Python只是函数第一等公民的功能特性，那么在Python代码中是可以将Python的函数可以作为变量使用并将其作为返回值亦可。<strong>从主函数中返回子函数(即从函数中返回函数)</strong>。</p>
-
+</div><p>**我们可以看到在函数(主函数)内定义函数(子函数)，只要是不调用子函数，子函数只是声明并不执行，当执行完子函数时又返回了主函数。**由于Python只是函数第一等公民的功能特性，那么在Python代码中是可以将Python的函数可以作为变量使用并将其作为返回值亦可。<strong>从主函数中返回子函数(即从函数中返回函数)</strong>。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -468,29 +442,29 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">greet</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s2">&#34;now you are in inside the greet() method&#34;</span>
-    <span class="k">def</span> <span class="nf">welcome</span><span class="p">():</span>
-        <span class="k">return</span> <span class="s2">&#34;now you are in inside the welcome() method&#34;</span>
-    <span class="k">if</span> <span class="n">name</span><span class="o">==</span><span class="s2">&#34;brian&#34;</span><span class="p">:</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">now you are in inside the greet() method</span><span class="s2">&#34;</span>
+    <span class="k">def</span> <span class="nf">welcome</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">now you are in inside the welcome() method</span><span class="s2">&#34;</span>
+    <span class="k">if</span> <span class="n">name</span><span class="o">==</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">greet</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">welcome</span>
-<span class="n">a</span><span class="o">=</span><span class="n">hi</span><span class="p">()</span>
+<span class="n">a</span><span class="o">=</span><span class="n">hi</span><span class="p">(</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="o">&lt;</span><span class="n">function</span> <span class="n">hi</span><span class="o">.&lt;</span><span class="nb">locals</span><span class="o">&gt;.</span><span class="n">greet</span> <span class="n">at</span> <span class="mh">0x10f792a60</span><span class="o">&gt;</span>
-<span class="n">a</span><span class="p">()</span>
+<span class="o">&lt;</span><span class="n">function</span> <span class="n">hi</span><span class="o">.</span><span class="o">&lt;</span><span class="nb">locals</span><span class="o">&gt;</span><span class="o">.</span><span class="n">greet</span> <span class="n">at</span> <span class="mh">0x10f792a60</span><span class="o">&gt;</span>
+<span class="n">a</span><span class="p">(</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="s1">&#39;now you are in inside the greet() method&#39;</span></code></pre></td></tr></table>
+<span class="sa"></span><span class="s1">&#39;</span><span class="s1">now you are in inside the greet() method</span><span class="s1">&#39;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>既然函数可以作为变量使用既可以赋值又可以作为函数返回值，那么自然而然肯定还可以作为参数使用。
+</div><p>既然函数可以作为变量使用既可以赋值又可以作为函数返回值，那么自然而然肯定还可以作为参数使用。
 <strong>函数作为参数</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -501,27 +475,30 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s2">&#34;hi,brian&#34;</span>
-<span class="k">def</span> <span class="nf">doSomethingBeforeHi</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I&#39;m doing some boring work before executing &#34;</span><span class="o">+</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="o">+</span><span class="s2">&#34; function&#34;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">func</span><span class="p">())</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">hi,brian</span><span class="s2">&#34;</span>
+<span class="k">def</span> <span class="nf">doSomethingBeforeHi</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">I</span><span class="s2">&#39;</span><span class="s2">m doing some boring work before executing </span><span class="s2">&#34;</span><span class="o">+</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="o">+</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2"> function</span><span class="s2">&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
 <span class="n">doSomethingBeforeHi</span><span class="p">(</span><span class="n">hi</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="n">I</span><span class="s1">&#39;m doing some boring work before executing hi function</span>
-<span class="n">hi</span><span class="p">,</span><span class="n">brian</span></code></pre></td></tr></table>
+<span class="n">I</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">m doing some boring work before executing hi function</span>
+<span class="n">hi</span><span class="p">,</span><span class="n">brian</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>我们来总结一下Python将函数作为第一等公民具备以下三个特性：
-&gt; * 函数可以作为变量使用和赋值
-&gt; * 在函数内可以定义函数
-&gt; * 从函数可以返回函数
-&gt; * 函数可以作为函数参数</p>
-
+</div><p>我们来总结一下Python将函数作为第一等公民具备以下三个特性：</p>
+<blockquote>
+<ul>
+<li>函数可以作为变量使用和赋值</li>
+<li>在函数内可以定义函数</li>
+<li>从函数可以返回函数</li>
+<li>函数可以作为函数参数</li>
+</ul>
+</blockquote>
 <p>下面我们来写一个我们自己原生的一个装饰器，</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -544,31 +521,31 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1">#定义了一个装饰器函数和一个参数，该参数是接收函数的参数。</span>
-<span class="k">def</span> <span class="nf">new_decorator</span><span class="p">(</span><span class="n">a_func</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">new_decorator</span><span class="p">(</span><span class="n">a_func</span><span class="p">)</span><span class="p">:</span>
     <span class="c1">#在函数内定义要执行的函数</span>
-    <span class="k">def</span> <span class="nf">wrap_function</span><span class="p">():</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I am doing some boring work before executing a_func()&#34;</span><span class="p">)</span>
-        <span class="n">a_func</span><span class="p">()</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I am doing some boring work after executing a_func()&#34;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrap_function</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">I am doing some boring work before executing a_func()</span><span class="s2">&#34;</span><span class="p">)</span>
+        <span class="n">a_func</span><span class="p">(</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">I am doing some boring work after executing a_func()</span><span class="s2">&#34;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">wrap_function</span>
 
 <span class="c1">#定义一个要装饰的函数</span>
-<span class="k">def</span> <span class="nf">func_requiring_decorator</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I am the function which needs some decorators&#34;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func_requiring_decorator</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">I am the function which needs some decorators</span><span class="s2">&#34;</span><span class="p">)</span>
 <span class="c1">#将装饰了的函数功能重新赋值给原始对象进行更新</span>
 <span class="n">func_requiring_decorator</span> <span class="o">=</span> <span class="n">new_decorator</span><span class="p">(</span><span class="n">func_requiring_decorator</span><span class="p">)</span>
 <span class="c1">#调用函数</span>
-<span class="n">func_requiring_decorator</span><span class="p">()</span>
+<span class="n">func_requiring_decorator</span><span class="p">(</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="n">I</span> <span class="n">am</span> <span class="n">doing</span> <span class="n">some</span> <span class="n">boring</span> <span class="n">work</span> <span class="n">before</span> <span class="n">executing</span> <span class="n">a_func</span><span class="p">()</span>
+<span class="n">I</span> <span class="n">am</span> <span class="n">doing</span> <span class="n">some</span> <span class="n">boring</span> <span class="n">work</span> <span class="n">before</span> <span class="n">executing</span> <span class="n">a_func</span><span class="p">(</span><span class="p">)</span>
 <span class="n">I</span> <span class="n">am</span> <span class="n">the</span> <span class="n">function</span> <span class="n">which</span> <span class="n">needs</span> <span class="n">some</span> <span class="n">decorators</span>
-<span class="n">I</span> <span class="n">am</span> <span class="n">doing</span> <span class="n">some</span> <span class="n">boring</span> <span class="n">work</span> <span class="n">after</span> <span class="n">executing</span> <span class="n">a_func</span><span class="p">()</span></code></pre></td></tr></table>
+<span class="n">I</span> <span class="n">am</span> <span class="n">doing</span> <span class="n">some</span> <span class="n">boring</span> <span class="n">work</span> <span class="n">after</span> <span class="n">executing</span> <span class="n">a_func</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>我们上述做的事情就是一个简单的装饰器的工作，它的运行原理是一样的。Python为了使其简短和语义方便将<strong>@object</strong>作为装饰器。我们来修改一下内容：</p>
+</div><p>我们上述做的事情就是一个简单的装饰器的工作，它的运行原理是一样的。Python为了使其简短和语义方便将**@object**作为装饰器。我们来修改一下内容：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -585,27 +562,27 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">new_decorator</span><span class="p">(</span><span class="n">a_func</span><span class="p">):</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">new_decorator</span><span class="p">(</span><span class="n">a_func</span><span class="p">)</span><span class="p">:</span>
     
-    <span class="k">def</span> <span class="nf">wrap_function</span><span class="p">():</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I am doing some boring work before executing a_func()&#34;</span><span class="p">)</span>
-        <span class="n">a_func</span><span class="p">()</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I am doing some boring work after executing a_func()&#34;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrap_function</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">I am doing some boring work before executing a_func()</span><span class="s2">&#34;</span><span class="p">)</span>
+        <span class="n">a_func</span><span class="p">(</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">I am doing some boring work after executing a_func()</span><span class="s2">&#34;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">wrap_function</span>
 <span class="nd">@new_decorator</span>
-<span class="k">def</span> <span class="nf">func_requiring_decorator</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I am the function which needs some decorators&#34;</span><span class="p">)</span>
-<span class="n">func_requiring_decorator</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">func_requiring_decorator</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">I am the function which needs some decorators</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="n">func_requiring_decorator</span><span class="p">(</span><span class="p">)</span>
 <span class="c1">#输出：</span>
-<span class="n">I</span> <span class="n">am</span> <span class="n">doing</span> <span class="n">some</span> <span class="n">boring</span> <span class="n">work</span> <span class="n">before</span> <span class="n">executing</span> <span class="n">a_func</span><span class="p">()</span>
+<span class="n">I</span> <span class="n">am</span> <span class="n">doing</span> <span class="n">some</span> <span class="n">boring</span> <span class="n">work</span> <span class="n">before</span> <span class="n">executing</span> <span class="n">a_func</span><span class="p">(</span><span class="p">)</span>
 <span class="n">I</span> <span class="n">am</span> <span class="n">the</span> <span class="n">function</span> <span class="n">which</span> <span class="n">needs</span> <span class="n">some</span> <span class="n">decorators</span>
-<span class="n">I</span> <span class="n">am</span> <span class="n">doing</span> <span class="n">some</span> <span class="n">boring</span> <span class="n">work</span> <span class="n">after</span> <span class="n">executing</span> <span class="n">a_func</span><span class="p">()</span></code></pre></td></tr></table>
+<span class="n">I</span> <span class="n">am</span> <span class="n">doing</span> <span class="n">some</span> <span class="n">boring</span> <span class="n">work</span> <span class="n">after</span> <span class="n">executing</span> <span class="n">a_func</span><span class="p">(</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>但是我们的函数命名和docstring并没改变，python通过<strong>functools的wraps</strong>可以解决这个问题。</p>
+</div><p>但是我们的函数命名和docstring并没改变，python通过<strong>functools的wraps</strong>可以解决这个问题。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -620,25 +597,25 @@
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">new_decorator</span><span class="p">(</span><span class="n">a_func</span><span class="p">):</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">new_decorator</span><span class="p">(</span><span class="n">a_func</span><span class="p">)</span><span class="p">:</span>
     
-    <span class="k">def</span> <span class="nf">wrap_function</span><span class="p">():</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I am doing some boring work before executing a_func()&#34;</span><span class="p">)</span>
-        <span class="n">a_func</span><span class="p">()</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I am doing some boring work after executing a_func()&#34;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrap_function</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">I am doing some boring work before executing a_func()</span><span class="s2">&#34;</span><span class="p">)</span>
+        <span class="n">a_func</span><span class="p">(</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">I am doing some boring work after executing a_func()</span><span class="s2">&#34;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">wrap_function</span>
 <span class="nd">@new_decorator</span>
-<span class="k">def</span> <span class="nf">func_requiring_decorator</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I am the function which needs some decorators&#34;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func_requiring_decorator</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">I am the function which needs some decorators</span><span class="s2">&#34;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">func_requiring_decorator</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="n">wrap_function</span></code></pre></td></tr></table>
+<span class="n">wrap_function</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>我们需要导入functools包的wraps来导入。</p>
+</div><p>我们需要导入functools包的wraps来导入。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -654,26 +631,26 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">new_decorator</span><span class="p">(</span><span class="n">a_func</span><span class="p">):</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">new_decorator</span><span class="p">(</span><span class="n">a_func</span><span class="p">)</span><span class="p">:</span>
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">a_func</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">wrap_function</span><span class="p">():</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I am doing some boring work before executing a_func()&#34;</span><span class="p">)</span>
-        <span class="n">a_func</span><span class="p">()</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I am doing some boring work after executing a_func()&#34;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrap_function</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">I am doing some boring work before executing a_func()</span><span class="s2">&#34;</span><span class="p">)</span>
+        <span class="n">a_func</span><span class="p">(</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">I am doing some boring work after executing a_func()</span><span class="s2">&#34;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">wrap_function</span>
 
 <span class="nd">@new_decorator</span>
-<span class="k">def</span> <span class="nf">func_requiring_decorator</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;I am the function which needs some decorators&#34;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func_requiring_decorator</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">I am the function which needs some decorators</span><span class="s2">&#34;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">func_requiring_decorator</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
 <span class="c1">#输出:</span>
-<span class="n">func_requiring_decorator</span></code></pre></td></tr></table>
+<span class="n">func_requiring_decorator</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>下面我们来看一下一个标准的装饰器范本</p>
+</div><p>下面我们来看一下一个标准的装饰器范本</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -693,30 +670,30 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">decorator_name</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">decorator_name</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="p">:</span>
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">decorated</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargv</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decorated</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">*</span><span class="o">*</span><span class="n">kwargv</span><span class="p">)</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">can_run</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&#34;Function will not run&#34;</span>
-        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargv</span><span class="p">)</span>
+            <span class="k">return</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Function will not run</span><span class="s2">&#34;</span>
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">*</span><span class="o">*</span><span class="n">kwargv</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">decorated</span>
 <span class="nd">@decorator_name</span>
-<span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
-    <span class="k">return</span><span class="p">(</span><span class="s2">&#34;Function is running&#34;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">return</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Function is running</span><span class="s2">&#34;</span><span class="p">)</span>
 <span class="n">can_run</span><span class="o">=</span><span class="bp">True</span>
-<span class="n">func</span><span class="p">()</span>
+<span class="n">func</span><span class="p">(</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="s1">&#39;Function is running&#39;</span>
+<span class="sa"></span><span class="s1">&#39;</span><span class="s1">Function is running</span><span class="s1">&#39;</span>
 <span class="n">can_run</span><span class="o">=</span><span class="bp">False</span>
-<span class="n">func</span><span class="p">()</span>
+<span class="n">func</span><span class="p">(</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="n">Function</span> <span class="n">will</span> <span class="ow">not</span> <span class="n">run</span></code></pre></td></tr></table>
+<span class="n">Function</span> <span class="n">will</span> <span class="ow">not</span> <span class="n">run</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><strong>@wraps接收一个函数进行装饰，并复制了函数名称、注释文档、参数列表等功能。</strong>装饰器在Python中经常使用的，我们看一下在权限验证、日志方面的应用。</p>
+</div><p>**@wraps接收一个函数进行装饰，并复制了函数名称、注释文档、参数列表等功能。**装饰器在Python中经常使用的，我们看一下在权限验证、日志方面的应用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -729,23 +706,23 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">requires_auth</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">requires_auth</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="p">:</span>
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">decorated</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decorated</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">*</span><span class="o">*</span><span class="n">kwargs</span><span class="p">)</span><span class="p">:</span>
         <span class="c1">#获得授权的用户信息</span>
         <span class="n">auth</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">authorizztion</span>
         <span class="c1">#检查auth是否正确，即验证授权信息</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">auth</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">check_auth</span><span class="p">(</span><span class="n">auth</span><span class="o">.</span><span class="n">username</span><span class="p">,</span><span class="n">auth</span><span class="o">.</span><span class="n">userpassword</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">auth</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">check_auth</span><span class="p">(</span><span class="n">auth</span><span class="o">.</span><span class="n">username</span><span class="p">,</span><span class="n">auth</span><span class="o">.</span><span class="n">userpassword</span><span class="p">)</span><span class="p">:</span>
             <span class="c1">#执行你相关的业务授权信息</span>
-            <span class="n">authenticate</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">decorated</span></code></pre></td></tr></table>
+            <span class="n">authenticate</span><span class="p">(</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">*</span><span class="o">*</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">decorated</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>日志应用的模块中也有大量应用<strong>装饰器</strong>，我们下面来看一下装饰器的例子：</p>
+</div><p>日志应用的模块中也有大量应用<strong>装饰器</strong>，我们下面来看一下装饰器的例子：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -762,27 +739,27 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">logit</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">logit</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="p">:</span>
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">with_logging</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="k">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="o">+</span><span class="s2">&#34; was called&#34;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">with_logging</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">*</span><span class="o">*</span><span class="n">kwargs</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="o">+</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2"> was called</span><span class="s2">&#34;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">*</span><span class="o">*</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">with_logging</span>
 
 <span class="nd">@logit</span>
-<span class="k">def</span> <span class="nf">addition_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">addition_func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">x</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">addition_func</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">addition_func</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="p">)</span>
 <span class="c1">#输出</span>
 <span class="n">addition_func</span> <span class="n">was</span> <span class="n">called</span>
-<span class="mi">4</span></code></pre></td></tr></table>
+<span class="mi">4</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><strong>我们看一下如何在函数中嵌套装饰器，这个应用也非常的广泛。</strong>我们来看一下：</p>
+</div><p>**我们看一下如何在函数中嵌套装饰器，这个应用也非常的广泛。**我们来看一下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -806,38 +783,40 @@
 </span><span class="lnt">22
 </span><span class="lnt">23
 </span><span class="lnt">24
+</span><span class="lnt">25
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
 
 
-<span class="k">def</span> <span class="nf">logit</span><span class="p">(</span><span class="n">logfile</span><span class="o">=</span><span class="s2">&#34;out.log&#34;</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">logging_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">logit</span><span class="p">(</span><span class="n">logfile</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">out.log</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">logging_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="p">:</span>
         <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-        <span class="k">def</span> <span class="nf">wrapped_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargv</span><span class="p">):</span>
-            <span class="n">log_string</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="o">+</span><span class="s2">&#34; was called&#34;</span>
+        <span class="k">def</span> <span class="nf">wrapped_func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">*</span><span class="o">*</span><span class="n">kwargv</span><span class="p">)</span><span class="p">:</span>
+            <span class="n">log_string</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="o">+</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2"> was called</span><span class="s2">&#34;</span>
             <span class="k">print</span><span class="p">(</span><span class="n">log_string</span><span class="p">)</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">logfile</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">log_string</span><span class="o">+</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargv</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">logfile</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">a</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">log_string</span><span class="o">+</span><span class="sa"></span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">*</span><span class="o">*</span><span class="n">kwargv</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">wrapped_func</span>
     <span class="k">return</span> <span class="n">logging_decorator</span>
 
 
-<span class="nd">@logit</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">func1</span><span class="p">():</span>
+<span class="nd">@logit</span><span class="p">(</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func1</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
     <span class="k">pass</span>
 
 
-<span class="nd">@logit</span><span class="p">(</span><span class="n">logfile</span><span class="o">=</span><span class="s2">&#34;func2.log&#34;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">func2</span><span class="p">():</span>
-    <span class="k">pass</span></code></pre></td></tr></table>
+<span class="nd">@logit</span><span class="p">(</span><span class="n">logfile</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">func2.log</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func2</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>虽然上面的函数嵌套装饰器可以满足参数定制化的需求，但是在一些复杂业务还是无法满足需求的。这个时候我们需要采用面向对象的思维模式对装饰器进行抽象和编程。下面我们来看一下这个例子：</p>
+</div><p>虽然上面的函数嵌套装饰器可以满足参数定制化的需求，但是在一些复杂业务还是无法满足需求的。这个时候我们需要采用面向对象的思维模式对装饰器进行抽象和编程。下面我们来看一下这个例子：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -869,38 +848,38 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
 
-<span class="k">class</span> <span class="nc">logit</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="s2">&#34;out.log&#34;</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">logit</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">logfile</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">out.log</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logfile</span> <span class="o">=</span> <span class="n">logfile</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span><span class="p">:</span>
         <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-        <span class="k">def</span> <span class="nf">wrapped_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargv</span><span class="p">):</span>
-            <span class="n">log_string</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&#34; was called&#34;</span>
+        <span class="k">def</span> <span class="nf">wrapped_function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">*</span><span class="o">*</span><span class="n">kwargv</span><span class="p">)</span><span class="p">:</span>
+            <span class="n">log_string</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2"> was called</span><span class="s2">&#34;</span>
             <span class="k">print</span><span class="p">(</span><span class="n">log_string</span><span class="p">)</span>
-            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logfile</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">log_string</span> <span class="o">+</span> <span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">notify</span><span class="p">()</span>
-            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargv</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logfile</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">a</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">log_string</span> <span class="o">+</span> <span class="sa"></span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">notify</span><span class="p">(</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">*</span><span class="o">*</span><span class="n">kwargv</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">wrapped_function</span>
 
-    <span class="k">def</span> <span class="nf">notify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">notify</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
         <span class="k">pass</span>
 
 
-<span class="nd">@logit</span><span class="p">()</span>
-<span class="k">def</span> <span class="nf">func1</span><span class="p">():</span>
+<span class="nd">@logit</span><span class="p">(</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">func1</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
     <span class="k">pass</span>
 
-<span class="n">func1</span><span class="p">()</span>
+<span class="n">func1</span><span class="p">(</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="n">func1</span> <span class="n">was</span> <span class="n">called</span></code></pre></td></tr></table>
+<span class="n">func1</span> <span class="n">was</span> <span class="n">called</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>当我们的业务需要具体实现notify的子类时，我们可以这样去做：</p>
+</div><p>当我们的业务需要具体实现notify的子类时，我们可以这样去做：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -909,38 +888,37 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">email_logit</span><span class="p">(</span><span class="n">logit</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">email</span><span class="o">=</span><span class="s2">&#34;admin@project.com&#34;</span><span class="p">,</span><span class="o">*</span><span class="n">argc</span><span class="p">,</span><span class="o">**</span><span class="n">kwagrv</span><span class="p">):</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">email_logit</span><span class="p">(</span><span class="n">logit</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">email</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">admin@project.com</span><span class="s2">&#34;</span><span class="p">,</span><span class="o">*</span><span class="n">argc</span><span class="p">,</span><span class="o">*</span><span class="o">*</span><span class="n">kwagrv</span><span class="p">)</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">email_logit</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">argc</span><span class="p">,</span><span class="o">**</span><span class="n">kwagrv</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">email_logit</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">argc</span><span class="p">,</span><span class="o">*</span><span class="o">*</span><span class="n">kwagrv</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">notify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span></code></pre></td></tr></table>
+    <span class="k">def</span> <span class="nf">notify</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="k">pass</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="global-and-return">global and return</h3>
-
-<p>如何在讲解<strong>global和return</strong>时不了解python的变量作用域是不合理的。我们来看一下Python的变量作用域范围<strong>LEGB</strong>。
-* L(local)局部作用域
+</div><h3 id="global-and-return">global and return</h3>
+<p>如何在讲解<strong>global和return</strong>时不了解python的变量作用域是不合理的。我们来看一下Python的变量作用域范围<strong>LEGB</strong>。</p>
+<ul>
+<li>L(local)局部作用域
 局部变量：包含在def关键字定义的语句块中，即在函数中定义的变量。每当函数被调用时都会创建一个新的局部作用域。Python中也有递归，即自己调用自己，每次调用都会创建一个新的局部命名空间。在函数内部的变量声明，除非特别的声明为全局变量，否则均默认为局部变量。有些情况需要在函数内部定义全局变量，这时可以使用global关键字来声明变量的作用域为全局。局部变量域就像一个 栈，仅仅是暂时的存在，依赖创建该局部作用域的函数是否处于活动的状态。所以，一般建议尽量少定义全局变量，因为全局变量在模块文件运行的过程中会一直存在，占用内存空间。
-<strong>注意：如果需要在函数内部对全局变量赋值，需要在函数内部通过global语句声明该变量为全局变量。</strong>
-* E(enclosing)嵌套作用域
-E也包含在def关键字中，E和L是相对的，E相对于更上层的函数而言也是L。与L的区别在于，对一个函数而言，L是定义在此函数内部的局部作用域，而E是定义在此函数的上一层父级函数的局部作用域。主要是为了实现Python的闭包，而增加的实现。
-* G(global)全局作用域
+<strong>注意：如果需要在函数内部对全局变量赋值，需要在函数内部通过global语句声明该变量为全局变量。</strong></li>
+<li>E(enclosing)嵌套作用域
+E也包含在def关键字中，E和L是相对的，E相对于更上层的函数而言也是L。与L的区别在于，对一个函数而言，L是定义在此函数内部的局部作用域，而E是定义在此函数的上一层父级函数的局部作用域。主要是为了实现Python的闭包，而增加的实现。</li>
+<li>G(global)全局作用域
 即在模块层次中定义的变量，每一个模块都是一个全局作用域。也就是说，在模块文件顶层声明的变量具有全局作用域，从外部开来，模块的全局变量就是一个模块对象的属性。
-<strong>注意：全局作用域的作用范围仅限于单个模块文件内</strong>
-* B(built-in)内置作用域
-系统内固定模块里定义的变量，如预定义在builtin 模块内的变量。</p>
-
-<h4 id="变量名解析legb法则">变量名解析LEGB法则</h4>
-
+<strong>注意：全局作用域的作用范围仅限于单个模块文件内</strong></li>
+<li>B(built-in)内置作用域
+系统内固定模块里定义的变量，如预定义在builtin 模块内的变量。</li>
+</ul>
+<h4 id="legb">变量名解析LEGB法则</h4>
 <p><strong>搜索变量名的优先级：局部作用域 &gt; 嵌套作用域 &gt; 全局作用域 &gt; 内置作用域</strong>
 <strong>LEGB法则： 当在函数中使用未确定的变量名时，Python会按照优先级依次搜索4个作用域，以此来确定该变量名的意义。首先搜索局部作用域(L)，之后是上一层嵌套结构中def或lambda函数的嵌套作用域(E)，之后是全局作用域(G)，最后是内置作用域(B)。按这个查找原则，在第一处找到的地方停止。如果没有找到，则会出发NameError错误。</strong>
 另外值得注意的是<strong>Python中的模块代码在执行之前，并不会经过预编译，但是模块内的函数体代码在运行前会经过预编译，因此不管变量名的绑定发生在作用域的那个位置，都能被编译器知道。Python虽然是一个静态作用域语言，但变量名查找是动态发生的，直到在程序运行时，才会发现作用域方面的问题。</strong>
 当我们在局部作用域时想使用全局作用域中的变量时，需要通过使用<strong>global</strong>来覆盖使用。比如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -965,68 +943,66 @@ E也包含在def关键字中，E和L是相对的，E相对于更上层的函数�
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">result</span><span class="o">=</span><span class="mi">12</span>
-<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="p">:</span>
   <span class="n">result</span><span class="o">=</span><span class="n">x</span><span class="o">+</span><span class="n">y</span>
   <span class="k">return</span> <span class="n">result</span>
 
 <span class="n">temp</span><span class="o">=</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;global result is :&#34;</span><span class="p">,</span><span class="n">result</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;add result is :&#34;</span><span class="p">,</span><span class="n">temp</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">global result is :</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">result</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">add result is :</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">temp</span><span class="p">)</span>
 <span class="c1">#输出为</span>
 <span class="k">global</span> <span class="n">result</span> <span class="ow">is</span> <span class="p">:</span> <span class="mi">12</span>
 <span class="n">add</span> <span class="n">result</span> <span class="ow">is</span> <span class="p">:</span> <span class="mi">5</span>
 <span class="c1">#如果我们想通过全局变量的result，则需要通过global</span>
-<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="p">:</span>
   <span class="k">global</span> <span class="n">result</span>
   <span class="n">result</span> <span class="o">=</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
   <span class="k">return</span> <span class="n">result</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;global result is :&#34;</span><span class="p">,</span><span class="n">result</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">&#34;add result is :&#34;</span><span class="p">,</span><span class="n">temp</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">global result is :</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">result</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">add result is :</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">temp</span><span class="p">)</span>
 <span class="c1">#输出为</span>
 <span class="k">global</span> <span class="n">result</span> <span class="ow">is</span> <span class="p">:</span> <span class="mi">5</span>
-<span class="n">add</span> <span class="n">result</span> <span class="ow">is</span> <span class="p">:</span> <span class="mi">5</span></code></pre></td></tr></table>
+<span class="n">add</span> <span class="n">result</span> <span class="ow">is</span> <span class="p">:</span> <span class="mi">5</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>如果想return多个值，可以通过<strong>tuple,list或者dict等数据结构返回。</strong></p>
-
+</div><p>如果想return多个值，可以通过<strong>tuple,list或者dict等数据结构返回。</strong></p>
 <h3 id="slots">__slots__</h3>
-
-<p>在Python中每个类都有实例，每个实例都有一些属性。默认情况下，Python采用字典的方式来保存对象实例属性，这就允许我们在runtime时可以动态设置一些属性。然而这会造成一些资源的浪费，比如随着类实例的增加内存随之增加，这样会消耗很多内存。我们可以用<strong>__slots__</strong>来进优化这部分内存空间，它告诉Python解释器在构造类的实例时不要使用字典的方式并且只给一个固定集合的属性分配空间。</p>
+<p>在Python中每个类都有实例，每个实例都有一些属性。默认情况下，Python采用字典的方式来保存对象实例属性，这就允许我们在runtime时可以动态设置一些属性。然而这会造成一些资源的浪费，比如随着类实例的增加内存随之增加，这样会消耗很多内存。我们可以用**__slots__**来进优化这部分内存空间，它告诉Python解释器在构造类的实例时不要使用字典的方式并且只给一个固定集合的属性分配空间。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Email</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="vm">__slots__</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;emailNo&#39;</span><span class="p">,</span><span class="s1">&#39;emailAddress&#39;</span><span class="p">]</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">emailNo</span><span class="p">,</span> <span class="n">emailAddress</span><span class="p">):</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Email</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>
+    <span class="vm">__slots__</span><span class="o">=</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">emailNo</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">emailAddress</span><span class="s1">&#39;</span><span class="p">]</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">emailNo</span><span class="p">,</span> <span class="n">emailAddress</span><span class="p">)</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">emailNo</span> <span class="o">=</span> <span class="n">emailNo</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">emailAddress</span> <span class="o">=</span> <span class="n">emailAddress</span></code></pre></td></tr></table>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emailAddress</span> <span class="o">=</span> <span class="n">emailAddress</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>这样定义的类，在类进行实例化后会优化内存占用，具体占用多少这个根据你自己写的代码、业务逻辑有关。但是有一点可以肯定，<strong>__slots__</strong>要比不加该特性的使用的。</p>
-
+</div><p>这样定义的类，在类进行实例化后会优化内存占用，具体占用多少这个根据你自己写的代码、业务逻辑有关。但是有一点可以肯定，**__slots__**要比不加该特性的使用的。</p>
 <h3 id="collections">collections</h3>
-
-<p><strong>collections</strong>主要是基于该模块下面的容器类型的数据结构，我们来看一下:
-&gt; * defaultdict
-&gt; * counter
-&gt; * dequeue
-&gt; * namedtuple
-&gt; * OrderedDict
-&gt; * enum.Enum(Python 3.4及以上)</p>
-
+<p><strong>collections</strong>主要是基于该模块下面的容器类型的数据结构，我们来看一下:</p>
+<blockquote>
+<ul>
+<li>defaultdict</li>
+<li>counter</li>
+<li>dequeue</li>
+<li>namedtuple</li>
+<li>OrderedDict</li>
+<li>enum.Enum(Python 3.4及以上)</li>
+</ul>
+</blockquote>
 <h4 id="defaultdict">defaultdict</h4>
-
 <p>如果在k，v这种数据结构的场景，建议使用<strong>defaultdict</strong>作为你的数据结构,在Python官方文档里面将collections下的数据结构称为高性能容器数据结构。我们来看一下两个实用的例子。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1037,19 +1013,19 @@ E也包含在def关键字中，E和L是相对的，E相对于更上层的函数�
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
-<span class="n">colours</span><span class="o">=</span><span class="p">((</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">),(</span><span class="s1">&#39;eric&#39;</span><span class="p">,</span><span class="s1">&#39;yellow&#39;</span><span class="p">),(</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span><span class="s1">&#39;yellow&#39;</span><span class="p">),(</span><span class="s1">&#39;doc&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">),(</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">))</span>
+<span class="n">colours</span><span class="o">=</span><span class="p">(</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">brian</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">red</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">eric</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">yellow</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">brian</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">yellow</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">doc</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">blue</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">brian</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">blue</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span>
 <span class="n">fav_colors</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span><span class="n">color</span> <span class="ow">in</span> <span class="n">colours</span><span class="p">:</span>
     <span class="n">fav_colors</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">fav_colors</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="n">defaultdict</span><span class="p">(</span><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">list</span><span class="s1">&#39;&gt;, {&#39;</span><span class="n">brian</span><span class="s1">&#39;: [&#39;</span><span class="n">red</span><span class="s1">&#39;, &#39;</span><span class="n">yellow</span><span class="s1">&#39;, &#39;</span><span class="n">blue</span><span class="s1">&#39;], &#39;</span><span class="n">eric</span><span class="s1">&#39;: [&#39;</span><span class="n">yellow</span><span class="s1">&#39;], &#39;</span><span class="n">doc</span><span class="s1">&#39;: [&#39;</span><span class="n">blue</span><span class="s1">&#39;]})</span></code></pre></td></tr></table>
+<span class="n">defaultdict</span><span class="p">(</span><span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">list</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">&gt;, {</span><span class="s1">&#39;</span><span class="n">brian</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">: [</span><span class="s1">&#39;</span><span class="n">red</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">, </span><span class="s1">&#39;</span><span class="n">yellow</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">, </span><span class="s1">&#39;</span><span class="n">blue</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">], </span><span class="s1">&#39;</span><span class="n">eric</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">: [</span><span class="s1">&#39;</span><span class="n">yellow</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">], </span><span class="s1">&#39;</span><span class="n">doc</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">: [</span><span class="s1">&#39;</span><span class="n">blue</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">]})</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>这个是常用的业务处理模型，下面我来看看非常经典的另外一个实例。比如：</p>
+</div><p>这个是常用的业务处理模型，下面我来看看非常经典的另外一个实例。比如：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1062,32 +1038,31 @@ E也包含在def关键字中，E和L是相对的，E相对于更上层的函数�
 <span class="n">tree</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span><span class="n">defaultdict</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
 <span class="c1">#def tree():</span>
 <span class="c1">#    return defaultdict(tree)</span>
-<span class="n">some_dict</span> <span class="o">=</span> <span class="n">tree</span><span class="p">()</span>
+<span class="n">some_dict</span> <span class="o">=</span> <span class="n">tree</span><span class="p">(</span><span class="p">)</span>
 <span class="c1">#我们能看到作为dict来取数据的时候，并没有造成KeyError错误。</span>
-<span class="n">some_dict</span><span class="p">[</span><span class="s1">&#39;colors&#39;</span><span class="p">][</span><span class="s1">&#39;fav&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span></code></pre></td></tr></table>
+<span class="n">some_dict</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">colors</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">fav</span><span class="s1">&#39;</span><span class="p">]</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">yellow</span><span class="s1">&#39;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>由于defaultdict是相当于层级的dict高性能容器数据结构，我们通过<strong>json</strong>来解构和分析。下面我们来看一下：</p>
+</div><p>由于defaultdict是相当于层级的dict高性能容器数据结构，我们通过<strong>json</strong>来解构和分析。下面我们来看一下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">json</span>
-<span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">some_dict</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">some_dict</span><span class="p">)</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="s1">&#39;{&#34;colors&#34;: {&#34;fav&#34;: &#34;yellow&#34;}}&#39;</span></code></pre></td></tr></table>
+<span class="sa"></span><span class="s1">&#39;</span><span class="s1">{</span><span class="s1">&#34;</span><span class="s1">colors</span><span class="s1">&#34;</span><span class="s1">: {</span><span class="s1">&#34;</span><span class="s1">fav</span><span class="s1">&#34;</span><span class="s1">: </span><span class="s1">&#34;</span><span class="s1">yellow</span><span class="s1">&#34;</span><span class="s1">}}</span><span class="s1">&#39;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="counter">counter</h4>
-
+</div><h4 id="counter">counter</h4>
 <p><strong>counter</strong>是个计数器，它也属于Python高性能容器数据结构。我们来看一下使用方式:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1108,33 +1083,30 @@ E也包含在def关键字中，E和L是相对的，E相对于更上层的函数�
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
 
-<span class="n">colours</span> <span class="o">=</span> <span class="p">((</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;eric&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">),</span>
-           <span class="p">(</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;docx&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">))</span>
+<span class="n">colours</span> <span class="o">=</span> <span class="p">(</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">brian</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">red</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span> <span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">eric</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">yellow</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span>
+           <span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">brian</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">yellow</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span> <span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">docx</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">blue</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span>
 
 <span class="n">fav_colours</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">colours</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">fav_colours</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="n">Counter</span><span class="p">({</span><span class="s1">&#39;brian&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;docx&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;eric&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+<span class="n">Counter</span><span class="p">(</span><span class="p">{</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">brian</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">docx</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">eric</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span><span class="p">)</span>
 <span class="c1">#下面是我通过defaultdict来实现</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 <span class="n">fav_colours_dict</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">colours</span><span class="p">:</span>
-    <span class="n">fav_colours_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">fav_colours_dict</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">+</span><span class="o">=</span> <span class="mi">1</span>
 <span class="k">print</span><span class="p">(</span><span class="n">fav_colours_dict</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="n">defaultdict</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;int&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;brian&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;docx&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;eric&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span></code></pre></td></tr></table>
+<span class="n">defaultdict</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">type</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">int</span><span class="s1">&#39;</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">{</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">brian</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">docx</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">eric</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="dequeue">dequeue</h4>
-
+</div><h4 id="dequeue">dequeue</h4>
 <p><strong>dequeue</strong>是双端队列，在队列的头部和尾部都可以操作。一些常用的API可以查看Python帮助文档，这里就列出了。队列是一种先进先出（First-In-First-Out，FIFO）的数据结构。队列被用在很多地方，比如提交操作系统执行的一系列进程、打印任务池等，一些仿真系统用队列来模拟银行或杂货店里排队的顾客。队列的两种主要操作是：向队列中插入新元素和删除队列中的元素。插入操作也叫做入队，删除操作也叫做出队。入队操作在队尾插入新元素，出队操作删除队头的元素。队列的另外一项重要操作是读取队头的元素。这个操作叫做peek()。该操作返回队头元素，但不把它从队列中删除。除了读取队头元素，我们还想知道队列中存储了多少元素，可以使用size()满足该需求。</p>
-
 <h4 id="namedtuple">namedtuple</h4>
-
 <p><strong>命名元组</strong>是一个给元组命名的一种元组，这么说有点抽象。我们来看一下使用：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1152,26 +1124,26 @@ E也包含在def关键字中，E和L是相对的，E相对于更上层的函数�
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
-<span class="n">Animal</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Animal&#39;</span><span class="p">,</span> <span class="s1">&#39;name age type&#39;</span><span class="p">)</span>
-<span class="n">perrty</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&#34;cat&#34;</span><span class="p">)</span>
+<span class="n">Animal</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Animal</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">name age type</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">perrty</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">cat</span><span class="s2">&#34;</span><span class="p">)</span>
 <span class="c1"># 还可以通过这样构造</span>
-<span class="n">eric</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;brian&#34;</span><span class="p">,</span> <span class="s2">&#34;age&#34;</span><span class="p">:</span><span class="mi">31</span><span class="p">,</span> <span class="s2">&#34;type&#34;</span><span class="p">:</span><span class="s2">&#34;cat&#34;</span><span class="p">})</span>
-<span class="k">print</span><span class="p">(</span><span class="n">perrty</span><span class="p">,</span> <span class="s2">&#34;the name is &#34;</span><span class="o">+</span><span class="n">perrty</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">eric</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="o">*</span><span class="o">*</span><span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">name</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">age</span><span class="s2">&#34;</span><span class="p">:</span><span class="mi">31</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">type</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">cat</span><span class="s2">&#34;</span><span class="p">}</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">perrty</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">the name is </span><span class="s2">&#34;</span><span class="o">+</span><span class="n">perrty</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="p">(</span><span class="n">Animal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;cat&#39;</span><span class="p">),</span> <span class="s1">&#39;the name is brian&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">perrty</span><span class="o">.</span><span class="n">_asdict</span><span class="p">())</span>
+<span class="p">(</span><span class="n">Animal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">brian</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">cat</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">the name is brian</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">perrty</span><span class="o">.</span><span class="n">_asdict</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;brian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="mi">31</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;cat&#39;</span><span class="p">)])</span>
+<span class="n">OrderedDict</span><span class="p">(</span><span class="p">[</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">name</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">brian</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span> <span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">age</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span><span class="p">,</span> <span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">type</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">cat</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">]</span><span class="p">)</span>
 <span class="c1">#_make是namedtuple的</span>
-<span class="k">print</span><span class="p">(</span><span class="n">Animal</span><span class="o">.</span><span class="n">_make</span><span class="p">((</span><span class="s2">&#34;brian&#34;</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="s2">&#34;dog&#34;</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Animal</span><span class="o">.</span><span class="n">_make</span><span class="p">(</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">dog</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="n">Animal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;brian&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;dog&#39;</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="n">Animal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">brian</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">31</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">dog</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p><strong>namedtuple相对比传统的tuple，可以说是轻量级的tuple。特别是在ORM框架中经常使用，来保持数据一致性并节省一定的内存空间。_make是namedtuple的类方法是来生成对象的实例，接收的是有序参数的容器(list或者tuple)。</strong>这种方式和数据库序列化时非常常见。</p>
+</div><p>**namedtuple相对比传统的tuple，可以说是轻量级的tuple。特别是在ORM框架中经常使用，来保持数据一致性并节省一定的内存空间。_make是namedtuple的类方法是来生成对象的实例，接收的是有序参数的容器(list或者tuple)。**这种方式和数据库序列化时非常常见。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1186,25 +1158,25 @@ E也包含在def关键字中，E和L是相对的，E相对于更上层的函数�
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">EmployeeRecord</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;EmployeeRecord&#39;</span><span class="p">,</span> <span class="s1">&#39;name, age, title, department, paygrade&#39;</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">EmployeeRecord</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">EmployeeRecord</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">name, age, title, department, paygrade</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">csv</span>
-<span class="k">for</span> <span class="n">emp</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="n">EmployeeRecord</span><span class="o">.</span><span class="n">_make</span><span class="p">,</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s2">&#34;employees.csv&#34;</span><span class="p">,</span> <span class="s2">&#34;rb&#34;</span><span class="p">))):</span>
+<span class="k">for</span> <span class="n">emp</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="n">EmployeeRecord</span><span class="o">.</span><span class="n">_make</span><span class="p">,</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">employees.csv</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">rb</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">)</span><span class="p">)</span><span class="p">:</span>
     <span class="k">print</span><span class="p">(</span><span class="n">emp</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">emp</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">sqlite3</span>
-<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;/companydata&#39;</span><span class="p">)</span>
-<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT name, age, title, department, paygrade FROM employees&#39;</span><span class="p">)</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">/companydata</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="p">)</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">SELECT name, age, title, department, paygrade FROM employees</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="c1">#这边将对象的属性批量构造实例</span>
-<span class="k">for</span> <span class="n">emp</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="n">EmployeeRecord</span><span class="o">.</span><span class="n">_make</span><span class="p">,</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">emp</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">emp</span><span class="o">.</span><span class="n">title</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="k">for</span> <span class="n">emp</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="n">EmployeeRecord</span><span class="o">.</span><span class="n">_make</span><span class="p">,</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">(</span><span class="p">)</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">emp</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">emp</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>还有一个方法是<strong>_replace</strong>,是用来<strong>修改</strong>对象,它不是在原有基础上进行修改，而是直接创建一个新的对象。</p>
+</div><p>还有一个方法是**_replace**,是用来**修改**对象,它不是在原有基础上进行修改，而是直接创建一个新的对象。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1219,23 +1191,22 @@ E也包含在def关键字中，E和L是相对的，E相对于更上层的函数�
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 
-<span class="n">Account</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Account&#39;</span><span class="p">,</span> <span class="s1">&#39;owner balance transaction_count&#39;</span><span class="p">)</span>
-<span class="n">default_account</span> <span class="o">=</span> <span class="n">Account</span><span class="p">(</span><span class="s1">&#39;&lt;owner name&gt;&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="n">johns_account</span> <span class="o">=</span> <span class="n">default_account</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">owner</span><span class="o">=</span><span class="s1">&#39;John&#39;</span><span class="p">)</span>
-<span class="n">janes_account</span> <span class="o">=</span> <span class="n">default_account</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">owner</span><span class="o">=</span><span class="s1">&#39;Jane&#39;</span><span class="p">)</span>
+<span class="n">Account</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Account</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">owner balance transaction_count</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">default_account</span> <span class="o">=</span> <span class="n">Account</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">&lt;owner name&gt;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">johns_account</span> <span class="o">=</span> <span class="n">default_account</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">owner</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">John</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">janes_account</span> <span class="o">=</span> <span class="n">default_account</span><span class="o">.</span><span class="n">_replace</span><span class="p">(</span><span class="n">owner</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Jane</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">johns_account</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">janes_account</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="n">Account</span><span class="p">(</span><span class="n">owner</span><span class="o">=</span><span class="s1">&#39;John&#39;</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">transaction_count</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">Account</span><span class="p">(</span><span class="n">owner</span><span class="o">=</span><span class="s1">&#39;Jane&#39;</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">transaction_count</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="n">Account</span><span class="p">(</span><span class="n">owner</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">John</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">transaction_count</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">Account</span><span class="p">(</span><span class="n">owner</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Jane</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">balance</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">transaction_count</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="enum-enum">enum.Enum</h4>
-
+</div><h4 id="enumenum">enum.Enum</h4>
 <p>在Python中枚举是没有直接作为Python的条件选择的，而是自己扩展。在Python(3.4)以后才加入的<strong>enum</strong>模块。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1259,28 +1230,27 @@ E也包含在def关键字中，E和L是相对的，E相对于更上层的函数�
 <span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 
 
-<span class="k">class</span> <span class="nc">Species</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">Species</span><span class="p">(</span><span class="n">Enum</span><span class="p">)</span><span class="p">:</span>
     <span class="n">cat</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="n">dog</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="n">horse</span> <span class="o">=</span> <span class="mi">3</span>
     <span class="n">owl</span> <span class="o">=</span> <span class="mi">4</span>
 
 
-<span class="n">Animal</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Animal&#39;</span><span class="p">,</span> <span class="s1">&#39;name,age,type&#39;</span><span class="p">)</span>
-<span class="n">perry</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;Perry&#34;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Species</span><span class="o">.</span><span class="n">cat</span><span class="p">)</span>
-<span class="n">eric</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;Eric&#34;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Species</span><span class="o">.</span><span class="n">cat</span><span class="p">)</span>
-<span class="n">charlie</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;Charlie&#34;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Species</span><span class="o">.</span><span class="n">dog</span><span class="p">)</span>
+<span class="n">Animal</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Animal</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">name,age,type</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">perry</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Perry</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Species</span><span class="o">.</span><span class="n">cat</span><span class="p">)</span>
+<span class="n">eric</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Eric</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Species</span><span class="o">.</span><span class="n">cat</span><span class="p">)</span>
+<span class="n">charlie</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Charlie</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">Species</span><span class="o">.</span><span class="n">dog</span><span class="p">)</span>
 <span class="k">print</span><span class="p">(</span><span class="n">charlie</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">perry</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">perry</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">eric</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="p">(</span><span class="n">false</span><span class="p">,</span><span class="n">true</span><span class="p">)</span></code></pre></td></tr></table>
+<span class="p">(</span><span class="n">false</span><span class="p">,</span><span class="n">true</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="enumrable">enumrable</h4>
-
+</div><h4 id="enumrable">enumrable</h4>
 <p>enumrable可枚举的数据类型，它带有自动计数(即索引)功能。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1291,78 +1261,76 @@ E也包含在def关键字中，E和L是相对的，E相对于更上层的函数�
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;brian&#34;</span><span class="p">,</span> <span class="s2">&#34;eric&#34;</span><span class="p">,</span> <span class="s2">&#34;perry&#34;</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;key==&#34;</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="s2">&#34;;v==&#34;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">temp</span><span class="p">)))</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">temp</span> <span class="o">=</span> <span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">eric</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">perry</span><span class="s2">&#34;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">key==</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">;v==</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="p">)</span><span class="p">)</span>
 <span class="c1">#输出</span>
-<span class="p">(</span><span class="s1">&#39;key==&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;;v==&#39;</span><span class="p">,</span> <span class="s1">&#39;brian&#39;</span><span class="p">)</span>
-<span class="p">(</span><span class="s1">&#39;key==&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;;v==&#39;</span><span class="p">,</span> <span class="s1">&#39;eric&#39;</span><span class="p">)</span>
-<span class="p">(</span><span class="s1">&#39;key==&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;;v==&#39;</span><span class="p">,</span> <span class="s1">&#39;perry&#39;</span><span class="p">)</span>
-<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;brian&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;eric&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;perry&#39;</span><span class="p">)]</span></code></pre></td></tr></table>
+<span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">key==</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">;v==</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">brian</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">key==</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">;v==</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">eric</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">key==</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">;v==</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">perry</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="p">[</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">brian</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">eric</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">perry</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">]</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="comprehension">comprehension</h3>
-
-<p><strong>comprehension</strong>推导式这个语法是Python的一种独有特性，一种数据容器用来构造另一种数据容器。常用数据容器支持推导式的有以下三个数据结构：
-&gt; * List Comprehension
-&gt; * Dict Comprehension
-&gt; * Set Comprehension</p>
-
+</div><h3 id="comprehension">comprehension</h3>
+<p><strong>comprehension</strong>推导式这个语法是Python的一种独有特性，一种数据容器用来构造另一种数据容器。常用数据容器支持推导式的有以下三个数据结构：</p>
+<blockquote>
+<ul>
+<li>List Comprehension</li>
+<li>Dict Comprehension</li>
+<li>Set Comprehension</li>
+</ul>
+</blockquote>
 <h4 id="list-comprehension">list comprehension</h4>
-
 <p>list comprehension又叫<strong>列表推导式(列表解析式)</strong>，通过一种简洁的方式来构造列表，它相当于在for里面写表达式。我们来看以下规范：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">variable</span> <span class="o">=</span> <span class="p">[</span><span class="n">out_exp</span> <span class="k">for</span> <span class="n">out_exp</span> <span class="ow">in</span> <span class="n">result_list</span> <span class="k">if</span> <span class="n">out_exp</span><span class="o">==</span><span class="mi">2</span><span class="p">]</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">variable</span> <span class="o">=</span> <span class="p">[</span><span class="n">out_exp</span> <span class="k">for</span> <span class="n">out_exp</span> <span class="ow">in</span> <span class="n">result_list</span> <span class="k">if</span> <span class="n">out_exp</span><span class="o">==</span><span class="mi">2</span><span class="p">]</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>形如上面的格式我们统称为列表推导式，我们来看一个例子：</p>
+</div><p>形如上面的格式我们统称为列表推导式，我们来看一个例子：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="o">*</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="mi">2</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="dict-comprehension">dict comprehension</h4>
-
+</div><h4 id="dict-comprehension">dict comprehension</h4>
 <p><strong>dict comprehension</strong>字典推导式，我们来看一个例子：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">temp</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;brian&#34;</span><span class="p">,</span> <span class="s2">&#34;age&#34;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s2">&#34;class&#34;</span><span class="p">:</span> <span class="s2">&#34;cs&#34;</span><span class="p">}</span>
-<span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">temp</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()}</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">temp</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">name</span><span class="s2">&#34;</span><span class="p">:</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">age</span><span class="s2">&#34;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">class</span><span class="s2">&#34;</span><span class="p">:</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">cs</span><span class="s2">&#34;</span><span class="p">}</span>
+<span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">temp</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="p">)</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h4 id="set-comprehension">set comprehension</h4>
-
+</div><h4 id="set-comprehension">set comprehension</h4>
 <p><strong>set comprehension</strong>集合推导式。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">a</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
-<span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">}</span></code></pre></td></tr></table>
+<span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">x</span><span class="o">*</span><span class="o">*</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">a</span><span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="try-else">try/else</h3>
-
+</div><h3 id="tryelse">try/else</h3>
 <p>我们学过其它编程语言的话，大家应该都知道<strong>try except finally</strong>的异常处理机制，那么python下的try/else是怎么回事？我们来看一下，</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1378,24 +1346,24 @@ E也包含在def关键字中，E和L是相对的，E相对于更上层的函数�
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;no excetion&#34;</span><span class="p">)</span>
-    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&#34;raise exception&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">no excetion</span><span class="s2">&#34;</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">raise exception</span><span class="s2">&#34;</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;raise excetion&#34;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">raise excetion</span><span class="s2">&#34;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;else no excetion&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">else no excetion</span><span class="s2">&#34;</span><span class="p">)</span>
 <span class="k">finally</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;finally&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">finally</span><span class="s2">&#34;</span><span class="p">)</span>
 <span class="c1">#输出</span>
 <span class="n">no</span> <span class="n">excetion</span>
 <span class="k">raise</span> <span class="n">excetion</span>
-<span class="k">finally</span></code></pre></td></tr></table>
+<span class="k">finally</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>当<strong>try和except</strong>代码块内出现异常时，<strong>else</strong>代码逻辑是不执行的，当try内无异常时则执行else代码逻辑。<strong>finally</strong>无论是否有异常则都会执行。<strong>else</strong>不仅在try异常里面，也会和for配合使用。</p>
+</div><p>当<strong>try和except</strong>代码块内出现异常时，<strong>else</strong>代码逻辑是不执行的，当try内无异常时则执行else代码逻辑。<strong>finally</strong>无论是否有异常则都会执行。<strong>else</strong>不仅在try异常里面，也会和for配合使用。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1410,27 +1378,28 @@ E也包含在def关键字中，E和L是相对的，E相对于更上层的函数�
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
+</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">50</span><span class="p">:</span>
         <span class="k">break</span>
 <span class="k">else</span><span class="p">:</span>
    <span class="c1">#for什么都没执行或者没跳出for时，下面逻辑会执行</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;else code&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">else code</span><span class="s2">&#34;</span><span class="p">)</span>
 <span class="c1">#输出</span>
 <span class="k">else</span> <span class="n">code</span>
 <span class="c1">#但是如果运行下面语句，由于break作用会跳出当前上下文不会执行else。</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
         <span class="k">break</span>
 <span class="k">else</span><span class="p">:</span>
    <span class="c1">#for什么都没执行或者没跳出for时，下面逻辑会执行</span>
-    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;else code&#34;</span><span class="p">)</span></code></pre></td></tr></table>
-</div>
-</div>
-<h2 id="总结">总结</h2>
+    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">else code</span><span class="s2">&#34;</span><span class="p">)</span>
 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="heading1">总结</h2>
 <p>这篇博客总结较多，希望能帮助大家。如果对你有用，可以在捐赠博客。</p>
     </div>
 

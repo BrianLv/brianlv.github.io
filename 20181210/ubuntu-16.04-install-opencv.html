@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.2" />
+<meta name="generator" content="Hugo 0.60.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/ubuntu-16.04-install-opencv.html" />
@@ -66,16 +66,13 @@
 <meta property="article:modified_time" content="2018-12-10T21:23:57+08:00" />
 <meta itemprop="name" content="Ubuntu 16.04 Install OpenCV">
 <meta itemprop="description" content="Ubuntu 16.04 Install OpenCV">
-
-
 <meta itemprop="datePublished" content="2018-12-10T21:23:57&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-10T21:23:57&#43;08:00" />
 <meta itemprop="wordCount" content="691">
 
 
 
-<meta itemprop="keywords" content="OpenCV," />
-<meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="OpenCV," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Ubuntu 16.04 Install OpenCV"/>
 <meta name="twitter:description" content="Ubuntu 16.04 Install OpenCV"/>
 
@@ -328,39 +325,33 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content">
     <nav id="TableOfContents">
-<ul>
-<li><a href="#概述">概述</a>
-<ul>
-<li><a href="#1-从ubuntu源安装opencv">1.从Ubuntu源安装opencv</a></li>
-<li><a href="#2-从opencv官方源代码安装">2.从opencv官方源代码安装</a></li>
-<li><a href="#3-从anaconda安装oepncv环境">3.从Anaconda安装oepncv环境</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#1ubuntuopencv">1.从Ubuntu源安装opencv</a></li>
+    <li><a href="#2opencv">2.从opencv官方源代码安装</a></li>
+    <li><a href="#3anacondaoepncv">3.从Anaconda安装oepncv环境</a></li>
+  </ul>
 </nav>
   </div>
 </div>
 
     
     <div class="post-content">
-      <h1 id="概述">概述</h1>
-
+      <h1 id="heading">概述</h1>
 <p>安装opencv有很多种方式，我列出了三种方式。并针对第二种方式进行了详细的安装解释，强烈推荐使用第三种方式。</p>
-
-<h2 id="1-从ubuntu源安装opencv">1.从Ubuntu源安装opencv</h2>
+<h2 id="1ubuntuopencv">1.从Ubuntu源安装opencv</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install libopencv-dev python-opencv</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install libopencv-dev python-opencv
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="2-从opencv官方源代码安装">2.从opencv官方源代码安装</h2>
-
+</div><h2 id="2opencv">2.从opencv官方源代码安装</h2>
 <p>1.安装opencv所依赖的包</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -417,13 +408,13 @@ sudo apt-get install -y python-dev python-tk python-numpy python3-dev python3-tk
 sudo apt-get install -y ant default-jdk
 
 <span class="c1"># Documentation:</span>
-sudo apt-get install -y doxygen</code></pre></td></tr></table>
+sudo apt-get install -y doxygen
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>2.下载opencv和opencv_contrib源代码</p>
+</div><p>2.下载opencv和opencv_contrib源代码</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -432,26 +423,26 @@ sudo apt-get install -y doxygen</code></pre></td></tr></table>
 <pre class="chroma"><code class="language-bash" data-lang="bash">wget -O opencv.zip https://github.com/opencv/opencv/archive/3.2.0.zip
 wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.2.0.zip
 unzip opencv.zip
-unzip opencv_contrib.zip</code></pre></td></tr></table>
+unzip opencv_contrib.zip
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>3.为opencv创建独立虚拟话环境</p>
+</div><p>3.为opencv创建独立虚拟话环境</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-bash" data-lang="bash">mkvirtualenv -p python3.5 cvdl
 workon cvdl
-pip install numpy</code></pre></td></tr></table>
+pip install numpy
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>4.配置和安装opencv</p>
+</div><p>4.配置和安装opencv</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -470,13 +461,13 @@ cmake -DCMAKE_BUILD_TYPE<span class="o">=</span>RELEASE -DCMAKE_INSTALL_PREFIX<s
 <span class="c1"># OPENCV_EXTRA_MODULES_PATH：opencv第三方的模块。</span>
 make -j4
 sudo make install
-sudo ldconfig</code></pre></td></tr></table>
+sudo ldconfig
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>5.安装成功的opencv作用到全局</p>
+</div><p>5.安装成功的opencv作用到全局</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -489,14 +480,14 @@ sudo ldconfig</code></pre></td></tr></table>
 <span class="nb">cd</span> /usr/local/lib/python3.5/site-packages/
 sudo mv cv2.cpython-35m-x86_64-linux-gnu.so cv2.so
 <span class="nb">cd</span> ~/.virtualenvs/cvdl/lib/python3.5/site-packages
-ln -s /usr/local/lib/python3.5/site-packages/cv2.so cv2.so</code></pre></td></tr></table>
+ln -s /usr/local/lib/python3.5/site-packages/cv2.so cv2.so
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>6.测试安装是否成功
+</div><p>6.测试安装是否成功
 打开ipython，输入如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -505,31 +496,31 @@ ln -s /usr/local/lib/python3.5/site-packages/cv2.so cv2.so</code></pre></td></tr
 <pre class="chroma"><code class="language-bash" data-lang="bash">ipython
 import cv2
 cv2.__version__
-<span class="c1">#如果提示正常代表安装成功</span></code></pre></td></tr></table>
+<span class="c1">#如果提示正常代表安装成功</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>7.删除源包</p>
+</div><p>7.删除源包</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">rm -rf opencv opencv_contrib opencv.zip opencv_contrib.zip</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-bash" data-lang="bash">rm -rf opencv opencv_contrib opencv.zip opencv_contrib.zip
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="3-从anaconda安装oepncv环境">3.从Anaconda安装oepncv环境</h2>
-
+</div><h2 id="3anacondaoepncv">3.从Anaconda安装oepncv环境</h2>
 <p>我们需要建立一个虚拟化的独立环境</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">cv3</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.6</span>
 <span class="n">source</span> <span class="n">activate</span> <span class="n">cv3</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">conda</span><span class="o">.</span><span class="n">anaconda</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">menpo</span> <span class="n">opencv3</span></code></pre></td></tr></table>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">https</span><span class="p">:</span><span class="o">/</span><span class="o">/</span><span class="n">conda</span><span class="o">.</span><span class="n">anaconda</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">menpo</span> <span class="n">opencv3</span>
+</code></pre></td></tr></table>
 </div>
 </div>
     </div>
