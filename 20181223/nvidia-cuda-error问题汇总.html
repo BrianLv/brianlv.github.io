@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>大规模分布式机器学习之参数服务器 - 吕海峰的博客</title>
+  <title>nvidia cuda error问题汇总 - 吕海峰的博客</title>
   
 
 <meta name="renderer" content="webkit" />
@@ -22,9 +22,10 @@
 
 <meta name="mobile-web-app-capable" content="yes">
 
-<meta name="author" content="吕海峰(BrianLv)" /><meta name="description" content="大规模分布式机器学习" />
-<meta name="keywords" content="大规模分布式机器学习" />
+<meta name="author" content="吕先生(BrianLv)" />
+  <meta name="description" content="概述 由于现在tensorflow的版本变化很大很多特别是从1.8开始到1.13，1.14等版本迁移的时候，要么API过时要么cuda报错。其" />
 
+  <meta name="keywords" content="吕海峰, BrianLv, 自然语言处理, 深度学习, 机器学习" />
 
 
 
@@ -34,7 +35,7 @@
 <meta name="generator" content="Hugo 0.60.0" />
 
 
-<link rel="canonical" href="https://www.brianlv.com/20181221/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8.html" />
+<link rel="canonical" href="https://www.brianlv.com/20181223/nvidia-cuda-error%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html" />
 
 
 
@@ -58,23 +59,23 @@
 <link rel="stylesheet" href="/css/">
 
 
-<meta property="og:title" content="大规模分布式机器学习之参数服务器" />
-<meta property="og:description" content="大规模分布式机器学习" />
+<meta property="og:title" content="nvidia cuda error问题汇总" />
+<meta property="og:description" content="概述 由于现在tensorflow的版本变化很大很多特别是从1.8开始到1.13，1.14等版本迁移的时候，要么API过时要么cuda报错。其" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://www.brianlv.com/20181221/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8.html" />
-<meta property="article:published_time" content="2018-12-21T21:24:38+08:00" />
-<meta property="article:modified_time" content="2018-12-21T21:24:38+08:00" />
-<meta itemprop="name" content="大规模分布式机器学习之参数服务器">
-<meta itemprop="description" content="大规模分布式机器学习">
-<meta itemprop="datePublished" content="2018-12-21T21:24:38&#43;08:00" />
-<meta itemprop="dateModified" content="2018-12-21T21:24:38&#43;08:00" />
-<meta itemprop="wordCount" content="2703">
+<meta property="og:url" content="https://www.brianlv.com/20181223/nvidia-cuda-error%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html" />
+<meta property="article:published_time" content="2018-12-23T21:39:15+08:00" />
+<meta property="article:modified_time" content="2018-12-23T21:39:15+08:00" />
+<meta itemprop="name" content="nvidia cuda error问题汇总">
+<meta itemprop="description" content="概述 由于现在tensorflow的版本变化很大很多特别是从1.8开始到1.13，1.14等版本迁移的时候，要么API过时要么cuda报错。其">
+<meta itemprop="datePublished" content="2018-12-23T21:39:15&#43;08:00" />
+<meta itemprop="dateModified" content="2018-12-23T21:39:15&#43;08:00" />
+<meta itemprop="wordCount" content="816">
 
 
 
-<meta itemprop="keywords" content="Deep Learning," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="大规模分布式机器学习之参数服务器"/>
-<meta name="twitter:description" content="大规模分布式机器学习"/>
+<meta itemprop="keywords" content="issues," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="nvidia cuda error问题汇总"/>
+<meta name="twitter:description" content="概述 由于现在tensorflow的版本变化很大很多特别是从1.8开始到1.13，1.14等版本迁移的时候，要么API过时要么cuda报错。其"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -294,18 +295,18 @@
           <article class="post bg-white">
     
     <header class="post-header">
-      <h1 class="post-title">大规模分布式机器学习之参数服务器</h1>
+      <h1 class="post-title">nvidia cuda error问题汇总</h1>
       
       <div class="post-meta">
-        <time datetime="2018-12-21" class="post-time">
-          2018-12-21
+        <time datetime="2018-12-23" class="post-time">
+          2018-12-23
         </time>
         <div class="post-category">
-            <a href="https://www.brianlv.com/categories/deep-learning.html"> Deep Learning </a>
+            <a href="https://www.brianlv.com/categories/issues.html"> issues </a>
             
           </div>
-        <span class="more-meta"> 约 2703 字 </span>
-          <span class="more-meta"> 预计阅读 6 分钟 </span>
+        <span class="more-meta"> 约 816 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
 
         
         
@@ -321,114 +322,181 @@
 
     
     
-<div class="post-toc" id="post-toc">
-  <h2 class="post-toc-title">文章目录</h2>
-  <div class="post-toc-content">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#heading">概述</a></li>
-    <li><a href="#heading1">工作原理</a></li>
-    <li><a href="#heading2">模型参数</a></li>
-    <li><a href="#heading3">接口</a></li>
-    <li><a href="#heading4">同步协议</a>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-    <li><a href="#heading5">工业界参数服务器</a></li>
-    <li><a href="#heading6">参考链接</a></li>
-  </ul>
-</nav>
-  </div>
-</div>
 
     
     <div class="post-content">
       <h2 id="heading">概述</h2>
-<p><strong>参数服务器</strong>是分布式机器学习框架中用来作为参数同步的框架，现在很多大规模的分布式机器学习都采用<strong>参数服务器架构</strong>用来进行参数的同步以提升大规模的模型的速度和效率。由于我们现在正处于一个大数据的时代，如何结合海量数据和超大规模的模型进行应用？比如现在以小视频和短视频(时序特征+内容特征+用户等多维度特征巨大)为主的推荐、广告、视频算法、搜索等都要采用大规模分布式机器学习系统,比如短视频为主的多模态学习更是需要大规模的分布式机器学习来快速满足产品场景化需求、画像更新、视频流算法、智能化内容创作、聚类、灰度算法及时调整、老用户的运营模型以及如何将流量转为价值过程中的模型，大规模分布式机器学习系统都充当了底层基石。**分布式学习系统包括两大模块：模型和分布式系统。**其中模型需要解决训练和正确率的问题，分布式系统需要考虑并行、网络、慢机、故障处理、调度、数据一致性等问题。最近在看mxnet的源码，我们一起学习一下参数服务的架构和设计，更为详细的可以参考mxnet官网。</p>
-<p><strong>现有系统的不足</strong>：</p>
-<blockquote>
-<p><strong>MapReduce：迭代式计算低效，节点之间通信效率不高</strong></p>
-<p><strong>MPI：无法支撑大数据，任意节点挂掉，任务就失败,多节点共享内存的方式以及测试比较复杂和调试困难</strong></p>
-<p><strong>Graph：用图来做抽象，类似深度学习无法高效求解，只能同步，不支持异步</strong></p>
-<p><strong>Spark：通用框架，高维度和稀疏数据支持不够，Spark的并行梯度下降方法是同步阻断式的，且模型参数需通过全局广播的形式发送到各节点</strong></p>
-</blockquote>
-<p>2014年分布式可扩展的Parameter Server被沐神(李沐)提出，几乎完美的解决了机器模型的分布式训练问题，现在我们常说的<strong>Parameter Server</strong>属于第三代参数服务器。其特点如下:</p>
-<ul>
-<li><strong>Efficient Communication</strong>：异步通信模型，最优化机器学习任务来减少网络负担。</li>
-</ul>
-<ul>
-<li><strong>Flexible Consistency Models</strong>：允许算法设计者去平衡算法收敛率与系统效率。</li>
-<li><strong>Elastic Scalability</strong>：在无需重启运行中的框架下便可添加新节点。</li>
-<li><strong>Fault Tolerance and Durability</strong></li>
-<li><strong>Ease of Use</strong></li>
-</ul>
-<p>综合考虑性价比高的选择是<strong>参数服务器(Parameter Sever)</strong>，其架构如下图所示:</p>
-<p><img src="/image/parameter_server.png" alt="参数服务器"></p>
-<p>其算法如下:</p>
-<p><img src="/image/sgd_ps.png" alt="参数服务器算法"></p>
-<h2 id="heading1">工作原理</h2>
-<p>参数服务器结点中包含一个服务器管理者结点, 该管理者结点负责维护服务器各结点元数据的一致性,管理 服务器各结点的生命周期以及分配资源.工作结点负责处理 数据,一个工作结点处理一部分训练数据,计算局部梯度并进 行数据分析,各工作结点间互不通信.任务调度管理器为对 应工作结点下的机器分配工作负载并监督机器处理的进程, 增删工作结点时,任务调度器为它们重新分配未完成的任务.工作结点之间独立运行,可实现多租户模式,不同类型的应用 可在不同工作结点中并行运行,同类型的应用也可同时分配 到多个工作结点中同步执行以提高并行性.参数服务器模型由工作结点和服务器端参数服务器结点 组成,工作结点和服务器结点都各自包含多台机器.服务器结 点下的每台机器都包含一部分全局的共享参数。如下图所示：</p>
-<p><img src="/image/shared_weight.png" alt="参数共享"></p>
-<p>补充两个小概念:<strong>数据并行和模型并行</strong>。</p>
-<p>**Model Parallelism:**可以理解为单个的模型分布在多个机器上。将深度神经网络放在多台机器上并行训练所能获得的性能提升效果主要取决于模型的结构。具有大量参数的模型通常可以获得更多CPU内核和内存，因此，并行化大型模型会显著提高性能，从而缩短训练时间。</p>
-<p>**Data Parallelism:**减少训练时间的一般思路是，采用n个workers同时并行计算n个不同的数据块（partitions，分区），来优化一个central model的参数。在这种情况下，把n个模型副本放在n个处理节点上，即每个节点（或进程）都拥有一个模型的副本。然后，每个worker使用指定的数据块来训练一个局部的模型副本。但是，可以让所有的workers同时一致工作，优化同一个目标。</p>
-<h2 id="heading2">模型参数</h2>
-<p>模型参数默认采用<strong>&lt;key,value&gt;</strong>集合，key 就是 feature ID(slotId)，value 是其权值。对于不存在的key，可认为其权值为0。也有对&lt;key,value&gt;进行抽象的。</p>
-<h2 id="heading3">接口</h2>
-<p>workers和servers之间通信是通过 push() 和 pull() 方法进行的。worker通过 push() 将计算好的梯度发送到 server，然后通过 pull() 从 server 获取更新参数。</p>
-<p>为了提高通信效率，PS允许用户使用 Range Push/Range Pull 操作。</p>
+<p>由于现在tensorflow的版本变化很大很多特别是从1.8开始到1.13，1.14等版本迁移的时候，要么API过时要么cuda报错。其中API过时可以很方便的查找并替换，但是很多CUDA版本问题就比较麻烦。建议一定要查看相应的深度学习框架所支持的CUDA版本。这里列出了主要的经常出现的cuda issues。</p>
+<h2 id="issues">ISSUES</h2>
+<h4 id="1cpugpu">1.切换使用CPU/GPU</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 0表示使用CPU，1则是GPU</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ConfigProto</span><span class="p">(</span><span class="n">device_count</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">GPU</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span><span class="p">)</span> 
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+  <span class="k">pass</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="2could-not-create-cudnn-handle-cudnnstatusinternalerror">2.could not create cudnn handle: CUDNN_STATUS_INTERNAL_ERROR</h4>
+<p>我这边在查找github上找到的fixed的issue，其中如下可以解决该问题：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">config</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ConfigProto</span><span class="p">(</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">gpu_options</span><span class="o">.</span><span class="n">allow_growth</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+  <span class="k">pass</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>或者显存限制设置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">config</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ConfigProto</span><span class="p">(</span><span class="p">)</span>
+<span class="n">config</span><span class="o">.</span><span class="n">gpu_options</span><span class="o">.</span><span class="n">per_process_gpu_memory_fraction</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="p">)</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+  <span class="k">pass</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="3-so-">3. *.so 动态链接库的丢失问题</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">locate lib*.so 找到其所在位置
+然后在环境变量里加上:
+<span class="nb">export</span> <span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/cuda-x.x.0/lib64:/usr/local/cuda-x.0/extras/CUPTI/lib64:<span class="nv">$LD_LIBRARY_PATH</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="4nvidiasmi-has-failed-because-it-couldnt-communicate-with-the-nvidia-driver">4.nvidia-smi has failed because it couldn't communicate with the NVIDIA driver</h4>
+<p>这个问题应该是出现的次数和频率比较多，这个问题可能有多种问题造成，首先需要按照NVIDIA的相应的cuda的文档进行检查和安装检测，在安装的时候需要将一些基础的开发工具包和相应的kernel版本进行处理。以centos7.0为例子：</p>
+<p>首先验证您的机器是否存在相应的显卡和linux内核版本进而选择相对应的内核架构及驱动。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">w</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
-<span class="n">w</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+<pre class="chroma"><code class="language-bash" data-lang="bash">lspci <span class="p">|</span> grep -i nvidia 
+uname -m <span class="o">&amp;&amp;</span> cat /etc/*release
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="heading4">同步协议</h2>
-<p>Parameter Server 一般会提供如下三个级别的异步控制协议： <strong>BSP（Bulk Synchronous Parallel），SSP（Stalness Synchronous Parallel） 和 ASP（Asynchronous Parallel）</strong>， 它们的同步限制依次放宽。为了追求更快的计算速度，算法可以选择更宽松的同步协议。</p>
-<p><img src="/image/sync_controller.png" alt="同步协议"></p>
-<h4 id="1-bsp">1. BSP</h4>
-<p>一般的分布式计算采用的同步协议，例如 Spark。在每一轮迭代中都需要等待所有的Task计算完成。</p>
-<ul>
-<li>优点：适用范围广；每一轮迭代收敛质量高</li>
-<li>缺点：但是每一轮迭代都需要等待最慢的Task，整体任务计算时间长</li>
-</ul>
-<h4 id="2-ssp">2. SSP</h4>
-<p>允许一定程度的Task进度不一致，但这个不一致有一个上限，我们称之为 staleness 值，即最快的Task最多领先最慢的Task staleness 轮迭代。</p>
-<ul>
-<li>优点：一定程度减少了Task之间的等待时间，计算速度较快</li>
-<li>缺点：每一轮迭代的收敛质量不如BSP，达到同样的收敛效果可能需要更多轮的迭代；适用性也不如BSP，部分算法不适用</li>
-</ul>
-<h4 id="3-asp">3. ASP</h4>
-<p>Task之间完全不用相互等待，先完成的Task，继续下一轮的训练。</p>
-<ul>
-<li>优点：消除了等待慢Task的时间，计算速度快</li>
-<li>缺点：适用性差，在一些情况下并不能保证收敛性</li>
-</ul>
-<h2 id="heading5">工业界参数服务器</h2>
-<p>我们看下腾讯的参数服务器:</p>
-<p><img src="/image/angel_architecture.png" alt="Angel"></p>
-<ol>
-<li><strong>Parameter Server层</strong>：提供通用的<code>参数服务器</code>服务，负责模型的分布存储，通讯同步和协调计算，并通过PSAgent提供<code>PS Service</code></li>
-<li><strong>Worker层</strong>： 基于Angel自身模型设计的分布式运行节点，自动读取并划分数据，局部训练出模型增量，通过<code>PS Client</code>和<code>PS Server</code>通信，完成模型训练和预测。一个Worker包含一个或者多个Task，Task是Angel计算单元，这样设计的原因是可以让Task共享Worker的许多公共资源。</li>
-<li><strong>Model层</strong>： 这是一层虚拟抽象层，并非真实存在的物理层。关于Model的Push和Pull，各种异步控制，模型分区路由，自定义函数……是连通Worker和PSServer的桥梁。</li>
-</ol>
-<p>蚂蚁金服的参数服务器如下:</p>
-<p><img src="/image/alibab_ps.png" alt="PS"></p>
-<ol>
-<li>内置Failover机制，稳健性大大提升；</li>
-<li>架构中有多个Server，模型的可扩展性非常强；</li>
-<li>完美支持同步和异步，可以达到更快的收敛速度，同时不影响模型的精度；</li>
-<li>同时在稀疏性的上支持，让worker和server节点在通信效率上大幅度提升。</li>
-</ol>
-<h2 id="heading6"><strong>参考链接</strong></h2>
-<p>1.<a href="https://zhuanlan.zhihu.com/p/82116922">参数服务器参考</a></p>
-<p>2.<a href="%E8%88%92%E5%A8%9C%E3%80%81%E5%88%98%E6%B3%A2">分布式机器学习平台与算法-舒娜</a></p>
-<p>3.<a href="https://blog.csdn.net/qq_28954371/article/details/52850096?utm_source=blogxgwz3">参数服务器参考</a></p>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">sudo yum -y update
+sudo yum -y groupinstall  <span class="s2">&#34;Development Tools&#34;</span>
+sudo yum -y install epel-release
+sudo yum -y install dkms
+sudo yum -y install kernel-devel-<span class="k">$(</span>uname -r<span class="k">)</span>
+<span class="c1">#install cuda and seting path,source path</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>重启服务器，在**/etc/default/grub**里面找到GRUB_CMDLINE_LINUX，添加如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">rd.driver.blacklist<span class="o">=</span>nouveau nouveau.modeset<span class="o">=</span><span class="m">0</span>
+<span class="c1">#generate config</span>
+grub2-mkconfig -o /boot/grub2/grub.cfg
+</code></pre></td></tr></table>
+</div>
+</div><p>编辑或创建 /etc/modprobe.d/blacklist.conf文件加入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">blacklist nouveau
+</code></pre></td></tr></table>
+</div>
+</div><p>更新配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">mv /boot/initramfs-<span class="k">$(</span>uname -r<span class="k">)</span>.img /boot/initramfs-<span class="k">$(</span>uname -r<span class="k">)</span>-nouveau.img
+dracut /boot/initramfs-<span class="k">$(</span>uname -r<span class="k">)</span>.img <span class="k">$(</span>uname -r<span class="k">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>重新启动服务器，如果还是报failed错误，请验证如下步骤，检查dkms的状态和是否已安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">dkms status
+<span class="c1"># nvidia, 418.86.00: added</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>并运行安装该模块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">dmks autoinstall
+<span class="c1">#error ,failed</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们需要检查是否已安装正确的linux kernel。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">rpm -qa <span class="p">|</span> grep kernel-devel-<span class="k">$(</span>uname -r<span class="k">)</span> <span class="o">||</span> yum -y install kernel-devel-<span class="k">$(</span>uname -r<span class="k">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>最后装载模块即可</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">nvidia-modprobe
+<span class="nb">echo</span> <span class="nv">$?</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>最后重启服务器即可。</p>
+<h2 id="heading1">总结</h2>
+<p><strong>坑不断，需要一点一点花时间去填。</strong></p>
+
     </div>
 
     
@@ -436,12 +504,12 @@
 <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
-    <span class="item-content">吕海峰(BrianLv)</span>
+    <span class="item-content">吕先生(BrianLv)</span>
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
     <span class="item-content">
-      2018-12-21
+      2018-12-23
       
     </span>
   </p>
@@ -471,29 +539,16 @@
 
     <footer class="post-footer">
       <div class="post-tags">
-          <a href="https://www.brianlv.com/tags/deep-learning.html">Deep Learning</a>
+          <a href="https://www.brianlv.com/tags/issues.html">issues</a>
           
         </div>
 
       
       <nav class="post-nav">
         
-          <a class="prev" href="/20181222/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bknn%E7%AE%97%E6%B3%95.html">
-            
-            <i class="iconfont">
-              <svg  class="icon" viewBox="0 0 1024 1024" version="1.1"
-  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="18" height="18">
-  <path d="M691.908486 949.511495l75.369571-89.491197c10.963703-12.998035 10.285251-32.864502-1.499144-44.378743L479.499795 515.267417 757.434875 204.940602c11.338233-12.190647 11.035334-32.285311-0.638543-44.850487l-80.46666-86.564541c-11.680017-12.583596-30.356378-12.893658-41.662889-0.716314L257.233596 494.235404c-11.332093 12.183484-11.041474 32.266891 0.657986 44.844348l80.46666 86.564541c1.772366 1.910513 3.706415 3.533476 5.750981 4.877077l306.620399 321.703933C662.505829 963.726242 680.945807 962.528973 691.908486 949.511495z"></path>
-</svg>
-
-            </i>
-            <span class="prev-text nav-default">机器学习之KNN算法</span>
-            <span class="prev-text nav-mobile">上一篇</span>
-          </a>
         
-          <a class="next" href="/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA%E7%AE%97%E6%B3%95.html">
-            <span class="next-text nav-default">机器学习之感知机算法</span>
+          <a class="next" href="/20181222/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bknn%E7%AE%97%E6%B3%95.html">
+            <span class="next-text nav-default">机器学习之KNN算法</span>
             <span class="prev-text nav-mobile">下一篇</span>
             
             <i class="iconfont">

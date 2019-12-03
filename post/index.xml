@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 22 Dec 2018 21:24:38 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 23 Dec 2018 21:39:15 +0800</lastBuildDate>
     
 	<atom:link href="https://www.brianlv.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>nvidia cuda error问题汇总</title>
+      <link>https://www.brianlv.com/20181223/nvidia-cuda-error%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html</link>
+      <pubDate>Sun, 23 Dec 2018 21:39:15 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/20181223/nvidia-cuda-error%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html</guid>
+      <description>概述 由于现在tensorflow的版本变化很大很多特别是从1.8开始到1.13，1.14等版本迁移的时候，要么API过时要么cuda报错。其</description>
+    </item>
     
     <item>
       <title>机器学习之KNN算法</title>
@@ -17,18 +26,22 @@
       <pubDate>Sat, 22 Dec 2018 21:24:38 +0800</pubDate>
       
       <guid>https://www.brianlv.com/20181222/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bknn%E7%AE%97%E6%B3%95.html</guid>
-      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
-
+      <description>&lt;h2 id=&#34;heading&#34;&gt;概述&lt;/h2&gt;
 &lt;p&gt;KNN算法(&lt;strong&gt;K最近邻算法&lt;/strong&gt;)也是一种基本的机器学习算法，可以用于分类和回归任务中。即对于给定一个训练数据集，对新的实例在训练数据集中找到与该实例最邻近的k个实例。我们看一下可视化的KNN算法：&lt;/p&gt;
-
-&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://www.brianlv.com/image/ml_knn.jpeg&#34; alt=&#34;KNN 算法&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://www.brianlv.com/image/ml_knn.jpeg&#34; alt=&#34;KNN 算法&#34;&gt;&lt;/p&gt;
 &lt;p&gt;如上图我们看到，给定一个新输入实例对于k的取值不同,对该算法的结果影响比较大,其次是当训练样本数大、特征向量维度很高时计算复杂度也高。因为我们在预测时需要计算预测样本和每一个训练样本的距离，并且对距离进行排序找到最近的k个样本并将结果返回。&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;1.  &lt;strong&gt;使用高效的部分排序算法，只找出最小的k个数。&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;2. &lt;strong&gt;k-d树实现快速的近邻查找。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;使用高效的部分排序算法，只找出最小的k个数。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;strong&gt;k-d树实现快速的近邻查找。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;</description>
     </item>
@@ -39,43 +52,29 @@
       <pubDate>Fri, 21 Dec 2018 21:24:38 +0800</pubDate>
       
       <guid>https://www.brianlv.com/20181221/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8.html</guid>
-      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;参数服务器&lt;/strong&gt;是分布式机器学习框架中用来作为参数同步的框架，现在很多大规模的分布式机器学习都采用&lt;strong&gt;参数服务器架构&lt;/strong&gt;用来进行参数的同步以提升大规模的模型的速度和效率。由于我们现在正处于一个大数据的时代，如何结合海量数据和超大规模的模型进行应用？比如现在以小视频和短视频(时序特征+内容特征+用户等多维度特征巨大)为主的推荐、广告、视频算法、搜索等都要采用大规模分布式机器学习系统,比如短视频为主的多模态学习更是需要大规模的分布式机器学习来快速满足产品场景化需求、画像更新、视频流算法、智能化内容创作、聚类、灰度算法及时调整、老用户的运营模型以及如何将流量转为价值过程中的模型，大规模分布式机器学习系统都充当了底层基石。&lt;strong&gt;分布式学习系统包括两大模块：模型和分布式系统。&lt;/strong&gt;其中模型需要解决训练和正确率的问题，分布式系统需要考虑并行、网络、慢机、故障处理、调度、数据一致性等问题。最近在看mxnet的源码，我们一起学习一下参数服务的架构和设计，更为详细的可以参考mxnet官网。&lt;/p&gt;
-
+      <description>&lt;h2 id=&#34;heading&#34;&gt;概述&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;参数服务器&lt;/strong&gt;是分布式机器学习框架中用来作为参数同步的框架，现在很多大规模的分布式机器学习都采用&lt;strong&gt;参数服务器架构&lt;/strong&gt;用来进行参数的同步以提升大规模的模型的速度和效率。由于我们现在正处于一个大数据的时代，如何结合海量数据和超大规模的模型进行应用？比如现在以小视频和短视频(时序特征+内容特征+用户等多维度特征巨大)为主的推荐、广告、视频算法、搜索等都要采用大规模分布式机器学习系统,比如短视频为主的多模态学习更是需要大规模的分布式机器学习来快速满足产品场景化需求、画像更新、视频流算法、智能化内容创作、聚类、灰度算法及时调整、老用户的运营模型以及如何将流量转为价值过程中的模型，大规模分布式机器学习系统都充当了底层基石。**分布式学习系统包括两大模块：模型和分布式系统。**其中模型需要解决训练和正确率的问题，分布式系统需要考虑并行、网络、慢机、故障处理、调度、数据一致性等问题。最近在看mxnet的源码，我们一起学习一下参数服务的架构和设计，更为详细的可以参考mxnet官网。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;现有系统的不足&lt;/strong&gt;：&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;MapReduce：迭代式计算低效，节点之间通信效率不高&lt;/strong&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;MPI：无法支撑大数据，任意节点挂掉，任务就失败,多节点共享内存的方式以及测试比较复杂和调试困难&lt;/strong&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;Graph：用图来做抽象，类似深度学习无法高效求解，只能同步，不支持异步&lt;/strong&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;Spark：通用框架，高维度和稀疏数据支持不够，Spark的并行梯度下降方法是同步阻断式的，且模型参数需通过全局广播的形式发送到各节点&lt;/strong&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;2014年分布式可扩展的Parameter Server被沐神(李沐)提出，几乎完美的解决了机器模型的分布式训练问题，现在我们常说的&lt;strong&gt;Parameter Server&lt;/strong&gt;属于第三代参数服务器。其特点如下:&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Efficient Communication&lt;/strong&gt;：异步通信模型，最优化机器学习任务来减少网络负担。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Flexible Consistency Models&lt;/strong&gt;：允许算法设计者去平衡算法收敛率与系统效率。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Elastic Scalability&lt;/strong&gt;：在无需重启运行中的框架下便可添加新节点。&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Fault Tolerance and Durability&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;strong&gt;Ease of Use&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Efficient Communication&lt;/strong&gt;：异步通信模型，最优化机器学习任务来减少网络负担。&lt;/li&gt;
 &lt;/ul&gt;
-
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Flexible Consistency Models&lt;/strong&gt;：允许算法设计者去平衡算法收敛率与系统效率。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Elastic Scalability&lt;/strong&gt;：在无需重启运行中的框架下便可添加新节点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fault Tolerance and Durability&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ease of Use&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;综合考虑性价比高的选择是&lt;strong&gt;参数服务器(Parameter Sever)&lt;/strong&gt;，其架构如下图所示:&lt;/p&gt;
-
-&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://www.brianlv.com/image/parameter_server.png&#34; alt=&#34;参数服务器&#34;&gt;&lt;/figure&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;https://www.brianlv.com/image/parameter_server.png&#34; alt=&#34;参数服务器&#34;&gt;&lt;/p&gt;
 &lt;p&gt;其算法如下:&lt;/p&gt;
-
-&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://www.brianlv.com/image/sgd_ps.png&#34; alt=&#34;参数服务器算法&#34;&gt;&lt;/figure&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;img src=&#34;https://www.brianlv.com/image/sgd_ps.png&#34; alt=&#34;参数服务器算法&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -84,11 +83,9 @@
       <pubDate>Thu, 20 Dec 2018 21:39:15 +0800</pubDate>
       
       <guid>https://www.brianlv.com/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA%E7%AE%97%E6%B3%95.html</guid>
-      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;感知机(perceptron)&lt;/strong&gt;是个二类分类的线性分类模型，该算法对应于特征空间将实例划分为正负两类的分离超平面，属于判别模型。&lt;strong&gt;判别模型是一种对未观测数据y与已观测数据x之间关系进行建模的方法，直接对条件概率p(y|x;θ)建模。直接假设判别函数的参数形式是已知的 ，然后基于训练样本，使用某种学习算法，来学习判别函数的参数值，被称为判别式方法，感知机所得到的是一个线性判别函数。而一般来说，寻找线性判别函数的问题，会被形式化为极小化准则函数的问题，以分类为目的的准则函数可以是样本的风险函数，或者是训练误差&lt;/strong&gt;。 从机器学习的角度来讲，感知机属于监督学习（supervised learning），它是一个单层的二分类器。感知机算法非常重要，它是神经网络和SVM的基础。感知机算法如下图所示:&lt;/p&gt;
-
-&lt;p&gt;&lt;figure&gt;&lt;img src=&#34;https://www.brianlv.com/image/ml_perceptron.png&#34; alt=&#34;感知机算法&#34;&gt;&lt;/figure&gt;&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;heading&#34;&gt;概述&lt;/h2&gt;
+&lt;p&gt;**感知机(perceptron)**是个二类分类的线性分类模型，该算法对应于特征空间将实例划分为正负两类的分离超平面，属于判别模型。&lt;strong&gt;判别模型是一种对未观测数据y与已观测数据x之间关系进行建模的方法，直接对条件概率p(y|x;θ)建模。直接假设判别函数的参数形式是已知的 ，然后基于训练样本，使用某种学习算法，来学习判别函数的参数值，被称为判别式方法，感知机所得到的是一个线性判别函数。而一般来说，寻找线性判别函数的问题，会被形式化为极小化准则函数的问题，以分类为目的的准则函数可以是样本的风险函数，或者是训练误差&lt;/strong&gt;。 从机器学习的角度来讲，感知机属于监督学习（supervised learning），它是一个单层的二分类器。感知机算法非常重要，它是神经网络和SVM的基础。感知机算法如下图所示:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.brianlv.com/image/ml_perceptron.png&#34; alt=&#34;感知机算法&#34;&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -870,91 +867,6 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>深入理解Python的With-as语句</title>
-      <link>https://www.brianlv.com/20181202/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html</link>
-      <pubDate>Sun, 02 Dec 2018 21:57:43 +0800</pubDate>
-      
-      <guid>https://www.brianlv.com/20181202/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3python%E7%9A%84with-as%E8%AF%AD%E5%8F%A5.html</guid>
-      <description>&lt;h2 id=&#34;heading&#34;&gt;概述&lt;/h2&gt;
-&lt;p&gt;学习Python有一段时间了，最近做一个项目会涉及到文件的读取和关闭。比如：我想把一些对象序列化到文件里面，然后当我再次使用的时候，在从文件里面读取反序列化成对象。像这种操作一般都是用&lt;strong&gt;try…except…finally&lt;/strong&gt;。但是经过自己对Python的研究发现会有更出色的方法，比如：with-as语句也有的人称为&lt;strong&gt;context manager。&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id=&#34;withas-&#34;&gt;With-as 用法&lt;/h2&gt;
-&lt;p&gt;我们先看一下例子，当我们需要打开一个文件的时，比如：txt等，一般经常会这么操作：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;test.txt&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;rw&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;except&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;finally&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;这是错误，因为file.open是否打开文件是不确定，而在出现异常的时候你却关闭了已经打开的文件。文件没有打开怎么能直接关闭呢？你可以按照下面的解决方法来解决上述出现的问题。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
-    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;test.txt&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;rw&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;except&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
-    &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
-    &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;出&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;现&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;异&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;常&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;直&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;接&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;返&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;回&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;或&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;者&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;退&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;出&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;这&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;说&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;明&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;file并没有打开&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
-    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
-
-&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;已&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;经&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;成&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;功&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;打&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;开&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;file文件&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;所&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;以&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;你&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;需&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;要&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;在&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;finally中关闭打开的文件&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
-    &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;except&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
-    &lt;span class=&#34;n&#34;&gt;To&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt;
-&lt;span class=&#34;k&#34;&gt;finally&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
-    &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;close&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;你会发现这么做会非常麻烦，并且try……except…..finally嵌套也比较啰嗦。那有没有好的解决办法能解决上述问题，并且还能减少代码量呢？(类似于C#中的using关键字)答案是肯定的，那就是with……as语句。&lt;strong&gt;With语句适用于对I/O、文件流、数据流等资源进行访问的场合，确保不管使用过程中是否发生异常都会执行必要的“清理”操作，释放资源.比如文件使用后自动关闭、线程中锁的自动获取和释放等等。&lt;/strong&gt; 我们来看一下with-as的用法：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;k&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;/etc/passwd&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;r&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;  
-    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;line&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
-        &lt;span class=&#34;k&#34;&gt;print&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;line&lt;/span&gt;
-        &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;more&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;processing&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;code&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;这个语句执行完成之后，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄,确实比try……except……finally好多了。在这个例子中f就是上下文管理器enter()的返回值，返回的是当前文件自身的引用。Python内建对象都加入了对上下文管理器的支持，可以用在with语句中。比如:file、 threading、decimal等等，在多线程模块中，lock和条件变量也是支持with语句的。例如：&lt;/p&gt;</description>
     </item>
     
   </channel>

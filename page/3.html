@@ -63,7 +63,7 @@
 <meta property="og:description" content="吕海峰的个人博客" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.brianlv.com/" />
-<meta property="og:updated_time" content="2018-12-22T21:24:38+08:00" />
+<meta property="og:updated_time" content="2018-12-23T21:39:15+08:00" />
 <meta itemprop="name" content="吕海峰的博客">
 <meta itemprop="description" content="吕海峰的个人博客"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="吕海峰的博客"/>
@@ -291,6 +291,75 @@
     
   
   
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      <a class="post-link" href="/20181210/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html">Linux 后台服务</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-10" class="post-time">
+        2018-12-10
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/linux.html"> Linux </a>
+          
+        </div>
+      <span class="more-meta"> 约 2167 字 </span>
+      <span class="more-meta"> 预计阅读 5 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="heading">概述</h2>
+<p>研发人员交付测试和上线产品时，需要对服务和产品以后台进程的方式启动。所以便利的后台进程工具可以很好的帮助你管理你的进程。确切的说：成为系统的守护进程(daemon)。</p>
+<h2 id="heading1">任务</h2>
+<p>我们一般通过如下方式的命令运行的大多数是<strong>前台任务</strong>，：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task</span>
+python main.py
+<span class="c1">#nodejs task</span>
+nodejs main.js
+</code></pre></td></tr></table>
+</div>
+</div><p>前台任务有很大的限制。我们无法获得标准输入<strong>stdin</strong>(它独占窗口session)，当前的session中断和退出，会立即中断任务。如果想结束改task只能等待完成或者手动结束。我们更倾向于<strong>后台任务</strong>，通过如下方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">#python task</span>
+python main.py <span class="p">&amp;</span>
+<span class="c1">#nodejs task</span>
+nodejs main.js <span class="p">&amp;</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+    <div class="read-more">
+      <a href="/20181210/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
   
     <article class="post bg-white">
   <header class="post-header">

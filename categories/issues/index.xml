@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>issues on 吕海峰的博客</title>
+    <link>https://www.brianlv.com/categories/issues.html</link>
+    <description>Recent content in issues on 吕海峰的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 23 Dec 2018 21:39:15 +0800</lastBuildDate>
+    
+	<atom:link href="https://www.brianlv.com/categories/issues/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>nvidia cuda error问题汇总</title>
+      <link>https://www.brianlv.com/20181223/nvidia-cuda-error%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html</link>
+      <pubDate>Sun, 23 Dec 2018 21:39:15 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/20181223/nvidia-cuda-error%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html</guid>
+      <description>概述 由于现在tensorflow的版本变化很大很多特别是从1.8开始到1.13，1.14等版本迁移的时候，要么API过时要么cuda报错。其</description>
+    </item>
+    
+  </channel>
+</rss>
