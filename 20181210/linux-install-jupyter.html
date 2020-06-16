@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/linux-install-jupyter.html" />
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -326,14 +326,14 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#heading">概述</a></li>
-    <li><a href="#heading1">安装和配置</a>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#安装和配置">安装和配置</a>
       <ul>
-        <li><a href="#heading2">基本包安装</a></li>
-        <li><a href="#heading3">配置</a></li>
+        <li><a href="#基本包安装">基本包安装</a></li>
+        <li><a href="#配置">配置</a></li>
       </ul>
     </li>
-    <li><a href="#heading4">使用</a></li>
+    <li><a href="#使用">使用</a></li>
   </ul>
 </nav>
   </div>
@@ -341,11 +341,11 @@
 
     
     <div class="post-content">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>由于我的开发环境是CentOS，现在主要是以Python为主，偶尔夹杂C/C++和GoLang语言。在本地开发、测试、提交git和在生产环境再去测试、开发，并且会在生产环境会有临时性的开发任务和调整，都是比较浪费时间的。<strong>不建议直接修改生产环境的代码，临时性的修改后一定要测试并稳定运行一段时间。</strong> 写这篇博客主要是为了利用线上资源，实现跨平台开发和测试代码示例用的。所以就在服务器安装了<strong>IPython，Jupyter和Notebook</strong>。</p>
-<h2 id="heading1">安装和配置</h2>
+<h2 id="安装和配置">安装和配置</h2>
 <p>在安装<strong>IPython，Jupyter和Notebook</strong>时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如(&lsquo;Development Tools‘)。废话少说，直接写代码。</p>
-<h3 id="heading2">基本包安装</h3>
+<h3 id="基本包安装">基本包安装</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -416,7 +416,7 @@ nano .bashrc或者.bash_profile
 </code></pre></td></tr></table>
 </div>
 </div><p>所有需要的安装现在全部完毕，下面我们来配置使其生效。</p>
-<h3 id="heading3">配置</h3>
+<h3 id="配置">配置</h3>
 <p>我了实现我们自定制设置，我们需要通过如下配置来完成，我们首先要生成一个jupyter的配置文件。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -438,7 +438,7 @@ nano .bashrc或者.bash_profile
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">notebook.auth</span> <span class="kn">import</span> <span class="n">passwd</span>
-<span class="n">passwd</span><span class="p">(</span><span class="p">)</span>
+<span class="n">passwd</span><span class="p">()</span>
 <span class="c1">#Enter password</span>
 <span class="c1">#output sha1:49acd1a985cc:beb1fb6859665bfa721e65e78fc511c41basdasa.</span>
 </code></pre></td></tr></table>
@@ -475,7 +475,7 @@ c.NotebookApp.keyfile <span class="o">=</span> <span class="s1">&#39;/home/user/
 <span class="c1">#保存退出即可</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="heading4">使用</h2>
+</div><h2 id="使用">使用</h2>
 <p>由于jupyter使用的8888作为默认端口，所以我需要把端口给开放并重启防火墙。通过如下代码设置：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -608,7 +608,7 @@ systemctl restart firewalld.service
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

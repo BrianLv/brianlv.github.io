@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>VXLAN on 吕海峰的博客</title>
+    <link>https://www.brianlv.com/tags/vxlan.html</link>
+    <description>Recent content in VXLAN on 吕海峰的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 14 Jun 2020 18:43:24 +0800</lastBuildDate>
+    
+	<atom:link href="https://www.brianlv.com/tags/vxlan/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>深入浅出云计算VPC网络之VXLAN</title>
+      <link>https://www.brianlv.com/20200614/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%BA%91%E8%AE%A1%E7%AE%97vpc%E7%BD%91%E7%BB%9C%E4%B9%8Bvxlan.html</link>
+      <pubDate>Sun, 14 Jun 2020 18:43:24 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/20200614/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%BA%91%E8%AE%A1%E7%AE%97vpc%E7%BD%91%E7%BB%9C%E4%B9%8Bvxlan.html</guid>
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
+&lt;p&gt;云计算三大组成部分：&lt;strong&gt;计算、存储和网络&lt;/strong&gt;。VXLAN属于云计算虚拟化网络的非常重要的一部分,现在大多数云计算虚拟化网络都是基于此协议实现&lt;strong&gt;数据中心互联和虚拟机迁移&lt;/strong&gt;  ，在数量级很大的虚拟机上完成这些工作是一个非常大的挑战。主要面临以下挑战：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;虚拟机网络规模的挑战&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;在传统的L2 layer，数据是通过查询MAC地址表进行L2转发，而MAC地址表的容量会限制虚拟机的数量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络隔离能力的挑战&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;传统网络隔离技术是通过VLAN，通过手动配置交换机和服务器对vlan设置Tag域来实现网络隔离。但是vlan Tag只有12 bits，只能表示4096个VLAN，无法满足现在海量的云计算租户。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在其网络架构下网络迁移范围和能力的挑战&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;虚拟机迁移过程中要保证业务不中断，特别是现在分布式系统中更是如此，要保证虚拟机的IP地址不变。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;VXLAN很好的完成了上面的挑战，我们一起来看看VXLAN是什么？&lt;strong&gt;VXLAN(Virtual eXtensible Local Area Network)采用MAC in UDP封装方式，是Network Virtualization over Layer 3(NVO3)中的一种网络虚拟化技术,并使用物理网络的IP、MAC作为outer-header进行封装，然后在IP网络上传输， 到达目的地后由隧道终结点解封装并将数据发送给目标虚拟机。&lt;/strong&gt; NVO3技术还有其它协议：GENEVE、NVGRE和STT，据我了解现在云计算厂商大多数常用的技术还是VXLAN标准多一些，GENEV支持的网卡并不多。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.brianlv.com/image/vxlan-info.png&#34; alt=&#34;vxlan协议&#34;&gt;&lt;/p&gt;
+&lt;p&gt;具体的报文格式&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.brianlv.com/image/vxlan-arch.png&#34; alt=&#34;vxlan协议&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

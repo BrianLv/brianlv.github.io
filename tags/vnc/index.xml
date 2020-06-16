@@ -17,7 +17,7 @@
       <pubDate>Mon, 10 Dec 2018 21:23:21 +0800</pubDate>
       
       <guid>https://www.brianlv.com/20181210/ubuntu-install-vnc.html</guid>
-      <description>&lt;h1 id=&#34;heading&#34;&gt;概述&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;概述&#34;&gt;概述&lt;/h1&gt;
 &lt;p&gt;由于最近开发cuda的并行运算所以需要安装VNC来调试和cuda开发。
 安装X11VNC&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

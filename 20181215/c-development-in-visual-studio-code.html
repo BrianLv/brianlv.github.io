@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181215/c-development-in-visual-studio-code.html" />
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -326,12 +326,12 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#heading">开发环境搭建</a>
+    <li><a href="#开发环境搭建">开发环境搭建</a>
       <ul>
-        <li><a href="#ccpppropertiejson">c_cpp_propertie.json</a></li>
+        <li><a href="#c_cpp_propertiejson">c_cpp_propertie.json</a></li>
       </ul>
     </li>
-    <li><a href="#heading1">效果</a></li>
+    <li><a href="#效果">效果</a></li>
   </ul>
 </nav>
   </div>
@@ -340,7 +340,7 @@
     
     <div class="post-content">
       <p>由于我工作环境是Linux和Mac,个人的工作目录和开发环境一直来回切换，之前一直使用emacs，emacs非常强大和可定制化。最近看到vscode的社区不断壮大，在好基友的推荐下，试用vscode，发现非常不错。于是记录和分享到博客中。今天主要给大家讲解的<strong>vscode配置c/c++ ide开发环境</strong>，当然官网支持很多种可定制化的配置。</p>
-<h2 id="heading">开发环境搭建</h2>
+<h2 id="开发环境搭建">开发环境搭建</h2>
 <p>我们首先安装<strong>vscode</strong>，官网是：<a href="https://code.visualstudio.com/">vscode</a>。我们下面来安装支持c/c++开发环境的安装包。</p>
 <ul>
 <li>cpptools</li>
@@ -348,7 +348,7 @@
 <li>C/C++ Clang</li>
 </ul>
 <p>我们在工作目录依次安装如下，<strong>c_cpp_properties.json(指定c/c++包和平台相关的配置文件),launch.json(debug 调试),tasks.json(你的编译等命令)</strong>。</p>
-<h3 id="ccpppropertiejson">c_cpp_propertie.json</h3>
+<h3 id="c_cpp_propertiejson">c_cpp_propertie.json</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -438,8 +438,8 @@
         <span class="s2">&#34;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include&#34;</span><span class="p">,</span>
         <span class="s2">&#34;/usr/include&#34;</span><span class="p">,</span>
         <span class="s2">&#34;${workspaceRoot}&#34;</span>
-      <span class="p">]</span><span class="p">,</span>
-      <span class="nt">&#34;defines&#34;</span><span class="p">:</span> <span class="p">[</span><span class="p">]</span><span class="p">,</span>
+      <span class="p">],</span>
+      <span class="nt">&#34;defines&#34;</span><span class="p">:</span> <span class="p">[],</span>
       <span class="nt">&#34;intelliSenseMode&#34;</span><span class="p">:</span> <span class="s2">&#34;clang-x64&#34;</span><span class="p">,</span>
       <span class="nt">&#34;browse&#34;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="p">[</span>
@@ -449,56 +449,56 @@
           <span class="s2">&#34;/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include&#34;</span><span class="p">,</span>
           <span class="s2">&#34;/usr/include&#34;</span><span class="p">,</span>
           <span class="s2">&#34;${workspaceRoot}&#34;</span>
-        <span class="p">]</span><span class="p">,</span>
+        <span class="p">],</span>
         <span class="nt">&#34;limitSymbolsToIncludedHeaders&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="nt">&#34;databaseFilename&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span>
-      <span class="p">}</span><span class="p">,</span>
+      <span class="p">},</span>
       <span class="nt">&#34;macFrameworkPath&#34;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&#34;/System/Library/Frameworks&#34;</span><span class="p">,</span>
         <span class="s2">&#34;/Library/Frameworks&#34;</span>
       <span class="p">]</span>
-    <span class="p">}</span><span class="p">,</span>
+    <span class="p">},</span>
     <span class="p">{</span>
       <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Linux&#34;</span><span class="p">,</span>
       <span class="nt">&#34;includePath&#34;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&#34;/usr/include&#34;</span><span class="p">,</span>
         <span class="s2">&#34;/usr/local/include&#34;</span><span class="p">,</span>
         <span class="s2">&#34;${workspaceRoot}&#34;</span>
-      <span class="p">]</span><span class="p">,</span>
-      <span class="nt">&#34;defines&#34;</span><span class="p">:</span> <span class="p">[</span><span class="p">]</span><span class="p">,</span>
+      <span class="p">],</span>
+      <span class="nt">&#34;defines&#34;</span><span class="p">:</span> <span class="p">[],</span>
       <span class="nt">&#34;intelliSenseMode&#34;</span><span class="p">:</span> <span class="s2">&#34;clang-x64&#34;</span><span class="p">,</span>
       <span class="nt">&#34;browse&#34;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="p">[</span>
           <span class="s2">&#34;/usr/include&#34;</span><span class="p">,</span>
           <span class="s2">&#34;/usr/local/include&#34;</span><span class="p">,</span>
           <span class="s2">&#34;${workspaceRoot}&#34;</span>
-        <span class="p">]</span><span class="p">,</span>
+        <span class="p">],</span>
         <span class="nt">&#34;limitSymbolsToIncludedHeaders&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="nt">&#34;databaseFilename&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span>
       <span class="p">}</span>
-    <span class="p">}</span><span class="p">,</span>
+    <span class="p">},</span>
     <span class="p">{</span>
       <span class="nt">&#34;name&#34;</span><span class="p">:</span> <span class="s2">&#34;Win32&#34;</span><span class="p">,</span>
       <span class="nt">&#34;includePath&#34;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&#34;C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include&#34;</span><span class="p">,</span>
         <span class="s2">&#34;${workspaceRoot}&#34;</span>
-      <span class="p">]</span><span class="p">,</span>
+      <span class="p">],</span>
       <span class="nt">&#34;defines&#34;</span><span class="p">:</span> <span class="p">[</span>
         <span class="s2">&#34;_DEBUG&#34;</span><span class="p">,</span>
         <span class="s2">&#34;UNICODE&#34;</span><span class="p">,</span>
         <span class="s2">&#34;_UNICODE&#34;</span>
-      <span class="p">]</span><span class="p">,</span>
+      <span class="p">],</span>
       <span class="nt">&#34;intelliSenseMode&#34;</span><span class="p">:</span> <span class="s2">&#34;msvc-x64&#34;</span><span class="p">,</span>
       <span class="nt">&#34;browse&#34;</span><span class="p">:</span> <span class="p">{</span>
         <span class="nt">&#34;path&#34;</span><span class="p">:</span> <span class="p">[</span>
           <span class="s2">&#34;C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include/*&#34;</span><span class="p">,</span>
           <span class="s2">&#34;${workspaceRoot}&#34;</span>
-        <span class="p">]</span><span class="p">,</span>
+        <span class="p">],</span>
         <span class="nt">&#34;limitSymbolsToIncludedHeaders&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="nt">&#34;databaseFilename&#34;</span><span class="p">:</span> <span class="s2">&#34;&#34;</span>
       <span class="p">}</span>
     <span class="p">}</span>
-  <span class="p">]</span><span class="p">,</span>
+  <span class="p">],</span>
   <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="mi">3</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
@@ -529,9 +529,9 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-  <span class="err">/</span><span class="err">/</span> <span class="err">U</span><span class="err">s</span><span class="err">e</span> <span class="err">I</span><span class="err">n</span><span class="err">t</span><span class="err">e</span><span class="err">l</span><span class="err">l</span><span class="err">i</span><span class="err">S</span><span class="err">e</span><span class="err">n</span><span class="err">s</span><span class="err">e</span> <span class="err">t</span><span class="err">o</span> <span class="err">l</span><span class="err">e</span><span class="err">a</span><span class="err">r</span><span class="err">n</span> <span class="err">a</span><span class="err">b</span><span class="err">o</span><span class="err">u</span><span class="err">t</span> <span class="err">p</span><span class="err">o</span><span class="err">s</span><span class="err">s</span><span class="err">i</span><span class="err">b</span><span class="err">l</span><span class="err">e</span> <span class="err">a</span><span class="err">t</span><span class="err">t</span><span class="err">r</span><span class="err">i</span><span class="err">b</span><span class="err">u</span><span class="err">t</span><span class="err">e</span><span class="err">s</span><span class="err">.</span>
-  <span class="err">/</span><span class="err">/</span> <span class="err">H</span><span class="err">o</span><span class="err">v</span><span class="err">e</span><span class="err">r</span> <span class="err">t</span><span class="err">o</span> <span class="err">v</span><span class="err">i</span><span class="err">e</span><span class="err">w</span> <span class="err">d</span><span class="err">e</span><span class="err">s</span><span class="err">c</span><span class="err">r</span><span class="err">i</span><span class="err">p</span><span class="err">t</span><span class="err">i</span><span class="err">o</span><span class="err">n</span><span class="err">s</span> <span class="err">o</span><span class="err">f</span> <span class="err">e</span><span class="err">x</span><span class="err">i</span><span class="err">s</span><span class="err">t</span><span class="err">i</span><span class="err">n</span><span class="err">g</span> <span class="err">a</span><span class="err">t</span><span class="err">t</span><span class="err">r</span><span class="err">i</span><span class="err">b</span><span class="err">u</span><span class="err">t</span><span class="err">e</span><span class="err">s</span><span class="err">.</span>
-  <span class="err">/</span><span class="err">/</span> <span class="err">F</span><span class="err">o</span><span class="err">r</span> <span class="err">m</span><span class="err">o</span><span class="err">r</span><span class="err">e</span> <span class="err">i</span><span class="err">n</span><span class="err">f</span><span class="err">o</span><span class="err">r</span><span class="err">m</span><span class="err">a</span><span class="err">t</span><span class="err">i</span><span class="err">o</span><span class="err">n</span><span class="err">,</span> <span class="err">v</span><span class="err">i</span><span class="err">s</span><span class="err">i</span><span class="err">t</span><span class="err">:</span> <span class="err">h</span><span class="err">t</span><span class="err">t</span><span class="err">p</span><span class="err">s</span><span class="err">:</span><span class="err">/</span><span class="err">/</span><span class="err">g</span><span class="err">o</span><span class="err">.</span><span class="err">m</span><span class="err">i</span><span class="err">c</span><span class="err">r</span><span class="err">o</span><span class="err">s</span><span class="err">o</span><span class="err">f</span><span class="err">t</span><span class="err">.</span><span class="err">c</span><span class="err">o</span><span class="err">m</span><span class="err">/</span><span class="err">f</span><span class="err">w</span><span class="err">l</span><span class="err">i</span><span class="err">n</span><span class="err">k</span><span class="err">/</span><span class="err">?</span><span class="err">l</span><span class="err">i</span><span class="err">n</span><span class="err">k</span><span class="err">i</span><span class="err">d</span><span class="err">=</span><span class="err">8</span><span class="err">3</span><span class="err">0</span><span class="err">3</span><span class="err">8</span><span class="err">7</span>
+  <span class="err">//</span> <span class="err">Use</span> <span class="err">IntelliSense</span> <span class="err">to</span> <span class="err">learn</span> <span class="err">about</span> <span class="err">possible</span> <span class="err">attributes.</span>
+  <span class="err">//</span> <span class="err">Hover</span> <span class="err">to</span> <span class="err">view</span> <span class="err">descriptions</span> <span class="err">of</span> <span class="err">existing</span> <span class="err">attributes.</span>
+  <span class="err">//</span> <span class="err">For</span> <span class="err">more</span> <span class="err">information,</span> <span class="err">visit:</span> <span class="err">https://go.microsoft.com/fwlink/?linkid=830387</span>
   <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;0.2.0&#34;</span><span class="p">,</span>
   <span class="nt">&#34;configurations&#34;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
@@ -539,10 +539,10 @@
       <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;cppdbg&#34;</span><span class="p">,</span>
       <span class="nt">&#34;request&#34;</span><span class="p">:</span> <span class="s2">&#34;launch&#34;</span><span class="p">,</span>
       <span class="nt">&#34;program&#34;</span><span class="p">:</span> <span class="s2">&#34;${workspaceFolder}/build/DemoProject&#34;</span><span class="p">,</span>
-      <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[</span><span class="p">]</span><span class="p">,</span>
+      <span class="nt">&#34;args&#34;</span><span class="p">:</span> <span class="p">[],</span>
       <span class="nt">&#34;stopAtEntry&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
       <span class="nt">&#34;cwd&#34;</span><span class="p">:</span> <span class="s2">&#34;${workspaceFolder}/build&#34;</span><span class="p">,</span>
-      <span class="nt">&#34;environment&#34;</span><span class="p">:</span> <span class="p">[</span><span class="p">]</span><span class="p">,</span>
+      <span class="nt">&#34;environment&#34;</span><span class="p">:</span> <span class="p">[],</span>
       <span class="nt">&#34;externalConsole&#34;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
       <span class="nt">&#34;MIMode&#34;</span><span class="p">:</span> <span class="s2">&#34;lldb&#34;</span>
     <span class="p">}</span>
@@ -585,13 +585,13 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-  <span class="err">/</span><span class="err">/</span> <span class="err">S</span><span class="err">e</span><span class="err">e</span> <span class="err">h</span><span class="err">t</span><span class="err">t</span><span class="err">p</span><span class="err">s</span><span class="err">:</span><span class="err">/</span><span class="err">/</span><span class="err">g</span><span class="err">o</span><span class="err">.</span><span class="err">m</span><span class="err">i</span><span class="err">c</span><span class="err">r</span><span class="err">o</span><span class="err">s</span><span class="err">o</span><span class="err">f</span><span class="err">t</span><span class="err">.</span><span class="err">c</span><span class="err">o</span><span class="err">m</span><span class="err">/</span><span class="err">f</span><span class="err">w</span><span class="err">l</span><span class="err">i</span><span class="err">n</span><span class="err">k</span><span class="err">/</span><span class="err">?</span><span class="err">L</span><span class="err">i</span><span class="err">n</span><span class="err">k</span><span class="err">I</span><span class="err">d</span><span class="err">=</span><span class="err">7</span><span class="err">3</span><span class="err">3</span><span class="err">5</span><span class="err">5</span><span class="err">8</span>
-  <span class="err">/</span><span class="err">/</span> <span class="err">f</span><span class="err">o</span><span class="err">r</span> <span class="err">t</span><span class="err">h</span><span class="err">e</span> <span class="err">d</span><span class="err">o</span><span class="err">c</span><span class="err">u</span><span class="err">m</span><span class="err">e</span><span class="err">n</span><span class="err">t</span><span class="err">a</span><span class="err">t</span><span class="err">i</span><span class="err">o</span><span class="err">n</span> <span class="err">a</span><span class="err">b</span><span class="err">o</span><span class="err">u</span><span class="err">t</span> <span class="err">t</span><span class="err">h</span><span class="err">e</span> <span class="err">t</span><span class="err">a</span><span class="err">s</span><span class="err">k</span><span class="err">s</span><span class="err">.</span><span class="err">j</span><span class="err">s</span><span class="err">o</span><span class="err">n</span> <span class="err">f</span><span class="err">o</span><span class="err">r</span><span class="err">m</span><span class="err">a</span><span class="err">t</span>
+  <span class="err">//</span> <span class="err">See</span> <span class="err">https://go.microsoft.com/fwlink/?LinkId=733558</span>
+  <span class="err">//</span> <span class="err">for</span> <span class="err">the</span> <span class="err">documentation</span> <span class="err">about</span> <span class="err">the</span> <span class="err">tasks.json</span> <span class="err">format</span>
   <span class="nt">&#34;version&#34;</span><span class="p">:</span> <span class="s2">&#34;2.0.0&#34;</span><span class="p">,</span>
   <span class="nt">&#34;echoCommand&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
   <span class="nt">&#34;options&#34;</span><span class="p">:</span> <span class="p">{</span>
     <span class="nt">&#34;cwd&#34;</span><span class="p">:</span> <span class="s2">&#34;${workspaceRoot}/build&#34;</span>
-  <span class="p">}</span><span class="p">,</span>
+  <span class="p">},</span>
   <span class="nt">&#34;tasks&#34;</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
       <span class="nt">&#34;label&#34;</span><span class="p">:</span> <span class="s2">&#34;cmake&#34;</span><span class="p">,</span>
@@ -601,7 +601,7 @@
         <span class="nt">&#34;kind&#34;</span><span class="p">:</span> <span class="s2">&#34;build&#34;</span><span class="p">,</span>
         <span class="nt">&#34;isDefault&#34;</span><span class="p">:</span> <span class="kc">true</span>
       <span class="p">}</span>
-    <span class="p">}</span><span class="p">,</span>
+    <span class="p">},</span>
     <span class="p">{</span>
       <span class="nt">&#34;label&#34;</span><span class="p">:</span> <span class="s2">&#34;make&#34;</span><span class="p">,</span>
       <span class="nt">&#34;type&#34;</span><span class="p">:</span> <span class="s2">&#34;shell&#34;</span><span class="p">,</span>
@@ -615,7 +615,7 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="heading1">效果</h2>
+</div><h2 id="效果">效果</h2>
 <p><img src="/image/vscodeauto.jpeg" alt="整体布局">
 <img src="/image/vscodeide.jpeg" alt="智能提示"></p>
     </div>
@@ -780,7 +780,7 @@
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

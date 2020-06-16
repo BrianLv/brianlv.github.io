@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/" />
@@ -51,7 +51,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -63,7 +63,7 @@
 <meta property="og:description" content="吕海峰的个人博客" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.brianlv.com/" />
-<meta property="og:updated_time" content="2018-12-23T21:39:15+08:00" />
+<meta property="og:updated_time" content="2017-08-20T21:38:52+08:00" />
 <meta itemprop="name" content="吕海峰的博客">
 <meta itemprop="description" content="吕海峰的个人博客"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="吕海峰的博客"/>
@@ -296,6 +296,88 @@
   <header class="post-header">
     <h1 class="post-title">
       
+      <a class="post-link" href="/20181210/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F.html">机器学习性能度量</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-10" class="post-time">
+        2018-12-10
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/machine-learning.html"> Machine Learning </a>
+          
+        </div>
+      <span class="more-meta"> 约 3743 字 </span>
+      <span class="more-meta"> 预计阅读 8 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <p>我们在进行机器学习时需要衡量机器学习的优劣和本身模型的准确程度，比如简单的衡量数据的准确率和错误率，但是我们更关心的是模型的泛化能力的指标，即基于模型的所选的item相关性以及模型分类指标的好坏。</p>
+<h2 id="机器学习度量">机器学习度量</h2>
+<ul>
+<li><strong>error rate(错误率)</strong>:把分类错误的样本数占样本总数的比例。$$E=a/m$$</li>
+<li><strong>accuracy(精确度)</strong>:分类正确的样本数占样本总数的比例。$$acc=1-E$$</li>
+<li>**training error(训练误差):**学习器在训练集上的误差。</li>
+<li>**generalization error(泛华误差):**在新样本上的误差。</li>
+</ul>
+<p>在机器学习中由很多机器学习算法，那么如何选择这些算法和模型，如何评估这些算法和模型,评估模型的算法和准确率的方式很多，我们依次来介绍一下几个常用的指标。<strong>TP、TN、FP、FN、Acc、Recall、F1、ROC和ROI</strong></p>
+<h2 id="各种机器学习衡量指标">各种机器学习衡量指标</h2>
+<h3 id="accuracyprecisionrecall和f1-score">Accuracy、Precision、Recall和F1-Score</h3>
+<p>混淆矩阵是按照预测分类和实际分类的类别对比,如下图所示:
+<img src="/image/precision-recall.png" alt="混淆矩阵">
+如上表所示，行表示预测的label值，列表示真实label值。TP，FP，FN，TN分别表示如下意思：</p>
+<ul>
+<li>TP（true positive）：表示样本的真实类别为正，最后预测得到的结果也为正</li>
+<li>FP（false positive）：表示样本的真实类别为负，最后预测得到的结果却为正</li>
+<li>FN（false negative）：表示样本的真实类别为正，最后预测得到的结果却为负</li>
+<li>TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负</li>
+</ul>
+<p>$$
+Accuracy = \frac{TP+TN}{TP+FP+TN+FN}
+$$
+$$
+Precision = \frac{TP}{TP+FP}
+$$
+$$
+Recall = \frac{TP}{TP+FN}
+$$
+$$
+SP = \frac{TN}{TN + FP}\<br>
+$$</p>
+<ul>
+<li>Accuracy：表示预测结果的精确度，预测正确的样本数除以总样本数。</li>
+<li>Precision，准确率，表示预测结果中，预测为正样本的样本中，正确预测为正样本的概率；</li>
+<li>Recall，召回率，表示在原始样本的正样本中，最后被正确预测为正样本的概率；</li>
+<li>Specificity，常常称作特异性，它研究的样本集是原始样本中的负样本，表示的是在这些负样本中最后被正确预测为负样本的概率。</li>
+</ul>
+<p>在实际当中，我们往往希望得到的precision和recall都比较高，比如当FN和FP等于0的时候，他们的值都等于1。但是，它们往往在某种情况下是互斥的。例如，有50个正样本，50个负样本，结果全部预测为正样本，那么TP=50,FP=50,TN=0,FN=0,按照上面的公式计算，可以得到正样本的recall却为1，precision却为0.5.所以需要一种折衷的方式，因此就有了F1-score。</p>
+<p>$$
+F1-score = \frac{2\times recall \times precision}{ recall + precision}
+$$</p>
+<p><strong>F1-score表示的是precision和recall的调和平均评估指标.</strong>
+另外还有一个指标，即MCC，该指标对于不均衡数据集的评估非常有效，公式如下：</p>
+<p>$$
+MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP+FP)\times(TP+FN)\times(TN+FP)\times(TN+FN)}}
+$$</p>
+    </div>
+    <div class="read-more">
+      <a href="/20181210/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F.html" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
       <a class="post-link" href="/20181210/%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B.html">结构化的机器学习流程</a>
     </h1>
     
@@ -337,9 +419,9 @@
 <li>利用数据生成模型</li>
 <li>序列化模型</li>
 </ul>
-<h2 id="heading">数据理解</h2>
+<h2 id="数据理解">数据理解</h2>
 <p>数据的理解主要在于分析数据维度、数据类型属性、数据分布以及相关性等。数据属性的相关性是指数据的两个属性的互相影响。</p>
-<h3 id="heading1">数据统计分析</h3>
+<h3 id="数据统计分析">数据统计分析</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -360,18 +442,18 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 数据导入与数据维度探索</span>
 <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">loadtxt</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">rt</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rawdata</span><span class="p">:</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="n">rawdata</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">,</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">&#39;rt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">rawdata</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="n">rawdata</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
     <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="c1">#数据属性和描述性统计</span>
 <span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
 <span class="c1">#数据根据类别分类</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">class</span><span class="s2">&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&#34;class&#34;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
 <span class="c1">#数据属性相关性(皮尔逊相关系数，1完全正相关，-1完全负相关，0不相关)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">pearson</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&#34;pearson&#34;</span><span class="p">))</span>
 <span class="c1">#数据分布分析,skew代表高斯分布的偏离程度，数据接近于0表示数据偏差非常小</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">skew</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">skew</span><span class="p">())</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -448,7 +530,7 @@ $${0,10,110,111}$$
 （1）信息熵只反映内容的随机性，与内容本身无关。不管是什么样内容的文件，只要服从同样的概率分布，就会计算得到同样的信息熵。
 （2）信息熵越大，表示占用的二进制位越长，因此就可以表达更多的符号。所以，人们有时也说，信息熵越大，表示信息量越大。不过，由于第一点的原因，这种说法很容易产生误导。较大的信息熵，只表示可能出现的符号较多，并不意味着你可以从中得到更多的信息。
 （3）信息熵与热力学的熵，基本无关。</p>
-<h2 id="kl">相对熵(KL离散度)</h2>
+<h2 id="相对熵kl离散度">相对熵(KL离散度)</h2>
 <p>相对熵又叫做KL离散度，其定义为：
 $$
 KL(f(x)||g(x))=-\sum_{x \in X} f(x) \cdot log\frac{f(x)}{g(x)}
@@ -458,7 +540,7 @@ KL 散度是两个概率分布f(x)和g(x)差别的非对称性的度量。KL散�
 (1) 两函数完全相同时，KL=0
 (2) KL越大，差异越大
 (3) 对概率分布或者概率密度函数(&gt;0), KL可用来衡量两个随机变量分布的差异性。</p>
-<h2 id="heading">交叉熵</h2>
+<h2 id="交叉熵">交叉熵</h2>
 <p>对一随机事件，其真实概率分布为p(i)，从数据中得到的概率分布为q(i)，则我们定义，交叉熵为:
 $$
 H(p,q)=\displaystyle\sum _{x}p(x)log\frac{1}{q(x)}=-\sum _{x}p(x)logq(x)
@@ -512,7 +594,7 @@ $$</p>
           <a href="https://www.brianlv.com/categories/python.html"> Python </a>
           
         </div>
-      <span class="more-meta"> 约 3098 字 </span>
+      <span class="more-meta"> 约 3128 字 </span>
       <span class="more-meta"> 预计阅读 7 分钟 </span>
       
       
@@ -523,9 +605,9 @@ $$</p>
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="python-">Python 进阶</h2>
+      <h2 id="python-进阶">Python 进阶</h2>
 <p>我们在<strong>Python进阶教程(二)</strong>，介绍了一些Python进阶用法。今天给大家介绍的是和<strong>c/c++</strong>混合编程的用法。我们都知道特别是Python2.x版本GIL的影响造成多线程计算方面是鸡肋，并且常常在高性能计算方面依赖很多包。如果我们想切合我们自己的业务处理，比如高性能部分我们用<strong>C/C++</strong>生成动态链接库，Python调用该动态链接库。我们今天主要介绍Python在和<strong>c/c++</strong>混合编程。</p>
-<h3 id="pythoncc">Python和C/C++混合编程</h3>
+<h3 id="python和cc混合编程">Python和C/C++混合编程</h3>
 <p>在和<strong>C/C++代码</strong>进行混合编程时，我们通常需要采用以下几个技术点：</p>
 <ul>
 <li><strong>Ctypes</strong>:C++编译成动态链接库(DLL,即运行时动态调用)，然后通过<strong>ctypes</strong>来解析和加载动态链接库，python调用该动态链接库。从ctypes的文档中可以推断，在各个平台上均使用了对应平台动态加载动态链接库的方法，并通过一套类型映射的方式将Python与二进制动态链接库相连接。ctypes 实现了一系列的类型转换方法，Python的数据类型会包装或直接推算为C类型，作为函数的调用参数；函数的返回值也经过一系列的包装成为Python类型。
@@ -566,7 +648,7 @@ $$</p>
           <a href="https://www.brianlv.com/categories/python.html"> Python </a>
           
         </div>
-      <span class="more-meta"> 约 5659 字 </span>
+      <span class="more-meta"> 约 5663 字 </span>
       <span class="more-meta"> 预计阅读 12 分钟 </span>
       
       
@@ -577,9 +659,9 @@ $$</p>
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>在上一篇博客中，我们介绍了**<a href="https://www.brianlv.com/post/python%E8%BF%9B%E9%98%B6%E4%B8%80">Python进阶系列一</a>**，还有一些新的技巧没有翻译完，我们下面来继续我们的翻译。</p>
-<h2 id="intermediate-python-">Intermediate Python 中译(二)</h2>
+<h2 id="intermediate-python-中译二">Intermediate Python 中译(二)</h2>
 <h3 id="decorators">Decorators</h3>
 <p><strong>Decorators</strong>装饰器是Pytho非常重要的特性，相当于Java注解功能。装饰器是修饰函数的一种语法特性，可以使其功能发生一些改变。在Python函数也是第一等公民，可以直接赋值对象和使用。</p>
 <div class="highlight"><div class="chroma">
@@ -600,18 +682,18 @@ $$</p>
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">:</span>
-    <span class="k">return</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">hi,</span><span class="s2">&#34;</span><span class="o">+</span><span class="n">name</span>
-<span class="k">print</span><span class="p">(</span><span class="n">hi</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&#34;hi,&#34;</span><span class="o">+</span><span class="n">name</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hi</span><span class="p">())</span>
 <span class="c1">#输出</span>
 <span class="n">hi</span><span class="p">,</span><span class="n">brian</span>
 <span class="n">greet</span> <span class="o">=</span> <span class="n">hi</span>
-<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
 <span class="c1">#输出</span>
 <span class="n">hi</span><span class="p">,</span><span class="n">brian</span>
 <span class="c1">#此时已经删除hi对象，无法运行hi()方法，但是可以通过greet()方法运行</span>
 <span class="k">del</span> <span class="n">hi</span>
-<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
 <span class="c1">#输出</span>
 <span class="n">hi</span><span class="err">，</span><span class="n">brian</span>
 </code></pre></td></tr></table>
@@ -636,21 +718,21 @@ $$</p>
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">now you are inside in the hi() method</span><span class="s2">&#34;</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">now you are in inside the greet() method</span><span class="s2">&#34;</span>
-    <span class="k">def</span> <span class="nf">welcome</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">now you are in inside the welcome() method</span><span class="s2">&#34;</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">welcome</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">now you are back in the hi() method</span><span class="s2">&#34;</span><span class="p">)</span>
-<span class="n">hi</span><span class="p">(</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">hi</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;now you are inside in the hi() method&#34;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">greet</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s2">&#34;now you are in inside the greet() method&#34;</span>
+    <span class="k">def</span> <span class="nf">welcome</span><span class="p">():</span>
+        <span class="k">return</span> <span class="s2">&#34;now you are in inside the welcome() method&#34;</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">welcome</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;now you are back in the hi() method&#34;</span><span class="p">)</span>
+<span class="n">hi</span><span class="p">()</span>
 <span class="c1">#输出为</span>
-<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">inside</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">(</span><span class="p">)</span> <span class="n">method</span>
-<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">greet</span><span class="p">(</span><span class="p">)</span> <span class="n">method</span>
-<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">welcome</span><span class="p">(</span><span class="p">)</span> <span class="n">method</span>
-<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">back</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">(</span><span class="p">)</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">inside</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">()</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">greet</span><span class="p">()</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="ow">in</span> <span class="n">inside</span> <span class="n">the</span> <span class="n">welcome</span><span class="p">()</span> <span class="n">method</span>
+<span class="n">now</span> <span class="n">you</span> <span class="n">are</span> <span class="n">back</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">hi</span><span class="p">()</span> <span class="n">method</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>**我们可以看到在函数(主函数)内定义函数(子函数)，只要是不调用子函数，子函数只是声明并不执行，当执行完子函数时又返回了主函数。**由于Python只是函数第一等公民的功能特性，那么在Python代码中是可以将Python的函数可以作为变量使用并将其作为返回值亦可。<strong>从主函数中返回子函数(即从函数中返回函数)</strong>。</p>
@@ -689,11 +771,11 @@ $$</p>
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>hi，朋友们大家好，今天将英文原著作者 @yasoob《Intermediate Python》进行翻译和在工作中使用的Python技巧进行了总结。Gitbook里面有翻译的版本，大家可以下载下来看看。我今天主要是将该英文原著翻译成适合自己的理解的语言，并附加一些自己在工作中使用Python的技巧。废话少说，下面我们依次来学习一下@yasoob的原著。</p>
-<h2 id="intermediate-python-">Intermediate Python 中译</h2>
+<h2 id="intermediate-python-中译">Intermediate Python 中译</h2>
 <p>如果在翻译过程中有问题或者code无法运行，还请各位大侠指正。</p>
-<h3 id="argskwargs">*args和**kwargs</h3>
+<h3 id="args和kwargs">*args和**kwargs</h3>
 <p>我们在函数定义时，会经常使用*args和**kwargs这两个魔法变量，特别是函数参数数量不确定或参数较多时。当然*args和**kwargs这两个name并不是惟一的name，可以改成*as和**kwas，只要在命名前面加上修饰符*和**即可。我们先来看一下*args。</p>
 <h4 id="args">*args</h4>
 <div class="highlight"><div class="chroma">
@@ -710,12 +792,12 @@ $$</p>
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test_args_kwargs</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">)</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">frist arg: </span><span class="s2">&#34;</span><span class="p">,</span><span class="n">name</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test_args_kwargs</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;frist arg: &#34;</span><span class="p">,</span><span class="n">name</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">another arg through *argv: </span><span class="s2">&#34;</span><span class="p">,</span><span class="n">arg</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;another arg through *argv: &#34;</span><span class="p">,</span><span class="n">arg</span><span class="p">)</span>
 
-<span class="n">test_args_kwargs</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">eric</span><span class="s2">&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">rose</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="n">test_args_kwargs</span><span class="p">(</span><span class="s2">&#34;brian&#34;</span><span class="p">,</span><span class="s2">&#34;eric&#34;</span><span class="p">,</span><span class="s2">&#34;rose&#34;</span><span class="p">)</span>
 <span class="c1">#输出为</span>
 <span class="n">frist</span> <span class="n">arg</span><span class="p">:</span>  <span class="n">brian</span>
 <span class="n">another</span> <span class="n">arg</span> <span class="n">through</span> <span class="o">*</span><span class="n">argv</span><span class="p">:</span>  <span class="n">eric</span>
@@ -732,7 +814,7 @@ $$</p>
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">names</span><span class="o">=</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">eric</span><span class="s2">&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">rose</span><span class="s2">&#34;</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">names</span><span class="o">=</span><span class="p">(</span><span class="s2">&#34;brian&#34;</span><span class="p">,</span><span class="s2">&#34;eric&#34;</span><span class="p">,</span><span class="s2">&#34;rose&#34;</span><span class="p">)</span>
 <span class="n">test_args_kwargs</span><span class="p">(</span><span class="o">*</span><span class="n">names</span><span class="p">)</span>
 <span class="n">frist</span> <span class="n">arg</span><span class="p">:</span>  <span class="n">brian</span>
 <span class="n">another</span> <span class="n">arg</span> <span class="n">through</span> <span class="o">*</span><span class="n">argv</span><span class="p">:</span>  <span class="n">eric</span>
@@ -754,11 +836,11 @@ $$</p>
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">greet_me</span><span class="p">(</span><span class="o">*</span><span class="o">*</span><span class="n">args</span><span class="p">)</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">{0}=={1}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">greet_me</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;{0}=={1}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">))</span>
 
-<span class="n">greet_me</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">sex</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">男</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="n">greet_me</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">,</span><span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">sex</span><span class="o">=</span><span class="s2">&#34;男&#34;</span><span class="p">)</span>
 <span class="c1">#输出为</span>
 <span class="n">name</span><span class="o">==</span><span class="n">brian</span>
 <span class="n">age</span><span class="o">==</span><span class="mi">20</span>
@@ -776,15 +858,15 @@ $$</p>
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">name</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">age</span><span class="s2">&#34;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">sex</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">男</span><span class="s2">&#34;</span><span class="p">}</span>
-<span class="n">greet_me</span><span class="p">(</span><span class="o">*</span><span class="o">*</span><span class="n">person</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;brian&#34;</span><span class="p">,</span><span class="s2">&#34;age&#34;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="s2">&#34;sex&#34;</span><span class="p">:</span><span class="s2">&#34;男&#34;</span><span class="p">}</span>
+<span class="n">greet_me</span><span class="p">(</span><span class="o">**</span><span class="n">person</span><span class="p">)</span>
 <span class="c1">#输出为</span>
 <span class="n">name</span><span class="o">==</span><span class="n">brian</span>
 <span class="n">age</span><span class="o">==</span><span class="mi">20</span>
 <span class="n">sex</span><span class="o">==</span><span class="err">男</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="heading1">如何使用</h4>
+</div><h4 id="如何使用">如何使用</h4>
 <p>在很多场景里面都大量使用比如：
 1.装饰器
 2.函数定义
@@ -802,8 +884,8 @@ $$</p>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">someclass</span>
 
-<span class="k">def</span> <span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">)</span><span class="p">:</span>
-	<span class="k">return</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Test Data</span><span class="s2">&#34;</span>
+<span class="k">def</span> <span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s2">&#34;Test Data&#34;</span>
 <span class="n">someclass</span><span class="o">.</span><span class="n">get_info</span><span class="o">=</span><span class="n">get_info</span>
 </code></pre></td></tr></table>
 </div>
@@ -843,9 +925,9 @@ $$</p>
   <div class="post-content">
     
     <div class="post-summary">
-      <h1 id="python">Python性能分析与优化</h1>
+      <h1 id="python性能分析与优化">Python性能分析与优化</h1>
 <p>一个优秀的程序员，在保证业务正常的条件下都会追求自己的程序更快、更省。更快：运行时间短；更省：相对节省计算机资源（比如：CPU、Memory）。一般都是以这两种衡量方式来度量自己的程序及进一步优化自己程序的空间。更专业的性能分析软件一般有两类方法论：<strong>event-based profiling和statistical profiling</strong> 。</p>
-<h2 id="eventbased-profiling">Event-based Profiling</h2>
+<h2 id="event-based-profiling">Event-based Profiling</h2>
 <p>并不是所有编程语言都支持这类性能分析，支持这类分析的语言主要有：</p>
 <ul>
 <li>Java:JVMTI（JVM Tools Interface,JVM工具接口）为性能提供了钩子，可以跟踪函数调用和事件执行等等。</li>
@@ -888,91 +970,15 @@ $$</p>
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>**GIL（Global Interpreter 	Lock）**是什么东东？为什么当一些Pythoners在开发一些多线程操作的时候，都会有些很多疑问？多线程真的很糟糕吗？我该如何实现多线程并发操作？今天博主带你详细的介绍一下GIL。</p>
-<h2 id="gil">GIL原理</h2>
+<h2 id="gil原理">GIL原理</h2>
 <p>由于Python是动态解释性语言，即解释运行。运行Python代码时都会通过Python解释器解释执行，Python官方默认的解释器是Cython,当然你也可以选择自己的Python解释器(PyPy,JPython),其中JPython就没有GIL的限制。在解释器解释执行任何Python代码时，首先都需要<strong>they  acquire GIL when running，release GIL when blocking for I/O</strong>。如果没有涉及I/O操作，只是CPU密集型操作或者，解释器会每隔<strong>100 ticks</strong>(低级的解释器指令)就释放GIL(通过 sys.setcheckinterval来修改)。<strong>GIL是实现Python解释器(Cython)时所引入的一个概念。GIL不是Python的特性。</strong></p>
-<h3 id="heading1">线程执行模型</h3>
+<h3 id="线程执行模型">线程执行模型</h3>
 <p>我们先看一下Python下多任务线程执行模型，下面的图取自<strong>David Beazley</strong>大神，并且在他的个人网站中对GIL进行深度的解剖。如果想了解更深入的东西，可以去逛逛他的网站。</p>
     </div>
     <div class="read-more">
       <a href="/20181210/python-gil.html" class="read-more-link">阅读全文</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/20181210/linux-install-jupyter.html">Linux Install Jupyter</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2018-12-10" class="post-time">
-        2018-12-10
-      </time>
-      <div class="post-category">
-          <a href="https://www.brianlv.com/categories/python.html"> Python </a>
-          
-        </div>
-      <span class="more-meta"> 约 1054 字 </span>
-      <span class="more-meta"> 预计阅读 3 分钟 </span>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      <h2 id="heading">概述</h2>
-<p>由于我的开发环境是CentOS，现在主要是以Python为主，偶尔夹杂C/C++和GoLang语言。在本地开发、测试、提交git和在生产环境再去测试、开发，并且会在生产环境会有临时性的开发任务和调整，都是比较浪费时间的。<strong>不建议直接修改生产环境的代码，临时性的修改后一定要测试并稳定运行一段时间。</strong> 写这篇博客主要是为了利用线上资源，实现跨平台开发和测试代码示例用的。所以就在服务器安装了<strong>IPython，Jupyter和Notebook</strong>。</p>
-<h2 id="heading1">安装和配置</h2>
-<p>在安装<strong>IPython，Jupyter和Notebook</strong>时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如(&lsquo;Development Tools‘)。废话少说，直接写代码。</p>
-<h3 id="heading2">基本包安装</h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">yum update -y
-yum install python-pip -y
-yum install bzip2 -y
-yum groupinstall <span class="s2">&#34;Development Tools&#34;</span> -y
-</code></pre></td></tr></table>
-</div>
-</div><p>安装完pip之后，最好把pip源改为国内源，修改如下：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash">mkdir ~/.pip
-cat &gt; ~/.pip/pip.conf <span class="s">&lt;&lt; EOF
-</span><span class="s">[global]
-</span><span class="s">index-url = http://mirrors.aliyun.com/pypi/simple/
-</span><span class="s">[install]
-</span><span class="s">trusted-host=mirrors.aliyun.com
-</span><span class="s">EOF</span>
-</code></pre></td></tr></table>
-</div>
-</div>
-    </div>
-    <div class="read-more">
-      <a href="/20181210/linux-install-jupyter.html" class="read-more-link">阅读全文</a>
     </div>
     
   </div>
@@ -1070,7 +1076,7 @@ cat &gt; ~/.pip/pip.conf <span class="s">&lt;&lt; EOF
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

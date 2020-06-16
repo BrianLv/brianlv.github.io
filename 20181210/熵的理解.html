@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/%E7%86%B5%E7%9A%84%E7%90%86%E8%A7%A3.html" />
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -326,8 +326,8 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#kl">相对熵(KL离散度)</a></li>
-    <li><a href="#heading">交叉熵</a></li>
+    <li><a href="#相对熵kl离散度">相对熵(KL离散度)</a></li>
+    <li><a href="#交叉熵">交叉熵</a></li>
   </ul>
 </nav>
   </div>
@@ -373,7 +373,7 @@ $${0,10,110,111}$$
 （1）信息熵只反映内容的随机性，与内容本身无关。不管是什么样内容的文件，只要服从同样的概率分布，就会计算得到同样的信息熵。
 （2）信息熵越大，表示占用的二进制位越长，因此就可以表达更多的符号。所以，人们有时也说，信息熵越大，表示信息量越大。不过，由于第一点的原因，这种说法很容易产生误导。较大的信息熵，只表示可能出现的符号较多，并不意味着你可以从中得到更多的信息。
 （3）信息熵与热力学的熵，基本无关。</p>
-<h2 id="kl">相对熵(KL离散度)</h2>
+<h2 id="相对熵kl离散度">相对熵(KL离散度)</h2>
 <p>相对熵又叫做KL离散度，其定义为：
 $$
 KL(f(x)||g(x))=-\sum_{x \in X} f(x) \cdot log\frac{f(x)}{g(x)}
@@ -383,7 +383,7 @@ KL 散度是两个概率分布f(x)和g(x)差别的非对称性的度量。KL散�
 (1) 两函数完全相同时，KL=0
 (2) KL越大，差异越大
 (3) 对概率分布或者概率密度函数(&gt;0), KL可用来衡量两个随机变量分布的差异性。</p>
-<h2 id="heading">交叉熵</h2>
+<h2 id="交叉熵">交叉熵</h2>
 <p>对一随机事件，其真实概率分布为p(i)，从数据中得到的概率分布为q(i)，则我们定义，交叉熵为:
 $$
 H(p,q)=\displaystyle\sum _{x}p(x)log\frac{1}{q(x)}=-\sum _{x}p(x)logq(x)
@@ -575,7 +575,7 @@ $$</p>
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

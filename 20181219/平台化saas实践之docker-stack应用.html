@@ -34,7 +34,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181219/%E5%B9%B3%E5%8F%B0%E5%8C%96saas%E5%AE%9E%E8%B7%B5%E4%B9%8Bdocker-stack%E5%BA%94%E7%94%A8.html" />
@@ -53,7 +53,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -358,7 +358,7 @@ SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商�
 
     
     <div class="post-content">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p><strong>SaaS</strong> (软件即服务)是一种许可和交付模式，其中软件由提供商集中托管和管理，并通过订阅的方式提供给用户,用户也可以按需或者即用即付方式进行购买。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。提供商负责管理硬件和软件，并根据适当的服务协议确保应用和数据的可用性和安全性。现在很多传统软件向SaaS“转变”时，更多的是向<strong>平台化SaaS软件</strong>靠拢，借助此模式来交付的产品优势很多，比如:</p>
 <ul>
 <li><strong>提供灵活的方式满足客户需求</strong></li>
@@ -369,7 +369,7 @@ SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商�
 <li><strong>隔离性、安全性、可定制性度高</strong></li>
 </ul>
 <p><strong>平台+软件=平台化SaaS=支撑层+应用层</strong></p>
-<h2 id="saas">SaaS平台的挑战</h2>
+<h2 id="saas平台的挑战">SaaS平台的挑战</h2>
 <p>我个人觉得传统软件向SaaS过渡原因主要分为两方面：</p>
 <p>1.<strong>从外因分析是市场趋势、价值和效率的方式转变</strong></p>
 <p>传统软件在其整个生命周期内，价值的体现最终要依赖于大客户需求+解决方案+(服务能力)+销售(话有点大，呵呵)。而在其生命周期过程中，无论是任何一方都在变化，市场、需求和趋势也在发生变化，等产品面向市场时，其实已经&quot;慢半拍或者多拍&quot;了，很多决策主要依赖于&quot;拍脑袋&rdquo;，粗略的数据分析和统计很难满足复杂多变的外因。</p>
@@ -411,13 +411,13 @@ SaaS (软件即服务)是一种许可和交付模式，其中软件由提供商�
 <li>在线API、文档、在线服务，需求为租户提供健全的用户入场协助？</li>
 </ul>
 <p><strong>SaaS挑战核心是平衡，需要面对很多矛盾点，有效决策和逻辑性的思考，建立快速试错和纠正的机制，寻找出一系列的平衡规则。</strong>【收入、成本和增长】</p>
-<h2 id="dockersaas">基于Docker微服务式构建SaaS解决方案</h2>
+<h2 id="基于docker微服务式构建saas解决方案">基于Docker微服务式构建SaaS解决方案</h2>
 <p><strong>容器技术加速应用云化，现在很多云厂商基于微服务的架构设计模式来实现SaaS,而服务的载体依赖于Docker实现</strong>，主要是Docker具备很多天然优势能很好的满足SaaS。即通过<strong>封装、隔离、高效</strong>来解决<strong>私有化部署、安全问题、大客户问题、定制化问题</strong>。很多机遇SaaS化比较典型的技术架构网上很多，感兴趣的可以参考下。废话不少说，让我们开启Docker的实践之路吧，由于微服务架构模式涉及的东西很多，给华为微服务框架打个小广告，已经纳入Apache了。如下图所示：</p>
 <p><img src="/image/servicemicro.png" alt="micro-service"></p>
 <p>本篇博客只介绍Docker Service的Stack应用部署和管理，后续的博客再详细介绍,微服务架构模式和Docker内核技术，如下图所示。</p>
 <p><img src="/image/docker_app.png" alt="Docker"></p>
 <p><strong>计算机经典的一种解耦思想：分层</strong>，并不像kvm(基于内核的虚拟机)，配合QEMU（处理器虚拟软件），需要CPU支持虚拟化技术（并且在BIOS里打开虚拟化选项），效率可达到物理机的80％以上，kvm在实现虚拟化过程中需要配合其它的类库：QEMU、libvirt等，但是在网络虚拟化(SDN)和存储满足跨AZ和调度是十分复杂的。当然Docker也有不足，特别是在安全性和Kernel依赖方面，现在正在按照<strong>OCI</strong>进行模块化。</p>
-<h3 id="docker-stack">Docker Stack应用的部署和管理</h3>
+<h3 id="docker-stack应用的部署和管理">Docker Stack应用的部署和管理</h3>
 <p>我们来看下Docker Stack体系结构:</p>
 <p><img src="/image/docker_stack.gif" alt="Docker Stack"></p>
 <p>我们采用一个Demo来实践Stack，该Demo来自Docker大牛Nigel的官网，如下图所示，该应用由 5 个服务、3 个网络、4 个密钥以及 3 组端口映射构成。</p>
@@ -642,7 +642,7 @@ docker service logs
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

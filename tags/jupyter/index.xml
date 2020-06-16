@@ -17,11 +17,11 @@
       <pubDate>Mon, 10 Dec 2018 21:24:38 +0800</pubDate>
       
       <guid>https://www.brianlv.com/20181210/linux-install-jupyter.html</guid>
-      <description>&lt;h2 id=&#34;heading&#34;&gt;概述&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
 &lt;p&gt;由于我的开发环境是CentOS，现在主要是以Python为主，偶尔夹杂C/C++和GoLang语言。在本地开发、测试、提交git和在生产环境再去测试、开发，并且会在生产环境会有临时性的开发任务和调整，都是比较浪费时间的。&lt;strong&gt;不建议直接修改生产环境的代码，临时性的修改后一定要测试并稳定运行一段时间。&lt;/strong&gt; 写这篇博客主要是为了利用线上资源，实现跨平台开发和测试代码示例用的。所以就在服务器安装了&lt;strong&gt;IPython，Jupyter和Notebook&lt;/strong&gt;。&lt;/p&gt;
-&lt;h2 id=&#34;heading1&#34;&gt;安装和配置&lt;/h2&gt;
+&lt;h2 id=&#34;安装和配置&#34;&gt;安装和配置&lt;/h2&gt;
 &lt;p&gt;在安装&lt;strong&gt;IPython，Jupyter和Notebook&lt;/strong&gt;时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如(&amp;lsquo;Development Tools‘)。废话少说，直接写代码。&lt;/p&gt;
-&lt;h3 id=&#34;heading2&#34;&gt;基本包安装&lt;/h3&gt;
+&lt;h3 id=&#34;基本包安装&#34;&gt;基本包安装&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1

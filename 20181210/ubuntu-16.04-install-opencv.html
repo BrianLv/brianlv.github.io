@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/ubuntu-16.04-install-opencv.html" />
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -326,9 +326,9 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#1ubuntuopencv">1.从Ubuntu源安装opencv</a></li>
-    <li><a href="#2opencv">2.从opencv官方源代码安装</a></li>
-    <li><a href="#3anacondaoepncv">3.从Anaconda安装oepncv环境</a></li>
+    <li><a href="#1从ubuntu源安装opencv">1.从Ubuntu源安装opencv</a></li>
+    <li><a href="#2从opencv官方源代码安装">2.从opencv官方源代码安装</a></li>
+    <li><a href="#3从anaconda安装oepncv环境">3.从Anaconda安装oepncv环境</a></li>
   </ul>
 </nav>
   </div>
@@ -336,9 +336,9 @@
 
     
     <div class="post-content">
-      <h1 id="heading">概述</h1>
+      <h1 id="概述">概述</h1>
 <p>安装opencv有很多种方式，我列出了三种方式。并针对第二种方式进行了详细的安装解释，强烈推荐使用第三种方式。</p>
-<h2 id="1ubuntuopencv">1.从Ubuntu源安装opencv</h2>
+<h2 id="1从ubuntu源安装opencv">1.从Ubuntu源安装opencv</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -347,7 +347,7 @@
 <pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install libopencv-dev python-opencv
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="2opencv">2.从opencv官方源代码安装</h2>
+</div><h2 id="2从opencv官方源代码安装">2.从opencv官方源代码安装</h2>
 <p>1.安装opencv所依赖的包</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -508,7 +508,7 @@ cv2.__version__
 <pre class="chroma"><code class="language-bash" data-lang="bash">rm -rf opencv opencv_contrib opencv.zip opencv_contrib.zip
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="3anacondaoepncv">3.从Anaconda安装oepncv环境</h2>
+</div><h2 id="3从anaconda安装oepncv环境">3.从Anaconda安装oepncv环境</h2>
 <p>我们需要建立一个虚拟化的独立环境</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -519,7 +519,7 @@ cv2.__version__
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">cv3</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.6</span>
 <span class="n">source</span> <span class="n">activate</span> <span class="n">cv3</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">https</span><span class="p">:</span><span class="o">/</span><span class="o">/</span><span class="n">conda</span><span class="o">.</span><span class="n">anaconda</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">menpo</span> <span class="n">opencv3</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">conda</span><span class="o">.</span><span class="n">anaconda</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">menpo</span> <span class="n">opencv3</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -685,7 +685,7 @@ cv2.__version__
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

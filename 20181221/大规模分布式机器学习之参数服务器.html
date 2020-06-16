@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181221/%E5%A4%A7%E8%A7%84%E6%A8%A1%E5%88%86%E5%B8%83%E5%BC%8F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%82%E6%95%B0%E6%9C%8D%E5%8A%A1%E5%99%A8.html" />
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -326,17 +326,17 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#heading">概述</a></li>
-    <li><a href="#heading1">工作原理</a></li>
-    <li><a href="#heading2">模型参数</a></li>
-    <li><a href="#heading3">接口</a></li>
-    <li><a href="#heading4">同步协议</a>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#工作原理">工作原理</a></li>
+    <li><a href="#模型参数">模型参数</a></li>
+    <li><a href="#接口">接口</a></li>
+    <li><a href="#同步协议">同步协议</a>
       <ul>
         <li></li>
       </ul>
     </li>
-    <li><a href="#heading5">工业界参数服务器</a></li>
-    <li><a href="#heading6">参考链接</a></li>
+    <li><a href="#工业界参数服务器">工业界参数服务器</a></li>
+    <li><a href="#参考链接"><strong>参考链接</strong></a></li>
   </ul>
 </nav>
   </div>
@@ -344,7 +344,7 @@
 
     
     <div class="post-content">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p><strong>参数服务器</strong>是分布式机器学习框架中用来作为参数同步的框架，现在很多大规模的分布式机器学习都采用<strong>参数服务器架构</strong>用来进行参数的同步以提升大规模的模型的速度和效率。由于我们现在正处于一个大数据的时代，如何结合海量数据和超大规模的模型进行应用？比如现在以小视频和短视频(时序特征+内容特征+用户等多维度特征巨大)为主的推荐、广告、视频算法、搜索等都要采用大规模分布式机器学习系统,比如短视频为主的多模态学习更是需要大规模的分布式机器学习来快速满足产品场景化需求、画像更新、视频流算法、智能化内容创作、聚类、灰度算法及时调整、老用户的运营模型以及如何将流量转为价值过程中的模型，大规模分布式机器学习系统都充当了底层基石。**分布式学习系统包括两大模块：模型和分布式系统。**其中模型需要解决训练和正确率的问题，分布式系统需要考虑并行、网络、慢机、故障处理、调度、数据一致性等问题。最近在看mxnet的源码，我们一起学习一下参数服务的架构和设计，更为详细的可以参考mxnet官网。</p>
 <p><strong>现有系统的不足</strong>：</p>
 <blockquote>
@@ -367,15 +367,15 @@
 <p><img src="/image/parameter_server.png" alt="参数服务器"></p>
 <p>其算法如下:</p>
 <p><img src="/image/sgd_ps.png" alt="参数服务器算法"></p>
-<h2 id="heading1">工作原理</h2>
+<h2 id="工作原理">工作原理</h2>
 <p>参数服务器结点中包含一个服务器管理者结点, 该管理者结点负责维护服务器各结点元数据的一致性,管理 服务器各结点的生命周期以及分配资源.工作结点负责处理 数据,一个工作结点处理一部分训练数据,计算局部梯度并进 行数据分析,各工作结点间互不通信.任务调度管理器为对 应工作结点下的机器分配工作负载并监督机器处理的进程, 增删工作结点时,任务调度器为它们重新分配未完成的任务.工作结点之间独立运行,可实现多租户模式,不同类型的应用 可在不同工作结点中并行运行,同类型的应用也可同时分配 到多个工作结点中同步执行以提高并行性.参数服务器模型由工作结点和服务器端参数服务器结点 组成,工作结点和服务器结点都各自包含多台机器.服务器结 点下的每台机器都包含一部分全局的共享参数。如下图所示：</p>
 <p><img src="/image/shared_weight.png" alt="参数共享"></p>
 <p>补充两个小概念:<strong>数据并行和模型并行</strong>。</p>
 <p>**Model Parallelism:**可以理解为单个的模型分布在多个机器上。将深度神经网络放在多台机器上并行训练所能获得的性能提升效果主要取决于模型的结构。具有大量参数的模型通常可以获得更多CPU内核和内存，因此，并行化大型模型会显著提高性能，从而缩短训练时间。</p>
 <p>**Data Parallelism:**减少训练时间的一般思路是，采用n个workers同时并行计算n个不同的数据块（partitions，分区），来优化一个central model的参数。在这种情况下，把n个模型副本放在n个处理节点上，即每个节点（或进程）都拥有一个模型的副本。然后，每个worker使用指定的数据块来训练一个局部的模型副本。但是，可以让所有的workers同时一致工作，优化同一个目标。</p>
-<h2 id="heading2">模型参数</h2>
+<h2 id="模型参数">模型参数</h2>
 <p>模型参数默认采用<strong>&lt;key,value&gt;</strong>集合，key 就是 feature ID(slotId)，value 是其权值。对于不存在的key，可认为其权值为0。也有对&lt;key,value&gt;进行抽象的。</p>
-<h2 id="heading3">接口</h2>
+<h2 id="接口">接口</h2>
 <p>workers和servers之间通信是通过 push() 和 pull() 方法进行的。worker通过 push() 将计算好的梯度发送到 server，然后通过 pull() 从 server 获取更新参数。</p>
 <p>为了提高通信效率，PS允许用户使用 Range Push/Range Pull 操作。</p>
 <div class="highlight"><div class="chroma">
@@ -388,7 +388,7 @@
 <span class="n">w</span><span class="o">.</span><span class="n">pull</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="heading4">同步协议</h2>
+</div><h2 id="同步协议">同步协议</h2>
 <p>Parameter Server 一般会提供如下三个级别的异步控制协议： <strong>BSP（Bulk Synchronous Parallel），SSP（Stalness Synchronous Parallel） 和 ASP（Asynchronous Parallel）</strong>， 它们的同步限制依次放宽。为了追求更快的计算速度，算法可以选择更宽松的同步协议。</p>
 <p><img src="/image/sync_controller.png" alt="同步协议"></p>
 <h4 id="1-bsp">1. BSP</h4>
@@ -409,7 +409,7 @@
 <li>优点：消除了等待慢Task的时间，计算速度快</li>
 <li>缺点：适用性差，在一些情况下并不能保证收敛性</li>
 </ul>
-<h2 id="heading5">工业界参数服务器</h2>
+<h2 id="工业界参数服务器">工业界参数服务器</h2>
 <p>我们看下腾讯的参数服务器:</p>
 <p><img src="/image/angel_architecture.png" alt="Angel"></p>
 <ol>
@@ -425,7 +425,7 @@
 <li>完美支持同步和异步，可以达到更快的收敛速度，同时不影响模型的精度；</li>
 <li>同时在稀疏性的上支持，让worker和server节点在通信效率上大幅度提升。</li>
 </ol>
-<h2 id="heading6"><strong>参考链接</strong></h2>
+<h2 id="参考链接"><strong>参考链接</strong></h2>
 <p>1.<a href="https://zhuanlan.zhihu.com/p/82116922">参数服务器参考</a></p>
 <p>2.<a href="%E8%88%92%E5%A8%9C%E3%80%81%E5%88%98%E6%B3%A2">分布式机器学习平台与算法-舒娜</a></p>
 <p>3.<a href="https://blog.csdn.net/qq_28954371/article/details/52850096?utm_source=blogxgwz3">参数服务器参考</a></p>
@@ -561,7 +561,7 @@
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

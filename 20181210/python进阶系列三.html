@@ -34,7 +34,7 @@ Python和C/C&#43;&#43;混合编程 在和C/C&#43;&#43;代码进行混合编程�
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%89.html" />
@@ -53,7 +53,7 @@ Python和C/C&#43;&#43;混合编程 在和C/C&#43;&#43;代码进行混合编程�
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -107,7 +107,7 @@ Python/C在C中直接扩展Python的代码。
 ">
 <meta itemprop="datePublished" content="2018-12-10T21:31:00&#43;08:00" />
 <meta itemprop="dateModified" content="2018-12-10T21:31:00&#43;08:00" />
-<meta itemprop="wordCount" content="3098">
+<meta itemprop="wordCount" content="3128">
 
 
 
@@ -361,7 +361,7 @@ Python/C在C中直接扩展Python的代码。
             <a href="https://www.brianlv.com/categories/python.html"> Python </a>
             
           </div>
-        <span class="more-meta"> 约 3098 字 </span>
+        <span class="more-meta"> 约 3128 字 </span>
           <span class="more-meta"> 预计阅读 7 分钟 </span>
 
         
@@ -383,9 +383,9 @@ Python/C在C中直接扩展Python的代码。
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#python-">Python 进阶</a>
+    <li><a href="#python-进阶">Python 进阶</a>
       <ul>
-        <li><a href="#pythoncc">Python和C/C++混合编程</a></li>
+        <li><a href="#python和cc混合编程">Python和C/C++混合编程</a></li>
       </ul>
     </li>
   </ul>
@@ -395,9 +395,9 @@ Python/C在C中直接扩展Python的代码。
 
     
     <div class="post-content">
-      <h2 id="python-">Python 进阶</h2>
+      <h2 id="python-进阶">Python 进阶</h2>
 <p>我们在<strong>Python进阶教程(二)</strong>，介绍了一些Python进阶用法。今天给大家介绍的是和<strong>c/c++</strong>混合编程的用法。我们都知道特别是Python2.x版本GIL的影响造成多线程计算方面是鸡肋，并且常常在高性能计算方面依赖很多包。如果我们想切合我们自己的业务处理，比如高性能部分我们用<strong>C/C++</strong>生成动态链接库，Python调用该动态链接库。我们今天主要介绍Python在和<strong>c/c++</strong>混合编程。</p>
-<h3 id="pythoncc">Python和C/C++混合编程</h3>
+<h3 id="python和cc混合编程">Python和C/C++混合编程</h3>
 <p>在和<strong>C/C++代码</strong>进行混合编程时，我们通常需要采用以下几个技术点：</p>
 <ul>
 <li><strong>Ctypes</strong>:C++编译成动态链接库(DLL,即运行时动态调用)，然后通过<strong>ctypes</strong>来解析和加载动态链接库，python调用该动态链接库。从ctypes的文档中可以推断，在各个平台上均使用了对应平台动态加载动态链接库的方法，并通过一套类型映射的方式将Python与二进制动态链接库相连接。ctypes 实现了一系列的类型转换方法，Python的数据类型会包装或直接推算为C类型，作为函数的调用参数；函数的返回值也经过一系列的包装成为Python类型。
@@ -433,9 +433,9 @@ Python/C在C中直接扩展Python的代码。
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="kt">int</span> <span class="nf">add_int</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">)</span><span class="p">;</span>
-<span class="kt">float</span> <span class="nf">add_float</span><span class="p">(</span><span class="kt">float</span><span class="p">,</span> <span class="kt">float</span><span class="p">)</span><span class="p">;</span>
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span><span class="cp"></span><span class="kt">int</span> <span class="nf">add_int</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="p">);</span>
+<span class="kt">float</span> <span class="nf">add_float</span><span class="p">(</span><span class="kt">float</span><span class="p">,</span> <span class="kt">float</span><span class="p">);</span>
 
 <span class="kt">int</span> <span class="nf">add_int</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
 <span class="p">{</span>
@@ -485,11 +485,11 @@ Python/C在C中直接扩展Python的代码。
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">ctypes</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1">#load the shared object file</span>
-<span class="n">adder</span> <span class="o">=</span> <span class="n">CDLL</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">./add.so</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">adder</span> <span class="o">=</span> <span class="n">CDLL</span><span class="p">(</span><span class="s1">&#39;./add.so&#39;</span><span class="p">)</span>
 
 <span class="c1">#Find sum of integers</span>
 <span class="n">res_int</span> <span class="o">=</span> <span class="n">adder</span><span class="o">.</span><span class="n">add_int</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-<span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Sum of 4 and 5 = </span><span class="s2">&#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">res_int</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">&#34;Sum of 4 and 5 = &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">res_int</span><span class="p">)</span>
 
 <span class="c1">#Find sum of floats</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">c_float</span><span class="p">(</span><span class="mf">5.5</span><span class="p">)</span>
@@ -498,7 +498,7 @@ Python/C在C中直接扩展Python的代码。
 <span class="n">add_float</span> <span class="o">=</span> <span class="n">adder</span><span class="o">.</span><span class="n">add_float</span>
 <span class="c1">#这个非常重要，如果你没有给返回值指定输出Python ctypes的数据类型则会出现异常值。</span>
 <span class="n">add_float</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_float</span>
-<span class="k">print</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Sum of 5.5 and 4.1 = </span><span class="s2">&#34;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">add_float</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">&#34;Sum of 5.5 and 4.1 = &#34;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">add_float</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
 <span class="c1">#输出为</span>
 <span class="n">Sum</span> <span class="n">of</span> <span class="mi">4</span> <span class="ow">and</span> <span class="mi">5</span> <span class="o">=</span> <span class="mi">9</span>
 <span class="n">Sum</span> <span class="n">of</span> <span class="mf">5.5</span> <span class="ow">and</span> <span class="mf">4.1</span> <span class="o">=</span>  <span class="mf">10.6000003815</span>
@@ -507,7 +507,7 @@ Python/C在C中直接扩展Python的代码。
 </div><p>在指定ctypes的数据格式时一定要注意<strong>数据类型的匹配</strong>[^test1]。我们来看一下数据格式的匹配[^test]:
 <img src="/image/fundamentaltypes.png" alt="Ctypes 数据格式">
 更详细的使用<strong>ctypes</strong>教程**[ctypes tutorial][1]**。</p>
-<h4 id="using-c-from-pythonctypes1">Using C++ from Python(Ctypes)</h4>
+<h4 id="using-c-from-pythonctypes-1">Using C++ from Python(Ctypes)</h4>
 <p>ctypes不仅可以和C在一混合编程，我们还可以和C++混合编程，但是在ctypes的官方文档里面只定义了支持<strong>C Type</strong>。那么c++如何和Python进行混合编程呢？所以需要在C++里面通过<strong>extend c</strong>来支持C++混合编程。
 我们来看两个例子,第一个例子由两个文件构成一个是<strong>test.h,test.cpp</strong>,其中test.h是c++自定义的头文件,test.cpp是对外接口。依次来看看：</p>
 <div class="highlight"><div class="chroma">
@@ -546,38 +546,38 @@ Python/C在C中直接扩展Python的代码。
 </span><span class="lnt">32
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#</span><span class="cp">test.h</span><span class="cp">
-</span><span class="cp"></span><span class="cp">#</span><span class="cp">ifndef _Foo_h</span><span class="cp">
-</span><span class="cp"></span><span class="cp">#</span><span class="cp">define _Foo_h</span><span class="cp">
-</span><span class="cp"></span><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#test.h
+</span><span class="cp">#ifndef _Foo_h
+</span><span class="cp">#define _Foo_h
+</span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
 </span><span class="cp"></span>
 <span class="k">class</span> <span class="nc">Foo</span>
 <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-  <span class="n">Foo</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="p">;</span>
-  <span class="kt">void</span> <span class="nf">bar</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="nf">foobar</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">Foo</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
+  <span class="kt">void</span> <span class="nf">bar</span><span class="p">();</span>
+  <span class="kt">int</span> <span class="nf">foobar</span><span class="p">(</span><span class="kt">int</span><span class="p">);</span>
 
 <span class="k">private</span><span class="o">:</span>
   <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="n">Foo</span><span class="o">:</span><span class="o">:</span><span class="n">Foo</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">Foo</span><span class="o">::</span><span class="n">Foo</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="n">val</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">void</span> <span class="n">Foo</span><span class="o">:</span><span class="o">:</span><span class="n">bar</span><span class="p">(</span><span class="p">)</span>
+<span class="kt">void</span> <span class="n">Foo</span><span class="o">::</span><span class="n">bar</span><span class="p">()</span>
 <span class="p">{</span>
-  <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">cout</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">Value is </span><span class="s">&#34;</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">val</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">std</span><span class="o">:</span><span class="o">:</span><span class="n">endl</span><span class="p">;</span>
+  <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Value is &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">int</span> <span class="n">Foo</span><span class="o">:</span><span class="o">:</span><span class="n">foobar</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="kt">int</span> <span class="n">Foo</span><span class="o">::</span><span class="n">foobar</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="k">return</span> <span class="n">val</span> <span class="o">+</span> <span class="n">n</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="cp">#</span><span class="cp">endif </span><span class="c1">// !_Foo_h
+<span class="cp">#endif </span><span class="c1">// !_Foo_h
 </span></code></pre></td></tr></table>
 </div>
 </div><p>我们来看一下它的对外接口<strong>test.cpp</strong>是什么样的？</p>
@@ -601,20 +601,20 @@ Python/C在C中直接扩展Python的代码。
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&#34;test.h&#34;</span><span class="cp">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#include</span> <span class="cpf">&#34;test.h&#34;</span><span class="cp">
 </span><span class="cp"></span><span class="c1">//值得注意的是extern &#34;C&#34;
-</span><span class="c1"></span><span class="k">extern</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">C</span><span class="s">&#34;</span> <span class="p">{</span>
+</span><span class="c1"></span><span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="p">{</span>
 <span class="n">Foo</span> <span class="o">*</span><span class="nf">Foo_new</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="k">return</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">return</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kt">void</span> <span class="nf">Foo_bar</span><span class="p">(</span><span class="n">Foo</span> <span class="o">*</span><span class="n">foo</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="n">foo</span><span class="o">-</span><span class="o">&gt;</span><span class="n">bar</span><span class="p">(</span><span class="p">)</span><span class="p">;</span>
+  <span class="n">foo</span><span class="o">-&gt;</span><span class="n">bar</span><span class="p">();</span>
 <span class="p">}</span>
 <span class="kt">int</span> <span class="nf">Foo_foobar</span><span class="p">(</span><span class="n">Foo</span> <span class="o">*</span><span class="n">foo</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="k">return</span> <span class="n">foo</span><span class="o">-</span><span class="o">&gt;</span><span class="n">foobar</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">foo</span><span class="o">-&gt;</span><span class="n">foobar</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
@@ -680,9 +680,9 @@ libDemo.dylib
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">ctypes</span>
-<span class="n">lib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">cdll</span><span class="o">.</span><span class="n">LoadLibrary</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">./libDemo.dylib</span><span class="s2">&#34;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span><span class="p">:</span>
+<span class="n">lib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">cdll</span><span class="o">.</span><span class="n">LoadLibrary</span><span class="p">(</span><span class="s2">&#34;./libDemo.dylib&#34;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="n">lib</span><span class="o">.</span><span class="n">Foo_new</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
         <span class="n">lib</span><span class="o">.</span><span class="n">Foo_new</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
         <span class="n">lib</span><span class="o">.</span><span class="n">Foo_bar</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">]</span>
@@ -691,19 +691,19 @@ libDemo.dylib
         <span class="n">lib</span><span class="o">.</span><span class="n">Foo_foobar</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">Foo_new</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">bar</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">lib</span><span class="o">.</span><span class="n">Foo_bar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">foobar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">foobar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">lib</span><span class="o">.</span><span class="n">Foo_foobar</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
 
 <span class="n">f</span><span class="o">=</span><span class="n">Foo</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="p">)</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">foobar</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">foobar</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">foobar</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<span class="k">print</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="c1">#输出</span>
 <span class="mi">12</span>
-<span class="o">&lt;</span><span class="nb">type</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">int</span><span class="s1">&#39;</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nb">type</span> <span class="s1">&#39;int&#39;</span><span class="o">&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>我们来看另外一个例子，也是通过动态链接库来处理的。</p>
@@ -801,93 +801,93 @@ libDemo.dylib
 </span><span class="lnt">90
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+<pre class="chroma"><code class="language-c++" data-lang="c++"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
 </span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 <span class="k">typedef</span> <span class="k">struct</span> <span class="nc">StructTest</span>
 <span class="p">{</span>
   <span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">;</span>
   <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">score</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">score</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
 <span class="p">}</span> <span class="n">StructTest</span><span class="p">,</span> <span class="o">*</span><span class="n">StructPtr</span><span class="p">;</span>
 
 <span class="k">class</span> <span class="nc">TestLib</span>
 <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
-  <span class="kt">int</span> <span class="n">passInt</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span><span class="p">;</span>
-  <span class="kt">double</span> <span class="nf">passDouble</span><span class="p">(</span><span class="kt">double</span> <span class="n">d</span><span class="p">)</span><span class="p">;</span>
-  <span class="kt">char</span> <span class="nf">passChar</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">)</span><span class="p">;</span>
-  <span class="kt">char</span> <span class="o">*</span><span class="nf">passString</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">StructTest</span> <span class="nf">passStruct</span><span class="p">(</span><span class="n">StructTest</span> <span class="n">st</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">StructPtr</span> <span class="nf">passStructPtr</span><span class="p">(</span><span class="n">StructPtr</span> <span class="n">p</span><span class="p">)</span><span class="p">;</span>
-  <span class="n">StructPtr</span> <span class="nf">passStructArray</span><span class="p">(</span><span class="n">StructTest</span> <span class="n">vst</span><span class="p">[</span><span class="p">]</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span><span class="p">;</span>
-<span class="p">}</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">passInt</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">);</span>
+  <span class="kt">double</span> <span class="nf">passDouble</span><span class="p">(</span><span class="kt">double</span> <span class="n">d</span><span class="p">);</span>
+  <span class="kt">char</span> <span class="nf">passChar</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">);</span>
+  <span class="kt">char</span> <span class="o">*</span><span class="nf">passString</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">);</span>
+  <span class="n">StructTest</span> <span class="nf">passStruct</span><span class="p">(</span><span class="n">StructTest</span> <span class="n">st</span><span class="p">);</span>
+  <span class="n">StructPtr</span> <span class="nf">passStructPtr</span><span class="p">(</span><span class="n">StructPtr</span> <span class="n">p</span><span class="p">);</span>
+  <span class="n">StructPtr</span> <span class="nf">passStructArray</span><span class="p">(</span><span class="n">StructTest</span> <span class="n">vst</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">size</span><span class="p">);</span>
+<span class="p">};</span>
 
-<span class="kt">int</span> <span class="n">TestLib</span><span class="o">:</span><span class="o">:</span><span class="n">passInt</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span>
+<span class="kt">int</span> <span class="n">TestLib</span><span class="o">::</span><span class="n">passInt</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="n">cout</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">a</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="sa"></span><span class="s">&#34;</span><span class="s"> in c++</span><span class="s">&#34;</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; in c++&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
   <span class="k">return</span> <span class="n">a</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="kt">double</span> <span class="n">TestLib</span><span class="o">:</span><span class="o">:</span><span class="n">passDouble</span><span class="p">(</span><span class="kt">double</span> <span class="n">d</span><span class="p">)</span>
+<span class="kt">double</span> <span class="n">TestLib</span><span class="o">::</span><span class="n">passDouble</span><span class="p">(</span><span class="kt">double</span> <span class="n">d</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="n">cout</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">d</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="sa"></span><span class="s">&#34;</span><span class="s"> in c++</span><span class="s">&#34;</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">d</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; in c++&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
   <span class="k">return</span> <span class="n">d</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="kt">char</span> <span class="n">TestLib</span><span class="o">:</span><span class="o">:</span><span class="n">passChar</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">)</span>
+<span class="kt">char</span> <span class="n">TestLib</span><span class="o">::</span><span class="n">passChar</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="n">cout</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">c</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="sa"></span><span class="s">&#34;</span><span class="s"> in c++</span><span class="s">&#34;</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; in c++&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
   <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="kt">char</span> <span class="o">*</span><span class="n">TestLib</span><span class="o">:</span><span class="o">:</span><span class="n">passString</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span>
+<span class="kt">char</span> <span class="o">*</span><span class="n">TestLib</span><span class="o">::</span><span class="n">passString</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="n">cout</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">s</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="sa"></span><span class="s">&#34;</span><span class="s"> in c++</span><span class="s">&#34;</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; in c++&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
   <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="n">StructTest</span> <span class="n">TestLib</span><span class="o">:</span><span class="o">:</span><span class="n">passStruct</span><span class="p">(</span><span class="n">StructTest</span> <span class="n">st</span><span class="p">)</span>
+<span class="n">StructTest</span> <span class="n">TestLib</span><span class="o">::</span><span class="n">passStruct</span><span class="p">(</span><span class="n">StructTest</span> <span class="n">st</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="n">cout</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">st</span><span class="p">.</span><span class="n">name</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="sa"></span><span class="s">&#34;</span><span class="s"> </span><span class="s">&#34;</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">st</span><span class="p">.</span><span class="n">age</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="sa"></span><span class="s">&#34;</span><span class="s"> </span><span class="s">&#34;</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">st</span><span class="p">.</span><span class="n">score</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="sa"></span><span class="s">&#34;</span><span class="s"> in c++</span><span class="s">&#34;</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">st</span><span class="p">.</span><span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">st</span><span class="p">.</span><span class="n">age</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">st</span><span class="p">.</span><span class="n">score</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; in c++&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
   <span class="k">return</span> <span class="n">st</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="n">StructPtr</span> <span class="n">TestLib</span><span class="o">:</span><span class="o">:</span><span class="n">passStructPtr</span><span class="p">(</span><span class="n">StructPtr</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">StructPtr</span> <span class="n">TestLib</span><span class="o">::</span><span class="n">passStructPtr</span><span class="p">(</span><span class="n">StructPtr</span> <span class="n">p</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="n">cout</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">p</span><span class="o">-</span><span class="o">&gt;</span><span class="n">name</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="sa"></span><span class="s">&#34;</span><span class="s"> </span><span class="s">&#34;</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">p</span><span class="o">-</span><span class="o">&gt;</span><span class="n">age</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="sa"></span><span class="s">&#34;</span><span class="s"> </span><span class="s">&#34;</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">p</span><span class="o">-</span><span class="o">&gt;</span><span class="n">score</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="sa"></span><span class="s">&#34;</span><span class="s"> in c++</span><span class="s">&#34;</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">age</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">score</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; in c++&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
   <span class="k">return</span> <span class="n">p</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="n">StructPtr</span> <span class="n">TestLib</span><span class="o">:</span><span class="o">:</span><span class="n">passStructArray</span><span class="p">(</span><span class="n">StructTest</span> <span class="n">vst</span><span class="p">[</span><span class="p">]</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+<span class="n">StructPtr</span> <span class="n">TestLib</span><span class="o">::</span><span class="n">passStructArray</span><span class="p">(</span><span class="n">StructTest</span> <span class="n">vst</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="n">cout</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">vst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">.</span><span class="n">name</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="sa"></span><span class="s">&#34;</span><span class="s"> in c++</span><span class="s">&#34;</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">endl</span><span class="p">;</span>
-  <span class="n">cout</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">vst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="p">.</span><span class="n">name</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="sa"></span><span class="s">&#34;</span><span class="s"> in c++</span><span class="s">&#34;</span> <span class="o">&lt;</span><span class="o">&lt;</span> <span class="n">endl</span><span class="p">;</span>
-  <span class="k">return</span> <span class="o">&amp;</span><span class="n">vst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vst</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; in c++&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">vst</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; in c++&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="k">return</span> <span class="o">&amp;</span><span class="n">vst</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
 <span class="p">}</span>
-<span class="k">extern</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">C</span><span class="s">&#34;</span> <span class="p">{</span>
+<span class="k">extern</span> <span class="s">&#34;C&#34;</span> <span class="p">{</span>
 <span class="n">TestLib</span> <span class="n">obj</span><span class="p">;</span>
 <span class="kt">int</span> <span class="nf">passInt</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passInt</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passInt</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kt">double</span> <span class="nf">passDouble</span><span class="p">(</span><span class="kt">double</span> <span class="n">d</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passDouble</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passDouble</span><span class="p">(</span><span class="n">d</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kt">char</span> <span class="nf">passChar</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passChar</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passChar</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="kt">char</span> <span class="o">*</span><span class="nf">passString</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passString</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passString</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="n">StructTest</span> <span class="nf">passStruct</span><span class="p">(</span><span class="n">StructTest</span> <span class="n">st</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passStruct</span><span class="p">(</span><span class="n">st</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passStruct</span><span class="p">(</span><span class="n">st</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="n">StructPtr</span> <span class="nf">passStructPtr</span><span class="p">(</span><span class="n">StructPtr</span> <span class="n">p</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passStructPtr</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passStructPtr</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
 <span class="p">}</span>
-<span class="n">StructPtr</span> <span class="nf">passStructArray</span><span class="p">(</span><span class="n">StructTest</span> <span class="n">vst</span><span class="p">[</span><span class="p">]</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+<span class="n">StructPtr</span> <span class="nf">passStructArray</span><span class="p">(</span><span class="n">StructTest</span> <span class="n">vst</span><span class="p">[],</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
 <span class="p">{</span>
-  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passStructArray</span><span class="p">(</span><span class="n">vst</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">obj</span><span class="p">.</span><span class="n">passStructArray</span><span class="p">(</span><span class="n">vst</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="p">}</span>
 
@@ -949,55 +949,55 @@ libDemo.dylib
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">ctypes</span>
-<span class="n">lib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">cdll</span><span class="o">.</span><span class="n">LoadLibrary</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">./libTest.so</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">lib</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">cdll</span><span class="o">.</span><span class="n">LoadLibrary</span><span class="p">(</span><span class="s1">&#39;./libTest.so&#39;</span><span class="p">)</span>
 <span class="c1"># passInt</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">passInt</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">passInt</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">--------------------</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;passInt&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">passInt</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;--------------------&#39;</span><span class="p">)</span>
 <span class="c1"># passDouble</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">passDouble</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;passDouble&#39;</span><span class="p">)</span>
 <span class="n">lib</span><span class="o">.</span><span class="n">passDouble</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">passDouble</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">(</span><span class="mf">1.23</span><span class="p">)</span><span class="p">)</span><span class="p">)</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1"> in python</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">--------------------</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">passDouble</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">(</span><span class="mf">1.23</span><span class="p">)))</span> <span class="o">+</span> <span class="s1">&#39; in python&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;--------------------&#39;</span><span class="p">)</span>
 <span class="c1"># passChar</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">passChar</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;passChar&#39;</span><span class="p">)</span>
 <span class="n">lib</span><span class="o">.</span><span class="n">passChar</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">passChar</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char</span><span class="p">(</span><span class="mi">65</span><span class="p">)</span><span class="p">)</span><span class="p">)</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1"> in python</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># &#39;A&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">passChar</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="s1">A</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span><span class="p">)</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1"> in python</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># &#39;A&#39;</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">--------------------</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">passChar</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char</span><span class="p">(</span><span class="mi">65</span><span class="p">)))</span> <span class="o">+</span> <span class="s1">&#39; in python&#39;</span><span class="p">)</span> <span class="c1"># &#39;A&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">passChar</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;A&#39;</span><span class="p">)))</span> <span class="o">+</span> <span class="s1">&#39; in python&#39;</span><span class="p">)</span> <span class="c1"># &#39;A&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;--------------------&#39;</span><span class="p">)</span>
 <span class="c1"># passString</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">passString</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;passString&#39;</span><span class="p">)</span>
 <span class="n">lib</span><span class="o">.</span><span class="n">passString</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">passString</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="s1">abcde</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span><span class="p">)</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1"> in python</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># 这里一定要加b</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">--------------------</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">passString</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;abcde&#39;</span><span class="p">)))</span> <span class="o">+</span> <span class="s1">&#39; in python&#39;</span><span class="p">)</span> <span class="c1"># 这里一定要加b</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;--------------------&#39;</span><span class="p">)</span>
 <span class="c1"># passStruct</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">passStruct</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">class</span> <span class="nc">Struct</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">)</span><span class="p">:</span>
-    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">name</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">)</span><span class="p">,</span>
-                <span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">age</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">)</span><span class="p">,</span>
-                <span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">score</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;passStruct&#39;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Struct</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">Structure</span><span class="p">):</span>
+    <span class="n">_fields_</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_char_p</span><span class="p">),</span>
+                <span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">),</span>
+                <span class="p">(</span><span class="s1">&#39;score&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)]</span>
 <span class="n">lib</span><span class="o">.</span><span class="n">passStruct</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">Struct</span>
 <span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">st</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">passStruct</span><span class="p">(</span><span class="n">Struct</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="s1">xidui</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span><span class="p">(</span><span class="o">*</span><span class="n">array</span><span class="p">)</span><span class="p">)</span><span class="p">)</span>
+<span class="n">st</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">passStruct</span><span class="p">(</span><span class="n">Struct</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;xidui&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)(</span><span class="o">*</span><span class="n">array</span><span class="p">)))</span>
 <span class="c1"># p = lib.passStruct(Struct(b&#39;xidui&#39;, 10, (ctypes.c_int * 3)(1, 2, 3)))</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1"> </span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">age</span><span class="p">)</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1"> </span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">score</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="p">)</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1"> in python</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">--------------------</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">age</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">score</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; in python&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;--------------------&#39;</span><span class="p">)</span>
 <span class="c1"># passStructPointer</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">passStructPointer</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;passStructPointer&#39;</span><span class="p">)</span>
 <span class="n">lib</span><span class="o">.</span><span class="n">passStructPtr</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Struct</span><span class="p">)</span>
-<span class="n">lib</span><span class="o">.</span><span class="n">passStructPtr</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Struct</span><span class="p">)</span><span class="p">]</span> <span class="c1"># 这行不加，程序会宕</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">passStructPtr</span><span class="p">(</span><span class="n">Struct</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="s1">xidui</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span><span class="p">(</span><span class="o">*</span><span class="n">array</span><span class="p">)</span><span class="p">)</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1"> </span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">age</span><span class="p">)</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1"> </span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">score</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="p">)</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1"> in python</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">--------------------</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">passStructPtr</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Struct</span><span class="p">)]</span> <span class="c1"># 这行不加，程序会宕</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">passStructPtr</span><span class="p">(</span><span class="n">Struct</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;xidui&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)(</span><span class="o">*</span><span class="n">array</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">age</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">score</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; in python&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;--------------------&#39;</span><span class="p">)</span>
 <span class="c1"># passStructArray</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">passStructArray</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;passStructArray&#39;</span><span class="p">)</span>
 <span class="n">lib</span><span class="o">.</span><span class="n">passStructArray</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">Struct</span><span class="p">)</span>
-<span class="n">lib</span><span class="o">.</span><span class="n">passStructArray</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">ARRAY</span><span class="p">(</span><span class="n">Struct</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
-<span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">Struct</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="s1">xidui1</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="p">)</span><span class="p">,</span>
-    <span class="n">Struct</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="s1">xidui2</span><span class="s1">&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="p">)</span><span class="p">]</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">passStructArray</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">ARRAY</span><span class="p">(</span><span class="n">Struct</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="p">(</span><span class="o">*</span><span class="n">array</span><span class="p">)</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1"> </span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">age</span><span class="p">)</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1"> </span><span class="s1">&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">score</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="p">)</span> <span class="o">+</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1"> in python</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">--------------------</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">passStructArray</span><span class="o">.</span><span class="n">argtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">ARRAY</span><span class="p">(</span><span class="n">Struct</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">]</span>
+<span class="n">array</span> <span class="o">=</span> <span class="p">[</span><span class="n">Struct</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;xidui1&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+    <span class="n">Struct</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;xidui2&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))]</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">passStructArray</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">ARRAY</span><span class="p">(</span><span class="n">Struct</span><span class="p">,</span> <span class="mi">2</span><span class="p">)(</span><span class="o">*</span><span class="n">array</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">age</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">score</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; in python&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;--------------------&#39;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><h4 id="swig">SWIG</h4>
@@ -1023,19 +1023,19 @@ libDemo.dylib
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//File: JsonTool.h
-</span><span class="c1"></span><span class="kt">int</span> <span class="nf">EnSerialization</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">file</span><span class="p">)</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">DeSerialization</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">jsonFile</span><span class="p">)</span><span class="p">;</span>
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">EnSerialization</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">file</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">DeSerialization</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">jsonFile</span><span class="p">);</span>
 
 
 <span class="c1">//File: JsonTool.cpp
 </span><span class="c1"></span><span class="kt">int</span> <span class="nf">EnSerialization</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">file</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="p">.</span><span class="p">.</span><span class="p">.</span>
+    <span class="p">...</span>
 <span class="p">}</span>
 
 <span class="kt">int</span> <span class="nf">DeSerialization</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">jsonFile</span><span class="p">)</span>
 <span class="p">{</span>
-    <span class="p">.</span><span class="p">.</span><span class="p">.</span>
+    <span class="p">...</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -1065,21 +1065,21 @@ libDemo.dylib
 <pre class="chroma"><code class="language-c++" data-lang="c++"><span class="c1">//第一种方式：
 </span><span class="c1"></span><span class="o">%</span><span class="n">module</span> <span class="n">JsonTool</span>
 <span class="o">%</span><span class="p">{</span>
-<span class="cp">#</span><span class="cp">define SWIG_FILE_WITH_INIT</span><span class="cp">
-</span><span class="cp"></span><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&#34;JsonTool.h&#34;</span><span class="cp">
+<span class="cp">#define SWIG_FILE_WITH_INIT
+</span><span class="cp">#include</span> <span class="cpf">&#34;JsonTool.h&#34;</span><span class="cp">
 </span><span class="cp"></span><span class="o">%</span><span class="p">}</span>
 
-<span class="kt">int</span> <span class="nf">EnSerialization</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">file</span><span class="p">)</span><span class="p">;</span>
-<span class="kt">int</span> <span class="nf">DeSerialization</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">jsonFile</span><span class="p">)</span><span class="p">;</span>
+<span class="kt">int</span> <span class="nf">EnSerialization</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">file</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">DeSerialization</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">jsonFile</span><span class="p">);</span>
 <span class="c1">//第二种方式(推荐使用)
-</span><span class="c1"></span><span class="c1">//File: JsonTool.i
+</span><span class="c1">//File: JsonTool.i
 </span><span class="c1"></span><span class="o">%</span><span class="n">module</span> <span class="n">JsonTool</span>
 <span class="o">%</span><span class="p">{</span>
-<span class="cp">#</span><span class="cp">define SWIG_FILE_WITH_INIT</span><span class="cp">
-</span><span class="cp"></span><span class="cp">#</span><span class="cp">include</span> <span class="cpf">&#34;JsonTool.h&#34;</span><span class="cp">
+<span class="cp">#define SWIG_FILE_WITH_INIT
+</span><span class="cp">#include</span> <span class="cpf">&#34;JsonTool.h&#34;</span><span class="cp">
 </span><span class="cp"></span><span class="o">%</span><span class="p">}</span>
 
-<span class="o">%</span><span class="n">include</span> <span class="sa"></span><span class="s">&#34;</span><span class="s">JsonTool.h</span><span class="s">&#34;</span>
+<span class="o">%</span><span class="n">include</span> <span class="s">&#34;JsonTool.h&#34;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>.i接口文件中主要包含了三个部分：</strong>
@@ -1120,22 +1120,22 @@ libDemo.dylib
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">distutils.core</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">Extension</span>
-<span class="n">pht_json_module</span> <span class="o">=</span> <span class="n">Extension</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">_JsonTool</span><span class="s1">&#39;</span><span class="p">,</span> <span class="c1">#模块名称，必须要有下划线</span>
-                        <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">JsonTool_wrap.cxx</span><span class="s1">&#39;</span><span class="p">,</span> <span class="c1">#封装后的接口cxx文件</span>
-                                 <span class="sa"></span><span class="s1">&#39;</span><span class="s1">base32.cpp</span><span class="s1">&#39;</span><span class="p">,</span>		<span class="c1">#以下为原始代码所依赖的文件</span>
-                                 <span class="sa"></span><span class="s1">&#39;</span><span class="s1">JsonTool.cpp</span><span class="s1">&#39;</span><span class="p">,</span>
-                                 <span class="sa"></span><span class="s1">&#39;</span><span class="s1">md5.cpp</span><span class="s1">&#39;</span><span class="p">,</span>
-                                 <span class="sa"></span><span class="s1">&#39;</span><span class="s1">sha1.cpp</span><span class="s1">&#39;</span><span class="p">,</span>
-                                 <span class="sa"></span><span class="s1">&#39;</span><span class="s1">stdafx.cpp</span><span class="s1">&#39;</span>
-                                <span class="p">]</span><span class="p">,</span>
+<span class="n">pht_json_module</span> <span class="o">=</span> <span class="n">Extension</span><span class="p">(</span><span class="s1">&#39;_JsonTool&#39;</span><span class="p">,</span> <span class="c1">#模块名称，必须要有下划线</span>
+                        <span class="n">sources</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;JsonTool_wrap.cxx&#39;</span><span class="p">,</span> <span class="c1">#封装后的接口cxx文件</span>
+                                 <span class="s1">&#39;base32.cpp&#39;</span><span class="p">,</span>		<span class="c1">#以下为原始代码所依赖的文件</span>
+                                 <span class="s1">&#39;JsonTool.cpp&#39;</span><span class="p">,</span>
+                                 <span class="s1">&#39;md5.cpp&#39;</span><span class="p">,</span>
+                                 <span class="s1">&#39;sha1.cpp&#39;</span><span class="p">,</span>
+                                 <span class="s1">&#39;stdafx.cpp&#39;</span>
+                                <span class="p">],</span>
                       <span class="p">)</span>
 
-<span class="n">setup</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">JsonTool</span><span class="s1">&#39;</span><span class="p">,</span>	<span class="c1">#打包后的名称</span>
-        <span class="n">version</span> <span class="o">=</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">0.1</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="n">author</span> <span class="o">=</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">SWIG Docs</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="n">description</span> <span class="o">=</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">Simple swig pht from docs</span><span class="s1">&#39;</span><span class="p">,</span>
-        <span class="n">ext_modules</span> <span class="o">=</span> <span class="p">[</span><span class="n">pht_json_module</span><span class="p">]</span><span class="p">,</span> <span class="c1">#与上面的扩展模块名称一致</span>
-        <span class="n">py_modules</span> <span class="o">=</span> <span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">JsonTool</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">,</span> <span class="c1">#需要打包的模块列表</span>
+<span class="n">setup</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;JsonTool&#39;</span><span class="p">,</span>	<span class="c1">#打包后的名称</span>
+        <span class="n">version</span> <span class="o">=</span> <span class="s1">&#39;0.1&#39;</span><span class="p">,</span>
+        <span class="n">author</span> <span class="o">=</span> <span class="s1">&#39;SWIG Docs&#39;</span><span class="p">,</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Simple swig pht from docs&#39;</span><span class="p">,</span>
+        <span class="n">ext_modules</span> <span class="o">=</span> <span class="p">[</span><span class="n">pht_json_module</span><span class="p">],</span> <span class="c1">#与上面的扩展模块名称一致</span>
+        <span class="n">py_modules</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;JsonTool&#39;</span><span class="p">],</span> <span class="c1">#需要打包的模块列表</span>
     <span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
@@ -1157,8 +1157,8 @@ libDemo.dylib
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">JsonTool</span>
-<span class="n">JsonTool</span><span class="o">.</span><span class="n">EnSerialization</span><span class="p">(</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">data</span><span class="s2">&#34;</span> <span class="p">)</span>
-<span class="n">JsonTool</span><span class="o">.</span><span class="n">DeSerialization</span><span class="p">(</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">data.json</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="n">JsonTool</span><span class="o">.</span><span class="n">EnSerialization</span><span class="p">(</span> <span class="s2">&#34;data&#34;</span> <span class="p">)</span>
+<span class="n">JsonTool</span><span class="o">.</span><span class="n">DeSerialization</span><span class="p">(</span> <span class="s2">&#34;data.json&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -1324,7 +1324,7 @@ libDemo.dylib
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

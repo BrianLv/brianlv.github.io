@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/" />
@@ -51,7 +51,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -63,7 +63,7 @@
 <meta property="og:description" content="吕海峰的个人博客" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.brianlv.com/" />
-<meta property="og:updated_time" content="2018-12-23T21:39:15+08:00" />
+<meta property="og:updated_time" content="2017-08-20T21:38:52+08:00" />
 <meta itemprop="name" content="吕海峰的博客">
 <meta itemprop="description" content="吕海峰的个人博客"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="吕海峰的博客"/>
@@ -296,6 +296,64 @@
   <header class="post-header">
     <h1 class="post-title">
       
+      <a class="post-link" href="/20200614/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%BA%91%E8%AE%A1%E7%AE%97vpc%E7%BD%91%E7%BB%9C%E4%B9%8Bvxlan.html">深入浅出云计算VPC网络之VXLAN</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2020-06-14" class="post-time">
+        2020-06-14
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/linux.html"> Linux Network </a>
+          
+        </div>
+      <span class="more-meta"> 约 3891 字 </span>
+      <span class="more-meta"> 预计阅读 8 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="概述">概述</h2>
+<p>云计算三大组成部分：<strong>计算、存储和网络</strong>。VXLAN属于云计算虚拟化网络的非常重要的一部分,现在大多数云计算虚拟化网络都是基于此协议实现<strong>数据中心互联和虚拟机迁移</strong>  ，在数量级很大的虚拟机上完成这些工作是一个非常大的挑战。主要面临以下挑战：</p>
+<ol>
+<li><strong>虚拟机网络规模的挑战</strong>
+<ul>
+<li>在传统的L2 layer，数据是通过查询MAC地址表进行L2转发，而MAC地址表的容量会限制虚拟机的数量。</li>
+</ul>
+</li>
+<li><strong>网络隔离能力的挑战</strong>
+<ul>
+<li>传统网络隔离技术是通过VLAN，通过手动配置交换机和服务器对vlan设置Tag域来实现网络隔离。但是vlan Tag只有12 bits，只能表示4096个VLAN，无法满足现在海量的云计算租户。</li>
+</ul>
+</li>
+<li><strong>在其网络架构下网络迁移范围和能力的挑战</strong>
+<ul>
+<li>虚拟机迁移过程中要保证业务不中断，特别是现在分布式系统中更是如此，要保证虚拟机的IP地址不变。</li>
+</ul>
+</li>
+</ol>
+<p>VXLAN很好的完成了上面的挑战，我们一起来看看VXLAN是什么？<strong>VXLAN(Virtual eXtensible Local Area Network)采用MAC in UDP封装方式，是Network Virtualization over Layer 3(NVO3)中的一种网络虚拟化技术,并使用物理网络的IP、MAC作为outer-header进行封装，然后在IP网络上传输， 到达目的地后由隧道终结点解封装并将数据发送给目标虚拟机。</strong> NVO3技术还有其它协议：GENEVE、NVGRE和STT，据我了解现在云计算厂商大多数常用的技术还是VXLAN标准多一些，GENEV支持的网卡并不多。</p>
+<p><img src="/image/vxlan-info.png" alt="vxlan协议"></p>
+<p>具体的报文格式</p>
+<p><img src="/image/vxlan-arch.png" alt="vxlan协议"></p>
+    </div>
+    <div class="read-more">
+      <a href="/20200614/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA%E4%BA%91%E8%AE%A1%E7%AE%97vpc%E7%BD%91%E7%BB%9C%E4%B9%8Bvxlan.html" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
       <a class="post-link" href="/20181223/nvidia-cuda-error%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB.html">nvidia cuda error问题汇总</a>
     </h1>
     
@@ -318,10 +376,10 @@
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>由于现在tensorflow的版本变化很大很多特别是从1.8开始到1.13，1.14等版本迁移的时候，要么API过时要么cuda报错。其中API过时可以很方便的查找并替换，但是很多CUDA版本问题就比较麻烦。建议一定要查看相应的深度学习框架所支持的CUDA版本。这里列出了主要的经常出现的cuda issues。</p>
 <h2 id="issues">ISSUES</h2>
-<h4 id="1cpugpu">1.切换使用CPU/GPU</h4>
+<h4 id="1切换使用cpugpu">1.切换使用CPU/GPU</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -331,12 +389,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 0表示使用CPU，1则是GPU</span>
-<span class="n">config</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ConfigProto</span><span class="p">(</span><span class="n">device_count</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">GPU</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span><span class="p">)</span> 
+<span class="n">config</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ConfigProto</span><span class="p">(</span><span class="n">device_count</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;GPU&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span> 
 <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
   <span class="k">pass</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="2could-not-create-cudnn-handle-cudnnstatusinternalerror">2.could not create cudnn handle: CUDNN_STATUS_INTERNAL_ERROR</h4>
+</div><h4 id="2could-not-create-cudnn-handle-cudnn_status_internal_error">2.could not create cudnn handle: CUDNN_STATUS_INTERNAL_ERROR</h4>
 <p>我这边在查找github上找到的fixed的issue，其中如下可以解决该问题：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -346,7 +404,7 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">config</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ConfigProto</span><span class="p">(</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">config</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ConfigProto</span><span class="p">()</span>
 <span class="n">config</span><span class="o">.</span><span class="n">gpu_options</span><span class="o">.</span><span class="n">allow_growth</span> <span class="o">=</span> <span class="bp">True</span>
 <span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
   <span class="k">pass</span>
@@ -361,9 +419,9 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">config</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ConfigProto</span><span class="p">(</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">config</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">ConfigProto</span><span class="p">()</span>
 <span class="n">config</span><span class="o">.</span><span class="n">gpu_options</span><span class="o">.</span><span class="n">per_process_gpu_memory_fraction</span> <span class="o">=</span> <span class="mf">0.8</span>
-<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span><span class="p">)</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
   <span class="k">pass</span>
 </code></pre></td></tr></table>
 </div>
@@ -403,7 +461,7 @@
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>KNN算法(<strong>K最近邻算法</strong>)也是一种基本的机器学习算法，可以用于分类和回归任务中。即对于给定一个训练数据集，对新的实例在训练数据集中找到与该实例最邻近的k个实例。我们看一下可视化的KNN算法：</p>
 <p><img src="/image/ml_knn.jpeg" alt="KNN 算法"></p>
 <p>如上图我们看到，给定一个新输入实例对于k的取值不同,对该算法的结果影响比较大,其次是当训练样本数大、特征向量维度很高时计算复杂度也高。因为我们在预测时需要计算预测样本和每一个训练样本的距离，并且对距离进行排序找到最近的k个样本并将结果返回。</p>
@@ -456,7 +514,7 @@
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p><strong>参数服务器</strong>是分布式机器学习框架中用来作为参数同步的框架，现在很多大规模的分布式机器学习都采用<strong>参数服务器架构</strong>用来进行参数的同步以提升大规模的模型的速度和效率。由于我们现在正处于一个大数据的时代，如何结合海量数据和超大规模的模型进行应用？比如现在以小视频和短视频(时序特征+内容特征+用户等多维度特征巨大)为主的推荐、广告、视频算法、搜索等都要采用大规模分布式机器学习系统,比如短视频为主的多模态学习更是需要大规模的分布式机器学习来快速满足产品场景化需求、画像更新、视频流算法、智能化内容创作、聚类、灰度算法及时调整、老用户的运营模型以及如何将流量转为价值过程中的模型，大规模分布式机器学习系统都充当了底层基石。**分布式学习系统包括两大模块：模型和分布式系统。**其中模型需要解决训练和正确率的问题，分布式系统需要考虑并行、网络、慢机、故障处理、调度、数据一致性等问题。最近在看mxnet的源码，我们一起学习一下参数服务的架构和设计，更为详细的可以参考mxnet官网。</p>
 <p><strong>现有系统的不足</strong>：</p>
 <blockquote>
@@ -514,7 +572,7 @@
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>**感知机(perceptron)**是个二类分类的线性分类模型，该算法对应于特征空间将实例划分为正负两类的分离超平面，属于判别模型。<strong>判别模型是一种对未观测数据y与已观测数据x之间关系进行建模的方法，直接对条件概率p(y|x;θ)建模。直接假设判别函数的参数形式是已知的 ，然后基于训练样本，使用某种学习算法，来学习判别函数的参数值，被称为判别式方法，感知机所得到的是一个线性判别函数。而一般来说，寻找线性判别函数的问题，会被形式化为极小化准则函数的问题，以分类为目的的准则函数可以是样本的风险函数，或者是训练误差</strong>。 从机器学习的角度来讲，感知机属于监督学习（supervised learning），它是一个单层的二分类器。感知机算法非常重要，它是神经网络和SVM的基础。感知机算法如下图所示:</p>
 <p><img src="/image/ml_perceptron.png" alt="感知机算法"></p>
     </div>
@@ -553,7 +611,7 @@
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p><strong>SaaS</strong> (软件即服务)是一种许可和交付模式，其中软件由提供商集中托管和管理，并通过订阅的方式提供给用户,用户也可以按需或者即用即付方式进行购买。所有基础结构、中间件、应用软件和应用数据都位于服务提供商的数据中心内。提供商负责管理硬件和软件，并根据适当的服务协议确保应用和数据的可用性和安全性。现在很多传统软件向SaaS“转变”时，更多的是向<strong>平台化SaaS软件</strong>靠拢，借助此模式来交付的产品优势很多，比如:</p>
 <ul>
 <li><strong>提供灵活的方式满足客户需求</strong></li>
@@ -588,7 +646,7 @@
           <a href="https://www.brianlv.com/categories/deep-learning.html"> Deep Learning </a>
           
         </div>
-      <span class="more-meta"> 约 2698 字 </span>
+      <span class="more-meta"> 约 2732 字 </span>
       <span class="more-meta"> 预计阅读 6 分钟 </span>
       
       
@@ -599,7 +657,7 @@
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>当我们要去部署和测试深度学习models时，我们经常需要一个比较便利和接口方便的web server，这样我们只需要专注在Model本身即可，通过web server一方面不仅可以进行调试和测试，
 另外一方面还可以将自己的成果输出给第三方和用户去体验深度学习带来的便利。大家经常使用的方式有以下两种(以TensorFlow为主):</p>
 <ul>
@@ -643,7 +701,7 @@
     
     <div class="post-summary">
       <p>由于我工作环境是Linux和Mac,个人的工作目录和开发环境一直来回切换，之前一直使用emacs，emacs非常强大和可定制化。最近看到vscode的社区不断壮大，在好基友的推荐下，试用vscode，发现非常不错。于是记录和分享到博客中。今天主要给大家讲解的<strong>vscode配置c/c++ ide开发环境</strong>，当然官网支持很多种可定制化的配置。</p>
-<h2 id="heading">开发环境搭建</h2>
+<h2 id="开发环境搭建">开发环境搭建</h2>
 <p>我们首先安装<strong>vscode</strong>，官网是：<a href="https://code.visualstudio.com/">vscode</a>。我们下面来安装支持c/c++开发环境的安装包。</p>
 <ul>
 <li>cpptools</li>
@@ -654,88 +712,6 @@
     </div>
     <div class="read-more">
       <a href="/20181215/c-development-in-visual-studio-code.html" class="read-more-link">阅读全文</a>
-    </div>
-    
-  </div>
-</article>
-
-  
-    <article class="post bg-white">
-  <header class="post-header">
-    <h1 class="post-title">
-      
-      <a class="post-link" href="/20181210/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F.html">机器学习性能度量</a>
-    </h1>
-    
-    <div class="post-meta">
-      <time datetime="2018-12-10" class="post-time">
-        2018-12-10
-      </time>
-      <div class="post-category">
-          <a href="https://www.brianlv.com/categories/machine-learning.html"> Machine Learning </a>
-          
-        </div>
-      <span class="more-meta"> 约 3743 字 </span>
-      <span class="more-meta"> 预计阅读 8 分钟 </span>
-      
-      
-      
-    </div>
-  </header>
-  
-  <div class="post-content">
-    
-    <div class="post-summary">
-      <p>我们在进行机器学习时需要衡量机器学习的优劣和本身模型的准确程度，比如简单的衡量数据的准确率和错误率，但是我们更关心的是模型的泛化能力的指标，即基于模型的所选的item相关性以及模型分类指标的好坏。</p>
-<h2 id="heading">机器学习度量</h2>
-<ul>
-<li><strong>error rate(错误率)</strong>:把分类错误的样本数占样本总数的比例。$$E=a/m$$</li>
-<li><strong>accuracy(精确度)</strong>:分类正确的样本数占样本总数的比例。$$acc=1-E$$</li>
-<li>**training error(训练误差):**学习器在训练集上的误差。</li>
-<li>**generalization error(泛华误差):**在新样本上的误差。</li>
-</ul>
-<p>在机器学习中由很多机器学习算法，那么如何选择这些算法和模型，如何评估这些算法和模型,评估模型的算法和准确率的方式很多，我们依次来介绍一下几个常用的指标。<strong>TP、TN、FP、FN、Acc、Recall、F1、ROC和ROI</strong></p>
-<h2 id="heading1">各种机器学习衡量指标</h2>
-<h3 id="accuracyprecisionrecallf1score">Accuracy、Precision、Recall和F1-Score</h3>
-<p>混淆矩阵是按照预测分类和实际分类的类别对比,如下图所示:
-<img src="/image/precision-recall.png" alt="混淆矩阵">
-如上表所示，行表示预测的label值，列表示真实label值。TP，FP，FN，TN分别表示如下意思：</p>
-<ul>
-<li>TP（true positive）：表示样本的真实类别为正，最后预测得到的结果也为正</li>
-<li>FP（false positive）：表示样本的真实类别为负，最后预测得到的结果却为正</li>
-<li>FN（false negative）：表示样本的真实类别为正，最后预测得到的结果却为负</li>
-<li>TN（true negative）：表示样本的真实类别为负，最后预测得到的结果也为负</li>
-</ul>
-<p>$$
-Accuracy = \frac{TP+TN}{TP+FP+TN+FN}
-$$
-$$
-Precision = \frac{TP}{TP+FP}
-$$
-$$
-Recall = \frac{TP}{TP+FN}
-$$
-$$
-SP = \frac{TN}{TN + FP}\<br>
-$$</p>
-<ul>
-<li>Accuracy：表示预测结果的精确度，预测正确的样本数除以总样本数。</li>
-<li>Precision，准确率，表示预测结果中，预测为正样本的样本中，正确预测为正样本的概率；</li>
-<li>Recall，召回率，表示在原始样本的正样本中，最后被正确预测为正样本的概率；</li>
-<li>Specificity，常常称作特异性，它研究的样本集是原始样本中的负样本，表示的是在这些负样本中最后被正确预测为负样本的概率。</li>
-</ul>
-<p>在实际当中，我们往往希望得到的precision和recall都比较高，比如当FN和FP等于0的时候，他们的值都等于1。但是，它们往往在某种情况下是互斥的。例如，有50个正样本，50个负样本，结果全部预测为正样本，那么TP=50,FP=50,TN=0,FN=0,按照上面的公式计算，可以得到正样本的recall却为1，precision却为0.5.所以需要一种折衷的方式，因此就有了F1-score。</p>
-<p>$$
-F1-score = \frac{2\times recall \times precision}{ recall + precision}
-$$</p>
-<p><strong>F1-score表示的是precision和recall的调和平均评估指标.</strong>
-另外还有一个指标，即MCC，该指标对于不均衡数据集的评估非常有效，公式如下：</p>
-<p>$$
-MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP+FP)\times(TP+FN)\times(TN+FP)\times(TN+FN)}}
-$$</p>
-    </div>
-    <div class="read-more">
-      <a href="/20181210/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F.html" class="read-more-link">阅读全文</a>
     </div>
     
   </div>
@@ -833,7 +809,7 @@ $$</p>
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

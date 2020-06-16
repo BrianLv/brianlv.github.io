@@ -17,9 +17,9 @@
       <pubDate>Mon, 10 Dec 2018 21:24:21 +0800</pubDate>
       
       <guid>https://www.brianlv.com/20181210/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html</guid>
-      <description>&lt;h2 id=&#34;heading&#34;&gt;概述&lt;/h2&gt;
+      <description>&lt;h2 id=&#34;概述&#34;&gt;概述&lt;/h2&gt;
 &lt;p&gt;研发人员交付测试和上线产品时，需要对服务和产品以后台进程的方式启动。所以便利的后台进程工具可以很好的帮助你管理你的进程。确切的说：成为系统的守护进程(daemon)。&lt;/p&gt;
-&lt;h2 id=&#34;heading1&#34;&gt;任务&lt;/h2&gt;
+&lt;h2 id=&#34;任务&#34;&gt;任务&lt;/h2&gt;
 &lt;p&gt;我们一般通过如下方式的命令运行的大多数是&lt;strong&gt;前台任务&lt;/strong&gt;，：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -59,7 +59,7 @@ nodejs main.js &lt;span class=&#34;p&#34;&gt;&amp;amp;&lt;/span&gt;
       <pubDate>Mon, 10 Dec 2018 21:23:21 +0800</pubDate>
       
       <guid>https://www.brianlv.com/20181210/ubuntu-install-vnc.html</guid>
-      <description>&lt;h1 id=&#34;heading&#34;&gt;概述&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;概述&#34;&gt;概述&lt;/h1&gt;
 &lt;p&gt;由于最近开发cuda的并行运算所以需要安装VNC来调试和cuda开发。
 安装X11VNC&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;

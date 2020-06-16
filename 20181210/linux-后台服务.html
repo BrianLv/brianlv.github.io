@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html" />
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -326,9 +326,9 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#heading">概述</a></li>
-    <li><a href="#heading1">任务</a></li>
-    <li><a href="#heading2">后台任务工具</a>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#任务">任务</a></li>
+    <li><a href="#后台任务工具">后台任务工具</a>
       <ul>
         <li><a href="#screen">screen</a></li>
         <li><a href="#supervisor">supervisor</a></li>
@@ -342,9 +342,9 @@
 
     
     <div class="post-content">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>研发人员交付测试和上线产品时，需要对服务和产品以后台进程的方式启动。所以便利的后台进程工具可以很好的帮助你管理你的进程。确切的说：成为系统的守护进程(daemon)。</p>
-<h2 id="heading1">任务</h2>
+<h2 id="任务">任务</h2>
 <p>我们一般通过如下方式的命令运行的大多数是<strong>前台任务</strong>，：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -395,7 +395,7 @@ huponexit      	off
 </code></pre></td></tr></table>
 </div>
 </div><p>如果启用了该参数，那么我们的后台任务也会退出。所以我们如果想写出稳定的后台服务，应该是避免SIGHUB信号。</p>
-<h2 id="heading2">后台任务工具</h2>
+<h2 id="后台任务工具">后台任务工具</h2>
 <p><strong>nohup、disown、screen、supervisor和Systemd</strong>等工具都可以避免SIGHUB信号，首推Systemd，但是备受争议它为违背了&quot;keep simple, keep stupid&quot;Unix哲学，其次supervisor和screen。</p>
 <h3 id="screen">screen</h3>
 <div class="highlight"><div class="chroma">
@@ -522,7 +522,7 @@ echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf
 ps -ef <span class="p">|</span> grep supervisor <span class="p">|</span> grep -v grep
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="supervisor1">supervisor使用</h4>
+</div><h4 id="supervisor使用">supervisor使用</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -761,7 +761,7 @@ supervisor&gt;
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

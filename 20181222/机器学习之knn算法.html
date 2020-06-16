@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181222/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8Bknn%E7%AE%97%E6%B3%95.html" />
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -326,18 +326,18 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#heading">概述</a></li>
-    <li><a href="#knn">KNN算法三要素</a>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#knn算法三要素">KNN算法三要素</a>
       <ul>
-        <li><a href="#heading1">算法定义</a></li>
-        <li><a href="#knn1">KNN模型</a></li>
-        <li><a href="#heading4">距离定义</a></li>
-        <li><a href="#k">k值的选择</a></li>
-        <li><a href="#heading5">决策规则</a></li>
-        <li><a href="#knn2">KNN算法实现</a></li>
+        <li><a href="#算法定义">算法定义</a></li>
+        <li><a href="#knn模型">KNN模型</a></li>
+        <li><a href="#距离定义">距离定义</a></li>
+        <li><a href="#k值的选择">k值的选择</a></li>
+        <li><a href="#决策规则">决策规则</a></li>
+        <li><a href="#knn算法实现">KNN算法实现</a></li>
       </ul>
     </li>
-    <li><a href="#knn-">KNN 实战之图像分类</a></li>
+    <li><a href="#knn-实战之图像分类">KNN 实战之图像分类</a></li>
   </ul>
 </nav>
   </div>
@@ -345,7 +345,7 @@
 
     
     <div class="post-content">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>KNN算法(<strong>K最近邻算法</strong>)也是一种基本的机器学习算法，可以用于分类和回归任务中。即对于给定一个训练数据集，对新的实例在训练数据集中找到与该实例最邻近的k个实例。我们看一下可视化的KNN算法：</p>
 <p><img src="/image/ml_knn.jpeg" alt="KNN 算法"></p>
 <p>如上图我们看到，给定一个新输入实例对于k的取值不同,对该算法的结果影响比较大,其次是当训练样本数大、特征向量维度很高时计算复杂度也高。因为我们在预测时需要计算预测样本和每一个训练样本的距离，并且对距离进行排序找到最近的k个样本并将结果返回。</p>
@@ -363,9 +363,9 @@
 </li>
 </ul>
 </blockquote>
-<h2 id="knn">KNN算法三要素</h2>
-<h3 id="heading1">算法定义</h3>
-<h4 id="heading2">分类算法定义</h4>
+<h2 id="knn算法三要素">KNN算法三要素</h2>
+<h3 id="算法定义">算法定义</h3>
+<h4 id="分类算法定义">分类算法定义</h4>
 <p>输入: 训练数据集</p>
 <p>$$T={(x_1,y_1),(x_2,y_2)&hellip;(x_N,y_N)}$$</p>
 <p>其中，$x_i \in X $的n维特征向量,$y_i \in Y={c_1,c_2&hellip;.c_k}$为实例的类别</p>
@@ -381,7 +381,7 @@ y=argmax \sum_{x_i \in N_k(x)}I(y_i=c_j),i=1,2,&hellip;N;j=1,2,3&hellip;K
 $$</p>
 </li>
 </ol>
-<h4 id="heading3">回归算法定义</h4>
+<h4 id="回归算法定义">回归算法定义</h4>
 <p>假设离测试样本最近的k个训练样本的标签值为$y_i$,则对样本的的回归预测值为:</p>
 <p>$$
 y=(\sum_{i=1}^k y_i)/k
@@ -391,9 +391,9 @@ $$</p>
 y=(\sum_{i=1}^k w_i \cdot y_i)/k
 $$</p>
 <p><strong>knn算法没有显示的学习过程。</strong></p>
-<h3 id="knn1">KNN模型</h3>
+<h3 id="knn模型">KNN模型</h3>
 <p>knn算法中，当训练数据集、距离度量、k值及分类决策规则确定后，对于任何一个新的实例，它所属的类唯一的确定。</p>
-<h3 id="heading4">距离定义</h3>
+<h3 id="距离定义">距离定义</h3>
 <p>knn中的距离度量有很多种方式，我们这里只介绍其中两种距离度量方式<strong>曼哈顿距离和欧氏距离</strong>。</p>
 <p><strong>曼哈顿距离</strong></p>
 <p>$$
@@ -403,16 +403,16 @@ $$</p>
 <p>$$
 L_2(x_i,x_j)=(\sum_{l=1}^n|x_i^{(l)}-x_j^{(l)}|)^{\frac{1}{2}}
 $$</p>
-<h3 id="k">k值的选择</h3>
+<h3 id="k值的选择">k值的选择</h3>
 <p>不同的k值对算法结果产生重大的影响</p>
 <ul>
 <li><strong>如果选择较小的k值，学习的近似误差会减小，只有与输入实例较近的训练实例才会对预测结果起作用，但是学习的估计误差会增大，预测结果对于近邻的实例点非常敏感。k值的减小意味着整体模型边的复杂，容易发生过拟合。</strong></li>
 <li><strong>如果选择较大的k值，可以减少学习的估计误差，但是近似误差会增大，k值的增大意味着整体的模型变得简单。</strong></li>
 </ul>
 <p><strong>所以我们一般将数据集划分为训练数据集、验证数据集和测试数据集，k值一般取一个比较小的数值，采用交叉验证的方法来选取最优的K值。</strong></p>
-<h3 id="heading5">决策规则</h3>
+<h3 id="决策规则">决策规则</h3>
 <p>knn算法中分类的决策规则往往是多数表决，即经验风险最小化。</p>
-<h3 id="knn2">KNN算法实现</h3>
+<h3 id="knn算法实现">KNN算法实现</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -431,23 +431,23 @@ $$</p>
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">classifyByKnn</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">x_train</span><span class="p">,</span><span class="n">y_labels</span><span class="p">,</span><span class="n">test</span><span class="p">)</span><span class="p">:</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">classifyByKnn</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">x_train</span><span class="p">,</span><span class="n">y_labels</span><span class="p">,</span><span class="n">test</span><span class="p">):</span>
   <span class="n">num_test</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-  <span class="n">labellist</span><span class="o">=</span><span class="p">[</span><span class="p">]</span>
-  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_test</span><span class="p">)</span><span class="p">:</span>
-    <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="p">(</span><span class="p">(</span><span class="n">x_train</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">,</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span><span class="p">)</span><span class="o">*</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span>
+  <span class="n">labellist</span><span class="o">=</span><span class="p">[]</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_test</span><span class="p">):</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">x_train</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">i</span><span class="p">],(</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">)))</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
     <span class="n">nearest_k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
-    <span class="n">topK</span> <span class="o">=</span> <span class="n">nearest_k</span><span class="p">[</span><span class="p">:</span><span class="n">k</span><span class="p">]</span>
-    <span class="n">classCount</span><span class="o">=</span><span class="p">{</span><span class="p">}</span>
+    <span class="n">topK</span> <span class="o">=</span> <span class="n">nearest_k</span><span class="p">[:</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">classCount</span><span class="o">=</span><span class="p">{}</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">topK</span><span class="p">:</span>
-      <span class="n">classCount</span><span class="p">[</span><span class="n">y_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">]</span><span class="o">=</span><span class="n">classCount</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">y_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
-    <span class="n">sortedClassCount</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">classCount</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="p">)</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">labellist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sortedClassCount</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">)</span>
+      <span class="n">classCount</span><span class="p">[</span><span class="n">y_labels</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">=</span><span class="n">classCount</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">y_labels</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">0</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+    <span class="n">sortedClassCount</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">classCount</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span><span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">labellist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sortedClassCount</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">labellist</span><span class="p">)</span>
                              
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="knn-">KNN 实战之图像分类</h2>
+</div><h2 id="knn-实战之图像分类">KNN 实战之图像分类</h2>
 <p>我们可以使用KNN算法来实现一个图像分类算法，我们选取的数据集为Cifar10(其中包含了飞机、汽车、鸟、猫、鹿、狗等10个类别),在进行图像分类之前我们需要对图像进行<strong>数据预处理</strong>。数据预处理可以帮助减少后续的运算量以及加速收敛，常用的图像预处理有:<strong>归一化、灰度变换、滤波变换、图像形态学变换等等</strong>。我们采用facebook开源的pytorch深度学习框架实现knn算法。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -502,26 +502,26 @@ $$</p>
 
 <span class="c1">#download dataset</span>
 <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span>
-<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">./dataset</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">train</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">download</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">./dataset</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">train</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">download</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">train_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s2">&#34;./dataset&#34;</span><span class="p">,</span><span class="n">train</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">download</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">CIFAR10</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s2">&#34;./dataset&#34;</span><span class="p">,</span><span class="n">train</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">download</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
 <span class="c1">#load dataset</span>
 <span class="n">train_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">train_dataset</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span><span class="n">shuffle</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">test_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="o">=</span><span class="n">test_dataset</span><span class="p">,</span><span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span><span class="n">shuffle</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 
 <span class="c1">#labels</span>
-<span class="n">classes</span><span class="o">=</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">plane</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">car</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">bird</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">cat</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">deer</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">dog</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">frog</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">horse</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">ship</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">truck</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">classes</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;plane&#39;</span><span class="p">,</span><span class="s1">&#39;car&#39;</span><span class="p">,</span><span class="s1">&#39;bird&#39;</span><span class="p">,</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span><span class="s1">&#39;deer&#39;</span><span class="p">,</span><span class="s1">&#39;dog&#39;</span><span class="p">,</span><span class="s1">&#39;frog&#39;</span><span class="p">,</span><span class="s1">&#39;horse&#39;</span><span class="p">,</span><span class="s1">&#39;ship&#39;</span><span class="p">,</span><span class="s1">&#39;truck&#39;</span><span class="p">)</span>
 
 <span class="c1">#process image data</span>
-<span class="k">def</span> <span class="nf">getXmean</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span><span class="p">:</span>
-  <span class="n">x_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">getXmean</span><span class="p">(</span><span class="n">x_train</span><span class="p">):</span>
+  <span class="n">x_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_train</span><span class="p">,(</span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
   <span class="n">mean_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
   <span class="k">return</span> <span class="n">mean_image</span>
 
-<span class="k">def</span> <span class="nf">centralized</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span><span class="n">mean_image</span><span class="p">)</span><span class="p">:</span>
-  <span class="n">x_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span><span class="p">(</span><span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">centralized</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span><span class="n">mean_image</span><span class="p">):</span>
+  <span class="n">x_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_test</span><span class="p">,(</span><span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
   <span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
-  <span class="n">x_test</span> <span class="o">-</span><span class="o">=</span> <span class="n">mean_image</span>
+  <span class="n">x_test</span> <span class="o">-=</span> <span class="n">mean_image</span>
   <span class="k">return</span> <span class="n">x_test</span>
 
 <span class="c1">#train model</span>
@@ -529,9 +529,9 @@ $$</p>
 <span class="n">mean_image</span> <span class="o">=</span> <span class="n">getXmean</span><span class="p">(</span><span class="n">train_x</span><span class="p">)</span>
 <span class="n">train_x</span> <span class="o">=</span> <span class="n">centralized</span><span class="p">(</span><span class="n">trian_x</span><span class="p">,</span><span class="n">mean_image</span><span class="p">)</span>
 <span class="n">train_y</span> <span class="o">=</span> <span class="n">train_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">train_labels</span>
-<span class="n">test_x</span> <span class="o">=</span> <span class="n">test_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">test_data</span><span class="p">[</span><span class="p">:</span><span class="mi">128</span><span class="p">]</span>
+<span class="n">test_x</span> <span class="o">=</span> <span class="n">test_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">test_data</span><span class="p">[:</span><span class="mi">128</span><span class="p">]</span>
 <span class="n">test_x</span> <span class="o">=</span> <span class="n">centralized</span><span class="p">(</span><span class="n">test_x</span><span class="p">,</span><span class="n">mean_image</span><span class="p">)</span>
-<span class="n">test_y</span> <span class="o">=</span> <span class="n">test_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">test_labels</span><span class="p">[</span><span class="p">:</span><span class="mi">128</span><span class="p">]</span>
+<span class="n">test_y</span> <span class="o">=</span> <span class="n">test_loader</span><span class="o">.</span><span class="n">dataset</span><span class="o">.</span><span class="n">test_labels</span><span class="p">[:</span><span class="mi">128</span><span class="p">]</span>
 <span class="n">num_test</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">test_y</span><span class="p">)</span>
 <span class="n">pred_y</span> <span class="o">=</span> <span class="n">classifyByKnn</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">train_x</span><span class="p">,</span><span class="n">trian_y</span><span class="p">,</span><span class="n">test_x</span><span class="p">)</span>
 <span class="n">num_correct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pred_y</span><span class="o">==</span><span class="n">test_y</span><span class="p">)</span>
@@ -576,19 +576,19 @@ $$</p>
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">folds</span> <span class="o">=</span> <span class="mi">5</span>
 <span class="n">k_values</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">15</span><span class="p">]</span>
 <span class="n">num_training</span><span class="o">=</span><span class="n">train_x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">train_x_folds</span><span class="o">=</span><span class="p">[</span><span class="p">]</span>
-<span class="n">train_y_folds</span><span class="o">=</span><span class="p">[</span><span class="p">]</span>
-<span class="n">indices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_training</span><span class="p">)</span><span class="p">,</span><span class="n">indices_or_sections</span><span class="o">=</span><span class="n">folds</span><span class="p">)</span>
- <span class="n">accuracy_dict</span><span class="o">=</span><span class="p">{</span><span class="p">}</span>
+<span class="n">train_x_folds</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">train_y_folds</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">indices</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">num_training</span><span class="p">),</span><span class="n">indices_or_sections</span><span class="o">=</span><span class="n">folds</span><span class="p">)</span>
+ <span class="n">accuracy_dict</span><span class="o">=</span><span class="p">{}</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
-  <span class="n">train_x_folds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">)</span>
-<span class="n">train_y_folds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">)</span>
+  <span class="n">train_x_folds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_x</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">train_y_folds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k_values</span><span class="p">:</span>
-  <span class="n">acc</span><span class="o">=</span><span class="p">[</span><span class="p">]</span>
-  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">folds</span><span class="p">)</span><span class="p">:</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">train_x_folds</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">train_x_folds</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="p">]</span>
+  <span class="n">acc</span><span class="o">=</span><span class="p">[]</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">folds</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">train_x_folds</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">train_x_folds</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">train_y_folds</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">train_y_folds</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">train_y_folds</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">train_y_folds</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">test_x_valid</span> <span class="o">=</span> <span class="n">train_x_folds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="n">test_y_valid</span> <span class="o">=</span> <span class="n">train_y_folds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
@@ -598,9 +598,9 @@ $$</p>
     <span class="n">acc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">accuracy</span><span class="p">)</span>
  <span class="n">accuracy_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">acc</span>
 <span class="c1"># sort accuracy and check</span>
-<span class="n">fok</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">accuracy_dict</span><span class="p">)</span><span class="p">:</span>
-  <span class="k">for</span> <span class="n">accuracy</span> <span class="ow">in</span> <span class="n">accuracy_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">k=</span><span class="si">%d</span><span class="s1">,accuracy=</span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">accuracy</span><span class="p">)</span><span class="p">)</span>
+<span class="n">fok</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">accuracy_dict</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">accuracy</span> <span class="ow">in</span> <span class="n">accuracy_dict</span><span class="p">[</span><span class="n">k</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;k=</span><span class="si">%d</span><span class="s1">,accuracy=</span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">accuracy</span><span class="p">))</span>
 
 </code></pre></td></tr></table>
 </div>
@@ -742,7 +742,7 @@ $$</p>
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/python%E8%BF%9B%E9%98%B6%E7%B3%BB%E5%88%97%E4%B8%80.html" />
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -326,18 +326,18 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#heading">概述</a></li>
-    <li><a href="#intermediate-python-">Intermediate Python 中译</a>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#intermediate-python-中译">Intermediate Python 中译</a>
       <ul>
-        <li><a href="#argskwargs">\*args和\**kwargs</a></li>
+        <li><a href="#args和kwargs">*args和**kwargs</a></li>
         <li><a href="#debugging">Debugging</a></li>
         <li><a href="#generators">Generators</a></li>
         <li><a href="#mapfilter-and-reduce">map，filter and reduce</a></li>
         <li><a href="#set-data-struct">set data struct</a></li>
-        <li><a href="#heading2">三元运算符</a></li>
+        <li><a href="#三元运算符">三元运算符</a></li>
       </ul>
     </li>
-    <li><a href="#heading3">总结</a></li>
+    <li><a href="#总结">总结</a></li>
   </ul>
 </nav>
   </div>
@@ -345,11 +345,11 @@
 
     
     <div class="post-content">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>hi，朋友们大家好，今天将英文原著作者 @yasoob《Intermediate Python》进行翻译和在工作中使用的Python技巧进行了总结。Gitbook里面有翻译的版本，大家可以下载下来看看。我今天主要是将该英文原著翻译成适合自己的理解的语言，并附加一些自己在工作中使用Python的技巧。废话少说，下面我们依次来学习一下@yasoob的原著。</p>
-<h2 id="intermediate-python-">Intermediate Python 中译</h2>
+<h2 id="intermediate-python-中译">Intermediate Python 中译</h2>
 <p>如果在翻译过程中有问题或者code无法运行，还请各位大侠指正。</p>
-<h3 id="argskwargs">*args和**kwargs</h3>
+<h3 id="args和kwargs">*args和**kwargs</h3>
 <p>我们在函数定义时，会经常使用*args和**kwargs这两个魔法变量，特别是函数参数数量不确定或参数较多时。当然*args和**kwargs这两个name并不是惟一的name，可以改成*as和**kwas，只要在命名前面加上修饰符*和**即可。我们先来看一下*args。</p>
 <h4 id="args">*args</h4>
 <div class="highlight"><div class="chroma">
@@ -366,12 +366,12 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test_args_kwargs</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">)</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">frist arg: </span><span class="s2">&#34;</span><span class="p">,</span><span class="n">name</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">test_args_kwargs</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;frist arg: &#34;</span><span class="p">,</span><span class="n">name</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">another arg through *argv: </span><span class="s2">&#34;</span><span class="p">,</span><span class="n">arg</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;another arg through *argv: &#34;</span><span class="p">,</span><span class="n">arg</span><span class="p">)</span>
 
-<span class="n">test_args_kwargs</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">eric</span><span class="s2">&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">rose</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="n">test_args_kwargs</span><span class="p">(</span><span class="s2">&#34;brian&#34;</span><span class="p">,</span><span class="s2">&#34;eric&#34;</span><span class="p">,</span><span class="s2">&#34;rose&#34;</span><span class="p">)</span>
 <span class="c1">#输出为</span>
 <span class="n">frist</span> <span class="n">arg</span><span class="p">:</span>  <span class="n">brian</span>
 <span class="n">another</span> <span class="n">arg</span> <span class="n">through</span> <span class="o">*</span><span class="n">argv</span><span class="p">:</span>  <span class="n">eric</span>
@@ -388,7 +388,7 @@
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">names</span><span class="o">=</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">eric</span><span class="s2">&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">rose</span><span class="s2">&#34;</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">names</span><span class="o">=</span><span class="p">(</span><span class="s2">&#34;brian&#34;</span><span class="p">,</span><span class="s2">&#34;eric&#34;</span><span class="p">,</span><span class="s2">&#34;rose&#34;</span><span class="p">)</span>
 <span class="n">test_args_kwargs</span><span class="p">(</span><span class="o">*</span><span class="n">names</span><span class="p">)</span>
 <span class="n">frist</span> <span class="n">arg</span><span class="p">:</span>  <span class="n">brian</span>
 <span class="n">another</span> <span class="n">arg</span> <span class="n">through</span> <span class="o">*</span><span class="n">argv</span><span class="p">:</span>  <span class="n">eric</span>
@@ -410,11 +410,11 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">greet_me</span><span class="p">(</span><span class="o">*</span><span class="o">*</span><span class="n">args</span><span class="p">)</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">(</span><span class="p">)</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">{0}=={1}</span><span class="s2">&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">)</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">greet_me</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&#34;{0}=={1}&#34;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">value</span><span class="p">))</span>
 
-<span class="n">greet_me</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">sex</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">男</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="n">greet_me</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span><span class="p">,</span><span class="n">age</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">sex</span><span class="o">=</span><span class="s2">&#34;男&#34;</span><span class="p">)</span>
 <span class="c1">#输出为</span>
 <span class="n">name</span><span class="o">==</span><span class="n">brian</span>
 <span class="n">age</span><span class="o">==</span><span class="mi">20</span>
@@ -432,15 +432,15 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">name</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">age</span><span class="s2">&#34;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">sex</span><span class="s2">&#34;</span><span class="p">:</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">男</span><span class="s2">&#34;</span><span class="p">}</span>
-<span class="n">greet_me</span><span class="p">(</span><span class="o">*</span><span class="o">*</span><span class="n">person</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">person</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&#34;name&#34;</span><span class="p">:</span><span class="s2">&#34;brian&#34;</span><span class="p">,</span><span class="s2">&#34;age&#34;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="s2">&#34;sex&#34;</span><span class="p">:</span><span class="s2">&#34;男&#34;</span><span class="p">}</span>
+<span class="n">greet_me</span><span class="p">(</span><span class="o">**</span><span class="n">person</span><span class="p">)</span>
 <span class="c1">#输出为</span>
 <span class="n">name</span><span class="o">==</span><span class="n">brian</span>
 <span class="n">age</span><span class="o">==</span><span class="mi">20</span>
 <span class="n">sex</span><span class="o">==</span><span class="err">男</span>
 </code></pre></td></tr></table>
 </div>
-</div><h4 id="heading1">如何使用</h4>
+</div><h4 id="如何使用">如何使用</h4>
 <p>在很多场景里面都大量使用比如：
 1.装饰器
 2.函数定义
@@ -458,8 +458,8 @@
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">someclass</span>
 
-<span class="k">def</span> <span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">)</span><span class="p">:</span>
-	<span class="k">return</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Test Data</span><span class="s2">&#34;</span>
+<span class="k">def</span> <span class="nf">get_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+	<span class="k">return</span> <span class="s2">&#34;Test Data&#34;</span>
 <span class="n">someclass</span><span class="o">.</span><span class="n">get_info</span><span class="o">=</span><span class="n">get_info</span>
 </code></pre></td></tr></table>
 </div>
@@ -490,10 +490,10 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pdb</span>
-<span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">*</span><span class="o">*</span><span class="n">kwargv</span><span class="p">)</span><span class="p">:</span>
-	<span class="n">pdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">(</span><span class="p">)</span>
-	<span class="o">.</span><span class="o">.</span><span class="o">.</span>
-<span class="n">method</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">sasa</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="o">**</span><span class="n">kwargv</span><span class="p">):</span>
+	<span class="n">pdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span>
+	<span class="o">...</span>
+<span class="n">method</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;sasa&#34;</span><span class="p">)</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>当函数调用时进入debug模式。
@@ -549,13 +549,13 @@
 </span><span class="lnt">29
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fibon</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="p">:</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">fibon</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">a</span><span class="o">=</span><span class="n">b</span><span class="o">=</span><span class="mi">1</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="k">yield</span> <span class="n">a</span>
         <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="o">+</span><span class="n">b</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fibon</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fibon</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 <span class="c1">#输出为</span>
 <span class="mi">1</span>
@@ -563,19 +563,19 @@
 <span class="mi">2</span>
 <span class="c1">#通过next方法来进行获取生成器的下一个迭代</span>
 <span class="n">gen_fibon</span> <span class="o">=</span> <span class="n">fibon</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen_fibon</span><span class="p">)</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen_fibon</span><span class="p">)</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen_fibon</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen_fibon</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen_fibon</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen_fibon</span><span class="p">))</span>
 <span class="c1">#输出结果为</span>
 <span class="mi">1</span>
 <span class="mi">1</span>
 <span class="mi">2</span>
 <span class="c1">#如果我们再进行下一个迭代时，会出现Exception，这说明我们的迭代已经完成，生成器已经没有再生成Python对象。</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen_fibon</span><span class="p">)</span><span class="p">)</span>
-<span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen_fibon</span><span class="p">))</span>
+<span class="o">---------------------------------------------------------------------------</span>
 <span class="ne">StopIteration</span>                             <span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">18</span><span class="o">-</span><span class="mi">5</span><span class="n">f779bae9fed</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">(</span><span class="p">)</span>
-<span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">-</span><span class="o">&gt;</span> <span class="mi">1</span> <span class="nb">next</span><span class="p">(</span><span class="n">gen_fibon</span><span class="p">)</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">18</span><span class="o">-</span><span class="mi">5</span><span class="n">f779bae9fed</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="nb">next</span><span class="p">(</span><span class="n">gen_fibon</span><span class="p">)</span>
 
 <span class="ne">StopIteration</span><span class="p">:</span> 
 </code></pre></td></tr></table>
@@ -592,10 +592,10 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">brian</span><span class="s2">&#34;</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">name</span><span class="o">=</span><span class="s2">&#34;brian&#34;</span>
 <span class="nb">next</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 <span class="c1">#输出结果为，告诉我们python的str了O型不是一个迭代器，那么就无法进行迭代。所以我们需要将str对象模型变成可迭代的python对象数据模型，只需要通过iter(object)方法即可。</span>
-<span class="ne">TypeError</span><span class="p">:</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">str</span><span class="s1">&#39;</span> <span class="nb">object</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">an</span> <span class="n">iterator</span>
+<span class="ne">TypeError</span><span class="p">:</span> <span class="s1">&#39;str&#39;</span> <span class="nb">object</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">an</span> <span class="n">iterator</span>
 <span class="c1">#代码修改</span>
 <span class="n">iter_name</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 <span class="nb">next</span><span class="p">(</span><span class="n">iter_name</span><span class="p">)</span>
@@ -620,7 +620,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">temp</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">18</span><span class="p">]</span>
-<span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">*</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">temp</span><span class="p">)</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">temp</span><span class="p">))</span>
 <span class="c1">#输出结果为：</span>
 <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">196</span><span class="p">,</span> <span class="mi">324</span><span class="p">]</span>
 </code></pre></td></tr></table>
@@ -645,15 +645,15 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="p">:</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">+</span><span class="n">x</span>
 
-<span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span>
 <span class="n">funcs</span><span class="o">=</span><span class="p">(</span><span class="n">add</span><span class="p">,</span><span class="n">multiply</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">func</span><span class="p">:</span><span class="n">func</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="p">,</span><span class="n">funcs</span><span class="p">)</span><span class="p">)</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">func</span><span class="p">:</span><span class="n">func</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">funcs</span><span class="p">)))</span>
 <span class="c1">#输出为</span>
 <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
@@ -673,7 +673,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">nums</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">less_than_zero</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span><span class="n">nums</span><span class="p">)</span><span class="p">)</span>
+<span class="n">less_than_zero</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">,</span><span class="n">nums</span><span class="p">))</span>
 <span class="c1">#输出为</span>
 <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </code></pre></td></tr></table>
@@ -700,7 +700,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="nb">reduce</span>
-<span class="k">print</span><span class="p">(</span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)))</span>
 <span class="c1">##输出为</span>
 <span class="mi">14</span>
 </code></pre></td></tr></table>
@@ -720,15 +720,15 @@
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">str_nums</span><span class="o">=</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">a</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">a</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">b</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">c</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">c</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">c</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">d</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">e</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">f</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">duplicates</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">str_nums</span> <span class="k">if</span> <span class="n">str_nums</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">]</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">str_nums</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
+<span class="n">duplicates</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">str_nums</span> <span class="k">if</span> <span class="n">str_nums</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">])</span>
 <span class="k">print</span><span class="p">(</span><span class="n">duplicates</span><span class="p">)</span>
-<span class="p">{</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">a</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">c</span><span class="s1">&#39;</span><span class="p">}</span>
-<span class="err">当</span><span class="err">然</span><span class="err">你</span><span class="err">也</span><span class="err">可</span><span class="err">以</span><span class="err">使</span><span class="err">用</span><span class="n">collection的Counter去处理</span>
+<span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">}</span>
+<span class="err">当然你也可以使用</span><span class="n">collection的Counter去处理</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
-<span class="k">print</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">str_nums</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Counter</span><span class="p">(</span><span class="n">str_nums</span><span class="p">))</span>
 <span class="c1">##输出为</span>
-<span class="n">Counter</span><span class="p">(</span><span class="p">{</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">a</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">b</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">c</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">d</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">e</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">f</span><span class="s1">&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span><span class="p">)</span>
+<span class="n">Counter</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>和set相关的操作自然想到<strong>交集、并集合差集</strong>。下面我们依次看一下Python提供的API。</p>
@@ -750,24 +750,24 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">colors</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="p">{</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">red</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">yellow</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">green</span><span class="s1">&#39;</span><span class="p">}</span><span class="p">)</span>
-<span class="n">input_colors</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="p">{</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">red</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">blue</span><span class="s1">&#39;</span><span class="p">}</span><span class="p">)</span>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">colors</span><span class="o">=</span><span class="nb">set</span><span class="p">({</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">})</span>
+<span class="n">input_colors</span><span class="o">=</span><span class="nb">set</span><span class="p">({</span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">})</span>
 <span class="c1">#交集API</span>
-<span class="k">print</span><span class="p">(</span><span class="n">input_colors</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">input_colors</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">colors</span><span class="p">))</span>
 <span class="c1">#输出</span>
-<span class="p">{</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">red</span><span class="s1">&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;red&#39;</span><span class="p">}</span>
 <span class="c1">#差集API</span>
-<span class="k">print</span><span class="p">(</span><span class="n">input_colors</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">input_colors</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">colors</span><span class="p">))</span>
 <span class="c1">#输出</span>
-<span class="p">{</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">blue</span><span class="s1">&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;blue&#39;</span><span class="p">}</span>
 <span class="c1">#并集API</span>
-<span class="k">print</span><span class="p">(</span><span class="n">input_colors</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">colors</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">input_colors</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">colors</span><span class="p">))</span>
 <span class="c1">#输出</span>
-<span class="p">{</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">blue</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">green</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">red</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">yellow</span><span class="s1">&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;yellow&#39;</span><span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>值得注意的是set的定义是通过{}来定义的或者通过set()初始化来定义。</strong></p>
-<h3 id="heading2">三元运算符</h3>
+<h3 id="三元运算符">三元运算符</h3>
 <p>三元运算符和其它语言的三元运算符所表达的语义是相同的，只是形式不一样。我们来看下：
 <strong>condition_true if condition else condition_is_false</strong></p>
 <div class="highlight"><div class="chroma">
@@ -779,12 +779,12 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">flag</span> <span class="o">=</span> <span class="bp">True</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">Brian</span><span class="s2">&#34;</span> <span class="k">if</span> <span class="n">flag</span> <span class="k">else</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">Not Brian</span><span class="s2">&#34;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;Brian&#34;</span> <span class="k">if</span> <span class="n">flag</span> <span class="k">else</span> <span class="s2">&#34;Not Brian&#34;</span><span class="p">)</span>
 <span class="c1">#输出</span>
 <span class="n">Brian</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="heading3">总结</h2>
+</div><h2 id="总结">总结</h2>
 <p>由于内容较多，所以分成三个博客篇幅来介绍。</p>
     </div>
 
@@ -948,7 +948,7 @@
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

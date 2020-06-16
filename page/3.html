@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/" />
@@ -51,7 +51,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -63,7 +63,7 @@
 <meta property="og:description" content="吕海峰的个人博客" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.brianlv.com/" />
-<meta property="og:updated_time" content="2018-12-23T21:39:15+08:00" />
+<meta property="og:updated_time" content="2017-08-20T21:38:52+08:00" />
 <meta itemprop="name" content="吕海峰的博客">
 <meta itemprop="description" content="吕海峰的个人博客"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="吕海峰的博客"/>
@@ -296,6 +296,82 @@
   <header class="post-header">
     <h1 class="post-title">
       
+      <a class="post-link" href="/20181210/linux-install-jupyter.html">Linux Install Jupyter</a>
+    </h1>
+    
+    <div class="post-meta">
+      <time datetime="2018-12-10" class="post-time">
+        2018-12-10
+      </time>
+      <div class="post-category">
+          <a href="https://www.brianlv.com/categories/python.html"> Python </a>
+          
+        </div>
+      <span class="more-meta"> 约 1054 字 </span>
+      <span class="more-meta"> 预计阅读 3 分钟 </span>
+      
+      
+      
+    </div>
+  </header>
+  
+  <div class="post-content">
+    
+    <div class="post-summary">
+      <h2 id="概述">概述</h2>
+<p>由于我的开发环境是CentOS，现在主要是以Python为主，偶尔夹杂C/C++和GoLang语言。在本地开发、测试、提交git和在生产环境再去测试、开发，并且会在生产环境会有临时性的开发任务和调整，都是比较浪费时间的。<strong>不建议直接修改生产环境的代码，临时性的修改后一定要测试并稳定运行一段时间。</strong> 写这篇博客主要是为了利用线上资源，实现跨平台开发和测试代码示例用的。所以就在服务器安装了<strong>IPython，Jupyter和Notebook</strong>。</p>
+<h2 id="安装和配置">安装和配置</h2>
+<p>在安装<strong>IPython，Jupyter和Notebook</strong>时，不仅需要安装Python和Pip，而且还需要安装一些开发操作系统的工具集比如(&lsquo;Development Tools‘)。废话少说，直接写代码。</p>
+<h3 id="基本包安装">基本包安装</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">yum update -y
+yum install python-pip -y
+yum install bzip2 -y
+yum groupinstall <span class="s2">&#34;Development Tools&#34;</span> -y
+</code></pre></td></tr></table>
+</div>
+</div><p>安装完pip之后，最好把pip源改为国内源，修改如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash">mkdir ~/.pip
+cat &gt; ~/.pip/pip.conf <span class="s">&lt;&lt; EOF
+</span><span class="s">[global]
+</span><span class="s">index-url = http://mirrors.aliyun.com/pypi/simple/
+</span><span class="s">[install]
+</span><span class="s">trusted-host=mirrors.aliyun.com
+</span><span class="s">EOF</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+    <div class="read-more">
+      <a href="/20181210/linux-install-jupyter.html" class="read-more-link">阅读全文</a>
+    </div>
+    
+  </div>
+</article>
+
+  
+    <article class="post bg-white">
+  <header class="post-header">
+    <h1 class="post-title">
+      
       <a class="post-link" href="/20181210/linux-%E5%90%8E%E5%8F%B0%E6%9C%8D%E5%8A%A1.html">Linux 后台服务</a>
     </h1>
     
@@ -318,9 +394,9 @@
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>研发人员交付测试和上线产品时，需要对服务和产品以后台进程的方式启动。所以便利的后台进程工具可以很好的帮助你管理你的进程。确切的说：成为系统的守护进程(daemon)。</p>
-<h2 id="heading1">任务</h2>
+<h2 id="任务">任务</h2>
 <p>我们一般通过如下方式的命令运行的大多数是<strong>前台任务</strong>，：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -387,9 +463,9 @@ nodejs main.js <span class="p">&amp;</span>
   <div class="post-content">
     
     <div class="post-summary">
-      <h1 id="heading">概述</h1>
+      <h1 id="概述">概述</h1>
 <p>安装opencv有很多种方式，我列出了三种方式。并针对第二种方式进行了详细的安装解释，强烈推荐使用第三种方式。</p>
-<h2 id="1ubuntuopencv">1.从Ubuntu源安装opencv</h2>
+<h2 id="1从ubuntu源安装opencv">1.从Ubuntu源安装opencv</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -398,7 +474,7 @@ nodejs main.js <span class="p">&amp;</span>
 <pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install libopencv-dev python-opencv
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="2opencv">2.从opencv官方源代码安装</h2>
+</div><h2 id="2从opencv官方源代码安装">2.从opencv官方源代码安装</h2>
 <p>1.安装opencv所依赖的包</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -498,7 +574,7 @@ sudo apt-get install -y doxygen
   <div class="post-content">
     
     <div class="post-summary">
-      <h1 id="heading">概述</h1>
+      <h1 id="概述">概述</h1>
 <p>由于最近开发cuda的并行运算所以需要安装VNC来调试和cuda开发。
 安装X11VNC</p>
 <div class="highlight"><div class="chroma">
@@ -579,9 +655,9 @@ sudo apt-get install -y doxygen
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="heading">简述</h2>
+      <h2 id="简述">简述</h2>
 <p>由于产品需要从裸机开始开发所以所有的配置和开发也是从零开始，这个导航是基于centos6.x版本升级默认的Centos的Python，升级到Python2.7或者Python3.3。我们不仅升级了Python，同样基于Python的setuptools, pip, virtualenv and pyvenv这些工具也同样安装和升级以便于项目需要。</p>
-<h2 id="heading1">安装基本的开发工具包</h2>
+<h2 id="安装基本的开发工具包">安装基本的开发工具包</h2>
 <p>为了确保编译Python成功，先安装下面的这几个package和类库。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -629,9 +705,9 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
   <div class="post-content">
     
     <div class="post-summary">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>学习Python有一段时间了，最近做一个项目会涉及到文件的读取和关闭。比如：我想把一些对象序列化到文件里面，然后当我再次使用的时候，在从文件里面读取反序列化成对象。像这种操作一般都是用<strong>try…except…finally</strong>。但是经过自己对Python的研究发现会有更出色的方法，比如：with-as语句也有的人称为<strong>context manager。</strong></p>
-<h2 id="withas-">With-as 用法</h2>
+<h2 id="with-as-用法">With-as 用法</h2>
 <p>我们先看一下例子，当我们需要打开一个文件的时，比如：txt等，一般经常会这么操作：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -645,12 +721,12 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">test.txt</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">rw</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
     <span class="n">To</span> <span class="n">Do</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="n">To</span> <span class="n">Do</span>
 <span class="k">finally</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>这是错误，因为file.open是否打开文件是不确定，而在出现异常的时候你却关闭了已经打开的文件。文件没有打开怎么能直接关闭呢？你可以按照下面的解决方法来解决上述出现的问题。</p>
@@ -674,20 +750,20 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="k">try</span><span class="p">:</span>  
-    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">test.txt</span><span class="s1">&#39;</span><span class="p">,</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">rw</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;test.txt&#39;</span><span class="p">,</span><span class="s1">&#39;rw&#39;</span><span class="p">)</span>
     <span class="n">To</span> <span class="n">Do</span>
 <span class="k">except</span><span class="p">:</span>  
     <span class="n">To</span> <span class="n">Do</span>
-    <span class="o">/</span><span class="o">/</span><span class="err">出</span><span class="err">现</span><span class="err">异</span><span class="err">常</span><span class="err">直</span><span class="err">接</span><span class="err">返</span><span class="err">回</span><span class="err">或</span><span class="err">者</span><span class="err">退</span><span class="err">出</span><span class="err">，</span><span class="err">这</span><span class="err">说</span><span class="err">明</span><span class="n">file并没有打开</span><span class="err">。</span>
+    <span class="o">//</span><span class="err">出现异常直接返回或者退出，这说明</span><span class="n">file并没有打开</span><span class="err">。</span>
     <span class="k">return</span><span class="o">/</span><span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
 
-<span class="o">/</span><span class="o">/</span><span class="err">已</span><span class="err">经</span><span class="err">成</span><span class="err">功</span><span class="err">打</span><span class="err">开</span><span class="n">file文件</span><span class="err">，</span><span class="err">所</span><span class="err">以</span><span class="err">你</span><span class="err">需</span><span class="err">要</span><span class="err">在</span><span class="n">finally中关闭打开的文件</span><span class="err">。</span>
+<span class="o">//</span><span class="err">已经成功打开</span><span class="n">file文件</span><span class="err">，所以你需要在</span><span class="n">finally中关闭打开的文件</span><span class="err">。</span>
 <span class="k">try</span><span class="p">:</span>  
     <span class="n">To</span> <span class="n">Do</span>
 <span class="k">except</span><span class="p">:</span>  
     <span class="n">To</span> <span class="n">Do</span>
 <span class="k">finally</span><span class="p">:</span>  
-    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>你会发现这么做会非常麻烦，并且try……except…..finally嵌套也比较啰嗦。那有没有好的解决办法能解决上述问题，并且还能减少代码量呢？(类似于C#中的using关键字)答案是肯定的，那就是with……as语句。<strong>With语句适用于对I/O、文件流、数据流等资源进行访问的场合，确保不管使用过程中是否发生异常都会执行必要的“清理”操作，释放资源.比如文件使用后自动关闭、线程中锁的自动获取和释放等等。</strong> 我们来看一下with-as的用法：</p>
@@ -699,10 +775,10 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">/etc/passwd</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">r</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;/etc/passwd&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>  
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">print</span> <span class="n">line</span>
-        <span class="o">.</span><span class="o">.</span><span class="o">.</span> <span class="n">more</span> <span class="n">processing</span> <span class="n">code</span> <span class="o">.</span><span class="o">.</span><span class="o">.</span>
+        <span class="o">...</span> <span class="n">more</span> <span class="n">processing</span> <span class="n">code</span> <span class="o">...</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>这个语句执行完成之后，不管在处理文件过程中是否发生异常，都能保证 with 语句执行完毕后已经关闭了打开的文件句柄,确实比try……except……finally好多了。在这个例子中f就是上下文管理器enter()的返回值，返回的是当前文件自身的引用。Python内建对象都加入了对上下文管理器的支持，可以用在with语句中。比如:file、 threading、decimal等等，在多线程模块中，lock和条件变量也是支持with语句的。例如：</p>
@@ -806,7 +882,7 @@ yum install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel read
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

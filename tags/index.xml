@@ -6,10 +6,19 @@
     <description>Recent content in Tags on 吕海峰的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 23 Dec 2018 21:39:15 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 14 Jun 2020 18:43:24 +0800</lastBuildDate>
     
 	<atom:link href="https://www.brianlv.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>VXLAN</title>
+      <link>https://www.brianlv.com/tags/vxlan.html</link>
+      <pubDate>Sun, 14 Jun 2020 18:43:24 +0800</pubDate>
+      
+      <guid>https://www.brianlv.com/tags/vxlan.html</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>issues</title>
@@ -66,15 +75,6 @@
     </item>
     
     <item>
-      <title>C/C&#43;&#43;</title>
-      <link>https://www.brianlv.com/tags/c/c&#43;&#43;.html</link>
-      <pubDate>Sat, 15 Dec 2018 17:14:08 +0800</pubDate>
-      
-      <guid>https://www.brianlv.com/tags/c/c&#43;&#43;.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Python</title>
       <link>https://www.brianlv.com/tags/python.html</link>
       <pubDate>Mon, 10 Dec 2018 21:31:00 +0800</pubDate>
@@ -116,6 +116,15 @@
       <pubDate>Mon, 10 Dec 2018 21:23:21 +0800</pubDate>
       
       <guid>https://www.brianlv.com/tags/vnc.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C/C&#43;&#43;</title>
+      <link>https://www.brianlv.com/tags/c/c&#43;&#43;.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.brianlv.com/tags/c/c&#43;&#43;.html</guid>
       <description></description>
     </item>
     

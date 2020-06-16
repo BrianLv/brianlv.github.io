@@ -33,7 +33,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181220/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%84%9F%E7%9F%A5%E6%9C%BA%E7%AE%97%E6%B3%95.html" />
@@ -52,7 +52,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -332,11 +332,11 @@
 
     
     <div class="post-content">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>**感知机(perceptron)**是个二类分类的线性分类模型，该算法对应于特征空间将实例划分为正负两类的分离超平面，属于判别模型。<strong>判别模型是一种对未观测数据y与已观测数据x之间关系进行建模的方法，直接对条件概率p(y|x;θ)建模。直接假设判别函数的参数形式是已知的 ，然后基于训练样本，使用某种学习算法，来学习判别函数的参数值，被称为判别式方法，感知机所得到的是一个线性判别函数。而一般来说，寻找线性判别函数的问题，会被形式化为极小化准则函数的问题，以分类为目的的准则函数可以是样本的风险函数，或者是训练误差</strong>。 从机器学习的角度来讲，感知机属于监督学习（supervised learning），它是一个单层的二分类器。感知机算法非常重要，它是神经网络和SVM的基础。感知机算法如下图所示:</p>
 <p><img src="/image/ml_perceptron.png" alt="感知机算法"></p>
-<h2 id="heading1">感知机模型</h2>
-<h3 id="heading2">算法定义</h3>
+<h2 id="感知机模型">感知机模型</h2>
+<h3 id="算法定义">算法定义</h3>
 <p>假设我们的输入空间（特征空间）是X⊆R，输出空间是<em><strong>y</strong></em>={+1,−1}。输入<em><strong>x</strong></em>∈<em><strong>X</strong></em>表示实例的特征向量，对应于输入空间（特征空间）的点；输出y∈<em><strong>y</strong></em>表示实例的类别。由输入空间到输出空间的函数:</p>
 <p>$$
 f(x)=sign(w \cdot x+b)
@@ -348,8 +348,8 @@ sign(x) = \begin{cases}
 -1, &amp;x \lt 0
 \end{cases}
 $$</p>
-<h3 id="heading3"></h3>
-<h3 id="heading4">感知机的几何模型</h3>
+<h3 id="heading"></h3>
+<h3 id="感知机的几何模型">感知机的几何模型</h3>
 <ul>
 <li>
 <p>线性方程 $w \cdot x +b=0$</p>
@@ -363,9 +363,9 @@ $$</p>
 </li>
 </ul>
 <p><strong>感知机算法模型</strong></p>
-<h3 id="heading5">学习策略</h3>
+<h3 id="学习策略">学习策略</h3>
 <p>再详细介绍感知机学习策略之前，我们先了解下数据集的<strong>线性可分 vs 线性不可分</strong>。</p>
-<h5 id="heading6">线性可分</h5>
+<h5 id="线性可分">线性可分</h5>
 <p>给定一个数据集$T={(x_1,y_1),(x_2,y_2)&hellip;&hellip;(x_n,y_n)}, x_i \in X=R^n,y_i \in Y,i=1,2,3&hellip;N$ ,如果存在某个超平面S</p>
 <p>$$w \cdot x + b = 0$$</p>
 <p>能够将数据集的正实例点(+1)和负实例点(-1)完全正确地划分到超平面的两侧，即对所有的$y_i = +1$的实例，有$w \cdot x_i + b &gt; 0$ ;对所有$y_i=-1$的实例，有$w \cdot x_i + b &lt; 0$,则称数据集T为线性可分数据集(Linearly Separable Data Set),否则为数据集T为线性不可分。也可以利用不同样本集用凸包包起来，判断不同凸包的边是否有交叉来判断是否线性可分。</p>
@@ -387,8 +387,8 @@ $$</p>
 argminL(w,b)=-\sum_{(x_i,y_i) \in M}  y_i(w^T \cdot x_i +b)
 $$</p>
 <p>**所以，感知机模型的学习问题，最终成为了损失函数最小化的问题。**这里需要注意一个特殊情况: 如果样本点刚好落在了决策超平面上这个点可以不予考虑。</p>
-<h4 id="heading7">求解感知机的损失函数</h4>
-<h5 id="heading8">感知机算法的原始形式</h5>
+<h4 id="求解感知机的损失函数">求解感知机的损失函数</h4>
+<h5 id="感知机算法的原始形式">感知机算法的原始形式</h5>
 <p>假设误分类点集合M是固定的，那么损失函数L(w,b)的梯度优化则如下:</p>
 <p>$$
 \nabla_w L(w,b)=-\sum_{x_i \in M} y_i \cdot x_i \<br>
@@ -400,7 +400,7 @@ w:=w+ \alpha \cdot x_i \cdot y_i \<br>
 b:=b+\alpha \cdot y_i
 $$</p>
 <p><strong>如果数据集是线性可分的，那么感知机算法一定是收敛的，即经过有限步的迭代后可以得出正确分类样本数据的参数w,b,虽然一定收敛但是分割超平面却不一定是惟一的。</strong> 详细的证明算法可以参考数学上的Novikoff定理，很多书籍资料都给出了详细的证明，感兴趣的朋友可以看下。</p>
-<h4 id="heading9">感知机算法原始形式代码实现</h4>
+<h4 id="感知机算法原始形式代码实现">感知机算法原始形式代码实现</h4>
 <p>比如我们业务现在需要对现有数据进行分类，比如用户是否为真实用户还是作弊用户，这是一个简单的二分类模型。我们现在拿到了样本的数据，需要对该数据进行分类，当然前提是该数据集是线性可分的，可以将数据集进行可视化和初步分析看一下数据。比如样本实例只有两维特征，正实例点是[10,8],[6,9],[6,8],[7,6],[7,8],[9,6],[11,3],[10,6],[12,5]；负实例点是[1,2],[2,2],[3,1],[1,1],[3,6],[4,4],[3,2],[2,6],[6,2]。我们根据感知器算法进行学习并得到模型。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -431,29 +431,29 @@ $$</p>
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="k">class</span> <span class="nc">Perceptron</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">result</span><span class="p">)</span><span class="p">:</span>
+<span class="k">class</span> <span class="nc">Perceptron</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">result</span><span class="p">):</span>
         <span class="c1">#加载训练集数据</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
         <span class="c1">#初始化w和b</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
         
-    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span><span class="o">=</span> <span class="mi">0</span> <span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">+</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">+</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                 <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">else</span> <span class="p">:</span>
-                <span class="n">i</span> <span class="o">+</span><span class="o">=</span> <span class="mi">1</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">w</span>
             <span class="k">print</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
-<span class="n">perceptron</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="p">)</span>
-<span class="n">perceptron</span><span class="o">.</span><span class="n">calculate</span><span class="p">(</span><span class="p">)</span>
+<span class="n">perceptron</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">()</span>
+<span class="n">perceptron</span><span class="o">.</span><span class="n">calculate</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>通过算法结果输出为:</p>
@@ -461,7 +461,7 @@ $$</p>
 w = [7,2]^T \<br>
 b = -48
 $$</p>
-<h5 id="heading10">感知机算法的对偶形式</h5>
+<h5 id="感知机算法的对偶形式">感知机算法的对偶形式</h5>
 <p>感知机模型最重要的并不是它的原始形式，而是他的对偶形式，这个里的对偶形式就是SVM求解中对偶形式的原型。</p>
 <blockquote>
 <p>每一个线性规划问题，我们称之为原始问题，都有一个与之对应的线性规划问题我们称之为对偶问题。原始问题与对偶问题的解是对应的，得出一个问题的解，另一个问题的解也就得到了。并且原始问题与对偶问题在形式上存在很简单的对应关系：</p>
@@ -503,7 +503,7 @@ $$</p>
 <ul>
 <li>直到全部没有误分类点</li>
 </ul>
-<h4 id="heading11">感知机算法对偶形式代码实现</h4>
+<h4 id="感知机算法对偶形式代码实现">感知机算法对偶形式代码实现</h4>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -544,36 +544,36 @@ $$</p>
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="k">class</span> <span class="nc">Perceptron</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">result</span><span class="p">)</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="n">result</span><span class="p">):</span>
         <span class="c1">#加载训练集数据</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">calculateDual</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">def</span> <span class="nf">calculateDual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1">#首先计算gram矩阵</span>
-        <span class="n">gram</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="p">:</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">]</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="p">:</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">gram</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
         <span class="c1">#初始化参数a、w和b</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="p">)</span>
-        <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span><span class="p">)</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">),</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">))</span>
         <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="p">:</span>
             <span class="n">temp</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="p">)</span> <span class="p">:</span>
-                <span class="n">temp</span> <span class="o">+</span><span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">gram</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">temp</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span><span class="o">=</span> <span class="mi">0</span> <span class="p">:</span>
-                <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span><span class="o">=</span> <span class="mi">1</span>
-                <span class="n">b</span> <span class="o">+</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">))</span> <span class="p">:</span>
+                <span class="n">temp</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">gram</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">temp</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="p">:</span>
+                <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">b</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
                 <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">else</span> <span class="p">:</span>
-                <span class="n">i</span> <span class="o">+</span><span class="o">=</span> <span class="mi">1</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
        
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="p">)</span><span class="p">:</span>
-            <span class="n">w</span> <span class="o">+</span><span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
+            <span class="n">w</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">result</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
         <span class="k">print</span> <span class="n">w</span>
         <span class="k">print</span> <span class="n">b</span>
-<span class="n">perceptron</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="p">)</span>
-<span class="n">perceptron</span><span class="o">.</span><span class="n">calculateDual</span><span class="p">(</span><span class="p">)</span>
+<span class="n">perceptron</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">()</span>
+<span class="n">perceptron</span><span class="o">.</span><span class="n">calculateDual</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
 </div>
@@ -710,7 +710,7 @@ $$</p>
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

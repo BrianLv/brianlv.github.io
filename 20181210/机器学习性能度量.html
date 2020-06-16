@@ -41,7 +41,7 @@ $$ MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP&#43;FP)\times(TP&#43;FN)\t
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%A7%E8%83%BD%E5%BA%A6%E9%87%8F.html" />
@@ -60,7 +60,7 @@ $$ MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP&#43;FP)\times(TP&#43;FN)\t
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -474,16 +474,16 @@ $$"/>
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#heading">机器学习度量</a></li>
-    <li><a href="#heading1">各种机器学习衡量指标</a>
+    <li><a href="#机器学习度量">机器学习度量</a></li>
+    <li><a href="#各种机器学习衡量指标">各种机器学习衡量指标</a>
       <ul>
-        <li><a href="#accuracyprecisionrecallf1score">Accuracy、Precision、Recall和F1-Score</a></li>
-        <li><a href="#rocauc">ROC和AUC</a></li>
-        <li><a href="#iouroi">IOU和ROI</a></li>
+        <li><a href="#accuracyprecisionrecall和f1-score">Accuracy、Precision、Recall和F1-Score</a></li>
+        <li><a href="#roc和auc">ROC和AUC</a></li>
+        <li><a href="#iou和roi">IOU和ROI</a></li>
       </ul>
     </li>
-    <li><a href="#heading2">实践</a></li>
-    <li><a href="#heading3">参考文献</a></li>
+    <li><a href="#实践">实践</a></li>
+    <li><a href="#参考文献">参考文献</a></li>
   </ul>
 </nav>
   </div>
@@ -492,7 +492,7 @@ $$"/>
     
     <div class="post-content">
       <p>我们在进行机器学习时需要衡量机器学习的优劣和本身模型的准确程度，比如简单的衡量数据的准确率和错误率，但是我们更关心的是模型的泛化能力的指标，即基于模型的所选的item相关性以及模型分类指标的好坏。</p>
-<h2 id="heading">机器学习度量</h2>
+<h2 id="机器学习度量">机器学习度量</h2>
 <ul>
 <li><strong>error rate(错误率)</strong>:把分类错误的样本数占样本总数的比例。$$E=a/m$$</li>
 <li><strong>accuracy(精确度)</strong>:分类正确的样本数占样本总数的比例。$$acc=1-E$$</li>
@@ -500,8 +500,8 @@ $$"/>
 <li>**generalization error(泛华误差):**在新样本上的误差。</li>
 </ul>
 <p>在机器学习中由很多机器学习算法，那么如何选择这些算法和模型，如何评估这些算法和模型,评估模型的算法和准确率的方式很多，我们依次来介绍一下几个常用的指标。<strong>TP、TN、FP、FN、Acc、Recall、F1、ROC和ROI</strong></p>
-<h2 id="heading1">各种机器学习衡量指标</h2>
-<h3 id="accuracyprecisionrecallf1score">Accuracy、Precision、Recall和F1-Score</h3>
+<h2 id="各种机器学习衡量指标">各种机器学习衡量指标</h2>
+<h3 id="accuracyprecisionrecall和f1-score">Accuracy、Precision、Recall和F1-Score</h3>
 <p>混淆矩阵是按照预测分类和实际分类的类别对比,如下图所示:
 <img src="/image/precision-recall.png" alt="混淆矩阵">
 如上表所示，行表示预测的label值，列表示真实label值。TP，FP，FN，TN分别表示如下意思：</p>
@@ -538,7 +538,7 @@ $$</p>
 <p>$$
 MCC=\frac{(TP \times TN)-(FP \times FN)}{\sqrt{(TP+FP)\times(TP+FN)\times(TN+FP)\times(TN+FN)}}
 $$</p>
-<h3 id="rocauc">ROC和AUC</h3>
+<h3 id="roc和auc">ROC和AUC</h3>
 <p>ROC（receiver operating characteristic),平面的横坐标是false positive rate(FPR)假阳率，纵坐标是true positive rate(TPR)真阳率。ROC计算过程如下：
 1.首先每个样本都需要有一个label值，并且还需要一个预测的score值（取值0到1）;
 2.然后按这个score对样本由大到小进行排序，假设这些数据位于表格中的一列，从上到下依次降序;
@@ -550,7 +550,7 @@ $$</p>
 <strong>AUC计算</strong>
 AUC（area under the curve）就是ROC曲线下方的面积，取值在0.5到1之间，因为随机猜测得到额AUC就是0.5。面积如下图所示，阴影部分即为AUC面积：
 <img src="/image/area_under_curve.png" alt="AUC面积图解—图片来自(参考文献5)"></p>
-<h3 id="iouroi">IOU和ROI</h3>
+<h3 id="iou和roi">IOU和ROI</h3>
 <p>上面大多数针对分类准确性的性能评估，在机器视觉领域同样也有相应的评估指标。
 1.IoU (Intersection over Union)，交集并集比
 2.ROI (region of interest) , 感兴趣区域
@@ -571,7 +571,7 @@ AUC（area under the curve）就是ROC曲线下方的面积，取值在0.5到1�
 这样，如果我们控制并集不要让并集太大，对准确预测是有益的。
 下面是wiki上的计算各种指标
 <img src="/image/wiki-aucroc.png" alt="AUC ROC"></p>
-<h2 id="heading2">实践</h2>
+<h2 id="实践">实践</h2>
 <p>宏平均比微平均更合理，但也不是说微平均一无是处，具体使用哪种评测机制，还是要取决于数据集中样本分布
 宏平均（Macro-averaging），是先对每一个类统计指标值，然后在对所有类求算术平均值。
 微平均（Micro-averaging），是对数据集中的每一个实例不分类别进行统计建立全局混淆矩阵，然后计算相应指标。</p>
@@ -655,8 +655,8 @@ AUC（area under the curve）就是ROC曲线下方的面积，取值在0.5到1�
 <span class="c1">#import data</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
 <span class="n">y_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">accuracy==</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">)</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">accuracy size==</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">normalize</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;accuracy==&#34;</span><span class="p">,</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;accuracy size==&#34;</span><span class="p">,</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">normalize</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
 <span class="n">accuracy</span><span class="o">==</span> <span class="mf">0.6666666666666666</span>
 <span class="n">accuracy</span> <span class="n">size</span><span class="o">==</span> <span class="mi">6</span>
 
@@ -664,32 +664,32 @@ AUC（area under the curve）就是ROC曲线下方的面积，取值在0.5到1�
 <span class="c1"># 宏平均（Macro-averaging），是先对每一个类统计指标值，然后在对所有类求算术平均值。 </span>
 <span class="c1"># 微平均（Micro-averaging），是对数据集中的每一个实例不分类别进行统计建立全局混淆矩阵，然后计算相应指标。</span>
 <span class="c1">#print(&#34;precision==&#34;,precision_score(y_pred=y_pred,y_true=y_true))只针对于二元分类</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">micro precision==</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">micro</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">macro precision==</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">macro</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;micro precision==&#34;</span><span class="p">,</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;macro precision==&#34;</span><span class="p">,</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">))</span>
 <span class="n">micro</span> <span class="n">precision</span><span class="o">==</span> <span class="mf">0.6666666666666666</span>
 <span class="n">macro</span> <span class="n">precision</span><span class="o">==</span> <span class="mf">0.6875</span>
 
 <span class="c1">#print(&#34;recall==&#34;,recall_score(y_pred=y_pred,y_true=y_true))只针对于二元分类</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">micro recall==</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">micro</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">macro recall==</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">macro</span><span class="s1">&#39;</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;micro recall==&#34;</span><span class="p">,</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="s1">&#39;micro&#39;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;macro recall==&#34;</span><span class="p">,</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">))</span>
 <span class="n">micro</span> <span class="n">recall</span><span class="o">==</span> <span class="mf">0.6666666666666666</span>
 <span class="n">macro</span> <span class="n">recall</span><span class="o">==</span> <span class="mf">0.6041666666666666</span>
 <span class="c1">#计算f1_score</span>
 <span class="c1">#print(&#34;f1_score==&#34;,f1_score(y_pred=y_pred,y_true=y_true))</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">weighted f1_score==</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">weighted</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">micro f1_score==</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">micro</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">macro f1_score==</span><span class="s2">&#34;</span><span class="p">,</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">macro</span><span class="s2">&#34;</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;weighted f1_score==&#34;</span><span class="p">,</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="s2">&#34;weighted&#34;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;micro f1_score==&#34;</span><span class="p">,</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="s2">&#34;micro&#34;</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&#34;macro f1_score==&#34;</span><span class="p">,</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">,</span><span class="n">average</span><span class="o">=</span><span class="s2">&#34;macro&#34;</span><span class="p">))</span>
 <span class="n">weighted</span> <span class="n">f1_score</span><span class="o">==</span> <span class="mf">0.7111111111111111</span>
 <span class="n">micro</span> <span class="n">f1_score</span><span class="o">==</span> <span class="mf">0.6666666666666666</span>
 <span class="n">macro</span> <span class="n">f1_score</span><span class="o">==</span> <span class="mf">0.6375</span>
 <span class="c1">#查看混淆矩阵</span>
-<span class="k">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">)</span><span class="p">)</span>
-<span class="p">[</span><span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">))</span>
+<span class="p">[[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]</span>
  <span class="p">[</span><span class="mi">0</span> <span class="mi">3</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
  <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">]</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">]]</span>
 <span class="c1">#查看混淆矩阵报告</span>
-<span class="k">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">)</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="o">=</span><span class="n">y_true</span><span class="p">))</span>
 	           <span class="n">precision</span>    <span class="n">recall</span>  <span class="n">f1</span><span class="o">-</span><span class="n">score</span>   <span class="n">support</span>
 
           <span class="mi">0</span>       <span class="mf">1.00</span>      <span class="mf">1.00</span>      <span class="mf">1.00</span>         <span class="mi">1</span>
@@ -809,89 +809,89 @@ AUC（area under the curve）就是ROC曲线下方的面积，取值在0.5到1�
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">interp</span>
 
 <span class="c1"># Import some data to play with</span>
-<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">(</span><span class="p">)</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
 
 <span class="c1"># Binarize the output</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">label_binarize</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">label_binarize</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 <span class="n">n_classes</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="c1"># Add noisy features to make the problem harder</span>
 <span class="n">random_state</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">random_state</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">200</span> <span class="o">*</span> <span class="n">n_features</span><span class="p">)</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">c_</span><span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">random_state</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="mi">200</span> <span class="o">*</span> <span class="n">n_features</span><span class="p">)]</span>
 
 <span class="c1"># shuffle and split training and test sets</span>
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=.</span><span class="mi">5</span><span class="p">,</span>
                                                     <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
 <span class="c1"># Learn to predict each class against the other</span>
-<span class="n">classifier</span> <span class="o">=</span> <span class="n">OneVsRestClassifier</span><span class="p">(</span><span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">linear</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">probability</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                                 <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span><span class="p">)</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">OneVsRestClassifier</span><span class="p">(</span><span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">probability</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                                 <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">))</span>
 <span class="n">y_score</span> <span class="o">=</span> <span class="n">classifier</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">decision_function</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
 <span class="c1"># Compute ROC curve and ROC area for each class</span>
-<span class="n">fpr</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="p">)</span>
-<span class="n">tpr</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="p">)</span>
-<span class="n">roc_auc</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">)</span><span class="p">:</span>
-    <span class="n">fpr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">,</span> <span class="n">tpr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">[</span><span class="p">:</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="p">,</span> <span class="n">y_score</span><span class="p">[</span><span class="p">:</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="p">)</span>
-    <span class="n">roc_auc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">,</span> <span class="n">tpr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">)</span>
+<span class="n">fpr</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">tpr</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">roc_auc</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">):</span>
+    <span class="n">fpr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">y_score</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+    <span class="n">roc_auc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
 <span class="c1"># Compute micro-average ROC curve and ROC area</span>
-<span class="n">fpr</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">micro</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">,</span> <span class="n">tpr</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">micro</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="p">)</span><span class="p">,</span> <span class="n">y_score</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="p">)</span><span class="p">)</span>
-<span class="n">roc_auc</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">micro</span><span class="s2">&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">micro</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">,</span> <span class="n">tpr</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">micro</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">)</span>
+<span class="n">fpr</span><span class="p">[</span><span class="s2">&#34;micro&#34;</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="s2">&#34;micro&#34;</span><span class="p">],</span> <span class="n">_</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_test</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">y_score</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+<span class="n">roc_auc</span><span class="p">[</span><span class="s2">&#34;micro&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="s2">&#34;micro&#34;</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="s2">&#34;micro&#34;</span><span class="p">])</span>
 
 <span class="c1"># Compute macro-average ROC curve and ROC area</span>
 
 <span class="c1"># First aggregate all false positive rates</span>
-<span class="n">all_fpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="p">[</span><span class="n">fpr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">)</span><span class="p">]</span><span class="p">)</span><span class="p">)</span>
+<span class="n">all_fpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">fpr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">)]))</span>
 
 <span class="c1"># Then interpolate all ROC curves at this points</span>
 <span class="n">mean_tpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">all_fpr</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">)</span><span class="p">:</span>
-    <span class="n">mean_tpr</span> <span class="o">+</span><span class="o">=</span> <span class="n">interp</span><span class="p">(</span><span class="n">all_fpr</span><span class="p">,</span> <span class="n">fpr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">,</span> <span class="n">tpr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">):</span>
+    <span class="n">mean_tpr</span> <span class="o">+=</span> <span class="n">interp</span><span class="p">(</span><span class="n">all_fpr</span><span class="p">,</span> <span class="n">fpr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
 <span class="c1"># Finally average it and compute AUC</span>
-<span class="n">mean_tpr</span> <span class="o">/</span><span class="o">=</span> <span class="n">n_classes</span>
+<span class="n">mean_tpr</span> <span class="o">/=</span> <span class="n">n_classes</span>
 
-<span class="n">fpr</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">macro</span><span class="s2">&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_fpr</span>
-<span class="n">tpr</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">macro</span><span class="s2">&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_tpr</span>
-<span class="n">roc_auc</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">macro</span><span class="s2">&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">macro</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">,</span> <span class="n">tpr</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">macro</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">)</span>
+<span class="n">fpr</span><span class="p">[</span><span class="s2">&#34;macro&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_fpr</span>
+<span class="n">tpr</span><span class="p">[</span><span class="s2">&#34;macro&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_tpr</span>
+<span class="n">roc_auc</span><span class="p">[</span><span class="s2">&#34;macro&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="s2">&#34;macro&#34;</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="s2">&#34;macro&#34;</span><span class="p">])</span>
 
 <span class="c1"># Plot all ROC curves</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">micro</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">,</span> <span class="n">tpr</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">micro</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">,</span>
-         <span class="n">label</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">micro-average ROC curve (area = {0:0.2f})</span><span class="s1">&#39;</span>
-               <span class="sa"></span><span class="s1">&#39;</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">roc_auc</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">micro</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">)</span><span class="p">,</span>
-         <span class="n">color</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">deeppink</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">:</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="s2">&#34;micro&#34;</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="s2">&#34;micro&#34;</span><span class="p">],</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;micro-average ROC curve (area = {0:0.2f})&#39;</span>
+               <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">roc_auc</span><span class="p">[</span><span class="s2">&#34;micro&#34;</span><span class="p">]),</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;deeppink&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">macro</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">,</span> <span class="n">tpr</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">macro</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">,</span>
-         <span class="n">label</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">macro-average ROC curve (area = {0:0.2f})</span><span class="s1">&#39;</span>
-               <span class="sa"></span><span class="s1">&#39;</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">roc_auc</span><span class="p">[</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">macro</span><span class="s2">&#34;</span><span class="p">]</span><span class="p">)</span><span class="p">,</span>
-         <span class="n">color</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">navy</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">:</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="s2">&#34;macro&#34;</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="s2">&#34;macro&#34;</span><span class="p">],</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;macro-average ROC curve (area = {0:0.2f})&#39;</span>
+               <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">roc_auc</span><span class="p">[</span><span class="s2">&#34;macro&#34;</span><span class="p">]),</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
-<span class="n">colors</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">(</span><span class="p">[</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">aqua</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">darkorange</span><span class="s1">&#39;</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">cornflowerblue</span><span class="s1">&#39;</span><span class="p">]</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">)</span><span class="p">,</span> <span class="n">colors</span><span class="p">)</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">,</span> <span class="n">tpr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span>
-             <span class="n">label</span><span class="o">=</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">ROC curve of class {0} (area = {1:0.2f})</span><span class="s1">&#39;</span>
-             <span class="sa"></span><span class="s1">&#39;</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">roc_auc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="p">)</span><span class="p">)</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">([</span><span class="s1">&#39;aqua&#39;</span><span class="p">,</span> <span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="s1">&#39;cornflowerblue&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_classes</span><span class="p">),</span> <span class="n">colors</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">,</span>
+             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ROC curve of class {0} (area = {1:0.2f})&#39;</span>
+             <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">roc_auc</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="p">,</span> <span class="sa"></span><span class="s1">&#39;</span><span class="s1">k--</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">]</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">False Positive Rate</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">True Positive Rate</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa"></span><span class="s1">&#39;</span><span class="s1">Some extension of Receiver operating characteristic to multi-class</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="sa"></span><span class="s2">&#34;</span><span class="s2">lower right</span><span class="s2">&#34;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="n">lw</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True Positive Rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Some extension of Receiver operating characteristic to multi-class&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&#34;lower right&#34;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>我们能看到如下图所示图片
 <img src="/image/multirocauc.png" alt="多分类ROC和AUC可视化">
 关于IoU指标可以参考文献6，里面介绍的很详细。</p>
-<h2 id="heading3">参考文献</h2>
+<h2 id="参考文献">参考文献</h2>
 <ul>
 <li><a href="http://nooverfit.com/wp/%E5%81%9A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%86%8D%E5%88%AB%E6%8A%8Aiou%EF%BC%8Croi-%E5%92%8C-roc%EF%BC%8Cauc-%E6%90%9E%E6%B7%B7%E4%BA%86-%EF%BC%81%E8%81%8A%E8%81%8A%E7%9B%AE%E6%A0%87/">做机器学习，再别把IoU，ROI 和 ROC，AUC 搞混了 ！聊聊目标检测，医疗领域的那些评价函数</a></li>
 <li><a href="https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/">目标检测</a></li>
@@ -1062,7 +1062,7 @@ AUC（area under the curve）就是ROC曲线下方的面积，取值在0.5到1�
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">

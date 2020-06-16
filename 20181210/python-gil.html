@@ -31,7 +31,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.60.0" />
+<meta name="generator" content="Hugo 0.70.0" />
 
 
 <link rel="canonical" href="https://www.brianlv.com/20181210/python-gil.html" />
@@ -50,7 +50,7 @@
 
 
 
-<link rel="stylesheet" href="/sass/jane.min.af20b78e95c84de86b00a0242a4a77bd2601700e1b250edf27537d957ac0041d.css" integrity="sha256-ryC3jpXITehrAKAkKkp3vSYBcA4bJQ7fJ1N9lXrABB0=" media="screen" crossorigin="anonymous">
+<link rel="stylesheet" href="/sass/jane.min.fa3d941d1d0e0ddc985804227feabffea55c89883eb0af34e0532a7ae9135151.css" integrity="sha256-&#43;j2UHR0ODdyYWAQif&#43;q//qVciYg&#43;sK804FMqeukTUVE=" media="screen" crossorigin="anonymous">
 
 
 
@@ -326,13 +326,13 @@
   <div class="post-toc-content">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#heading">概述</a></li>
-    <li><a href="#gil">GIL原理</a>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#gil原理">GIL原理</a>
       <ul>
-        <li><a href="#heading1">线程执行模型</a></li>
+        <li><a href="#线程执行模型">线程执行模型</a></li>
       </ul>
     </li>
-    <li><a href="#gil1">如何避免GIL影响</a></li>
+    <li><a href="#如何避免gil影响">如何避免GIL影响</a></li>
   </ul>
 </nav>
   </div>
@@ -340,11 +340,11 @@
 
     
     <div class="post-content">
-      <h2 id="heading">概述</h2>
+      <h2 id="概述">概述</h2>
 <p>**GIL（Global Interpreter 	Lock）**是什么东东？为什么当一些Pythoners在开发一些多线程操作的时候，都会有些很多疑问？多线程真的很糟糕吗？我该如何实现多线程并发操作？今天博主带你详细的介绍一下GIL。</p>
-<h2 id="gil">GIL原理</h2>
+<h2 id="gil原理">GIL原理</h2>
 <p>由于Python是动态解释性语言，即解释运行。运行Python代码时都会通过Python解释器解释执行，Python官方默认的解释器是Cython,当然你也可以选择自己的Python解释器(PyPy,JPython),其中JPython就没有GIL的限制。在解释器解释执行任何Python代码时，首先都需要<strong>they  acquire GIL when running，release GIL when blocking for I/O</strong>。如果没有涉及I/O操作，只是CPU密集型操作或者，解释器会每隔<strong>100 ticks</strong>(低级的解释器指令)就释放GIL(通过 sys.setcheckinterval来修改)。<strong>GIL是实现Python解释器(Cython)时所引入的一个概念。GIL不是Python的特性。</strong></p>
-<h3 id="heading1">线程执行模型</h3>
+<h3 id="线程执行模型">线程执行模型</h3>
 <p>我们先看一下Python下多任务线程执行模型，下面的图取自<strong>David Beazley</strong>大神，并且在他的个人网站中对GIL进行深度的解剖。如果想了解更深入的东西，可以去逛逛他的网站。</p>
 <p><img src="/image/gil-threads.png" alt="Thread Execution Model"></p>
 <p>从上图中可以看出，这个是三个线程”协作式“执行，当Thread1执行时它获得GIL，其它线程一直在等待；当遇到I/O处理时，Thread1会释放GIL，Thread2得到GIL，Thread2开始运行，如此反复直到任务完成。<strong>当任一个线程正在运行时，它控制着GIL，并且在处理I/O(read,write,send,recv,etc.)时释放GIL。CPU密集型(不提供I/O操作)的线程作为特殊的情况被处理，即每运行100个低级的解释器指令进行检查并根据线程优先级进行释放/重新获取或者释放GIL。</strong></p>
@@ -383,23 +383,23 @@
 <span class="kn">import</span> <span class="nn">threading</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
-<span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="k">while</span> <span class="n">n</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
-        <span class="n">n</span><span class="o">-</span><span class="o">=</span><span class="mi">1</span>
+        <span class="n">n</span><span class="o">-=</span><span class="mi">1</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="sa"></span><span class="s2">&#34;</span><span class="s2">__main__</span><span class="s2">&#34;</span><span class="p">:</span>
-    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="p">)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="n">count</span><span class="p">(</span><span class="mi">10000000</span><span class="p">)</span>
     <span class="n">count</span><span class="p">(</span><span class="mi">10000000</span><span class="p">)</span>
-    <span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="p">)</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="k">print</span> <span class="n">t2</span><span class="o">-</span><span class="n">t1</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">count</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">10000000</span><span class="p">,</span><span class="p">)</span><span class="p">)</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="p">)</span>
-    <span class="n">b</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">count</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">10000000</span><span class="p">,</span><span class="p">)</span><span class="p">)</span>
-    <span class="n">b</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="p">)</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="p">)</span>
-    <span class="n">b</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="p">)</span>
-    <span class="n">t3</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">count</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">10000000</span><span class="p">,))</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">count</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">10000000</span><span class="p">,))</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="n">b</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="n">t3</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
     <span class="k">print</span> <span class="n">t3</span><span class="o">-</span><span class="n">t2</span>
 
 <span class="c1"># 输出结果</span>
@@ -410,7 +410,7 @@
 </div><p>上述的例子是一个很典型的CPU密集任务，<strong>threading</strong>是Python高级别的线程库，Count只是普通的函数运行在一个主线程内。这就是为什么Python多线程的并不是真正意义上的多线程。<strong>Python的Thread是真实操作系统的Thread，两者没有差别。在Linux下是由pthreads实现的，而在windows下是由Windows threads实现的，并通过操作系统调度算法进行调度。为了充分利用CPU，python计算当前已执行了多少数量的指令达到阈值就会立即(100 ticks)来释放GIL。</strong>
 我们分析一下程序问题：
 count函数里面主要做的是计算,I/O操作一直没有触发，那么就会一直等待知道<strong>100 ticks</strong>才会释放GIL。从release GIL到acquire GIL之间几乎是没有间隙的。所以在其他核心上的线程被唤醒时，大部分情况下主线程已经又再一次获取到GIL了。这个时候被唤醒执行的线程只能白白的浪费CPU时间，看着另一个线程拿着GIL欢快的执行着。然后达到切换时间后进入待调度状态，再被唤醒，再等待，以此往复恶性循环。</p>
-<h2 id="gil1">如何避免GIL影响</h2>
+<h2 id="如何避免gil影响">如何避免GIL影响</h2>
 <blockquote>
 <ul>
 <li>CPU密集型下的任务尽量采用多进程处理(multiprocessing).</li>
@@ -580,7 +580,7 @@ count函数里面主要做的是计算,I/O操作一直没有触发，那么就�
     &copy;
     
       2017 -
-    2019
+    2020
     <span class="heart">
       
       <i class="iconfont">
